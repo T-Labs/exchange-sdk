@@ -13,8 +13,8 @@ namespace TLabs.ExchangeSdk.Currencies
     {
         private readonly ILogger _logger;
 
-        protected List<Currency> _currencies = new List<Currency>();
-        protected List<CurrencyPair> _currencyPairs = new List<CurrencyPair>();
+        private List<Currency> _currencies = new List<Currency>();
+        private List<CurrencyPair> _currencyPairs = new List<CurrencyPair>();
 
         /// <summary>
         /// Use for rounding commissions, quote amounts, deposits, withdrawals
