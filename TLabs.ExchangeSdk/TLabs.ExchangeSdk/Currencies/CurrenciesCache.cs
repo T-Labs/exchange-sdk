@@ -9,7 +9,7 @@ using TLabs.DotnetHelpers;
 
 namespace TLabs.ExchangeSdk.Currencies
 {
-    public class CurrenciesKeeper
+    public class CurrenciesCache
     {
         private readonly ILogger _logger;
 
@@ -21,8 +21,8 @@ namespace TLabs.ExchangeSdk.Currencies
         /// </summary>
         public const int Digits = 8;
 
-        public CurrenciesKeeper(
-            ILogger<CurrenciesKeeper> logger)
+        public CurrenciesCache(
+            ILogger<CurrenciesCache> logger)
         {
             _logger = logger;
         }
