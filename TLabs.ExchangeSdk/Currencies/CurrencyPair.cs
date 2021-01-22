@@ -56,6 +56,8 @@ namespace TLabs.ExchangeSdk.Currencies
 
         public static string GetCurrencyFromId(string code) => code.Split(new char[] { '_' })[1];
 
+        public string GetDisplayName => OverridedName ?? (CurrencyToId + "/" + CurrencyFromId);
+
         public override string ToString() => $"{nameof(CurrencyPair)}({Code} {OverridedName}, {CurrencyToId}-{CurrencyFromId}, " +
             $"digits:{DigitsPrice} {DigitsAmount}, {(IsHalted ? "halted" : "")} {(IsShowedForUsers ? "showed" : "")})";
     }
