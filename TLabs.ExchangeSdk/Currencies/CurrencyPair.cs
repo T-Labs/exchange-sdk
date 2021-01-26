@@ -2,7 +2,7 @@ namespace TLabs.ExchangeSdk.Currencies
 {
     public class CurrencyPair
     {
-        public string Code { get; set; }
+        public string Code => $"{CurrencyToId}_{CurrencyFromId}";
 
         /// <summary>
         /// Is currency pair halted
@@ -42,17 +42,19 @@ namespace TLabs.ExchangeSdk.Currencies
 
         public bool SendToCoinmarketcap { get; set; } = true;
 
-        private CurrencyPair(string currencyFromId, string currencyToId)
-        {
-            CurrencyFromId = currencyFromId;
-            CurrencyToId = currencyToId;
-        }
-
         public CurrencyPair()
         {
         }
 
-        public string GetCurrencyPairCode() => $"{CurrencyToId}_{CurrencyFromId}";
+        public CurrencyPair(string currencyToId, string currencyFromId)
+        {
+            CurrencyToId = currencyToId;
+            CurrencyFromId = currencyFromId;
+        }
+
+        public CurrencyPair(string code) : this(GetCurrencyToId(code), GetCurrencyFromId(code))
+        {
+        }
 
         public static string GetCurrencyToId(string code) => code.Split(new char[] { '_' })[0];
 
