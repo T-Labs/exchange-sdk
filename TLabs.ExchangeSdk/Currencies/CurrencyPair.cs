@@ -40,6 +40,8 @@ namespace TLabs.ExchangeSdk.Currencies
         /// </summary>
         public int DigitsAmount { get; set; }
 
+        public bool SendToCoinmarketcap { get; set; } = true;
+
         private CurrencyPair(string currencyFromId, string currencyToId)
         {
             CurrencyFromId = currencyFromId;
