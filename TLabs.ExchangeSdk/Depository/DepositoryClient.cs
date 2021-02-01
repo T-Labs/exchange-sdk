@@ -17,6 +17,14 @@ namespace TLabs.ExchangeSdk.Depository
 
         public async Task<QueryResult> SendTxCommands(List<TxCommandDto> txCommands)
         {
+            foreach (var command in txCommands)
+            {
+                command.TxTypeCode = command.TxTypeCode?.Trim().NullIfEmpty();
+                command.CurrencyCode = command.CurrencyCode?.Trim().NullIfEmpty();
+                command.UserId = command.UserId?.Trim().NullIfEmpty();
+                command.ActionId = command.ActionId?.Trim().NullIfEmpty();
+                command.TxId = command.TxId.Trim().NullIfEmpty();
+            }
             var result = await $"depository/transaction/commands".InternalApi()
                 .PostJsonAsync(txCommands).GetQueryResult();
             return result;
