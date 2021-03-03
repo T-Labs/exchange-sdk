@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TLabs.DotnetHelpers;
+using TLabs.DotnetHelpers.Helpers;
 
 namespace TLabs.ExchangeSdk.Currencies
 {
@@ -74,13 +75,6 @@ namespace TLabs.ExchangeSdk.Currencies
                 _currencyPairs = currencyPairs;
         }
 
-        private async Task<List<CurrencyPair>> LoadCurrencyPairs()
-        {
-            var result = await $"depository/currency-pairs".InternalApi()
-                .GetJsonAsync<List<CurrencyPair>>().GetQueryResult();
-            return result.Data;
-        }
-
         private async Task<List<Currency>> LoadCurrencies()
         {
             var result = await $"depository/currencies".InternalApi()
@@ -88,10 +82,25 @@ namespace TLabs.ExchangeSdk.Currencies
             return result.Data;
         }
 
-        public async Task LoadData()
+        private async Task<List<CurrencyPair>> LoadCurrencyPairs()
         {
-            SetCurrencyPairs(await LoadCurrencyPairs());
-            SetCurrencies(await LoadCurrencies());
+            var result = await $"depository/currency-pairs".InternalApi()
+                .GetJsonAsync<List<CurrencyPair>>().GetQueryResult();
+            return result.Data;
+        }
+
+        public async Task LoadData(int countAttempts = 0)
+        {
+            var currencies = await LoadCurrencies();
+            SetCurrencies(currencies);
+            var currencyPairs = await LoadCurrencyPairs();
+            SetCurrencyPairs(currencyPairs);
+
+            if (currencies?.Count > 0 && currencyPairs?.Count > 0) // loaded succesfully
+                return;
+
+            await Task.Delay(TimeHelper.GetDelay(countAttempts)); // use increasing delay and try again
+            _ = LoadData(++countAttempts);
         }
 
         #endregion Load methods
