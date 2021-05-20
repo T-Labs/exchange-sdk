@@ -15,7 +15,7 @@ namespace TLabs.ExchangeSdk.Depository
         {
         }
 
-        public async Task<QueryResult> SendTxCommands(List<TxCommandDto> txCommands)
+        public async Task<QueryResult> SendTxCommands(List<TxCommandDto> txCommands, bool checkBalances = true)
         {
             foreach (var command in txCommands)
             {
@@ -26,12 +26,13 @@ namespace TLabs.ExchangeSdk.Depository
                 command.TxId = command.TxId?.Trim().NullIfEmpty();
             }
             var result = await $"depository/transaction/commands".InternalApi()
+                .SetQueryParam(nameof(checkBalances), checkBalances)
                 .PostJsonAsync(txCommands).GetQueryResult();
             return result;
         }
 
-        public Task<QueryResult> SendTxCommand(TxCommandDto txCommand)
-            => SendTxCommands(new List<TxCommandDto> { txCommand });
+        public Task<QueryResult> SendTxCommand(TxCommandDto txCommand, bool checkBalances = true)
+            => SendTxCommands(new List<TxCommandDto> { txCommand }, checkBalances);
 
         public async Task<QueryResult<List<TransactionDto>>> GetTransactions(string userId = null, string currencyCode = null,
             DateTimeOffset? from = null, DateTimeOffset? to = null, List<string> transactionTypes = null, bool includeRollbacks = false)
