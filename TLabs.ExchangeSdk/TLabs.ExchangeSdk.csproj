@@ -15,6 +15,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="TLabs.DotnetHelpers" Version="1.0.20" />
+    <PackageReference Include="TLabs.DotnetHelpers" Version="1.0.21" />
   </ItemGroup>
 </Project>
