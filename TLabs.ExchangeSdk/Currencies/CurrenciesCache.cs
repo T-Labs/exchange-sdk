@@ -30,6 +30,8 @@ namespace TLabs.ExchangeSdk.Currencies
 
         #region Getters
 
+        public bool IsLoaded => _currencies?.Count > 0 && _currencyPairs?.Count > 0;
+
         public List<CurrencyPair> GetCurrencyPairs() => _currencyPairs;
 
         public CurrencyPair GetCurrencyPair(string code)
@@ -96,11 +98,11 @@ namespace TLabs.ExchangeSdk.Currencies
             var currencyPairs = await LoadCurrencyPairs();
             SetCurrencyPairs(currencyPairs);
 
-            if (currencies?.Count > 0 && currencyPairs?.Count > 0) // loaded succesfully
-                return;
-
-            await Task.Delay(TimeHelper.GetDelay(countAttempts)); // use increasing delay and try again
-            _ = LoadData(++countAttempts);
+            if (!IsLoaded)
+            {
+                await Task.Delay(TimeHelper.GetDelay(countAttempts)); // use increasing delay and try again
+                _ = LoadData(++countAttempts);
+            }
         }
 
         #endregion Load methods
