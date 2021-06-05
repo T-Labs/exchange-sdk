@@ -38,7 +38,7 @@ namespace TLabs.ExchangeSdk.Currencies
         {
             var pair = _currencyPairs.FirstOrDefault(_ => _.Code == code);
             if (pair == null)
-                _logger.LogWarning($"GetCurrencyPair() {code} wasn't found");
+                _logger.LogError($"CurrenciesCache not found {code}");
             return pair;
         }
 
@@ -48,7 +48,7 @@ namespace TLabs.ExchangeSdk.Currencies
         {
             var currency = _currencies.FirstOrDefault(_ => _.Code == code);
             if (currency == null)
-                _logger.LogWarning($"GetCurrency() {code} wasn't found");
+                _logger.LogError($"CurrenciesCache not found {code}");
             return currency;
         }
 
