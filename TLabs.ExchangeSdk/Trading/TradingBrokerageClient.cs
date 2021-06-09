@@ -24,7 +24,7 @@ namespace TLabs.ExchangeSdk.Trading
             return result;
         }
 
-        public async Task CancelOrder(string orderId, string userId)
+        public async Task CancelOrder(Guid orderId, string userId)
         {
             await $"brokerage/order/{orderId}?userId={userId}".InternalApi()
                 .DeleteAsync();
