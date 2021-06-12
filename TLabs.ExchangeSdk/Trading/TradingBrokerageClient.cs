@@ -15,12 +15,12 @@ namespace TLabs.ExchangeSdk.Trading
         {
         }
 
-        public async Task<CreateOrderResult> CreateOrder(OrderCreateRequest request)
+        public async Task<OrderCreateResult> CreateOrder(OrderCreateRequest request)
         {
             var resultStr = await $"brokerage/order".InternalApi()
                 .PostJsonAsync<string>(request);
             var decodedString = JsonConvert.DeserializeObject<string>(resultStr);
-            var result = JsonConvert.DeserializeObject<CreateOrderResult>(decodedString);
+            var result = JsonConvert.DeserializeObject<OrderCreateResult>(decodedString);
             return result;
         }
 

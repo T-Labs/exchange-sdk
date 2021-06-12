@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TLabs.ExchangeSdk.Trading
 {
-    public class CreateOrderResult
+    public class OrderCreateResult
     {
         /// <summary>OrderId</summary>
         public Guid Id { get; set; }
