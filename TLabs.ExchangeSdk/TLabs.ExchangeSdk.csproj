@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <Version>1.0.34</Version>
+    <Version>1.0.35</Version>
     <TargetFramework>netcoreapp5.0</TargetFramework>
   </PropertyGroup>
 
@@ -15,6 +15,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="TLabs.DotnetHelpers" Version="1.0.27" />
+    <PackageReference Include="TLabs.DotnetHelpers" Version="1.0.28" />
   </ItemGroup>
 </Project>
