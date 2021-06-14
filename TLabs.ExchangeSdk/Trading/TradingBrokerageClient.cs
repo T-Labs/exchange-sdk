@@ -24,9 +24,9 @@ namespace TLabs.ExchangeSdk.Trading
             return result;
         }
 
-        public async Task CancelOrder(Guid orderId, string userId)
+        public async Task<IFlurlResponse> CancelOrder(Guid orderId, string userId)
         {
-            await $"brokerage/order/{orderId}?userId={userId}".InternalApi()
+            return await $"brokerage/order/{orderId}?userId={userId}".InternalApi()
                 .DeleteAsync();
         }
 
