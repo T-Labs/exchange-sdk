@@ -63,8 +63,15 @@ namespace TLabs.ExchangeSdk.Trading
 
         public bool IsLocal => Exchange == Exchange.Local;
 
+        public string Status => (Fulfilled == 0 && !IsCanceled) ? "Created"
+            : (Fulfilled == Amount) ? "Completed"
+            : (Fulfilled > 0 && !IsCanceled) ? "PartiallyCompleted"
+            : (Fulfilled == 0 && IsCanceled) ? "Canceled"
+            : (Amount > 0 && IsCanceled) ? "PartiallyExecutedAndCanceled"
+            : "Default";
+
         public override string ToString() => $"{(IsBid ? "Bid" : "Ask")}({Id} {CurrencyPairCode} created:{DateCreated} " +
-            $"{(IsCanceled ? "canceled" : IsActive ? "active" : "completed")} {ClientType} {UserId}, {Exchange} " +
+            $"{Status} {(IsCanceled ? "canceled" : "")}, {ClientType} {UserId}, {Exchange} " +
             $"Available:{AvailableAmount} filled:{Fulfilled}+{Blocked}/{Amount} for price:{Price}, )";
 
         public Order Clone() => (Order)MemberwiseClone();
