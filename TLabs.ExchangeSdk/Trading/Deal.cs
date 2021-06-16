@@ -9,6 +9,33 @@ namespace TLabs.ExchangeSdk.Trading
 {
     public class Deal
     {
+        public Deal()
+        {
+        }
+
+        public Deal(Order order1, Order order2, decimal price, decimal volume)
+        {
+            var (bid, ask) = order1.IsBid ? (order1, order2) : (order2, order1);
+            if (!bid.IsBid)
+            {
+                throw new Exception($"No bids passed to Deal(): {order1}, {order2}");
+            }
+
+            if (ask.IsBid)
+            {
+                throw new Exception($"No asks passed to Deal(): {order1}, {order2}");
+            }
+
+            DealId = Guid.NewGuid(); // DealId is used before saving Deal to DB
+            DateCreated = DateTimeOffset.UtcNow;
+            BidId = bid.Id;
+            AskId = ask.Id;
+            Price = price;
+            Volume = volume;
+            FromInnerTradingBot = bid.ClientType == ClientType.DealsBot;
+            IsSentToDealEnding = FromInnerTradingBot ? true : false; // all deals except deals-bot deals have to be processed
+        }
+
         /// <summary>Deal guid</summary>
         [Key]
         public Guid DealId { get; set; }

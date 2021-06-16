@@ -9,6 +9,18 @@ namespace TLabs.ExchangeSdk.Trading
 {
     public class Order : OrderBase
     {
+        public Order()
+        {
+        }
+
+        public Order(bool isBid, string currencyPairCode, decimal price, decimal amount)
+        {
+            IsBid = isBid;
+            CurrencyPairCode = currencyPairCode;
+            Price = price;
+            Amount = amount;
+        }
+
         public Guid Id { get; set; }
 
         public ClientType ClientType { get; set; }
@@ -49,7 +61,7 @@ namespace TLabs.ExchangeSdk.Trading
 
         public override string ToString() => $"{nameof(Order)}{(IsBid ? "Bid" : "Ask")}({Id} {CurrencyPairCode} " +
             $"created:{DateCreated} {Status} {(IsCanceled ? "canceled" : "")}, {ClientType} {UserId}, {Exchange} " +
-            $"Available:{AvailableAmount} filled:{Fulfilled}+{Blocked}/{Amount} for price:{Price}, )";
+            $"Available:{AvailableAmount} filled:{Fulfilled}+{Blocked}/{Amount} for price:{Price})";
 
         public Order Clone() => (Order)MemberwiseClone();
     }

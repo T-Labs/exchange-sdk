@@ -22,8 +22,8 @@ namespace TLabs.ExchangeSdk.Trading
         public decimal Price { get; set; }
         public DateTimeOffset DateCreated { get; set; } = DateTimeOffset.UtcNow;
 
-        public bool IsOnSameOrderbookSide(Order order2) => this.IsBid == order2.IsBid;
-        public bool IsSameCurrencyPair(Order order2) => this.CurrencyPairCode == order2.CurrencyPairCode;
+        public bool HasSameOrderbookSide(Order order2) => this.IsBid == order2.IsBid;
+        public bool HasSameCurrencyPair(Order order2) => this.CurrencyPairCode == order2.CurrencyPairCode;
 
         public override string ToString() => $"{nameof(OrderBase)}({(IsBid ? "bid" : "ask")} amount:{Amount} price:{Price})";
 
