@@ -32,7 +32,16 @@ namespace TLabs.ExchangeSdk.Currencies
 
         public bool IsLoaded => _currencies?.Count > 0 && _currencyPairs?.Count > 0;
 
-        public List<CurrencyPair> GetCurrencyPairs() => _currencyPairs;
+        public List<CurrencyPair> GetCurrencyPairs(bool onlyVisible = false)
+        {
+            if (onlyVisible)
+            {
+                return _currencyPairs.Where(_ => _.IsShowedForUsers
+                    && _.CurrencyFrom.IsShowedForUsers && _.CurrencyTo.IsShowedForUsers)
+                    .ToList();
+            }
+            return _currencyPairs;
+        }
 
         public CurrencyPair GetCurrencyPair(string code)
         {
@@ -42,7 +51,16 @@ namespace TLabs.ExchangeSdk.Currencies
             return pair;
         }
 
-        public List<Currency> GetCurrencies() => _currencies;
+        public List<Currency> GetCurrencies(bool onlyVisible = false)
+        {
+            if (onlyVisible)
+                return _currencies.Where(_ => _.IsShowedForUsers).ToList();
+            return _currencies;
+        }
+
+        /// <summary>Get currencies with their own crypto-adapters (exclude tokens and fiat)</summary>
+        public List<Currency> GetCryptoAdapterCurrencies() =>
+            _currencies.Where(_ => _.TokenOf.NotHasValue() && !_.IsFiat).ToList();
 
         public Currency GetCurrency(string code)
         {
