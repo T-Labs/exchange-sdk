@@ -6,9 +6,9 @@ using TLabs.DotnetHelpers;
 
 namespace TLabs.ExchangeSdk.Commissions
 {
-    public class CommissionsClient
+    public class ClientCommissions
     {
-        public CommissionsClient()
+        public ClientCommissions()
         {
         }
 

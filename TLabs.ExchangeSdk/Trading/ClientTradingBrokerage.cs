@@ -9,9 +9,9 @@ using TLabs.DotnetHelpers;
 
 namespace TLabs.ExchangeSdk.Trading
 {
-    public class TradingBrokerageClient
+    public class ClientTradingBrokerage
     {
-        public TradingBrokerageClient()
+        public ClientTradingBrokerage()
         {
         }
 

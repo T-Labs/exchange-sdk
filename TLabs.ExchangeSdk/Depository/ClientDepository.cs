@@ -9,9 +9,9 @@ using TLabs.DotnetHelpers;
 
 namespace TLabs.ExchangeSdk.Depository
 {
-    public class DepositoryClient
+    public class ClientDepository
     {
-        public DepositoryClient()
+        public ClientDepository()
         {
         }
 
