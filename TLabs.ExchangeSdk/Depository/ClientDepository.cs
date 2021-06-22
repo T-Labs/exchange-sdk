@@ -35,7 +35,9 @@ namespace TLabs.ExchangeSdk.Depository
             => SendTxCommands(new List<TxCommandDto> { txCommand }, checkBalances);
 
         public async Task<List<TransactionDto>> GetTransactions(string userId = null, string currencyCode = null,
-            DateTimeOffset? from = null, DateTimeOffset? to = null, List<string> transactionTypes = null, bool includeRollbacks = false)
+            DateTimeOffset? from = null, DateTimeOffset? to = null,
+            List<string> transactionTypes = null, int page = 1, int pageSize = 50000,
+            bool includeRollbacks = false)
         {
             var request = "depository/transaction/transactions".InternalApi()
                 .SetQueryParam(nameof(userId), userId)
@@ -43,6 +45,8 @@ namespace TLabs.ExchangeSdk.Depository
                 .SetQueryParam(nameof(from), from?.ToString("o"))
                 .SetQueryParam(nameof(to), to?.ToString("o"))
                 .SetQueryParam(nameof(transactionTypes), transactionTypes)
+                .SetQueryParam(nameof(page), page)
+                .SetQueryParam(nameof(pageSize), pageSize)
                 .SetQueryParam(nameof(includeRollbacks), includeRollbacks.ToString());
             var result = await request.GetJsonAsync<List<TransactionDto>>();
             return result;
