@@ -34,12 +34,12 @@ namespace TLabs.ExchangeSdk.Depository
         public Task<QueryResult> SendTxCommand(TxCommandDto txCommand, bool checkBalances = true)
             => SendTxCommands(new List<TxCommandDto> { txCommand }, checkBalances);
 
-        public async Task<List<TransactionDto>> GetTransactions(string userId = null, string currencyCode = null,
+        public async Task<PagedList<TransactionDto>> GetTransactions(string userId = null, string currencyCode = null,
             DateTimeOffset? from = null, DateTimeOffset? to = null,
             List<string> transactionTypes = null, int page = 1, int pageSize = 50000,
             bool includeRollbacks = false)
         {
-            var request = "depository/transaction/transactions".InternalApi()
+            var request = "depository/transaction".InternalApi()
                 .SetQueryParam(nameof(userId), userId)
                 .SetQueryParam(nameof(currencyCode), currencyCode)
                 .SetQueryParam(nameof(from), from?.ToString("o"))
@@ -48,7 +48,7 @@ namespace TLabs.ExchangeSdk.Depository
                 .SetQueryParam(nameof(page), page)
                 .SetQueryParam(nameof(pageSize), pageSize)
                 .SetQueryParam(nameof(includeRollbacks), includeRollbacks.ToString());
-            var result = await request.GetJsonAsync<List<TransactionDto>>();
+            var result = await request.GetJsonAsync<PagedList<TransactionDto>>();
             return result;
         }
 
