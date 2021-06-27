@@ -67,9 +67,9 @@ namespace TLabs.ExchangeSdk.Trading
         /// <summary>Bid</summary>
         public Order Bid { get; set; }
 
-        public DealResponse GetDealResponse()
+        public MarketdataDeal GetDealResponse()
         {
-            return new DealResponse()
+            return new MarketdataDeal()
             {
                 DealId = DealId,
                 Price = Price,

@@ -13,11 +13,8 @@ namespace TLabs.ExchangeSdk.Trading
         }
 
         public MatchingOrder(bool isBid, string currencyPairCode, decimal price, decimal amount)
+            : base(isBid, currencyPairCode, price, amount)
         {
-            IsBid = isBid;
-            CurrencyPairCode = currencyPairCode;
-            Price = price;
-            Amount = amount;
         }
 
         /// <summary>How many times was this order sent to other exchange</summary>

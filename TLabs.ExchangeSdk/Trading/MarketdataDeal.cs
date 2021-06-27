@@ -3,7 +3,7 @@ using System;
 namespace TLabs.ExchangeSdk.Trading
 {
     /// <summary>Simplified record of deal, stored in MarketData</summary>
-    public class DealResponse
+    public class MarketdataDeal
     {
         /// <summary>Deal guid</summary>
         public Guid DealId { get; set; }
