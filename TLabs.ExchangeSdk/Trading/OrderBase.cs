@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel.DataAnnotations;
+using TLabs.ExchangeSdk.Currencies;
 
 namespace TLabs.ExchangeSdk.Trading
 {
@@ -25,12 +26,28 @@ namespace TLabs.ExchangeSdk.Trading
         public decimal Price { get; set; }
         public DateTimeOffset DateCreated { get; set; } = DateTimeOffset.UtcNow;
 
+        public override string ToString() => $"{nameof(OrderBase)}({(IsBid ? "bid" : "ask")} amount:{Amount} price:{Price})";
+
+        public OrderBase Clone() => (OrderBase)MemberwiseClone();
+
         public bool HasSameOrderbookSide(Order order2) => this.IsBid == order2.IsBid;
 
         public bool HasSameCurrencyPair(Order order2) => this.CurrencyPairCode == order2.CurrencyPairCode;
 
-        public override string ToString() => $"{nameof(OrderBase)}({(IsBid ? "bid" : "ask")} amount:{Amount} price:{Price})";
+        public string GetReceivedCurrency()
+        {
+            var pair = new CurrencyPair(CurrencyPairCode);
+            return IsBid ? pair.CurrencyToId : pair.CurrencyFromId;
+        }
 
-        public OrderBase Clone() => (OrderBase)MemberwiseClone();
+        public string GetSentCurrency()
+        {
+            var pair = new CurrencyPair(CurrencyPairCode);
+            return IsBid ? pair.CurrencyFromId : pair.CurrencyToId;
+        }
+
+        public decimal GetReceivedAmount() => IsBid ? Amount : Amount * Price;
+
+        public decimal GetSentAmount() => IsBid ? Amount * Price : Amount;
     }
 }
