@@ -62,10 +62,14 @@ namespace TLabs.ExchangeSdk.Depository
         public static readonly TransactionType TransferToColdWallet = new TransactionType("11",
             "Перевод с кошелька ноды на холодный кошелек", "TransferToColdWallet");
 
-        public static readonly TransactionType ExchangerDeposit = new TransactionType("301", "Пополнение счета Exchanger", nameof(ExchangerDeposit));
-        public static readonly TransactionType ExchangerWithdrawal = new TransactionType("302", "Вывод со счета Exchanger", nameof(ExchangerWithdrawal));
-        public static readonly TransactionType ExchangerCommission = new TransactionType("303", "Комиссия Exchanger", nameof(ExchangerCommission));
-        public static readonly TransactionType ExchangerProfit = new TransactionType("304", "Прибыль Exchanger", nameof(ExchangerProfit));
+        public static readonly TransactionType BotDeposit = new TransactionType("301", "Пополнение счета Exchanger", nameof(BotDeposit));
+        public static readonly TransactionType BotWithdrawal = new TransactionType("302", "Вывод со счета Exchanger", nameof(BotWithdrawal));
+        public static readonly TransactionType BotCommission = new TransactionType("303", "Комиссия Exchanger", nameof(BotCommission));
+        public static readonly TransactionType BotProfit = new TransactionType("304", "Прибыль Exchanger", nameof(BotProfit));
+        public static readonly TransactionType BotTransferFromUser = new TransactionType("311", "Перевод юзера к боту", nameof(BotTransferFromUser));
+        public static readonly TransactionType BotTransferToUser = new TransactionType("312", "Перевод бота к юзеру", nameof(BotTransferToUser));
+
+        public static readonly TransactionType InternalTransfer = new TransactionType("401", "Внутренний перевод", nameof(InternalTransfer));
 
         public static readonly TransactionType AffiliateTariffPurchase = new TransactionType("801", "Покупка RefferalTariff", nameof(AffiliateTariffPurchase));
         public static readonly TransactionType AffiliateTariffPurchaseRollback = new TransactionType("802", "Откат покупки RefferalTariff", nameof(AffiliateTariffPurchaseRollback));
@@ -111,7 +115,9 @@ namespace TLabs.ExchangeSdk.Depository
 
             Fee, NodeAgregationNetworkCommission,
 
-            ExchangerDeposit, ExchangerWithdrawal, ExchangerCommission, ExchangerProfit,
+            BotDeposit, BotWithdrawal, BotCommission, BotProfit, BotTransferFromUser, BotTransferToUser,
+
+            InternalTransfer,
 
             AffiliateTariffPurchase, AffiliateTariffPurchaseRollback,
             AffiliateDealCommission, AffiliateWithdrawalCommission, AffiliateCurrencyListing,

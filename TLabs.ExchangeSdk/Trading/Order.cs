@@ -37,6 +37,7 @@ namespace TLabs.ExchangeSdk.Trading
 
         public decimal AvailableAmount => Amount - Fulfilled - Blocked;
 
+        /// <summary>Completely fullfilled or canceled (won't be in matching pool anymore)</summary>
         public bool IsActive => !IsCanceled && Fulfilled < Amount;
 
         public bool IsLocal => Exchange == Exchange.Local;

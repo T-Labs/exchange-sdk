@@ -1,9 +1,26 @@
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace TLabs.ExchangeSdk.Depository
 {
     public class TxCommandDto
     {
+        public TxCommandDto()
+        {
+        }
+
+        public TxCommandDto(string txTypeCode, string currencyCode, string fromUserId, string toUserId, decimal amount,
+            string actionId, string txId = null)
+        {
+            TxTypeCode = txTypeCode;
+            CurrencyCode = currencyCode;
+            FromUserId = fromUserId;
+            ToUserId = toUserId;
+            Amount = amount;
+            ActionId = actionId;
+            TxId = txId;
+        }
+
         [Required]
         public string TxTypeCode { get; set; }
 
@@ -12,9 +29,16 @@ namespace TLabs.ExchangeSdk.Depository
         [Required]
         public string CurrencyCode { get; set; }
 
+        [Obsolete("Use FromUserId/ToUserId")]
         public string UserId { get; set; }
+        [Obsolete("Use FromClientType/ToClientType")]
+        public ClientType ClientType { get; set; }
 
-        public ClientType ClientType { get; set; } = ClientType.User;
+        public string FromUserId { get; set; }
+        public ClientType FromClientType { get; set; }
+
+        public string ToUserId { get; set; }
+        public ClientType ToClientType { get; set; }
 
         [Required]
         public string ActionId { get; set; }
@@ -22,6 +46,6 @@ namespace TLabs.ExchangeSdk.Depository
         public string TxId { get; set; }
 
         public override string ToString() => $"{nameof(TxCommandDto)}(type:{TxTypeCode}, " +
-            $"{Amount} {CurrencyCode}, {ClientType} {UserId}, actionId:{ActionId}, txId:{TxId})";
+            $"{Amount} {CurrencyCode}, users: {FromUserId} -> {ToUserId}, actionId:{ActionId}, txId:{TxId})";
     }
 }

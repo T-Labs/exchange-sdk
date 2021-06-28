@@ -22,6 +22,8 @@ namespace TLabs.ExchangeSdk.Depository
                 command.TxTypeCode = command.TxTypeCode?.Trim().NullIfEmpty();
                 command.CurrencyCode = command.CurrencyCode?.Trim().NullIfEmpty();
                 command.UserId = command.UserId?.Trim().NullIfEmpty();
+                command.FromUserId = command.FromUserId?.Trim().NullIfEmpty();
+                command.ToUserId = command.ToUserId?.Trim().NullIfEmpty();
                 command.ActionId = command.ActionId?.Trim().NullIfEmpty();
                 command.TxId = command.TxId?.Trim().NullIfEmpty();
             }
