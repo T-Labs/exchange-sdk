@@ -26,8 +26,15 @@ namespace TLabs.ExchangeSdk.Trading
                 .SetQueryParam("status", ((int)status).ToString())
                 .SetQueryParam(nameof(from), from?.ToString("o"))
                 .SetQueryParam(nameof(to), to?.ToString("o"))
-                .GetJsonAsync<List<MarketdataOrder>>().GetQueryResult();
-            return result.Succeeded ? result.Data : new List<MarketdataOrder>();
+                .GetJsonAsync<List<MarketdataOrder>>();
+            return result;
+        }
+
+        public async Task<MarketdataOrder> GetOrder(Guid id)
+        {
+            var result = await $"marketdata/order/{id}".InternalApi()
+                .GetJsonAsync<MarketdataOrder>();
+            return result;
         }
     }
 }
