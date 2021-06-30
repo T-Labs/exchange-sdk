@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30711.63
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TLabs.ExchangeSdk", "TLabs.ExchangeSdk\TLabs.ExchangeSdk.csproj", "{B29D1B89-8B19-4C0D-B28A-57CE4CD116B3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TLabs.ExchangeSdk", "TLabs.ExchangeSdk\TLabs.ExchangeSdk.csproj", "{B29D1B89-8B19-4C0D-B28A-57CE4CD116B3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TLabs.ExchangeSdk.Tests", "TLabs.ExchangeSdk.Tests\TLabs.ExchangeSdk.Tests.csproj", "{799F759E-FA5D-4F50-955E-55ABCD45D76F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{B29D1B89-8B19-4C0D-B28A-57CE4CD116B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B29D1B89-8B19-4C0D-B28A-57CE4CD116B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B29D1B89-8B19-4C0D-B28A-57CE4CD116B3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{799F759E-FA5D-4F50-955E-55ABCD45D76F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{799F759E-FA5D-4F50-955E-55ABCD45D76F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{799F759E-FA5D-4F50-955E-55ABCD45D76F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{799F759E-FA5D-4F50-955E-55ABCD45D76F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
