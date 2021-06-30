@@ -14,7 +14,7 @@ namespace TLabs.ExchangeSdk.Trading
             amountQuote / amountBase;
 
         /// <summary>Find where base and quote amounts</summary>
-        public static (T amountBase, T amountQuote) GetOrderAmountsFromDirection<T>(bool isBid, T amountFrom, T amountTo)
+        public static (T amountBase, T amountQuote) GetOrderAmountsByDirection<T>(bool isBid, T amountFrom, T amountTo)
         {
             return isBid ? (amountTo, amountFrom) : (amountFrom, amountTo);
         }
@@ -67,15 +67,15 @@ namespace TLabs.ExchangeSdk.Trading
             return QueryResult<OrderBase>.CreateSucceeded(order);
         }
 
-        public static QueryResult<OrderBase> GetOrderFromDirection(CurrencyPair currencyPair, bool isBid,
+        public static QueryResult<OrderBase> GetOrderByDirection(CurrencyPair currencyPair, bool isBid,
             decimal? amountFrom, decimal? amountTo, decimal? price = null)
         {
-            var (amountBase, amountQuote) = GetOrderAmountsFromDirection(isBid, amountFrom, amountTo);
+            var (amountBase, amountQuote) = GetOrderAmountsByDirection(isBid, amountFrom, amountTo);
             return GetOrder(currencyPair, isBid, amountBase, amountQuote, price);
         }
 
         /// <summary>
-        /// Construct order from parameters
+        /// Construct order by parameters
         /// amountFrom or amountTo is required
         /// price is required if amountFrom or amountTo is null
         /// </summary>
@@ -85,7 +85,7 @@ namespace TLabs.ExchangeSdk.Trading
         /// <param name="amountFrom">Amount of currencyFrom that user sells</param>
         /// <param name="amountTo">Amount of currencyTo that user buys</param>
         /// <param name="price">Order price</param>
-        public static QueryResult<OrderBase> GetOrderFromDirection(List<CurrencyPair> currencyPairs,
+        public static QueryResult<OrderBase> GetOrderByDirection(List<CurrencyPair> currencyPairs,
             string currencyFrom, string currencyTo,
             decimal? amountFrom, decimal? amountTo, decimal? price = null)
         {
@@ -94,7 +94,7 @@ namespace TLabs.ExchangeSdk.Trading
                 return QueryResult<OrderBase>.CreateFailedLogic(currencyPairResult.LogicError);
             var (currencyPair, isBid) = currencyPairResult.Data;
 
-            return GetOrderFromDirection(currencyPair, isBid, amountFrom, amountTo, price);
+            return GetOrderByDirection(currencyPair, isBid, amountFrom, amountTo, price);
         }
     }
 }
