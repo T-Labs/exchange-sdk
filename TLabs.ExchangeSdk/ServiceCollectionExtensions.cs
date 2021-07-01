@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using TLabs.ExchangeSdk.Commissions;
 using TLabs.ExchangeSdk.Currencies;
 using TLabs.ExchangeSdk.Depository;
+using TLabs.ExchangeSdk.Exchanges;
 using TLabs.ExchangeSdk.Trading;
 using TLabs.ExchangeSdk.Users;
 
@@ -18,6 +19,7 @@ namespace TLabs.ExchangeSdk
         {
             services.AddTransient<ClientCommissions>();
             services.AddTransient<ClientDepository>();
+            services.AddTransient<ClientExchanges>();
             services.AddTransient<ClientMarketdata>();
             services.AddTransient<ClientTradingBrokerage>();
             services.AddTransient<ClientUsers>();
