@@ -32,7 +32,7 @@ namespace TLabs.ExchangeSdk.Trading
 
         public async Task<MarketdataOrder> GetOrder(Guid id)
         {
-            var result = await $"marketdata/order/{id}".InternalApi()
+            var result = await $"marketdata/orders/order/{id}".InternalApi()
                 .GetJsonAsync<MarketdataOrder>();
             return result;
         }
