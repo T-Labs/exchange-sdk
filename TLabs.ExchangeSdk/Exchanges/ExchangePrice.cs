@@ -1,8 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TLabs.ExchangeSdk.Exchanges
 {
@@ -12,6 +8,8 @@ namespace TLabs.ExchangeSdk.Exchanges
         public string CurrencyPairCode { get; set; }
         public bool IsBid { get; set; }
         public decimal Price { get; set; }
+        public decimal PriceWithMarkup { get; set; }
+        public decimal PriceWithMarkupAndFee { get; set; }
         public string UserId { get; set; }
         public DateTimeOffset DateExpire { get; set; }
     }

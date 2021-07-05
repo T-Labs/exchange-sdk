@@ -70,6 +70,7 @@ namespace TLabs.ExchangeSdk.Depository
         public static readonly TransactionType BotTransferToUser = new TransactionType("312", "Перевод бота к юзеру", nameof(BotTransferToUser));
 
         public static readonly TransactionType InternalTransfer = new TransactionType("401", "Внутренний перевод", nameof(InternalTransfer));
+        public static readonly TransactionType ExchagngeTransfer = new TransactionType("431", "Перевод между юзерами при обмене", nameof(ExchagngeTransfer));
 
         public static readonly TransactionType AffiliateTariffPurchase = new TransactionType("801", "Покупка RefferalTariff", nameof(AffiliateTariffPurchase));
         public static readonly TransactionType AffiliateTariffPurchaseRollback = new TransactionType("802", "Откат покупки RefferalTariff", nameof(AffiliateTariffPurchaseRollback));
@@ -117,7 +118,7 @@ namespace TLabs.ExchangeSdk.Depository
 
             BotDeposit, BotWithdrawal, BotCommission, BotProfit, BotTransferFromUser, BotTransferToUser,
 
-            InternalTransfer,
+            InternalTransfer, ExchagngeTransfer,
 
             AffiliateTariffPurchase, AffiliateTariffPurchaseRollback,
             AffiliateDealCommission, AffiliateWithdrawalCommission, AffiliateCurrencyListing,

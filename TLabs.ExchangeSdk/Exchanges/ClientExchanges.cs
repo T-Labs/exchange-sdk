@@ -1,8 +1,5 @@
 using Flurl.Http;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using TLabs.DotnetHelpers;
 
@@ -17,7 +14,21 @@ namespace TLabs.ExchangeSdk.Exchanges
             return result;
         }
 
-        public async Task<PagedList<ExchangeOrder>> GetExchangeOrders(string userId = null, ExchangeStatus? status = null,
+        public async Task<ExchangePrice> EstimateExchangePrice(ExchangePriceRequest request)
+        {
+            var result = await $"brokerage/exchange/price".InternalApi()
+                .PostJsonAsync<ExchangePrice>(request);
+            return result;
+        }
+
+        public async Task<Guid> CreateExchange(ExchangeRequest request)
+        {
+            var result = await $"brokerage/exchange".InternalApi()
+                .PostJsonAsync<Guid>(request);
+            return result;
+        }
+
+        public async Task<PagedList<ExchangeOrder>> GetExchanges(string userId = null, ExchangeStatus? status = null,
             int page = 1, int pageSize = 20)
         {
             var result = await $"brokerage/exchange".InternalApi()
@@ -26,13 +37,6 @@ namespace TLabs.ExchangeSdk.Exchanges
                 .SetQueryParam(nameof(page), page)
                 .SetQueryParam(nameof(pageSize), pageSize)
                 .GetJsonAsync<PagedList<ExchangeOrder>>();
-            return result;
-        }
-
-        public async Task<ExchangeOrder> Approve(Guid exchangeId)
-        {
-            var result = await $"brokerage/exchange/approval/{exchangeId}".InternalApi()
-                .PostJsonAsync<ExchangeOrder>(null);
             return result;
         }
     }
