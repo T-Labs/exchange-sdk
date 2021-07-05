@@ -39,5 +39,12 @@ namespace TLabs.ExchangeSdk.Exchanges
                 .GetJsonAsync<PagedList<ExchangeOrder>>();
             return result;
         }
+
+        public async Task<ExchangeParams> GetExchangeParams()
+        {
+            var result = await $"brokerage/exchange/params".InternalApi()
+                .GetJsonAsync<ExchangeParams>();
+            return result;
+        }
     }
 }
