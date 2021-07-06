@@ -24,7 +24,7 @@ namespace TLabs.ExchangeSdk.Exchanges
         public async Task<Guid> CreateExchange(ExchangeRequest request)
         {
             var result = await $"brokerage/exchange".InternalApi()
-                .PostJsonAsync<Guid>(request);
+                .PostJsonAsync<ExchangeOrder>(request);
             return result;
         }
 

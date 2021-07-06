@@ -17,7 +17,6 @@ namespace TLabs.ExchangeSdk.Exchanges
         public DateTimeOffset DateUpdated { get; set; }
 
         public ExchangeStatus Status { get; set; }
-        public Guid? OrderId { get; set; }
 
         public string ErrorText { get; set; }
         public string Comment { get; set; }
