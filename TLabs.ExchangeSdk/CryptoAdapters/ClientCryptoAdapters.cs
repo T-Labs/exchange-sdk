@@ -37,7 +37,7 @@ namespace TLabs.ExchangeSdk.CryptoAdapters
             return result;
         }
 
-        public async Task<decimal?> GetDepositMinAmount(string currencyCode)
+        public async Task<decimal> GetDepositMinAmount(string currencyCode)
         {
             string adapterId = _currenciesCache.GetAdapterId(currencyCode);
             string resultStr = await $"{adapterId}/refill-min-amount/{currencyCode}".InternalApi()
