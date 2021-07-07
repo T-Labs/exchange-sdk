@@ -1,9 +1,6 @@
 using Flurl.Http;
 using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using TLabs.DotnetHelpers;
@@ -14,6 +11,7 @@ namespace TLabs.ExchangeSdk.CryptoAdapters
     public class ClientCryptoAdapters
     {
         private readonly CurrenciesCache _currenciesCache;
+
         public ClientCryptoAdapters(
             CurrenciesCache currenciesCache)
         {
@@ -39,6 +37,8 @@ namespace TLabs.ExchangeSdk.CryptoAdapters
             return result;
         }
 
+        #region ETH
+
         public async Task<QueryResult<string>> ResendTransaction(string currencyCode, string txHash, decimal? newGasPrice = null)
         {
             string adapterId = _currenciesCache.GetAdapterId(currencyCode);
@@ -58,10 +58,16 @@ namespace TLabs.ExchangeSdk.CryptoAdapters
             return result;
         }
 
+        #endregion ETH
+
+        #region TRON
+
         public async Task<TronParamsDto> TronGetParams() =>
             await $"trx/parameters".InternalApi().GetJsonAsync<TronParamsDto>();
 
         public async Task<TronParamsDto> TronSaveParams(TronParamsDto dto) =>
             await $"trx/parameters".InternalApi().PostJsonAsync<TronParamsDto>(dto);
+
+        #endregion TRON
     }
 }

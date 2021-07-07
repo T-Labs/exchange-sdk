@@ -1,6 +1,6 @@
 namespace TLabs.ExchangeSdk.CryptoAdapters
 {
-    public class RequestTransferToColdWallet
+    public class TransferToColdWalletRequest
     {
         public string CurrencyCode { get; set; }
 
