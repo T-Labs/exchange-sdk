@@ -18,13 +18,13 @@ namespace TLabs.ExchangeSdk.CryptoAdapters
             _currenciesCache = currenciesCache;
         }
 
-        public async Task<string> GetWalletAddress(string currencyCode, string userId,
+        public async Task<AddressModel> GetWalletAddress(string currencyCode, string userId,
             ClientType clientType = ClientType.User)
         {
             string adapterId = _currenciesCache.GetAdapterId(currencyCode);
             var result = await $"{adapterId}/address/{userId}".InternalApi()
                 .SetQueryParam(nameof(clientType), clientType)
-                .GetStringAsync();
+                .GetJsonAsync<AddressModel>();
             return result;
         }
 
