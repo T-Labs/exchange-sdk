@@ -22,7 +22,8 @@ namespace TLabs.ExchangeSdk.CryptoAdapters
             ClientType clientType = ClientType.User)
         {
             string adapterId = _currenciesCache.GetAdapterId(currencyCode);
-            var result = await $"{adapterId}/address/{userId}".InternalApi()
+            var result = await $"{adapterId}/address".InternalApi()
+                .SetQueryParam(nameof(userId), userId)
                 .SetQueryParam(nameof(clientType), clientType)
                 .GetJsonAsync<AddressModel>();
             return result;
