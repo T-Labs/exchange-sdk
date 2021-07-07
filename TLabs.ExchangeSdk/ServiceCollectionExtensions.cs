@@ -4,12 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TLabs.ExchangeSdk.Commissions;
-using TLabs.ExchangeSdk.Currencies;
-using TLabs.ExchangeSdk.Depository;
-using TLabs.ExchangeSdk.Exchanges;
-using TLabs.ExchangeSdk.Trading;
-using TLabs.ExchangeSdk.Users;
 
 namespace TLabs.ExchangeSdk
 {
@@ -17,15 +11,16 @@ namespace TLabs.ExchangeSdk
     {
         public static void AddSdkServices(this IServiceCollection services)
         {
-            services.AddTransient<ClientCommissions>();
-            services.AddTransient<ClientDepository>();
-            services.AddTransient<ClientExchanges>();
-            services.AddTransient<ClientMarketdata>();
-            services.AddTransient<ClientTradingBrokerage>();
-            services.AddTransient<ClientUsers>();
+            services.AddTransient<Commissions.ClientCommissions>();
+            services.AddTransient<CryptoAdapters.ClientCryptoAdapters>();
+            services.AddTransient<Depository.ClientDepository>();
+            services.AddTransient<Exchanges.ClientExchanges>();
+            services.AddTransient<Trading.ClientMarketdata>();
+            services.AddTransient<Trading.ClientTradingBrokerage>();
+            services.AddTransient<Users.ClientUsers>();
 
             // needs activation in Program.cs and action /currencies/reload
-            services.AddSingleton<CurrenciesCache>(); 
+            services.AddSingleton<Currencies.CurrenciesCache>(); 
         }
     }
 }
