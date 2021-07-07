@@ -8,6 +8,16 @@ namespace TLabs.ExchangeSdk.CryptoAdapters
 {
     public class AddressModel
     {
+        public AddressModel()
+        {
+        }
+
+        public AddressModel(string address, string addressPublicKey = null)
+        {
+            Address = address;
+            AddressPublicKey = addressPublicKey;
+        }
+
         /// <summary>Address Hash</summary>
         public string Address { get; set; }
 
