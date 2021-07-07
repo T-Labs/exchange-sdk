@@ -37,6 +37,15 @@ namespace TLabs.ExchangeSdk.CryptoAdapters
             return result;
         }
 
+        public async Task<decimal?> GetDepositMinAmount(string currencyCode)
+        {
+            string adapterId = _currenciesCache.GetAdapterId(currencyCode);
+            string resultStr = await $"{adapterId}/refill-min-amount/{currencyCode}".InternalApi()
+                .GetStringAsync();
+            decimal result = Convert.ToDecimal(resultStr);
+            return result;
+        }
+
         #region ETH
 
         public async Task<QueryResult<string>> ResendTransaction(string currencyCode, string txHash, decimal? newGasPrice = null)
