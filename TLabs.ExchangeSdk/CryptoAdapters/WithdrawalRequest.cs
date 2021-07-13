@@ -1,10 +1,13 @@
 using System;
+using TLabs.ExchangeSdk.Withdrawals;
 
 namespace TLabs.ExchangeSdk.CryptoAdapters
 {
     /// <summary>Withdrawal request</summary>
     public class WithdrawalRequest
     {
+        public WithdrawalType WithdrawalType { get; set; } = WithdrawalType.Crypto;
+
         public ClientType ClientType { get; set; }
 
         /// <summary>User that requested withdrawal</summary>
@@ -28,8 +31,11 @@ namespace TLabs.ExchangeSdk.CryptoAdapters
         /// <summary>true if it's admin withdrawal to cold wallet</summary>
         public bool IsToColdWallet { get; set; }
 
+        /// <summary>Only used with WithdrawalType.AdvCashBankCard</summary>
+        public WithdrawalBankCard BankCard { get; set; }
+
         public override string ToString() => $"{nameof(WithdrawalRequest)}({(IsToColdWallet ? "ToColdWallet" : "")}" +
-            $" {ClientType} {UserId}, {Amount} {CurrencyCode}, to {Address})";
+            $" {ClientType} {UserId}, {Amount} {CurrencyCode}, to {Address}, {WithdrawalType})";
 
         public void Trim()
         {
