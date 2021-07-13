@@ -3,7 +3,7 @@ namespace TLabs.ExchangeSdk.CryptoAdapters
     /// <summary>
     /// Модель ответа на вывод денег
     /// </summary>
-    public class WithdrawalResponse
+    public class WithdrawalAdapterResponse
     {
         /// <summary>
         /// Сообщение
@@ -18,7 +18,7 @@ namespace TLabs.ExchangeSdk.CryptoAdapters
         /// <summary>
         /// Статус ответа
         /// </summary>
-        public WithdrawalResponseStatus Status { get; set; }
+        public WithdrawalAdapterResponseStatus Status { get; set; }
 
         /// <summary>
         /// Идентификатор транзакции в блокчейне
@@ -29,7 +29,7 @@ namespace TLabs.ExchangeSdk.CryptoAdapters
     /// <summary>
     /// Статус ответа на вывод денег
     /// </summary>
-    public enum WithdrawalResponseStatus
+    public enum WithdrawalAdapterResponseStatus
     {
         /// <summary>
         /// Успешно

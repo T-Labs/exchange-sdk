@@ -4,7 +4,7 @@ using TLabs.ExchangeSdk.Withdrawals;
 namespace TLabs.ExchangeSdk.CryptoAdapters
 {
     /// <summary>Withdrawal request</summary>
-    public class WithdrawalRequest
+    public class WithdrawalAdapterRequest
     {
         public WithdrawalType WithdrawalType { get; set; } = WithdrawalType.Crypto;
 
@@ -32,9 +32,9 @@ namespace TLabs.ExchangeSdk.CryptoAdapters
         public bool IsToColdWallet { get; set; }
 
         /// <summary>Only used with WithdrawalType.AdvCashBankCard</summary>
-        public WithdrawalBankCard BankCard { get; set; }
+        public WithdrawalBankCardDto BankCard { get; set; }
 
-        public override string ToString() => $"{nameof(WithdrawalRequest)}({(IsToColdWallet ? "ToColdWallet" : "")}" +
+        public override string ToString() => $"{nameof(WithdrawalAdapterRequest)}({(IsToColdWallet ? "ToColdWallet" : "")}" +
             $" {ClientType} {UserId}, {Amount} {CurrencyCode}, to {Address}, {WithdrawalType})";
 
         public void Trim()

@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace TLabs.ExchangeSdk.Withdrawals
 {
-    public class WithdrawalBankCard
+    public class WithdrawalBankCardDto
     {
         [Required]
         public string CardNumber { get; set; }
@@ -15,10 +15,7 @@ namespace TLabs.ExchangeSdk.Withdrawals
         [Range(20, 99)]
         public int ExpiryYear { get; set; }
 
-        /// <summary>
-        /// Phone of card holder
-        /// </summary>
-        [Required]
+        /// <summary>Phone of card holder</summary>
         public string PhoneNumber { get; set; }
 
         /// <summary>
@@ -30,7 +27,7 @@ namespace TLabs.ExchangeSdk.Withdrawals
         public string Country { get; set; }
         public DateTimeOffset? DateBirthday { get; set; }
 
-        public override string ToString() => $"{nameof(WithdrawalBankCard)}({CardNumber.Substring(0, 8)}, " +
+        public override string ToString() => $"{nameof(WithdrawalBankCardDto)}({CardNumber.Substring(0, 8)}, " +
             $"{ExpiryMonth}/{ExpiryYear}, {Name}, {City}, {Country}, {DateBirthday?.ToString("yyyy-MM-dd")})";
     }
 }

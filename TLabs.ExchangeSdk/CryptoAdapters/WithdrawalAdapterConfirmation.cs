@@ -1,6 +1,6 @@
 namespace TLabs.ExchangeSdk.CryptoAdapters
 {
-    public class WithdrawalConfirmationDto
+    public class WithdrawalAdapterConfirmation
     {
         /// <summary>
         /// Depository WithdrawalBlock Transaction Id
@@ -18,7 +18,7 @@ namespace TLabs.ExchangeSdk.CryptoAdapters
 
         public string NetworkCommissionCurrencyCode { get; set; }
 
-        public override string ToString() => $"{nameof(WithdrawalConfirmationDto)}(DepositoryTransactionId:{TransactionId}, IsToColdWallet:{IsToColdWallet}, " +
+        public override string ToString() => $"{nameof(WithdrawalAdapterConfirmation)}(DepositoryTransactionId:{TransactionId}, IsToColdWallet:{IsToColdWallet}, " +
             $"NetworkCommission:{NetworkCommission} {NetworkCommissionCurrencyCode})";
     }
 }
