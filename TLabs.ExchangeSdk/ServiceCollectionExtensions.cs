@@ -11,6 +11,7 @@ namespace TLabs.ExchangeSdk
     {
         public static void AddSdkServices(this IServiceCollection services)
         {
+            services.AddTransient<BinanceHandling.ClientBinanceHandling>();
             services.AddTransient<Commissions.ClientCommissions>();
             services.AddTransient<CryptoAdapters.ClientCryptoAdapters>();
             services.AddTransient<Depository.ClientDepository>();
