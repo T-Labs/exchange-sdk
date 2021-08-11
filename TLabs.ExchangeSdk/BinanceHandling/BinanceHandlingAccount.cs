@@ -22,6 +22,8 @@ namespace TLabs.ExchangeSdk.BinanceHandling
 
         public BinanceHandlingBot Bot { get; set; }
 
+        public string BinanceAccountId { get; set; }
+
         public string ApiKey { get; set; }
 
         public string ApiSecret { get; set; }
