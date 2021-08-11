@@ -28,11 +28,11 @@ namespace TLabs.ExchangeSdk.BinanceHandling
 
         public string ApiSecret { get; set; }
 
-        /// <summary>Sent to keys handling service</summary>
-        public bool IsSent { get; set; }
-
         /// <summary>Id received from keys handling service</summary>
         public string ServiceKeyId { get; set; }
+
+        /// <summary>Is activated in keys handling service</summary>
+        public bool IsActive { get; set; }
 
         public override string ToString() => $"{nameof(BinanceHandlingAccount)}(Id: {Id}, user:{UserId}, " +
             $"{Bot}, ApiKeys: {ApiKey} - {ApiSecret.Cut(8)}, ServiceKeyId:{ServiceKeyId})";
