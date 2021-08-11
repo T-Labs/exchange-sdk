@@ -33,7 +33,6 @@ namespace TLabs.ExchangeSdk.Trading
             Price = price;
             Volume = volume;
             FromInnerTradingBot = bid.ClientType == ClientType.DealsBot;
-            IsSentToDealEnding = FromInnerTradingBot ? true : false; // all deals except deals-bot deals have to be processed
         }
 
         /// <summary>Deal guid</summary>
