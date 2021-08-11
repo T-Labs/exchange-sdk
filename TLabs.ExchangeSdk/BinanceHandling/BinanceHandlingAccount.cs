@@ -22,7 +22,7 @@ namespace TLabs.ExchangeSdk.BinanceHandling
 
         public BinanceHandlingBot Bot { get; set; }
 
-        public string BinanceAccountId { get; set; }
+        public string ExchangeAccountId { get; set; }
 
         public string ApiKey { get; set; }
 
