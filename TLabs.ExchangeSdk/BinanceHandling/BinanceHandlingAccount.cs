@@ -32,7 +32,7 @@ namespace TLabs.ExchangeSdk.BinanceHandling
         public string ServiceKeyId { get; set; }
 
         /// <summary>Is activated in keys handling service</summary>
-        public bool IsActive { get; set; }
+        public bool? IsActive { get; set; }
 
         public override string ToString() => $"{nameof(BinanceHandlingAccount)}(Id: {Id}, user:{UserId}, " +
             $"{Bot}, ApiKeys: {ApiKey} - {ApiSecret.Cut(8)}, ServiceKeyId:{ServiceKeyId})";
