@@ -22,6 +22,9 @@ namespace TLabs.ExchangeSdk.BinanceHandling
 
         public BinanceHandlingBot Bot { get; set; }
 
+        /// <summary>Profit is estimated in this currency</summary>
+        public string MainCurrency { get; set; }
+
         public string ExchangeAccountId { get; set; }
 
         public string ApiKey { get; set; }
