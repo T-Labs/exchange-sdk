@@ -22,11 +22,13 @@ namespace TLabs.ExchangeSdk.BinanceHandling
             _logger = logger;
         }
 
-        public async Task<List<BinanceHandlingAccount>> GetAccounts(string userId = null, BinanceHandlingBot? bot = null)
+        public async Task<List<BinanceHandlingAccount>> GetAccounts(string userId = null, BinanceHandlingBot? bot = null,
+            string mainCurrency = null)
         {
             var result = await $"{BaseUrl}".InternalApi()
                 .SetQueryParam(nameof(userId), userId)
                 .SetQueryParam(nameof(bot), bot.HasValue ? (int)bot : "")
+                .SetQueryParam(nameof(mainCurrency), mainCurrency)
                 .GetJsonAsync<List<BinanceHandlingAccount>>();
             return result;
         }
