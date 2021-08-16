@@ -34,6 +34,12 @@ namespace TLabs.ExchangeSdk.BinanceHandling
         /// <summary>Id received from keys handling service</summary>
         public string ServiceKeyId { get; set; }
 
+        /// <summary>When was sent to handling service</summary>
+        public DateTimeOffset? DateSent { get; set; }
+
+        /// <summary>Json of response after sending to handling service</summary>
+        public string ServiceAddKeyResponse { get; set; }
+
         /// <summary>Is activated in keys handling service</summary>
         public bool? IsActive { get; set; }
 
