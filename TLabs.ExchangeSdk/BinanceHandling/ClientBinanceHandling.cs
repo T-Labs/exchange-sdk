@@ -14,7 +14,7 @@ namespace TLabs.ExchangeSdk.BinanceHandling
         private readonly ILogger _logger;
 
         private const string BaseUrl = "brokerage/binance-handling";
-        public const string BaseCurrency = "C3";
+        public const string PaymentCurrency = "C3";
 
         public ClientBinanceHandling(
             ILogger<ClientBinanceHandling> logger)

@@ -52,6 +52,9 @@ namespace TLabs.ExchangeSdk.Currencies
         /// </summary>
         public int Digits { get; set; }
 
+        public bool AllowDeposits { get; set; } = true;
+        public bool AllowWithdrawals { get; set; } = true;
+
         /// <summary>
         /// Get gateway serviceId for crypto-adapter of this currency
         /// </summary>
