@@ -15,15 +15,30 @@ namespace TLabs.ExchangeSdk.Users
         {
         }
 
+        public async Task<int> GetUsersCount()
+        {
+            return await $"userprofiles/users/count".InternalApi().GetJsonAsync<int>();
+        }
+
         public async Task<ApplicationUser> GetUser(string userId)
         {
             return await $"userprofiles/identityusers/{userId}".InternalApi()
                 .GetJsonAsync<ApplicationUser>();
         }
 
-        public async Task<int> GetUsersCount()
+        public async Task<List<ApplicationUser>> GetUsers(DateTimeOffset? minRegisterDate = null,
+            int page = -1, int pageSize = 0, string search = null,
+            string merchantId = null, bool? otonFlag = null)
         {
-            return await $"userprofiles/users/count".InternalApi().GetJsonAsync<int>();
+            var users = await "userprofiles/users".InternalApi()
+                .SetQueryParam(nameof(minRegisterDate), minRegisterDate?.ToString("o"))
+                .SetQueryParam(nameof(page), page.ToString())
+                .SetQueryParam(nameof(pageSize), pageSize.ToString())
+                .SetQueryParam(nameof(search), search)
+                .SetQueryParam(nameof(merchantId), merchantId)
+                .SetQueryParam(nameof(otonFlag), otonFlag.ToString())
+                .GetJsonAsync<List<ApplicationUser>>();
+            return users;
         }
 
         public async Task<List<ApplicationUser>> GetUsersByEmail(string email)
