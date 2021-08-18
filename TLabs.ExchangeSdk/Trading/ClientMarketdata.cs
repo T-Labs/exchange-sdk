@@ -36,5 +36,11 @@ namespace TLabs.ExchangeSdk.Trading
                 .GetJsonAsync<MarketdataOrder>();
             return result;
         }
+
+        public async Task<List<Quote>> GetQuotes()
+        {
+            var quotes = await $"marketdata/quotes".InternalApi().GetJsonAsync<List<Quote>>();
+            return quotes;
+        }
     }
 }
