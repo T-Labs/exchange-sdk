@@ -31,17 +31,20 @@ namespace TLabs.ExchangeSdk.Verification
 
         public async Task<List<Country>> GetCountries()
         {
-            return await $"verification/countries".GetJsonAsync<List<Country>>();
+            return await $"verification/countries".InternalApi()
+                .GetJsonAsync<List<Country>>();
         }
 
         public async Task<List<Citizenship>> GetCitizenships()
         {
-            return await $"verification/citizenships".GetJsonAsync<List<Citizenship>>();
+            return await $"verification/citizenships".InternalApi()
+                .GetJsonAsync<List<Citizenship>>();
         }
 
         public async Task<List<string>> GetCitizenshipUserIds(int citizenshipId)
         {
-            return await $"verification/citizenships/{citizenshipId}/user-ids".GetJsonAsync<List<string>>();
+            return await $"verification/citizenships/{citizenshipId}/user-ids".InternalApi()
+                .GetJsonAsync<List<string>>();
         }
     }
 }
