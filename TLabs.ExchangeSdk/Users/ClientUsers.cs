@@ -26,7 +26,9 @@ namespace TLabs.ExchangeSdk.Users
                 .GetJsonAsync<ApplicationUser>();
         }
 
-        public async Task<List<ApplicationUser>> GetUsers(DateTimeOffset? minRegisterDate = null,
+        /// <summary>Only works with paginated requests</summary>
+        /// <param name="page">Starts from 1</param>
+        public async Task<PagedList<ApplicationUser>> GetUsersPage(DateTimeOffset? minRegisterDate = null,
             int page = -1, int pageSize = 0, string search = null,
             string merchantId = null, bool? otonFlag = null)
         {
@@ -37,7 +39,7 @@ namespace TLabs.ExchangeSdk.Users
                 .SetQueryParam(nameof(search), search)
                 .SetQueryParam(nameof(merchantId), merchantId)
                 .SetQueryParam(nameof(otonFlag), otonFlag.ToString())
-                .GetJsonAsync<List<ApplicationUser>>();
+                .GetJsonAsync<PagedList<ApplicationUser>>();
             return users;
         }
 
