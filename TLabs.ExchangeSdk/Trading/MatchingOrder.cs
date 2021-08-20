@@ -17,9 +17,6 @@ namespace TLabs.ExchangeSdk.Trading
         {
         }
 
-        /// <summary>How many times was this order sent to other exchange</summary>
-        public int LiquidityBlocksCount { get; set; }
-
         public virtual List<MatchingDeal> DealList { get; set; }
 
         public MatchingOrder Clone() => (MatchingOrder)MemberwiseClone();

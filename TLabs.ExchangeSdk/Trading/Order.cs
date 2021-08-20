@@ -35,6 +35,9 @@ namespace TLabs.ExchangeSdk.Trading
         /// <summary>Original order exchange</summary>
         public Exchange Exchange { get; set; } = Exchange.Local;
 
+        /// <summary>How many times was this order sent to other exchange</summary>
+        public int LiquidityBlocksCount { get; set; }
+
         public decimal AvailableAmount => Amount - Fulfilled - Blocked;
 
         /// <summary>Completely fullfilled or canceled (won't be in matching pool anymore)</summary>
