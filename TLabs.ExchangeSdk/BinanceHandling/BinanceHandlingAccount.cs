@@ -9,7 +9,7 @@ namespace TLabs.ExchangeSdk.BinanceHandling
 {
     public enum BinanceHandlingBot
     {
-        Unique = 0, Netter = 10,
+        Unique = 0, Netter = 10, Squeeze = 20,
     }
 
     public class BinanceHandlingAccount
