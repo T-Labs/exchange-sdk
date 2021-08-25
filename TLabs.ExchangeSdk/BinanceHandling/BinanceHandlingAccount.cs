@@ -44,6 +44,6 @@ namespace TLabs.ExchangeSdk.BinanceHandling
         public bool? IsActive { get; set; }
 
         public override string ToString() => $"{nameof(BinanceHandlingAccount)}(Id: {Id}, user:{UserId}, " +
-            $"{Bot}, ApiKeys: {ApiKey} - {ApiSecret.Cut(8)}, ServiceKeyId:{ServiceKeyId})";
+            $"{Bot}-{MainCurrency}, ApiKeys: {ApiKey} - {ApiSecret.Cut(8)}, ServiceKeyId:{ServiceKeyId})";
     }
 }
