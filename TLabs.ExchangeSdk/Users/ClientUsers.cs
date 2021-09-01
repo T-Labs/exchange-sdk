@@ -65,11 +65,13 @@ namespace TLabs.ExchangeSdk.Users
             return result;
         }
 
-        public async Task<ApplicationUser> GetMerchantBySubUserId(string subUserId)
+        public async Task<ApplicationUser> GetMerchantBySubUserId(string subUserId, string defaultMerchantId = null)
         {
             var result = await $"userprofiles/users/merchant".InternalApi()
                 .SetQueryParam(nameof(subUserId), subUserId)
                 .GetJsonAsync<ApplicationUser>();
+            if (result == null && defaultMerchantId.HasValue())
+                result = await GetUser(defaultMerchantId);
             return result;
         }
 
