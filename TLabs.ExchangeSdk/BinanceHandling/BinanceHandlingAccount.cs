@@ -11,6 +11,10 @@ namespace TLabs.ExchangeSdk.BinanceHandling
     {
         Unique = 0, Netter = 10, Squeeze = 20,
     }
+    public enum BinanceHandlingApiType
+    {
+        Team1 = 0, Team2 = 10,
+    }
 
     public class BinanceHandlingAccount
     {
@@ -19,6 +23,8 @@ namespace TLabs.ExchangeSdk.BinanceHandling
         public DateTimeOffset DateCreated { get; set; }
 
         public string UserId { get; set; }
+
+        public BinanceHandlingApiType ApiType { get; set; }
 
         public BinanceHandlingBot Bot { get; set; }
 
