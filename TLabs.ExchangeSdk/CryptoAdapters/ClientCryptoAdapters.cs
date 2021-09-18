@@ -1,5 +1,6 @@
 using Flurl.Http;
 using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Threading;
 using System.Threading.Tasks;
@@ -65,6 +66,22 @@ namespace TLabs.ExchangeSdk.CryptoAdapters
             var result = await $"{adapterId}/transactions/cancel/{txHash}?newGasPrice={newGasPrice}".InternalApi()
                 .PostJsonAsync<string>(null).GetQueryResult();
             Console.WriteLine($"CancelTransaction txHash change: {txHash} -> {result.Data}  {result.ErrorsString}");
+            return result;
+        }
+
+        public async Task<List<ConsolidationSetting>> GetConsolidationSettings(string mainCurrencyCode)
+        {
+            string adapterId = _currenciesCache.GetAdapterId(mainCurrencyCode);
+            var result = await $"{adapterId}/settings/consolidation".InternalApi()
+                .GetJsonAsync<List<ConsolidationSetting>>();
+            return result;
+        }
+
+        public async Task<List<ConsolidationSetting>> SaveConsolidationSettings(string mainCurrencyCode, List<ConsolidationSetting> model)
+        {
+            string adapterId = _currenciesCache.GetAdapterId(mainCurrencyCode);
+            var result = await $"{adapterId}/settings/consolidation".InternalApi()
+                .PostJsonAsync<List<ConsolidationSetting>>(model);
             return result;
         }
 
