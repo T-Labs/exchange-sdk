@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TLabs.ExchangeSdk.Trading
+namespace TLabs.ExchangeSdk
 {
     public enum Exchange
     {
