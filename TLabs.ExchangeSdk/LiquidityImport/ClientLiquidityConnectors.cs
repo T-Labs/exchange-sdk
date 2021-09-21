@@ -11,13 +11,15 @@ namespace TLabs.ExchangeSdk.LiquidityImport
         public string GetConnectorPath(Exchange exchange) => $"liquidity{exchange.ToString().ToLower()}";
 
         /// <summary>Get last snapshots by days. Only implemented for Binance</summary>
-        public async Task<List<BalanceSnapshotDto>> GetBalancesSnapshots(Exchange exchange, string apiKey, string apiSecret)
+        /// <param name="count">Number of daily snapshots to load (5-30)</param>
+        public async Task<List<BalanceSnapshotDto>> GetBalancesSnapshots(Exchange exchange, string apiKey, string apiSecret, int count = 5)
         {
             if (exchange != Exchange.Binance)
                 throw new ArgumentException($"Only Binance exchange allowed");
             var result = await $"{GetConnectorPath(exchange)}/external/balances-snapshots".InternalApi()
                 .SetQueryParam(nameof(apiKey), apiKey)
                 .SetQueryParam(nameof(apiSecret), apiSecret)
+                .SetQueryParam(nameof(count), count)
                 .GetJsonAsync<List<BalanceSnapshotDto>>();
             return result;
         }
