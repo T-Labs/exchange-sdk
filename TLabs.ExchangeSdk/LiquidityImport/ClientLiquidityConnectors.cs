@@ -10,6 +10,22 @@ namespace TLabs.ExchangeSdk.LiquidityImport
     {
         public string GetConnectorPath(Exchange exchange) => $"liquidity{exchange.ToString().ToLower()}";
 
+        /// <summary>Get prices at start of each day</summary>
+        public async Task<List<(DateTimeOffset date, decimal amount)>> GetDailyPrices(Exchange exchange, string apiKey, string apiSecret,
+            string currencyCode, DateTimeOffset from, DateTimeOffset to)
+        {
+            if (exchange != Exchange.Binance)
+                throw new ArgumentException($"Only Binance exchange allowed");
+            var result = await $"{GetConnectorPath(exchange)}/external/prices-daily".InternalApi()
+                .SetQueryParam(nameof(apiKey), apiKey)
+                .SetQueryParam(nameof(apiSecret), apiSecret)
+                .SetQueryParam(nameof(currencyCode), currencyCode)
+                .SetQueryParam(nameof(from), from.ToString("o"))
+                .SetQueryParam(nameof(to), to.ToString("o"))
+                .GetJsonAsync<List<(DateTimeOffset date, decimal amount)>>();
+            return result;
+        }
+
         /// <summary>Get last snapshots by days. Only implemented for Binance</summary>
         /// <param name="count">Number of daily snapshots to load (5-30)</param>
         public async Task<List<BalanceSnapshotDto>> GetBalancesSnapshots(Exchange exchange, string apiKey, string apiSecret, int count = 5)
