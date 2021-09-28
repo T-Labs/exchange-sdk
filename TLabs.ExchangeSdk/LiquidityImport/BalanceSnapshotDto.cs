@@ -16,7 +16,7 @@ namespace TLabs.ExchangeSdk.LiquidityImport
         public decimal GetCurrencyTotalBalance(string currencyCode) =>
             Balances.GetValueOrDefault(currencyCode, 0) + BalancesLocked.GetValueOrDefault(currencyCode, 0);
 
-        public Dictionary<string, decimal> GetTotalBalances(string currencyCode) {
+        public Dictionary<string, decimal> GetTotalBalances() {
             var totalBalances = Balances.ToDictionary(_ => _.Key, _ => _.Value); // clone
             foreach(var locked in BalancesLocked)
             {

@@ -11,14 +11,12 @@ namespace TLabs.ExchangeSdk.LiquidityImport
         public string GetConnectorPath(Exchange exchange) => $"liquidity{exchange.ToString().ToLower()}";
 
         /// <summary>Get prices at start of each day</summary>
-        public async Task<List<(DateTimeOffset date, decimal amount)>> GetDailyPrices(Exchange exchange, string apiKey, string apiSecret,
-            string currencyCode, DateTimeOffset from, DateTimeOffset to)
+        public async Task<List<(DateTimeOffset date, decimal amount)>> GetDailyPrices(Exchange exchange, string currencyCode,
+            DateTimeOffset from, DateTimeOffset to)
         {
             if (exchange != Exchange.Binance)
                 throw new ArgumentException($"Only Binance exchange allowed");
             var result = await $"{GetConnectorPath(exchange)}/external/prices-daily".InternalApi()
-                .SetQueryParam(nameof(apiKey), apiKey)
-                .SetQueryParam(nameof(apiSecret), apiSecret)
                 .SetQueryParam(nameof(currencyCode), currencyCode)
                 .SetQueryParam(nameof(from), from.ToString("o"))
                 .SetQueryParam(nameof(to), to.ToString("o"))
