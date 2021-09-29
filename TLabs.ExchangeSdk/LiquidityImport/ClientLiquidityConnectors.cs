@@ -10,6 +10,16 @@ namespace TLabs.ExchangeSdk.LiquidityImport
     {
         public string GetConnectorPath(Exchange exchange) => $"liquidity{exchange.ToString().ToLower()}";
 
+        /// <summary>Get CurrencyPair codes list without delimeters. Example: "BCHBTC", "BTCUSDT"</summary>
+        public async Task<List<string>> GetCurrencyPairs(Exchange exchange)
+        {
+            if (exchange != Exchange.Binance)
+                throw new ArgumentException($"Only Binance exchange allowed");
+            var result = await $"{GetConnectorPath(exchange)}/external/currency-pairs".InternalApi()
+                .GetJsonAsync<List<string>>();
+            return result;
+        }
+
         /// <summary>Get prices at start of each day</summary>
         public async Task<List<(DateTimeOffset date, decimal amount)>> GetDailyPrices(Exchange exchange, string currencyCode,
             DateTimeOffset from, DateTimeOffset to)
