@@ -12,29 +12,29 @@ namespace TLabs.ExchangeSdk.Trading
     {
 
         /// <summary>Calculate equivalent of amount</summary>
-        /// <param name="quotesDict">preloaded dict with quotes</param>
+        /// <param name="quotes">preloaded dict with quotes</param>
         /// <param name="equivalentCurrency">BTC or USDT</param>
         public static decimal? CalculateEquivalent(this decimal amount, string currencyCode,
-            Dictionary<string, Quote> quotesDict, string equivalentCurrency = "USDT")
+            Dictionary<string, Quote> quotes, string equivalentCurrency = "USDT")
         {
-            var rate = GetQuoteRate(currencyCode, quotesDict, equivalentCurrency);
+            var rate = GetQuoteRate(currencyCode, quotes, equivalentCurrency);
             return rate == null ? null : (amount * rate.Value).RoundDown(CurrenciesCache.Digits);
         }
 
         /// <summary>Calculate amount in currencyCode from its equivalent in USDT or BTC</summary>
-        /// <param name="quotesDict">preloaded dict with quotes</param>
+        /// <param name="quotes">preloaded dict with quotes</param>
         /// <param name="equivalentCurrency">BTC or USDT</param>
         public static decimal? CalculateFromEquivalent(this decimal amount, string currencyCode,
-            Dictionary<string, Quote> quotesDict, string equivalentCurrency = "USDT")
+            Dictionary<string, Quote> quotes, string equivalentCurrency = "USDT")
         {
-            var rate = GetQuoteRate(currencyCode, quotesDict, equivalentCurrency);
+            var rate = GetQuoteRate(currencyCode, quotes, equivalentCurrency);
             return rate == null ? null : (amount / rate.Value).RoundDown(CurrenciesCache.Digits);
         }
 
-        public static decimal? GetQuoteRate(string currencyCode, Dictionary<string, Quote> quotesDict,
+        public static decimal? GetQuoteRate(string currencyCode, Dictionary<string, Quote> quotes,
             string equivalentCurrency = "USDT")
         {
-            var quote = quotesDict.GetValueOrDefault(currencyCode, null);
+            var quote = quotes.GetValueOrDefault(currencyCode, null);
             decimal? rate = equivalentCurrency switch
             {
                 "USDT" => quote?.UsdtRate,
@@ -42,6 +42,22 @@ namespace TLabs.ExchangeSdk.Trading
                 _ => null,
             };
             return rate;
+        }
+
+        /// <summary>
+        /// someAmount * conversionRate: converts amount from currencyFrom to currencyTo
+        /// </summary>
+        /// <returns>conversionRate</returns>
+        public static decimal? GetConversionRate(Dictionary<string, Quote> quotes, string currencyFrom, string currencyTo)
+        {
+            if (currencyFrom == currencyTo)
+                return 1;
+            var quoteFrom = quotes.GetValueOrDefault(currencyFrom, null);
+            var quoteTo = quotes.GetValueOrDefault(currencyTo, null);
+            if (quoteFrom?.UsdtRate == null || quoteTo?.UsdtRate == null || quoteTo?.UsdtRate == 0)
+                return null;
+            decimal conversionRate = quoteFrom.UsdtRate.Value / quoteTo.UsdtRate.Value;
+            return conversionRate.RoundDown(CurrenciesCache.Digits);
         }
     }
 }
