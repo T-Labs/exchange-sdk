@@ -47,5 +47,27 @@ namespace TLabs.ExchangeSdk.LiquidityImport
                 .GetJsonAsync<List<BalanceSnapshotDto>>();
             return result;
         }
+
+        public async Task<List<ExchangeDepositDto>> GetDeposits(Exchange exchange, string apiKey, string apiSecret)
+        {
+            if (exchange != Exchange.Binance)
+                throw new ArgumentException($"Only Binance exchange allowed");
+            var result = await $"{GetConnectorPath(exchange)}/external/deposits".InternalApi()
+                .SetQueryParam(nameof(apiKey), apiKey)
+                .SetQueryParam(nameof(apiSecret), apiSecret)
+                .GetJsonAsync<List<ExchangeDepositDto>>();
+            return result;
+        }
+
+        public async Task<List<ExchangeWithdrawalDto>> GetWithdrawals(Exchange exchange, string apiKey, string apiSecret)
+        {
+            if (exchange != Exchange.Binance)
+                throw new ArgumentException($"Only Binance exchange allowed");
+            var result = await $"{GetConnectorPath(exchange)}/external/withdrawals".InternalApi()
+                .SetQueryParam(nameof(apiKey), apiKey)
+                .SetQueryParam(nameof(apiSecret), apiSecret)
+                .GetJsonAsync<List<ExchangeWithdrawalDto>>();
+            return result;
+        }
     }
 }
