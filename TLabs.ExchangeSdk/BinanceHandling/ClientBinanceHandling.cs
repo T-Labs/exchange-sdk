@@ -47,5 +47,13 @@ namespace TLabs.ExchangeSdk.BinanceHandling
                 .GetJsonAsync<List<BinanceBalanceSnapshot>>();
             return result;
         }
+
+        public async Task<List<BinanceHandlingPayment>> GetPayments(Guid accountId)
+        {
+            var result = await $"{BaseUrl}/payments".InternalApi()
+                .SetQueryParam(nameof(accountId), accountId)
+                .GetJsonAsync<List<BinanceHandlingPayment>>();
+            return result;
+        }
     }
 }
