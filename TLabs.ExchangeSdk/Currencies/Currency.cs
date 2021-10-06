@@ -52,6 +52,21 @@ namespace TLabs.ExchangeSdk.Currencies
         /// </summary>
         public int Digits { get; set; }
 
+        public string Website { get; set; }
+
+        public string WhitePaper { get; set; }
+
+        public string About { get; set; }
+
+        public string IssuingTime { get; set; }
+
+        public string IssuingPrice { get; set; }
+
+        public string TotalSupply { get; set; }
+
+        public string NetworkConfirmations { get; set; }
+
+        public byte[] LogoImage { get; set; }
         public bool AllowDeposits { get; set; } = true;
         public bool AllowWithdrawals { get; set; } = true;
 
