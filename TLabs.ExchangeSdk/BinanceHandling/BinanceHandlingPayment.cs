@@ -20,6 +20,7 @@ namespace TLabs.ExchangeSdk.BinanceHandling
         public DateTimeOffset DateTo { get; set; }
 
         public Guid BinanceHandlingAccountId { get; set; }
+        public BinanceHandlingAccount BinanceHandlingAccount { get; set; }
 
         /// <summary>Profit amount for which this payment was created, in currency of a bot</summary>
         public decimal ProfitAmount { get; set; }

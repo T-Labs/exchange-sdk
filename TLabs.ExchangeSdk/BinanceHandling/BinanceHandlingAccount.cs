@@ -49,6 +49,9 @@ namespace TLabs.ExchangeSdk.BinanceHandling
         /// <summary>Is activated in keys handling service</summary>
         public bool? IsActive { get; set; }
 
+        public List<BinanceHandlingPayment> Payments { get; set; }
+        public List<BinanceBalanceSnapshot> Snapshots { get; set; }
+
         public override string ToString() => $"{nameof(BinanceHandlingAccount)}(Id: {Id}, user:{UserId}, " +
             $"{Bot}-{MainCurrency}, ApiKeys: {ApiKey} - {ApiSecret.Cut(8)}, ServiceKeyId:{ServiceKeyId})";
     }

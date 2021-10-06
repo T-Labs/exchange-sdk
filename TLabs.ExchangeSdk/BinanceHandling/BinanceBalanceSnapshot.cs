@@ -12,6 +12,7 @@ namespace TLabs.ExchangeSdk.BinanceHandling
         public DateTimeOffset DateCreated { get; set; }
         public DateTimeOffset DateOfSnapshot { get; set; }
         public Guid BinanceHandlingAccountId { get; set; }
+        public BinanceHandlingAccount BinanceHandlingAccount { get; set; }
 
         /// <summary>Sum of all balances (free and locked) in BTC equivalent</summary>
         public decimal TotalBtc { get; set; }
