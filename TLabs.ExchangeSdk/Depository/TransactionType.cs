@@ -81,6 +81,7 @@ namespace TLabs.ExchangeSdk.Depository
         public static readonly TransactionType AffiliateDealCommission = new TransactionType("803", "Refferal комиссия сделки", nameof(AffiliateDealCommission));
         public static readonly TransactionType AffiliateWithdrawalCommission = new TransactionType("805", "Refferal комиссия вывода", nameof(AffiliateWithdrawalCommission));
         public static readonly TransactionType AffiliateCurrencyListing = new TransactionType("806", "Refferal листинга валюты", nameof(AffiliateCurrencyListing));
+        public static readonly TransactionType AffiliateApiTradeProfitPayment = new TransactionType("807", "Refferal оплаты за прибыль ApiTrade", nameof(AffiliateApiTradeProfitPayment));
         public static readonly TransactionType AffiliateClear = new TransactionType("809", "Affiliate очистка аккаунтов", nameof(AffiliateClear));
         public static readonly TransactionType AffiliateProfitPayment = new TransactionType("813", "Affiliate прибыль системе", nameof(AffiliateProfitPayment));
         public static readonly TransactionType AffiliateBonusesPayment = new TransactionType("815", "Affiliate бонусы юзеру", nameof(AffiliateBonusesPayment));
@@ -98,6 +99,8 @@ namespace TLabs.ExchangeSdk.Depository
         public static readonly TransactionType CurrencyListingPaymentBlock = new TransactionType("871", "CurrencyListing блокировка оплаты", nameof(CurrencyListingPaymentBlock));
         public static readonly TransactionType CurrencyListingPaymentCancel = new TransactionType("872", "CurrencyListing отмена оплаты", nameof(CurrencyListingPaymentCancel));
         public static readonly TransactionType CurrencyListingPayment = new TransactionType("873", "CurrencyListing оплата", nameof(CurrencyListingPayment));
+
+        public static readonly TransactionType ApiTradeProfitPayment = new TransactionType("891", "Оплата за прибыль ApiTrade", nameof(ApiTradeProfitPayment));
 
         public static readonly List<TransactionType> All = new List<TransactionType>
         {
@@ -126,7 +129,7 @@ namespace TLabs.ExchangeSdk.Depository
             ExchangeTransfer, ExchangeMarkup, ExchangeCommission, ExchangeCommissionConsolidation,
 
             AffiliateTariffPurchase, AffiliateTariffPurchaseRollback,
-            AffiliateDealCommission, AffiliateWithdrawalCommission, AffiliateCurrencyListing,
+            AffiliateDealCommission, AffiliateWithdrawalCommission, AffiliateCurrencyListing, AffiliateApiTradeProfitPayment,
             AffiliateClear,
             AffiliateProfitPayment, AffiliateBonusesPayment,
 
@@ -137,6 +140,8 @@ namespace TLabs.ExchangeSdk.Depository
             StakingFundProfit, StakingLock, StakingUnlockBegin, StakingUnlockEnd,
 
             CurrencyListingPaymentBlock, CurrencyListingPayment, CurrencyListingPaymentCancel,
+
+            ApiTradeProfitPayment,
         };
 
         private TransactionType(string code, string value, string valueKey)
