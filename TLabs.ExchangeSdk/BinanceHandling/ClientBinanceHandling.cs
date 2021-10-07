@@ -56,6 +56,13 @@ namespace TLabs.ExchangeSdk.BinanceHandling
             return result;
         }
 
+        public async Task<BinanceHandlingPayment> GetPayment(Guid paymentId)
+        {
+            var result = await $"{BaseUrl}/payments/{paymentId}".InternalApi()
+                .GetJsonAsync<BinanceHandlingPayment>();
+            return result;
+        }
+
         public async Task<BinanceHandlingPayment> ConfirmPayment(Guid paymentId)
         {
             var result = await $"{BaseUrl}/payments/{paymentId}/confirmation".InternalApi()
