@@ -8,6 +8,7 @@ namespace TLabs.ExchangeSdk.RabbitMq
 {
     public static class RabbitMqQueues
     {
+        public const string AffiliateUserRegister = "affiliate-user-register";
         public const string AffiliateProfit = "affiliate-profit";
         public const string AffiliateOrderFilled = "affiliate-order-filled";
         public const string BountyRecords = "bounty-records";
