@@ -66,7 +66,7 @@ namespace TLabs.ExchangeSdk.BinanceHandling
         public async Task<BinanceHandlingPayment> ConfirmPayment(Guid paymentId)
         {
             var result = await $"{BaseUrl}/payments/{paymentId}/confirmation".InternalApi()
-                .GetJsonAsync<BinanceHandlingPayment>();
+                .PostJsonAsync<BinanceHandlingPayment>(null);
             return result;
         }
     }
