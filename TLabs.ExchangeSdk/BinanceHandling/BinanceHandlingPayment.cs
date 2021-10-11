@@ -38,7 +38,8 @@ namespace TLabs.ExchangeSdk.BinanceHandling
         /// <summary>Recalculate amount and set DateAmountUpdated after this period</summary>
         public const int AmountUpdatePeriodMinutes = 20;
 
-        public bool AmountNeedsUpdate => DateAmountUpdated < DateTimeOffset.UtcNow.AddMinutes(-AmountUpdatePeriodMinutes);
+        public bool AmountNeedsUpdate() =>
+            DateAmountUpdated < DateTimeOffset.UtcNow.AddMinutes(-AmountUpdatePeriodMinutes);
 
         public override string ToString() => $"BinanceHandlingPayment({Id}, {DateFrom:yyy-MM-dd} - {DateTo:yyy-MM-dd}, " +
             $"{PaymentAmount} {PaymentCurrency}, for profit of {ProfitAmount} {ProfitCurrency}, AccId: {BinanceHandlingAccountId}, " +
