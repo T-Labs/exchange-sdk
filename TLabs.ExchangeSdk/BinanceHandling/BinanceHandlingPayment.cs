@@ -19,8 +19,8 @@ namespace TLabs.ExchangeSdk.BinanceHandling
         /// <summary>Payement for dates range To</summary>
         public DateTimeOffset DateTo { get; set; }
 
-        /// <summary>Price will update on user request if there was no updates recently</summary>
-        public DateTimeOffset DatePriceUpdated { get; set; }
+        /// <summary>Payment amount will update on user request if there was no updates recently</summary>
+        public DateTimeOffset DateAmountUpdated { get; set; }
 
         public Guid BinanceHandlingAccountId { get; set; }
         public BinanceHandlingAccount BinanceHandlingAccount { get; set; }
