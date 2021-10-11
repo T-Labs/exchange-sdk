@@ -19,6 +19,9 @@ namespace TLabs.ExchangeSdk.BinanceHandling
         /// <summary>Payement for dates range To</summary>
         public DateTimeOffset DateTo { get; set; }
 
+        /// <summary>Recalculate amount and set DateAmountUpdated after this period</summary>
+        public const int AmountUpdatePeriodMinutes = 20;
+
         /// <summary>Payment amount will update on user request if there was no updates recently</summary>
         public DateTimeOffset DateAmountUpdated { get; set; }
 
