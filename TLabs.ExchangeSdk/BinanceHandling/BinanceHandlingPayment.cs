@@ -19,9 +19,6 @@ namespace TLabs.ExchangeSdk.BinanceHandling
         /// <summary>Payement for dates range To</summary>
         public DateTimeOffset DateTo { get; set; }
 
-        /// <summary>Recalculate amount and set DateAmountUpdated after this period</summary>
-        public const int AmountUpdatePeriodMinutes = 20;
-
         /// <summary>Payment amount will update on user request if there was no updates recently</summary>
         public DateTimeOffset DateAmountUpdated { get; set; }
 
@@ -37,6 +34,11 @@ namespace TLabs.ExchangeSdk.BinanceHandling
 
         /// <summary>from ProfitCurrency to PaymentCurrency</summary>
         public decimal CurrencyConversionRate { get; set; }
+
+        /// <summary>Recalculate amount and set DateAmountUpdated after this period</summary>
+        public const int AmountUpdatePeriodMinutes = 20;
+
+        public bool AmountNeedsUpdate => DateAmountUpdated < DateTimeOffset.UtcNow.AddMinutes(-AmountUpdatePeriodMinutes);
 
         public override string ToString() => $"BinanceHandlingPayment({Id}, {DateFrom:yyy-MM-dd} - {DateTo:yyy-MM-dd}, " +
             $"{PaymentAmount} {PaymentCurrency}, for profit of {ProfitAmount} {ProfitCurrency}, AccId: {BinanceHandlingAccountId}, " +
