@@ -38,5 +38,8 @@ namespace TLabs.ExchangeSdk.RabbitMq
         public string Subject { get; set; }
         public string Body { get; set; }
         public string HtmlBody { get; set; }
+
+        public override string ToString() =>
+            $"{nameof(NotificationEmail)}(to {To}, {Subject}, \nHtmlBody: {HtmlBody}\nBody: {Body})";
     }
 }
