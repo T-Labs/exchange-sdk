@@ -48,10 +48,13 @@ namespace TLabs.ExchangeSdk.BinanceHandling
             return result;
         }
 
-        public async Task<List<BinanceHandlingPayment>> GetPayments(Guid accountId)
+        public async Task<List<BinanceHandlingPayment>> GetPayments(Guid? accountId = null,
+            DateTimeOffset? from = null, DateTimeOffset? to = null)
         {
             var result = await $"{BaseUrl}/payments".InternalApi()
                 .SetQueryParam(nameof(accountId), accountId)
+                .SetQueryParam(nameof(from), from?.ToString("o"))
+                .SetQueryParam(nameof(to), to?.ToString("o"))
                 .GetJsonAsync<List<BinanceHandlingPayment>>();
             return result;
         }
