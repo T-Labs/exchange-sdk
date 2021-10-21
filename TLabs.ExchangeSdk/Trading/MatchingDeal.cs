@@ -1,14 +1,13 @@
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TLabs.ExchangeSdk.Trading
 {
     public class MatchingDeal
     {
+        #region Constructors
+
         public MatchingDeal()
         {
         }
@@ -34,6 +33,19 @@ namespace TLabs.ExchangeSdk.Trading
             Volume = volume;
             FromInnerTradingBot = bid.ClientType == ClientType.DealsBot;
         }
+
+        public MatchingDeal(MarketdataDeal marketdataDeal)
+        {
+            DealId = marketdataDeal.DealId;
+            Price = marketdataDeal.Price;
+            Volume = marketdataDeal.Volume;
+            DateCreated = new DateTimeOffset(marketdataDeal.DealDateUtc, TimeSpan.Zero);
+            BidId = marketdataDeal.BidId;
+            AskId = marketdataDeal.AskId;
+            FromInnerTradingBot = marketdataDeal.FromInnerTradingBot;
+        }
+
+        #endregion Constructors
 
         /// <summary>Deal guid</summary>
         [Key]
