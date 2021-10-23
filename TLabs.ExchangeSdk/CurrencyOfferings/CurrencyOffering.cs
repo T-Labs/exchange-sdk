@@ -8,6 +8,7 @@ namespace TLabs.ExchangeSdk.CurrencyOfferings
 {
     public class CurrencyOffering
     {
+        public string CurrencyCode { get; set; }
         public string Name { get; set; }
         public DateTimeOffset DateCreated { get; set; }
         public DateTimeOffset DateUpdated { get; set; }
