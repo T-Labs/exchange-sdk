@@ -14,6 +14,7 @@ namespace TLabs.ExchangeSdk
             services.AddTransient<Affiliate.ClientAffiliate>();
             services.AddTransient<BinanceHandling.ClientBinanceHandling>();
             services.AddTransient<Commissions.ClientCommissions>();
+            services.AddTransient<CurrencyOfferings.ClientCurrencyOfferings>();
             services.AddTransient<CryptoAdapters.ClientCryptoAdapters>();
             services.AddTransient<Depository.ClientDepository>();
             services.AddTransient<Deposits.ClientDeposits>();
