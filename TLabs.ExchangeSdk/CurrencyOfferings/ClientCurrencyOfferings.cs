@@ -28,6 +28,13 @@ namespace TLabs.ExchangeSdk.CurrencyOfferings
             return result;
         }
 
+        public async Task<CurrencyOffering> Get(string code)
+        {
+            var result = await $"{BaseUrl}/{code}".InternalApi()
+                .GetJsonAsync<CurrencyOffering>();
+            return result;
+        }
+
         public async Task<CurrencyOffering> Add(CurrencyOffering model)
         {
             var result = await $"{BaseUrl}".InternalApi()
