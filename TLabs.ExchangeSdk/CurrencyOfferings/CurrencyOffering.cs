@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TLabs.DotnetHelpers;
 
 namespace TLabs.ExchangeSdk.CurrencyOfferings
 {
@@ -34,5 +35,13 @@ namespace TLabs.ExchangeSdk.CurrencyOfferings
 
         public override string ToString() => $"{nameof(CurrencyOffering)}({Name}, {DateStart} - {DateEnd}, " +
             $"AdminUserId:{AdminUserId}, CurrenciesForSale:{CurrenciesForSale}, PriceUsdt:{PriceUsdt})";
+
+        public void Trim()
+        {
+            CurrencyCode = CurrencyCode?.Trim().NullIfEmpty();
+            Name = Name?.Trim().NullIfEmpty();
+            AdminUserId = AdminUserId?.Trim().NullIfEmpty();
+            Website = Website?.Trim().NullIfEmpty();
+        }
     }
 }
