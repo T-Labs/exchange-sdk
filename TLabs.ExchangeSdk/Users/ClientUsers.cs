@@ -49,7 +49,7 @@ namespace TLabs.ExchangeSdk.Users
         {
             if (email.NotHasValue())
                 return null;
-            var result = await $"userprofiles/identityusers/byemail/{email}"
+            var result = await $"userprofiles/identityusers/byemail/{email}".InternalApi()
                 .GetJsonAsync<List<ApplicationUser>>();
             return result;
         }
