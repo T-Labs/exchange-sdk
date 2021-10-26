@@ -22,6 +22,8 @@ namespace TLabs.ExchangeSdk.Users
 
         public async Task<ApplicationUser> GetUser(string userId)
         {
+            if (userId.NotHasValue())
+                return null;
             return await $"userprofiles/identityusers/{userId}".InternalApi()
                 .GetJsonAsync<ApplicationUser>();
         }
@@ -45,6 +47,8 @@ namespace TLabs.ExchangeSdk.Users
 
         public async Task<List<ApplicationUser>> GetUsersByEmail(string email)
         {
+            if (email.NotHasValue())
+                return null;
             var result = await $"userprofiles/identityusers/byemail/{email}"
                 .GetJsonAsync<List<ApplicationUser>>();
             return result;

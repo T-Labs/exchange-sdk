@@ -30,6 +30,8 @@ namespace TLabs.ExchangeSdk.CurrencyOfferings
 
         public async Task<CurrencyOffering> Get(string code)
         {
+            if (code.NotHasValue())
+                return null;
             var result = await $"{BaseUrl}/{code}".InternalApi()
                 .GetJsonAsync<CurrencyOffering>();
             return result;

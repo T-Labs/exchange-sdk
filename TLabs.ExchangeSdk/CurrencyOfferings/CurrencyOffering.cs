@@ -30,10 +30,16 @@ namespace TLabs.ExchangeSdk.CurrencyOfferings
         public decimal PriceUsdt { get; set; } = 0;
         public decimal MinBuyAmount { get; set; }
 
+        /// <summary>How much tokens percentage will be paid initially</summary>
+        public decimal PaymentInitialPercentage { get; set; } = 50;
+
+        /// <summary>How many days it will take to pay the rest</summary>
+        public decimal DaysToPayRest { get; set; } = 10;
+
         public string Status =>
             DateStart > DateTimeOffset.UtcNow ? "Planned" : DateEnd < DateTimeOffset.UtcNow ? "Ended" : "Active";
 
-        public override string ToString() => $"{nameof(CurrencyOffering)}({Name}, {DateStart} - {DateEnd}, " +
+        public override string ToString() => $"{nameof(CurrencyOffering)}({CurrencyCode}, Name:{Name}, {DateStart} - {DateEnd}, " +
             $"AdminUserId:{AdminUserId}, CurrenciesForSale:{CurrenciesForSale}, PriceUsdt:{PriceUsdt})";
 
         public void Trim()
