@@ -54,8 +54,10 @@ namespace TLabs.ExchangeSdk.Depository
 
         public static readonly AccountChart CurrencyListingPaymentBlocked = new AccountChart("871", "CurrencyListing блокировка оплаты", nameof(CurrencyListingPaymentBlocked));
 
+        public static readonly AccountChart CurrencyOfferingsVesting = new AccountChart("901", "Заблокировано на CurrencyOffering", nameof(CurrencyOfferingsVesting));
+
         /// <summary>
-        /// Accounts that belong to user
+        /// Accounts that have UserId
         /// </summary>
         public static readonly List<AccountChart> UsersPersonalCharts = new List<AccountChart>
         {
@@ -64,6 +66,9 @@ namespace TLabs.ExchangeSdk.Depository
             BlockedForWithdrawn,
             StakingLocked, StakingLockedWithdrawal,
             CurrencyListingPaymentBlocked,
+            CurrencyOfferingsVesting,
+
+            FundBot,
         };
 
         public static readonly List<AccountChart> All = new List<AccountChart>(UsersPersonalCharts)

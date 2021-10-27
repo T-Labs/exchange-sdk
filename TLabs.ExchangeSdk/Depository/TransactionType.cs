@@ -102,6 +102,10 @@ namespace TLabs.ExchangeSdk.Depository
 
         public static readonly TransactionType ApiTradeProfitPayment = new TransactionType("891", "Оплата за прибыль ApiTrade", nameof(ApiTradeProfitPayment));
 
+        public static readonly TransactionType CurrencyOfferingPurchase = new TransactionType("911", "Покупка CurrencyOffering", nameof(CurrencyOfferingPurchase));
+        public static readonly TransactionType CurrencyOfferingCommission = new TransactionType("913", "Комиссия покупки CurrencyOffering", nameof(CurrencyOfferingCommission));
+        public static readonly TransactionType CurrencyOfferingTransfer = new TransactionType("915", "Разблокировка после покупки CurrencyOffering", nameof(CurrencyOfferingTransfer));
+
         public static readonly List<TransactionType> All = new List<TransactionType>
         {
             Rollback,
@@ -142,6 +146,8 @@ namespace TLabs.ExchangeSdk.Depository
             CurrencyListingPaymentBlock, CurrencyListingPayment, CurrencyListingPaymentCancel,
 
             ApiTradeProfitPayment,
+
+            CurrencyOfferingPurchase, CurrencyOfferingCommission, CurrencyOfferingTransfer,
         };
 
         private TransactionType(string code, string value, string valueKey)
