@@ -50,5 +50,30 @@ namespace TLabs.ExchangeSdk.CurrencyOfferings
                 .PostJsonAsync<CurrencyOffering>(model);
             return result;
         }
+
+        public async Task<List<CurrencyOfferingPurchase>> GetPurchases(string userId, string currencyCode)
+        {
+            var result = await $"{BaseUrl}/purchases".InternalApi()
+                .SetQueryParam(nameof(userId), userId)
+                .SetQueryParam(nameof(currencyCode), currencyCode)
+                .GetJsonAsync<List<CurrencyOfferingPurchase>>();
+            return result;
+        }
+
+        public async Task<decimal> GetPurchasePrice(string currencyCode, string payingCurrencyCode)
+        {
+            var result = await $"{BaseUrl}/purchases/price".InternalApi()
+                .SetQueryParam(nameof(currencyCode), currencyCode)
+                .SetQueryParam(nameof(payingCurrencyCode), payingCurrencyCode)
+                .GetStringAsync();
+            return decimal.Parse(result);
+        }
+
+        public async Task<CurrencyOfferingPurchase> MakePurchase(CurrencyOfferingPurchase model)
+        {
+            var result = await $"{BaseUrl}/purchases".InternalApi()
+                .PostJsonAsync<CurrencyOfferingPurchase>(model);
+            return result;
+        }
     }
 }

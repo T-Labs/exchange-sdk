@@ -36,6 +36,9 @@ namespace TLabs.ExchangeSdk.CurrencyOfferings
         /// <summary>How many days it will take to pay the rest</summary>
         public decimal DaysToPayRest { get; set; } = 10;
 
+        /// <summary>How much of admin profit goes to system (0-100)</summary>
+        public decimal SystemFeePercentage { get; set; } = 0;
+
         public string Status =>
             DateStart > DateTimeOffset.UtcNow ? "Planned" : DateEnd < DateTimeOffset.UtcNow ? "Ended" : "Active";
 
