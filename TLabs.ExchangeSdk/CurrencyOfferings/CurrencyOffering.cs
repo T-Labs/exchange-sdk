@@ -17,7 +17,7 @@ namespace TLabs.ExchangeSdk.CurrencyOfferings
         public DateTimeOffset DateEnd { get; set; }
 
         /// <summary>User that receives profits for selling tokens</summary>
-        public string AdminUserId { get; set; }
+        public string SellerUserId { get; set; }
 
         public string Website { get; set; }
         public decimal TotalVolume { get; set; }
@@ -43,13 +43,13 @@ namespace TLabs.ExchangeSdk.CurrencyOfferings
             DateStart > DateTimeOffset.UtcNow ? "Planned" : DateEnd < DateTimeOffset.UtcNow ? "Ended" : "Active";
 
         public override string ToString() => $"{nameof(CurrencyOffering)}({CurrencyCode}, Name:{Name}, {DateStart} - {DateEnd}, " +
-            $"AdminUserId:{AdminUserId}, CurrenciesForSale:{CurrenciesForSale}, PriceUsdt:{PriceUsdt})";
+            $"AdminUserId:{SellerUserId}, CurrenciesForSale:{CurrenciesForSale}, PriceUsdt:{PriceUsdt})";
 
         public void Trim()
         {
             CurrencyCode = CurrencyCode?.Trim().NullIfEmpty();
             Name = Name?.Trim().NullIfEmpty();
-            AdminUserId = AdminUserId?.Trim().NullIfEmpty();
+            SellerUserId = SellerUserId?.Trim().NullIfEmpty();
             Website = Website?.Trim().NullIfEmpty();
         }
     }

@@ -11,15 +11,23 @@ namespace TLabs.ExchangeSdk.Users
     {
         public DateTimeOffset RegistrationDate { get; set; }
 
+        /// <summary>Google Authenticator key</summary>
         public string PreSharedGoogleAuthKey { get; set; }
 
+        /// <summary>Temporary google authenticator key used in the process of generating</summary>
         public string TemporaryGeneratedGoogleAuthKey { get; set; }
 
+        /// <summary>Bitmask of enabled two factor authentication methods for the user</summary>
         public TwoFactorMethods TwoFactorMethods { get; set; }
 
+        /// <summary>User language</summary>
         public string Culture { get; set; }
 
+        /// <summary>User Nickname, will be used in chat</summary>
         public string Nickname { get; set; }
+
+        /// <summary>Referral code from n10</summary>
+        public string ReferralCode { get; set; }
 
         /// <summary>Id of user in Oton affiliate program</summary>
         public string OtonUserId { get; set; }

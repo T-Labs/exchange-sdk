@@ -16,5 +16,15 @@ namespace TLabs.ExchangeSdk.Users
         public const string PolicyCanRefill = "PolicyCanRefill";
         public const string CantWithdraw = "CantWithdraw";
         public const string PolicyCanWithdraw = "PolicyCanWithdraw";
+
+        public const string NoTradeCommissions = "NoTradeCommissions";
+
+        public const string Last2FAAccessToken = "Last2FAAccessToken";
+        public const string LastWithdrawalEmailDate = "LastWithdrawalEmailDate";
+
+        public const string LastLoginIp = "LastLoginIp";
+        public const string LastLoginTime = "LastLoginTime";
+        public const string SecondLastLoginIp = "SecondLastLoginIp";
+        public const string SecondLastLoginTime = "SecondLastLoginTime";
     }
 }
