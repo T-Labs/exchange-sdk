@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TLabs.DotnetHelpers.Helpers;
 
 namespace TLabs.ExchangeSdk.Users
 {
@@ -37,6 +38,45 @@ namespace TLabs.ExchangeSdk.Users
 
         /// <summary>If true then other users can specify this user's id in MerchantId</summary>
         public bool IsMerchant { get; set; }
+
+        public bool TwoFactorEmail {
+            get => FlagsHelper.IsSet(TwoFactorMethods, TwoFactorMethods.Email);
+            set => TwoFactorMethods =
+                value
+                    ? FlagsHelper.Set(TwoFactorMethods, TwoFactorMethods.Email)
+                    : FlagsHelper.Unset(TwoFactorMethods, TwoFactorMethods.Email);
+        }
+
+        public bool TwoFactorSms {
+            get => FlagsHelper.IsSet(TwoFactorMethods, TwoFactorMethods.Sms);
+            set => TwoFactorMethods =
+                value
+                    ? FlagsHelper.Set(TwoFactorMethods, TwoFactorMethods.Sms)
+                    : FlagsHelper.Unset(TwoFactorMethods, TwoFactorMethods.Sms);
+        }
+
+        public bool TwoFactorGa {
+            get => FlagsHelper.IsSet(TwoFactorMethods, TwoFactorMethods.GoogleAuthenticator);
+            set => TwoFactorMethods =
+                value
+                    ? FlagsHelper.Set(TwoFactorMethods, TwoFactorMethods.GoogleAuthenticator)
+                    : FlagsHelper.Unset(TwoFactorMethods, TwoFactorMethods.GoogleAuthenticator);
+        }
+
+        public bool IsGARequiredOnLogin => !string.IsNullOrEmpty(PreSharedGoogleAuthKey) && TwoFactorGa;
+
+        public void ClearSensitiveData()
+        {
+            AccessFailedCount = 0;
+            ConcurrencyStamp = "";
+            LockoutEnabled = false;
+            LockoutEnd = null;
+            TwoFactorEnabled = false;
+            PasswordHash = "";
+            SecurityStamp = "";
+            PreSharedGoogleAuthKey = "";
+            TemporaryGeneratedGoogleAuthKey = "";
+        }
     }
 
     [Flags]
