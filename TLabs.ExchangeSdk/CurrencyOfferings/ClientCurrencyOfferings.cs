@@ -78,11 +78,10 @@ namespace TLabs.ExchangeSdk.CurrencyOfferings
             return decimal.Parse(result);
         }
 
-        public async Task<CurrencyOfferingPurchase> MakePurchase(CurrencyOfferingPurchase model)
+        public async Task MakePurchase(CurrencyOfferingPurchase model)
         {
             var result = await $"{BaseUrl}/purchases".InternalApi()
-                .PostJsonAsync<CurrencyOfferingPurchase>(model);
-            return result;
+                .PostJsonAsync(model);
         }
     }
 }

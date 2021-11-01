@@ -8,7 +8,7 @@ using TLabs.ExchangeSdk.Currencies;
 
 namespace TLabs.ExchangeSdk.CurrencyOfferings
 {
-    public enum CurrencyOfferingPurchaseStatus { Created = 0, Paid = 10, FullyUnblocked = 20 };
+    public enum CurrencyOfferingPurchaseStatus { Created = 0, Paid = 10, FullyUnblocked = 20, Error = 50, };
 
     public class CurrencyOfferingPurchase
     {
@@ -32,6 +32,6 @@ namespace TLabs.ExchangeSdk.CurrencyOfferings
         public decimal PayAmount() => (BuyAmount * Price).RoundDown(CurrenciesCache.Digits);
 
         public override string ToString() => $"{nameof(CurrencyOfferingPurchase)}" +
-            $"({BuyAmount} {CurrencyCode} for {PayAmount()} {PayingCurrencyCode}, Price:{Price})";
+            $"({Status}, {BuyAmount} {CurrencyCode} for {PayAmount()} {PayingCurrencyCode}, Price:{Price})";
     }
 }

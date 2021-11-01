@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
-    <Version>1.0.148</Version>
+    <Version>1.0.150</Version>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -16,6 +16,6 @@
 
   <ItemGroup>
     <PackageReference Include="RabbitMQ.Client" Version="5.1.0" />
-    <PackageReference Include="TLabs.DotnetHelpers" Version="1.0.45" />
+    <PackageReference Include="TLabs.DotnetHelpers" Version="1.0.46" />
   </ItemGroup>
 </Project>
