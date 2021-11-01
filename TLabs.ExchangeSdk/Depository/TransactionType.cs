@@ -102,10 +102,12 @@ namespace TLabs.ExchangeSdk.Depository
 
         public static readonly TransactionType ApiTradeProfitPayment = new TransactionType("891", "Оплата за прибыль ApiTrade", nameof(ApiTradeProfitPayment));
 
-        public static readonly TransactionType CurrencyOfferingPurchaseBegin = new TransactionType("911", "Покупка CurrencyOffering", nameof(CurrencyOfferingPurchaseBegin));
-        public static readonly TransactionType CurrencyOfferingPurchaseEnd = new TransactionType("912", "Покупка CurrencyOffering", nameof(CurrencyOfferingPurchaseEnd));
-        public static readonly TransactionType CurrencyOfferingCommission = new TransactionType("913", "Комиссия покупки CurrencyOffering", nameof(CurrencyOfferingCommission));
-        public static readonly TransactionType CurrencyOfferingTransfer = new TransactionType("915", "Разблокировка после покупки CurrencyOffering", nameof(CurrencyOfferingTransfer));
+        public static readonly TransactionType CurrencyOfferingBuyBegin = new TransactionType("911", "Покупка CurrencyOffering начало", nameof(CurrencyOfferingBuyBegin));
+        public static readonly TransactionType CurrencyOfferingBuyEnd = new TransactionType("912", "Покупка CurrencyOffering конец", nameof(CurrencyOfferingBuyEnd));
+        public static readonly TransactionType CurrencyOfferingSellBegin = new TransactionType("913", "Продажа CurrencyOffering начало", nameof(CurrencyOfferingSellBegin));
+        public static readonly TransactionType CurrencyOfferingSellEnd = new TransactionType("914", "Продажа CurrencyOffering конец", nameof(CurrencyOfferingSellEnd));
+        public static readonly TransactionType CurrencyOfferingCommission = new TransactionType("917", "Комиссия покупки CurrencyOffering", nameof(CurrencyOfferingCommission));
+        public static readonly TransactionType CurrencyOfferingTransfer = new TransactionType("919", "Разблокировка после покупки CurrencyOffering", nameof(CurrencyOfferingTransfer));
 
         public static readonly List<TransactionType> All = new List<TransactionType>
         {
@@ -148,7 +150,7 @@ namespace TLabs.ExchangeSdk.Depository
 
             ApiTradeProfitPayment,
 
-            CurrencyOfferingPurchaseBegin, CurrencyOfferingPurchaseEnd,
+            CurrencyOfferingBuyBegin, CurrencyOfferingBuyEnd, CurrencyOfferingSellBegin, CurrencyOfferingSellEnd,
             CurrencyOfferingCommission, CurrencyOfferingTransfer,
         };
 

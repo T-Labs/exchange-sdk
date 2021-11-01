@@ -31,10 +31,19 @@ namespace TLabs.ExchangeSdk.CurrencyOfferings
         public async Task<CurrencyOffering> Get(string code)
         {
             if (code.NotHasValue())
-                return null;
+                throw new ArgumentNullException(nameof(code));
             var result = await $"{BaseUrl}/{code}".InternalApi()
                 .GetJsonAsync<CurrencyOffering>();
             return result;
+        }
+
+        public async Task<decimal> GetTotalSales(string code)
+        {
+            if (code.NotHasValue())
+                throw new ArgumentNullException(nameof(code));
+            var result = await $"{BaseUrl}/{code}/total-sales".InternalApi()
+                .GetJsonAsync<string>();
+            return decimal.Parse(result);
         }
 
         public async Task<CurrencyOffering> Add(CurrencyOffering model)
