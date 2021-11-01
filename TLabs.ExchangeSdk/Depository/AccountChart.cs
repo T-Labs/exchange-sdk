@@ -54,7 +54,8 @@ namespace TLabs.ExchangeSdk.Depository
 
         public static readonly AccountChart CurrencyListingPaymentBlocked = new AccountChart("871", "CurrencyListing блокировка оплаты", nameof(CurrencyListingPaymentBlocked));
 
-        public static readonly AccountChart CurrencyOfferingsVesting = new AccountChart("901", "Заблокировано на CurrencyOffering", nameof(CurrencyOfferingsVesting));
+        public static readonly AccountChart CurrencyOfferingsBlocked = new AccountChart("901", "Этап блокировки на CurrencyOffering", nameof(CurrencyOfferingsBlocked));
+        public static readonly AccountChart CurrencyOfferingsVesting = new AccountChart("903", "Вестинг на CurrencyOffering", nameof(CurrencyOfferingsVesting));
 
         /// <summary>
         /// Accounts that have UserId
@@ -66,7 +67,7 @@ namespace TLabs.ExchangeSdk.Depository
             BlockedForWithdrawn,
             StakingLocked, StakingLockedWithdrawal,
             CurrencyListingPaymentBlocked,
-            CurrencyOfferingsVesting,
+            CurrencyOfferingsBlocked, CurrencyOfferingsVesting,
 
             FundBot,
         };

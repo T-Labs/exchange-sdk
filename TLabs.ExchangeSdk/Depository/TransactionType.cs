@@ -102,7 +102,8 @@ namespace TLabs.ExchangeSdk.Depository
 
         public static readonly TransactionType ApiTradeProfitPayment = new TransactionType("891", "Оплата за прибыль ApiTrade", nameof(ApiTradeProfitPayment));
 
-        public static readonly TransactionType CurrencyOfferingPurchase = new TransactionType("911", "Покупка CurrencyOffering", nameof(CurrencyOfferingPurchase));
+        public static readonly TransactionType CurrencyOfferingPurchaseBegin = new TransactionType("911", "Покупка CurrencyOffering", nameof(CurrencyOfferingPurchaseBegin));
+        public static readonly TransactionType CurrencyOfferingPurchaseEnd = new TransactionType("912", "Покупка CurrencyOffering", nameof(CurrencyOfferingPurchaseEnd));
         public static readonly TransactionType CurrencyOfferingCommission = new TransactionType("913", "Комиссия покупки CurrencyOffering", nameof(CurrencyOfferingCommission));
         public static readonly TransactionType CurrencyOfferingTransfer = new TransactionType("915", "Разблокировка после покупки CurrencyOffering", nameof(CurrencyOfferingTransfer));
 
@@ -147,7 +148,8 @@ namespace TLabs.ExchangeSdk.Depository
 
             ApiTradeProfitPayment,
 
-            CurrencyOfferingPurchase, CurrencyOfferingCommission, CurrencyOfferingTransfer,
+            CurrencyOfferingPurchaseBegin, CurrencyOfferingPurchaseEnd,
+            CurrencyOfferingCommission, CurrencyOfferingTransfer,
         };
 
         private TransactionType(string code, string value, string valueKey)

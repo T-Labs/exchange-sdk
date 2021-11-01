@@ -15,7 +15,8 @@ namespace TLabs.ExchangeSdk.Depository
         {
         }
 
-        public async Task<QueryResult> SendTxCommands(List<TxCommandDto> txCommands, bool checkBalances = true)
+        public async Task<QueryResult> SendTxCommands(List<TxCommandDto> txCommands, bool checkBalances = true,
+            bool use2StepTransfer = false)
         {
             foreach (var command in txCommands)
             {
@@ -29,6 +30,7 @@ namespace TLabs.ExchangeSdk.Depository
             }
             var result = await $"depository/transaction/commands".InternalApi()
                 .SetQueryParam(nameof(checkBalances), checkBalances)
+                .SetQueryParam(nameof(use2StepTransfer), use2StepTransfer)
                 .PostJsonAsync(txCommands).GetQueryResult();
             return result;
         }
