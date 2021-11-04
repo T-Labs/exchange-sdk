@@ -8,7 +8,8 @@ using TLabs.ExchangeSdk.Currencies;
 
 namespace TLabs.ExchangeSdk.CurrencyOfferings
 {
-    public enum CurrencyOfferingPurchaseStatus { Created = 0, Paid = 10, FullyUnblocked = 20, Error = 50, };
+    public enum CurrencyOfferingPurchaseStatus { Created = 0, Paid = 10,
+        TransfersCreated = 20, FullyTransfered = 30, Error = 50, };
 
     public class CurrencyOfferingPurchase
     {
@@ -28,6 +29,8 @@ namespace TLabs.ExchangeSdk.CurrencyOfferings
         public decimal BuyAmount { get; set; }
 
         public decimal Price { get; set; }
+
+        public List<CurrencyOfferingPurchaseTransfer> Transfers { get; set; }
 
         public decimal PayAmount() => (BuyAmount * Price).RoundDown(CurrenciesCache.Digits);
 

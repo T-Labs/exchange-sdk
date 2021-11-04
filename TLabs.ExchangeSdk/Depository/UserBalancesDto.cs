@@ -4,16 +4,9 @@ namespace TLabs.ExchangeSdk.Depository
 {
     public class UserBalancesDto
     {
-        public List<Balance> Balances { get; set; }
-        public List<Balance> BalancesBlockedInOrder { get; set; }
-        public List<Balance> BalancesInCurrencyOfferingsVesting { get; set; }
-
-        public UserBalancesDto()
-        {
-            Balances = new List<Balance>();
-            BalancesBlockedInOrder = new List<Balance>();
-            BalancesInCurrencyOfferingsVesting = new List<Balance>();
-        }
+        public List<Balance> Balances { get; set; } = new();
+        public List<Balance> BalancesBlockedInOrder { get; set; } = new();
+        public List<Balance> BalancesInCurrencyOfferingsVesting { get; set; } = new();
 
         public class Balance
         {
