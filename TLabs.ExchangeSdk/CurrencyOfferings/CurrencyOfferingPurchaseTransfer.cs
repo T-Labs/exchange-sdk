@@ -15,7 +15,7 @@ namespace TLabs.ExchangeSdk.CurrencyOfferings
         public CurrencyOfferingPurchase Purchase { get; set; }
 
         [Column(TypeName = "date")]
-        public DateTimeOffset DateToTransfer { get; set; }
+        public DateTime DateToTransfer { get; set; }
 
         public DateTimeOffset DateCreated { get; set; }
 
