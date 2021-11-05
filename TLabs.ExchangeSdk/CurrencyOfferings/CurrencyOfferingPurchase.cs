@@ -9,7 +9,7 @@ using TLabs.ExchangeSdk.Currencies;
 namespace TLabs.ExchangeSdk.CurrencyOfferings
 {
     public enum CurrencyOfferingPurchaseStatus { Created = 0, Paid = 10,
-        TransfersCreated = 20, FullyTransfered = 30, Error = 50, };
+        TransfersCreated = 20, Error = 50, };
 
     public class CurrencyOfferingPurchase
     {

@@ -60,11 +60,13 @@ namespace TLabs.ExchangeSdk.CurrencyOfferings
             return result;
         }
 
-        public async Task<List<CurrencyOfferingPurchase>> GetPurchases(string userId, string currencyCode)
+        public async Task<List<CurrencyOfferingPurchase>> GetPurchases(string userId, string currencyCode,
+            CurrencyOfferingPurchaseStatus status)
         {
             var result = await $"{BaseUrl}/purchases".InternalApi()
                 .SetQueryParam(nameof(userId), userId)
                 .SetQueryParam(nameof(currencyCode), currencyCode)
+                .SetQueryParam(nameof(status), status)
                 .GetJsonAsync<List<CurrencyOfferingPurchase>>();
             return result;
         }
