@@ -92,5 +92,22 @@ namespace TLabs.ExchangeSdk.Depository
                 .GetJsonAsync<decimal>();
             return result;
         }
+
+        public async Task<string> OrderBlockOrUnblock(DepositoryReservationType type, string actionId, ClientType clientType, string userId,
+            decimal amount, string currencyCode)
+        {
+            var dto = new DepositoryReservationDto
+            {
+                ReservationType = type,
+                ActionId = actionId,
+                ClientType = clientType,
+                UserId = userId,
+                Amount = amount,
+                CurrencyCode = currencyCode
+            };
+            var responseMessage = await $"depository/deal/reserve".InternalApi()
+                .PostJsonAsync<string>(dto);
+            return responseMessage;
+        }
     }
 }

@@ -28,6 +28,20 @@ namespace TLabs.ExchangeSdk.Users
                 .GetJsonAsync<ApplicationUser>();
         }
 
+        /// <summary>Get all users</summary>
+        public async Task<PagedList<ApplicationUser>> GetUsersPage(DateTimeOffset? minRegisterDate = null,
+            string search = null, string merchantId = null, bool? otonFlag = null)
+        {
+            var users = await "userprofiles/users".InternalApi()
+                .SetQueryParam(nameof(minRegisterDate), minRegisterDate?.ToString("o"))
+                .SetQueryParam("page", -1) // result will not be PagedList
+                .SetQueryParam(nameof(search), search)
+                .SetQueryParam(nameof(merchantId), merchantId)
+                .SetQueryParam(nameof(otonFlag), otonFlag.ToString())
+                .GetJsonAsync<PagedList<ApplicationUser>>();
+            return users;
+        }
+
         /// <summary>Only works with paginated requests</summary>
         /// <param name="page">Starts from 1</param>
         public async Task<PagedList<ApplicationUser>> GetUsersPage(DateTimeOffset? minRegisterDate = null,
