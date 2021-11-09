@@ -30,6 +30,7 @@ namespace TLabs.ExchangeSdk.Depository
         public static readonly TransactionType DepositStaking = new TransactionType("104", "Безусловное пополнение баланса стейкингом", "DepositStaking");
         public static readonly TransactionType DepositReplacement = new TransactionType("108", "Пополнение баланса взамен удаленной валюты", nameof(DepositReplacement));
         public static readonly TransactionType DepositCorrection = new TransactionType("109", "Корректировочное пополнение баланса", nameof(DepositCorrection));
+        public static readonly TransactionType Nullification = new TransactionType("121", "Обнуление баланса", nameof(Nullification));
 
         public static readonly TransactionType WithdrawalBlock = new TransactionType("06", "Блокировка для вывода", nameof(WithdrawalBlock));
         public static readonly TransactionType WithdrawalStockCommissionBlock = new TransactionType("061", "Блокировка комиссии биржи для вывода", nameof(WithdrawalStockCommissionBlock));
@@ -47,7 +48,9 @@ namespace TLabs.ExchangeSdk.Depository
         public static readonly TransactionType OrderCancellingEnd = new TransactionType("221", "Подтверждение отмены ордера", "OrderCancellingEnd");
         public static readonly TransactionType OrderExcessCancellingBegin = new TransactionType("223", "Начало отмены избытка бида", nameof(OrderExcessCancellingBegin));
         public static readonly TransactionType OrderExcessCancellingEnd = new TransactionType("224", "Подтверждение отмены избытка бида", nameof(OrderExcessCancellingEnd));
-        public static readonly TransactionType Transfer = new TransactionType("03", "Перевод средств после сделки", "Transfer");
+        public static readonly TransactionType Transfer = new TransactionType("03", "Перевод средств после сделки (old)", nameof(Transfer));
+        public static readonly TransactionType TransferBegin = new TransactionType("031", "Перевод средств после сделки начало", nameof(TransferBegin));
+        public static readonly TransactionType TransferEnd = new TransactionType("032", "Перевод средств после сделки конец", nameof(TransferEnd));
 
         /// <summary>
         /// Move balance between Users and OnOrders accounts to fix previous trading errors
@@ -125,7 +128,7 @@ namespace TLabs.ExchangeSdk.Depository
             OrderingBegin, OrderingEnd,
             OrderCancellingBegin, OrderCancellingEnd,
             OrderExcessCancellingBegin, OrderExcessCancellingEnd,
-            Transfer,
+            Transfer, TransferBegin, TransferEnd,
             OrderingReturnRemains,
 
             Fee, NodeAgregationNetworkCommission,

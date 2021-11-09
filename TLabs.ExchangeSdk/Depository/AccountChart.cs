@@ -26,6 +26,7 @@ namespace TLabs.ExchangeSdk.Depository
         public static readonly AccountChart FundAffiliateProfits = new AccountChart("347", "Фонд Affiliate прибыли", nameof(FundAffiliateProfits));
         public static readonly AccountChart FundBountyBonusesForDistribution = new AccountChart("349", "Фонд BuySell бонусов для распределения", nameof(FundBountyBonusesForDistribution));
         public static readonly AccountChart FundPaymentsComission = new AccountChart("351", "Фонд комиссий платежей", nameof(FundPaymentsComission));
+        public static readonly AccountChart Nullification = new AccountChart("359", "Обнуление баланса", nameof(Nullification));
 
         public static readonly AccountChart FundBot = new AccountChart("361", "Фонды бота", nameof(FundBot));
         public static readonly AccountChart FundBotProfits = new AccountChart("362", "Фонды прибыли бота", nameof(FundBotProfits));
@@ -42,6 +43,7 @@ namespace TLabs.ExchangeSdk.Depository
 
         public static readonly AccountChart BlockedForOrder = new AccountChart("7", "Заморозка средств на ордер", "BlockedForOrder");
         public static readonly AccountChart BlockedForCancelOrder = new AccountChart("71", "Заморозка средств при отмене ордера", "BlockedForCancelOrder");
+        public static readonly AccountChart BlockedForDeal = new AccountChart("73", "Заморозка средств при сделке", nameof(BlockedForDeal));
         public static readonly AccountChart OnOrders = new AccountChart("75", "Средства на ордерах", "OnOrders");
 
         public static readonly AccountChart NetworkComission = new AccountChart("8", "Комиссия блокчейна", "NetworkComission");
@@ -63,7 +65,7 @@ namespace TLabs.ExchangeSdk.Depository
         public static readonly List<AccountChart> UsersPersonalCharts = new List<AccountChart>
         {
             Users,
-            BlockedForOrder, BlockedForCancelOrder, OnOrders,
+            BlockedForOrder, BlockedForCancelOrder, BlockedForDeal, OnOrders,
             BlockedForWithdrawn,
             StakingLocked, StakingLockedWithdrawal,
             CurrencyListingPaymentBlocked,
@@ -78,6 +80,7 @@ namespace TLabs.ExchangeSdk.Depository
             FundAffiliateBonusesForDistribution, FundAffiliateProfits,
             FundBot, FundBotProfits, FundPaymentsComission, FundsDeposit, FundsWithdrawal,
             FundBountyBonusesForDistribution,
+            Nullification,
 
             Deposit, DepositAdmin, DepositStaking, DepositAirdrop, DepositReplacement, DepositCorrection,
 

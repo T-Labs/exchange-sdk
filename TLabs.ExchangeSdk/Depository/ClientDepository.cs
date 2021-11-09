@@ -109,5 +109,15 @@ namespace TLabs.ExchangeSdk.Depository
                 .PostJsonAsync<string>(dto);
             return responseMessage;
         }
+
+        public async Task<IFlurlResponse> NullifyUserBalances(string userId)
+        {
+            if (userId.NotHasValue())
+                throw new ArgumentNullException(nameof(userId));
+            var result = await $"depository/nullification".InternalApi()
+                .SetQueryParam(nameof(userId), userId)
+                .PostJsonAsync(null);
+            return result;
+        }
     }
 }
