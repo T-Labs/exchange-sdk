@@ -112,6 +112,16 @@ namespace TLabs.ExchangeSdk.Depository
         public static readonly TransactionType CurrencyOfferingCommission = new TransactionType("917", "Комиссия покупки CurrencyOffering", nameof(CurrencyOfferingCommission));
         public static readonly TransactionType CurrencyOfferingTransfer = new TransactionType("919", "Разблокировка после покупки CurrencyOffering", nameof(CurrencyOfferingTransfer));
 
+        public static readonly List<TransactionType> TradingTypes = new List<TransactionType>
+        {
+            Rollback,
+            OrderingBegin, OrderingEnd,
+            OrderCancellingBegin, OrderCancellingEnd,
+            OrderExcessCancellingBegin, OrderExcessCancellingEnd,
+            Transfer, TransferBegin, TransferEnd,
+            OrderingReturnRemains,
+        };
+
         public static readonly List<TransactionType> All = new List<TransactionType>
         {
             Rollback,
