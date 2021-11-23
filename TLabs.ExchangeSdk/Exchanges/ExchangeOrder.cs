@@ -5,7 +5,10 @@ namespace TLabs.ExchangeSdk.Exchanges
 {
     public enum ExchangeStatus
     {
-        Started = 0, SuccessFinished = 100, ErrorFinished = 110,
+        Started = 0,
+        TransfersMade = 50, // amounts exchanged
+        SuccessFinished = 100, // commissions paid and process finished
+        ErrorFinished = 110,
     };
 
     public class ExchangeOrder : OrderBase
