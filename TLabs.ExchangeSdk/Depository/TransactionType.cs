@@ -24,10 +24,10 @@ namespace TLabs.ExchangeSdk.Depository
 
         public static readonly TransactionType Rollback = new TransactionType("001", "Откат", nameof(Rollback));
 
-        public static readonly TransactionType Deposit = new TransactionType("101", "Пополнение баланса", "Deposit");
-        public static readonly TransactionType DepositAdmin = new TransactionType("102", "Безусловное пополнение баланса админом", "DepositAdmin");
-        public static readonly TransactionType DepositAirdrop = new TransactionType("103", "Безусловное пополнение баланса аирдропом", "DepositAirdrop");
-        public static readonly TransactionType DepositStaking = new TransactionType("104", "Безусловное пополнение баланса стейкингом", "DepositStaking");
+        public static readonly TransactionType Deposit = new TransactionType("101", "Пополнение баланса", nameof(Deposit));
+        public static readonly TransactionType DepositAdmin = new TransactionType("102", "Безусловное пополнение баланса админом", nameof(DepositAdmin));
+        public static readonly TransactionType DepositAirdrop = new TransactionType("103", "Безусловное пополнение баланса аирдропом", nameof(DepositAirdrop));
+        public static readonly TransactionType DepositStaking = new TransactionType("104", "Безусловное пополнение баланса стейкингом", nameof(DepositStaking));
         public static readonly TransactionType DepositReplacement = new TransactionType("108", "Пополнение баланса взамен удаленной валюты", nameof(DepositReplacement));
         public static readonly TransactionType DepositCorrection = new TransactionType("109", "Корректировочное пополнение баланса", nameof(DepositCorrection));
         public static readonly TransactionType Nullification = new TransactionType("121", "Обнуление баланса", nameof(Nullification));
@@ -38,17 +38,17 @@ namespace TLabs.ExchangeSdk.Depository
         public static readonly TransactionType WithdrawalStockCommissionBlockRollback = new TransactionType("064", "Откат блокировки комиссии биржи для вывода", nameof(WithdrawalStockCommissionBlockRollback));
         public static readonly TransactionType WithdrawalBlockCancel = new TransactionType("065", "Отмена блокировки для вывода", nameof(WithdrawalBlockCancel));
         public static readonly TransactionType WithdrawalStockCommissionBlockCancel = new TransactionType("066", "Отмена блокировки комиссии биржи для вывода", nameof(WithdrawalStockCommissionBlockCancel));
-        public static readonly TransactionType Withdrawal = new TransactionType("05", "Вывод средств", "Withdrawal");
-        public static readonly TransactionType WithdrawalStockCommission = new TransactionType("062", "Комиссия вывода биржи", "WithdrawalStockCommission");
-        public static readonly TransactionType WithdrawalNetworkCommission = new TransactionType("07", "Комиссия вывода блокчейна", "WithdrawalNetworkCommission");
+        public static readonly TransactionType Withdrawal = new TransactionType("05", "Вывод средств", nameof(Withdrawal));
+        public static readonly TransactionType WithdrawalStockCommission = new TransactionType("062", "Комиссия вывода биржи", nameof(WithdrawalStockCommission));
+        public static readonly TransactionType WithdrawalNetworkCommission = new TransactionType("07", "Комиссия вывода блокчейна", nameof(WithdrawalNetworkCommission));
 
-        public static readonly TransactionType OrderingBegin = new TransactionType("201", "Начало выставления ордера", "OrderingBegin");
-        public static readonly TransactionType OrderingEnd = new TransactionType("211", "Подтверждение выставления ордера", "OrderingEnd");
-        public static readonly TransactionType OrderCancellingBegin = new TransactionType("202", "Начало отмены ордера", "OrderCancellingBegin");
-        public static readonly TransactionType OrderCancellingEnd = new TransactionType("221", "Подтверждение отмены ордера", "OrderCancellingEnd");
+        public static readonly TransactionType OrderingBegin = new TransactionType("201", "Начало выставления ордера", nameof(OrderingBegin));
+        public static readonly TransactionType OrderingEnd = new TransactionType("211", "Подтверждение выставления ордера", nameof(OrderingEnd));
+        public static readonly TransactionType OrderCancellingBegin = new TransactionType("202", "Начало отмены ордера", nameof(OrderCancellingBegin));
+        public static readonly TransactionType OrderCancellingEnd = new TransactionType("221", "Подтверждение отмены ордера", nameof(OrderCancellingEnd));
         public static readonly TransactionType OrderExcessCancellingBegin = new TransactionType("223", "Начало отмены избытка бида", nameof(OrderExcessCancellingBegin));
         public static readonly TransactionType OrderExcessCancellingEnd = new TransactionType("224", "Подтверждение отмены избытка бида", nameof(OrderExcessCancellingEnd));
-        public static readonly TransactionType Transfer = new TransactionType("03", "Перевод средств после сделки (old)", nameof(Transfer));
+        public static readonly TransactionType Transfer = new TransactionType("03", "Перевод средств после сделки (old)", nameof(Transfer)); // Obsolete
         public static readonly TransactionType TransferBegin = new TransactionType("031", "Перевод средств после сделки начало", nameof(TransferBegin));
         public static readonly TransactionType TransferEnd = new TransactionType("032", "Перевод средств после сделки конец", nameof(TransferEnd));
 
@@ -57,13 +57,13 @@ namespace TLabs.ExchangeSdk.Depository
         /// </summary>
         public static readonly TransactionType OrderingReturnRemains = new TransactionType("209", "Возврат ошибочно неразблокированных средств", nameof(OrderingReturnRemains));
 
-        public static readonly TransactionType Fee = new TransactionType("04", "Комиссия", "Fee");
+        public static readonly TransactionType Fee = new TransactionType("04", "Комиссия", nameof(Fee));
 
         public static readonly TransactionType NodeAgregationNetworkCommission = new TransactionType("071",
-            "Комиссия блокчейна при агрегации средств ноды", "NodeAgregationNetworkCommission");
+            "Комиссия блокчейна при агрегации средств ноды", nameof(NodeAgregationNetworkCommission));
 
         public static readonly TransactionType TransferToColdWallet = new TransactionType("11",
-            "Перевод с кошелька ноды на холодный кошелек", "TransferToColdWallet");
+            "Перевод с кошелька ноды на холодный кошелек", nameof(TransferToColdWallet));
 
         public static readonly TransactionType BotDeposit = new TransactionType("301", "Пополнение счета Exchanger", nameof(BotDeposit));
         public static readonly TransactionType BotWithdrawal = new TransactionType("302", "Вывод со счета Exchanger", nameof(BotWithdrawal));
@@ -74,7 +74,9 @@ namespace TLabs.ExchangeSdk.Depository
 
         public static readonly TransactionType InternalTransfer = new TransactionType("401", "Внутренний перевод", nameof(InternalTransfer));
 
-        public static readonly TransactionType ExchangeTransfer = new TransactionType("431", "Перевод между юзерами при обмене", nameof(ExchangeTransfer));
+        public static readonly TransactionType ExchangeTransfer = new TransactionType("431", "Перевод между юзерами при обмене", nameof(ExchangeTransfer)); // Obsolete
+        public static readonly TransactionType ExchangeTransferBegin = new TransactionType("432", "Перевод между юзерами при обмене начало", nameof(ExchangeTransferBegin));
+        public static readonly TransactionType ExchangeTransferEnd = new TransactionType("433", "Перевод между юзерами при обмене конец", nameof(ExchangeTransferEnd));
         public static readonly TransactionType ExchangeMarkup = new TransactionType("435", "Маркап обмена", nameof(ExchangeMarkup));
         public static readonly TransactionType ExchangeCommission = new TransactionType("436", "Комиссия обмена", nameof(ExchangeCommission));
         public static readonly TransactionType ExchangeCommissionConsolidation = new TransactionType("441", "Консолидация комиссии обмена", nameof(ExchangeCommissionConsolidation));
@@ -127,6 +129,7 @@ namespace TLabs.ExchangeSdk.Depository
             Rollback,
 
             Deposit, DepositAdmin, DepositStaking, DepositAirdrop, DepositReplacement, DepositCorrection,
+            Nullification,
 
             WithdrawalBlock, WithdrawalStockCommissionBlock,
             WithdrawalBlockRollback, WithdrawalStockCommissionBlockRollback,
@@ -146,7 +149,8 @@ namespace TLabs.ExchangeSdk.Depository
             BotDeposit, BotWithdrawal, BotCommission, BotProfit, BotTransferFromUser, BotTransferToUser,
 
             InternalTransfer,
-            ExchangeTransfer, ExchangeMarkup, ExchangeCommission, ExchangeCommissionConsolidation,
+            ExchangeTransfer, ExchangeTransferBegin, ExchangeTransferEnd,
+            ExchangeMarkup, ExchangeCommission, ExchangeCommissionConsolidation,
 
             AffiliateTariffPurchase, AffiliateTariffPurchaseRollback,
             AffiliateDealCommission, AffiliateWithdrawalCommission, AffiliateCurrencyListing, AffiliateApiTradeProfitPayment,
