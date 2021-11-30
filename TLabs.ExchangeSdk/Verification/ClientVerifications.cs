@@ -3,9 +3,11 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using TLabs.DotnetHelpers;
+using TLabs.ExchangeSdk.Users;
 
 namespace TLabs.ExchangeSdk.Verification
 {
@@ -13,6 +15,13 @@ namespace TLabs.ExchangeSdk.Verification
     {
         public ClientVerifications()
         {
+        }
+
+        public async Task<VerificationUser> GetVerification(string userId)
+        {
+            var result = await $"verification/verifications/{userId}".InternalApi()
+                .GetJsonAsync<VerificationUser>().GetQueryResult();
+            return result.Succeeded ? result.Data : null;
         }
 
         /// <summary>Get verifications by userIds or all</summary>
@@ -27,11 +36,13 @@ namespace TLabs.ExchangeSdk.Verification
             return result;
         }
 
-        public async Task<VerificationUser> GetVerification(string userId)
+        public async Task<List<(ApplicationUser, VerificationUser)>> LoadVerificationsForUsers(List<ApplicationUser> users)
         {
-            var result = await $"verification/verifications/{userId}".InternalApi()
-                .GetJsonAsync<VerificationUser>().GetQueryResult();
-            return result.Succeeded ? result.Data : null;
+            if (users == null || users.Count == 0)
+                return new();
+            var verirications = (await GetVerifications(users.Select(_ => _.Id).ToList())).ToDictionary(_ => _.Id, _ => _);
+            var result = users.Select(_ => (_, verirications.GetValueOrDefault(_.Id, null))).ToList();
+            return result;
         }
 
         public async Task<bool> IsVerified(string userId)
