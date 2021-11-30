@@ -15,6 +15,18 @@ namespace TLabs.ExchangeSdk.Verification
         {
         }
 
+        /// <summary>Get verifications by userIds or all</summary>
+        /// <param name="userIds">set null if you want to get all verifications</param>
+        public async Task<List<VerificationUser>> GetVerifications(List<string> userIds = null)
+        {
+            if (userIds != null && userIds.Count == 0)
+                return new();
+            string url = $"verification/verifications?verificationIds={string.Join(",", userIds ?? new())}";
+            var result = await url.InternalApi()
+                .GetJsonAsync<List<VerificationUser>>();
+            return result;
+        }
+
         public async Task<VerificationUser> GetVerification(string userId)
         {
             var result = await $"verification/verifications/{userId}".InternalApi()
