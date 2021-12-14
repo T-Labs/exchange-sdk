@@ -41,9 +41,12 @@ namespace TLabs.ExchangeSdk.CryptoAdapters
             var result = await $"{adapterId}/adapter-info".InternalApi()
                 .GetJsonAsync<AdapterInfo>(cancelToken);
 
-            if (nownodesApiKey.HasValue() && result != null)
+            if (nownodesApiKey.HasValue() && result != null
+                && !ClientCryptoNownodes.UnsupportedCurrencies.Contains(mainCurrencyCode))
+            {
                 result.LastBlockPublicNode = (await _clientCryptoNownodes
                     .GetLastBlockNum(nownodesApiKey, mainCurrencyCode).GetQueryResult()).Data;
+            }
 
             return result;
         }

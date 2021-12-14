@@ -17,6 +17,10 @@ namespace TLabs.ExchangeSdk.CryptoAdapters.NownodesApi
     {
         private readonly ILogger _logger;
 
+        public static readonly HashSet<string> UnsupportedCurrencies = new HashSet<string> {
+            "BTP", "COLX", "DEL", "PLEX", "PZM", "SIN", "UMI",
+        };
+
         public ClientCryptoNownodes(
             ILogger<ClientCryptoNownodes> logger)
         {
