@@ -5,6 +5,7 @@ using System.Globalization;
 using System.Threading;
 using System.Threading.Tasks;
 using TLabs.DotnetHelpers;
+using TLabs.ExchangeSdk.CryptoAdapters.NownodesApi;
 using TLabs.ExchangeSdk.Currencies;
 
 namespace TLabs.ExchangeSdk.CryptoAdapters
@@ -12,11 +13,14 @@ namespace TLabs.ExchangeSdk.CryptoAdapters
     public class ClientCryptoAdapters
     {
         private readonly CurrenciesCache _currenciesCache;
+        private readonly ClientCryptoNownodes _clientCryptoNownodes;
 
         public ClientCryptoAdapters(
-            CurrenciesCache currenciesCache)
+            CurrenciesCache currenciesCache,
+            ClientCryptoNownodes clientCryptoNownodes)
         {
             _currenciesCache = currenciesCache;
+            _clientCryptoNownodes = clientCryptoNownodes;
         }
 
         public async Task<AddressModel> GetWalletAddress(string currencyCode, string userId,
@@ -30,12 +34,17 @@ namespace TLabs.ExchangeSdk.CryptoAdapters
             return result;
         }
 
-        public async Task<AdapterInfo> GetAdapterInfo(string mainCurrencyCode)
+        public async Task<AdapterInfo> GetAdapterInfo(string mainCurrencyCode, string nownodesApiKey = null)
         {
             string adapterId = _currenciesCache.GetAdapterId(mainCurrencyCode);
             var cancelToken = new CancellationTokenSource(TimeSpan.FromSeconds(5)).Token;
             var result = await $"{adapterId}/adapter-info".InternalApi()
                 .GetJsonAsync<AdapterInfo>(cancelToken);
+
+            if (nownodesApiKey.HasValue() && result != null)
+                result.LastBlockPublicNode = (await _clientCryptoNownodes
+                    .GetLastBlockNum(nownodesApiKey, mainCurrencyCode).GetQueryResult()).Data;
+
             return result;
         }
 
