@@ -59,5 +59,27 @@ namespace TLabs.ExchangeSdk.Trading
             decimal conversionRate = quoteFrom.UsdtRate.Value / quoteTo.UsdtRate.Value;
             return conversionRate.RoundDown(CurrenciesCache.Digits);
         }
+
+        /// <summary>
+        /// Convert amounts in different currencies to currencyTo and get sum
+        /// </summary>
+        public static (decimal total, HashSet<string> skippedCurrencies) CalculateTotalEquivalent(Dictionary<string, Quote> quotes,
+            Dictionary<string, decimal> amounts, string currencyTo)
+        {
+            HashSet<string> skippedCurrencies = new();
+            decimal total = 0;
+            foreach (var (currency, amount) in amounts)
+            {
+                decimal? conversionRate = GetConversionRate(quotes, currency, currencyTo);
+                if (!conversionRate.HasValue)
+                {
+                    skippedCurrencies.Add(currency);
+                    continue;
+                }
+                decimal amountConverted = amount * conversionRate.Value;
+                total += amountConverted;
+            }
+            return (total, skippedCurrencies);
+        }
     }
 }
