@@ -79,6 +79,7 @@ namespace TLabs.ExchangeSdk.Trading
                 decimal amountConverted = amount * conversionRate.Value;
                 total += amountConverted;
             }
+            total = total.RoundDown(CurrenciesCache.Digits);
             return (total, skippedCurrencies);
         }
     }
