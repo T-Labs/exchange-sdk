@@ -28,6 +28,16 @@ namespace TLabs.ExchangeSdk.Users
                 .GetJsonAsync<ApplicationUser>();
         }
 
+        public async Task<List<ApplicationUser>> GetUsers(int skip = 0, int take = 0, string search = null)
+        {
+            var users = await "userprofiles/users/interval-users".InternalApi()
+                .SetQueryParam(nameof(skip), skip.ToString())
+                .SetQueryParam(nameof(take), take.ToString())
+                .SetQueryParam(nameof(search), search)
+                .GetJsonAsync<List<ApplicationUser>>();
+            return users;
+        }
+
         /// <summary>Only works with paginated requests</summary>
         /// <param name="page">Starts from 1</param>
         public async Task<PagedList<ApplicationUser>> GetUsers(DateTimeOffset? minRegisterDate = null,
