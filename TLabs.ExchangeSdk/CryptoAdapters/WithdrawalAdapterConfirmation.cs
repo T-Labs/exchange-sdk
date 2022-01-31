@@ -17,6 +17,7 @@ namespace TLabs.ExchangeSdk.CryptoAdapters
         public decimal NetworkCommission { get; set; }
 
         public string NetworkCommissionCurrencyCode { get; set; }
+        public int StatusId { get; set; }
 
         public override string ToString() => $"{nameof(WithdrawalAdapterConfirmation)}(DepositoryTransactionId:{TransactionId}, IsToColdWallet:{IsToColdWallet}, " +
             $"NetworkCommission:{NetworkCommission} {NetworkCommissionCurrencyCode})";
