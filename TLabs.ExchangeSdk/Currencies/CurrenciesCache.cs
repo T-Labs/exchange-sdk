@@ -118,7 +118,8 @@ namespace TLabs.ExchangeSdk.Currencies
 
             if (!IsLoaded)
             {
-                await Task.Delay(TimeHelper.GetDelay(countAttempts)); // use increasing delay and try again
+                var maxDelay = TimeSpan.FromMinutes(10); // currencies are vital for most services, no reason to wait too much
+                await Task.Delay(TimeHelper.GetDelay(countAttempts, maxDelay)); // use increasing delay and try again
                 _ = LoadData(++countAttempts);
             }
         }
