@@ -32,6 +32,12 @@ namespace TLabs.ExchangeSdk.Trading
         /// <summary>UserId that created ask</summary>
         public string UserAskId { get; set; }
 
+        /// <summary>Only set if was requested with includeOrders = true</summary>
+        public MarketdataOrder Bid { get; set; }
+
+        /// <summary>Only set if was requested with includeOrders = true</summary>
+        public MarketdataOrder Ask { get; set; }
+
         /// <summary>Is created by inner trading bot</summary>
         public bool FromInnerTradingBot { get; set; } = false;
 

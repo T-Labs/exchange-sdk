@@ -13,12 +13,15 @@ namespace TLabs.ExchangeSdk.Trading
     public class ClientTradingBrokerage
     {
         private readonly ClientMatchingEngine _clientMatchingEngine;
+        private readonly ClientMarketdata _clientMarketdata;
         private readonly ILogger _logger;
 
         public ClientTradingBrokerage(ClientMatchingEngine clientMatchingEngine,
+            ClientMarketdata clientMarketdata,
             ILogger<ClientTradingBrokerage> logger)
         {
             _clientMatchingEngine = clientMatchingEngine;
+            _clientMarketdata = clientMarketdata;
             _logger = logger;
         }
 
@@ -45,7 +48,7 @@ namespace TLabs.ExchangeSdk.Trading
         {
             if (userId.NotHasValue())
                 throw new ArgumentException("User not specified");
-            var orders = await _clientMatchingEngine.GetOrders(userId: userId, status: OrderStatusRequest.Active);
+            var orders = await _clientMarketdata.GetOrders(currencyPairCode: null, userId: userId, status: OrderStatusRequest.Active);
             int canceled = 0;
             foreach (var order in orders)
             {

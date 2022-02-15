@@ -37,6 +37,28 @@ namespace TLabs.ExchangeSdk.Trading
             return result;
         }
 
+        public async Task<List<MarketdataDeal>> GetDeals(List<string> userIds,
+            string currencyPairCode = null, DateTimeOffset? sinceDate = null, DateTimeOffset? toDate = null,
+            int pageNumber = 1, int pageSize = 20, bool includeOrders = false)
+        {
+            var result = await $"marketdata/orders/dealresponses".InternalApi()
+                .SetQueryParam("currencyPairId", currencyPairCode)
+                .SetQueryParam(nameof(sinceDate), sinceDate?.ToString("o"))
+                .SetQueryParam(nameof(toDate), toDate?.ToString("o"))
+                .SetQueryParam(nameof(pageNumber), pageNumber)
+                .SetQueryParam(nameof(pageSize), pageSize)
+                .SetQueryParam(nameof(includeOrders), includeOrders)
+                .PostJsonAsync<List<MarketdataDeal>>(userIds);
+            return result;
+        }
+
+        public async Task<MarketdataDeal> GetDeal(Guid id)
+        {
+            var result = await $"trading/deal/deal/{id}".InternalApi()
+                .GetJsonAsync<MarketdataDeal>();
+            return result;
+        }
+
         public async Task<List<Quote>> GetQuotes()
         {
             var quotes = await $"marketdata/quotes".InternalApi().GetJsonAsync<List<Quote>>();
