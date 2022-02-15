@@ -14,7 +14,7 @@ namespace TLabs.ExchangeSdk.Trading
         {
         }
 
-        public async Task<List<MarketdataOrder>> GetOrders(string currencyPairCode, bool? isBid = null, int? count = null,
+        public async Task<List<MarketdataOrder>> GetOrders(string currencyPairCode = null, bool? isBid = null, int? count = null,
             string userId = null, OrderStatusRequest status = OrderStatusRequest.Active,
             DateTimeOffset? from = null, DateTimeOffset? to = null)
         {
@@ -37,7 +37,7 @@ namespace TLabs.ExchangeSdk.Trading
             return result;
         }
 
-        public async Task<List<MarketdataDeal>> GetDeals(List<string> userIds,
+        public async Task<List<MarketdataDeal>> GetDeals(List<string> userIds = null,
             string currencyPairCode = null, DateTimeOffset? sinceDate = null, DateTimeOffset? toDate = null,
             int pageNumber = 1, int pageSize = 20, bool includeOrders = false)
         {
