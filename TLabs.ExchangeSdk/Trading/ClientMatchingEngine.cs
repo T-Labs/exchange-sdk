@@ -13,5 +13,15 @@ namespace TLabs.ExchangeSdk.Trading
         public ClientMatchingEngine()
         {
         }
+
+        /// <summary>Get active order (if exists in pools), without deals</summary>
+        /// <param name="currencyPairCode">Optional, if null then all pools will be checked</param>
+        public async Task<MatchingOrder> GetActiveOrder(Guid id, string currencyPairCode = null)
+        {
+            var result = await $"trading/order/{id}".InternalApi()
+                .SetQueryParam("currencyPairCode", currencyPairCode)
+                .GetJsonAsync<MatchingOrder>();
+            return result;
+        }
     }
 }
