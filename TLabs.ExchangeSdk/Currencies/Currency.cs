@@ -1,5 +1,11 @@
 namespace TLabs.ExchangeSdk.Currencies
 {
+    public class CurrencyCryptoAdapter
+    {
+        public string CurrencyCode { get; set; }
+        public string CryptoAdapterId { get; set; }
+    }
+
     public class Currency
     {
         /// <summary>

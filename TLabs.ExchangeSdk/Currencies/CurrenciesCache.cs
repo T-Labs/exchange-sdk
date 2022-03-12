@@ -14,8 +14,9 @@ namespace TLabs.ExchangeSdk.Currencies
     {
         private readonly ILogger _logger;
 
-        private List<Currency> _currencies = new List<Currency>();
-        private List<CurrencyPair> _currencyPairs = new List<CurrencyPair>();
+        private List<Currency> _currencies = new();
+        private List<CurrencyPair> _currencyPairs = new();
+        private Dictionary<string, List<string>> _currencyCryptoAdapters = new();
 
         /// <summary>
         /// Use for rounding commissions, quote amounts, deposits, withdrawals
@@ -70,7 +71,12 @@ namespace TLabs.ExchangeSdk.Currencies
             return currency;
         }
 
-        public string GetAdapterId(string currencyCode) => GetCurrency(currencyCode).CryptoAdapterId;
+        [Obsolete("Use GetAdapterIds()")]
+        public string GetAdapterId(string currencyCode) => _currencyCryptoAdapters == null
+            ? GetCurrency(currencyCode).CryptoAdapterId
+            : GetAdapterIds(currencyCode).FirstOrDefault(); 
+
+        public List<string> GetAdapterIds(string currencyCode) => _currencyCryptoAdapters.GetValueOrDefault(currencyCode, new());
 
         public int GetBalanceDigits(string currencyCode) => GetCurrency(currencyCode).Digits;
 
@@ -83,38 +89,26 @@ namespace TLabs.ExchangeSdk.Currencies
 
         #region Load methods
 
-        public void SetCurrencies(List<Currency> currencies)
+        public void SetCurrenciesInfo(CurrenciesInfo currenciesInfo)
         {
-            if (currencies != null)
-                _currencies = currencies;
+            if (currenciesInfo == null)
+                return;
+            _currencies = currenciesInfo.Currencies;
+            _currencyPairs = currenciesInfo.CurrencyPairs;
+            _currencyCryptoAdapters = currenciesInfo.CurrencyCryptoAdapters;
         }
 
-        public void SetCurrencyPairs(List<CurrencyPair> currencyPairs)
-        {
-            if (currencyPairs != null)
-                _currencyPairs = currencyPairs;
-        }
-
-        private async Task<List<Currency>> LoadCurrencies()
+        private async Task<CurrenciesInfo> LoadCurrenciesInfo()
         {
             var result = await $"depository/currencies".InternalApi()
-                .GetJsonAsync<List<Currency>>().GetQueryResult();
-            return result.Data;
-        }
-
-        private async Task<List<CurrencyPair>> LoadCurrencyPairs()
-        {
-            var result = await $"depository/currency-pairs".InternalApi()
-                .GetJsonAsync<List<CurrencyPair>>().GetQueryResult();
+                .GetJsonAsync<CurrenciesInfo>().GetQueryResult();
             return result.Data;
         }
 
         public async Task LoadData(int countAttempts = 0)
         {
-            var currencies = await LoadCurrencies();
-            SetCurrencies(currencies);
-            var currencyPairs = await LoadCurrencyPairs();
-            SetCurrencyPairs(currencyPairs);
+            var currencies = await LoadCurrenciesInfo();
+            SetCurrenciesInfo(currencies);
 
             if (!IsLoaded)
             {
