@@ -10,6 +10,6 @@ namespace TLabs.ExchangeSdk.Currencies
     {
         public List<Currency> Currencies { get; set; }
         public List<CurrencyPair> CurrencyPairs { get; set; }
-        public Dictionary<string, List<string>> CurrencyCryptoAdapters { get; set; }
+        public List<Adapter> Adapters { get; set; }
     }
 }

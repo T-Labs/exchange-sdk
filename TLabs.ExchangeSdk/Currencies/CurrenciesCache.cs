@@ -16,7 +16,7 @@ namespace TLabs.ExchangeSdk.Currencies
 
         private List<Currency> _currencies = new();
         private List<CurrencyPair> _currencyPairs = new();
-        private Dictionary<string, List<string>> _currencyCryptoAdapters = new();
+        private List<Adapter> _adapters = new();
 
         /// <summary>
         /// Use for rounding commissions, quote amounts, deposits, withdrawals
@@ -70,13 +70,14 @@ namespace TLabs.ExchangeSdk.Currencies
                 _logger.LogError($"CurrenciesCache not found {code}");
             return currency;
         }
+        public List<Adapter> GetAdapters() => _adapters;
 
         [Obsolete("Use GetAdapterIds()")]
-        public string GetAdapterId(string currencyCode) => _currencyCryptoAdapters == null
-            ? GetCurrency(currencyCode).CryptoAdapterId
-            : GetAdapterIds(currencyCode).FirstOrDefault(); 
+        public string GetAdapterId(string currencyCode) =>
+            GetAdapterIds(currencyCode).FirstOrDefault();
 
-        public List<string> GetAdapterIds(string currencyCode) => _currencyCryptoAdapters.GetValueOrDefault(currencyCode, new());
+        public List<string> GetAdapterIds(string currencyCode) =>
+            GetCurrency(currencyCode).CurrencyAdapters.Select(_ => _.AdapterCode).ToList();
 
         public int GetBalanceDigits(string currencyCode) => GetCurrency(currencyCode).Digits;
 
@@ -95,7 +96,7 @@ namespace TLabs.ExchangeSdk.Currencies
                 return;
             _currencies = currenciesInfo.Currencies;
             _currencyPairs = currenciesInfo.CurrencyPairs;
-            _currencyCryptoAdapters = currenciesInfo.CurrencyCryptoAdapters;
+            _adapters = currenciesInfo.Adapters;
         }
 
         private async Task<CurrenciesInfo> LoadCurrenciesInfo()

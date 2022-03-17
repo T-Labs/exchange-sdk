@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace TLabs.ExchangeSdk.Currencies
 {
     public class CurrencyCryptoAdapter
@@ -75,6 +77,7 @@ namespace TLabs.ExchangeSdk.Currencies
         public byte[] LogoImage { get; set; }
         public bool AllowDeposits { get; set; } = true;
         public bool AllowWithdrawals { get; set; } = true;
+        public List<CurrencyAdapter> CurrencyAdapters { get; set; }
 
         /// <summary>
         /// Get gateway serviceId for crypto-adapter of this currency
