@@ -33,5 +33,8 @@ namespace TLabs.ExchangeSdk.Currencies
             new Adapter { Code = "pzm", Name = "Prizm", MainCurrencyCode = "PZM", },
             new Adapter { Code = "advcash", Name = "AdvCash", MainCurrencyCode = null, IsFiat = true, },
         };
+
+        public override string ToString() =>
+            $"{nameof(Adapter)}({Code}, {Name}, MainCurrencyCode:{MainCurrencyCode})";
     }
 }
