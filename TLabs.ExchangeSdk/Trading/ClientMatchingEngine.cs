@@ -14,20 +14,13 @@ namespace TLabs.ExchangeSdk.Trading
         {
         }
 
-        public async Task<List<MatchingOrder>> GetOrders(string currencyPairCode = null,
-            bool? isBid = null, int? count = null,
-            string userId = null, OrderStatusRequest status = OrderStatusRequest.Active,
-            DateTimeOffset? from = null, DateTimeOffset? to = null)
+        /// <summary>Get active order (if exists in pools), without deals</summary>
+        /// <param name="currencyPairCode">Optional, if null then all pools will be checked</param>
+        public async Task<MatchingOrder> GetActiveOrder(Guid id, string currencyPairCode = null)
         {
-            var result = await $"trading/order".InternalApi()
-                .SetQueryParam("currencyPairId", currencyPairCode)
-                .SetQueryParam("isBid", isBid)
-                .SetQueryParam("count", count?.ToString())
-                .SetQueryParam("userId", userId)
-                .SetQueryParam("status", ((int)status).ToString())
-                .SetQueryParam(nameof(from), from?.ToString("o"))
-                .SetQueryParam(nameof(to), to?.ToString("o"))
-                .GetJsonAsync<List<MatchingOrder>>();
+            var result = await $"trading/order/{id}".InternalApi()
+                .SetQueryParam("currencyPairCode", currencyPairCode)
+                .GetJsonAsync<MatchingOrder>();
             return result;
         }
     }

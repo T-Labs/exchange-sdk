@@ -14,9 +14,9 @@ namespace TLabs.ExchangeSdk.Trading
         {
         }
 
-        public async Task<List<MarketdataOrder>> GetOrders(string currencyPairCode, bool? isBid = null, int? count = null,
+        public async Task<List<MarketdataOrder>> GetOrders(string currencyPairCode = null, bool? isBid = null, int? count = null,
             string userId = null, OrderStatusRequest status = OrderStatusRequest.Active,
-            DateTimeOffset? from = null, DateTimeOffset? to = null)
+            DateTimeOffset? from = null, DateTimeOffset? to = null, bool includeDeals = false)
         {
             var result = await $"marketdata/orders".InternalApi()
                 .SetQueryParam("currencyPairId", currencyPairCode)
@@ -26,6 +26,7 @@ namespace TLabs.ExchangeSdk.Trading
                 .SetQueryParam("status", ((int)status).ToString())
                 .SetQueryParam(nameof(from), from?.ToString("o"))
                 .SetQueryParam(nameof(to), to?.ToString("o"))
+                .SetQueryParam(nameof(includeDeals), includeDeals)
                 .GetJsonAsync<List<MarketdataOrder>>();
             return result;
         }
@@ -34,6 +35,28 @@ namespace TLabs.ExchangeSdk.Trading
         {
             var result = await $"marketdata/orders/order/{id}".InternalApi()
                 .GetJsonAsync<MarketdataOrder>();
+            return result;
+        }
+
+        public async Task<List<MarketdataDeal>> GetDeals(List<string> userIds = null,
+            string currencyPairCode = null, DateTimeOffset? sinceDate = null, DateTimeOffset? toDate = null,
+            int pageNumber = 1, int pageSize = 20, bool includeOrders = false)
+        {
+            var result = await $"marketdata/orders/dealresponses".InternalApi()
+                .SetQueryParam("currencyPairId", currencyPairCode)
+                .SetQueryParam(nameof(sinceDate), sinceDate?.ToString("o"))
+                .SetQueryParam(nameof(toDate), toDate?.ToString("o"))
+                .SetQueryParam(nameof(pageNumber), pageNumber)
+                .SetQueryParam(nameof(pageSize), pageSize)
+                .SetQueryParam(nameof(includeOrders), includeOrders)
+                .PostJsonAsync<List<MarketdataDeal>>(userIds);
+            return result;
+        }
+
+        public async Task<MarketdataDeal> GetDeal(Guid id)
+        {
+            var result = await $"marketdata/deals/{id}".InternalApi()
+                .GetJsonAsync<MarketdataDeal>();
             return result;
         }
 
