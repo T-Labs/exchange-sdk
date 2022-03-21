@@ -59,10 +59,10 @@ namespace TLabs.ExchangeSdk.Trading
             return (canceled, orders.Count);
         }
 
-        public async Task<List<VolumeLimit>> GetOrderVolumeLimits()
+        public async Task<List<OrderLimit>> GetOrderVolumeLimits()
         {
             var result = await "brokerage/currencies/limit".InternalApi()
-                .GetJsonAsync<List<VolumeLimit>>();
+                .GetJsonAsync<List<OrderLimit>>();
             return result;
         }
     }
