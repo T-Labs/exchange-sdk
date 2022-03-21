@@ -101,7 +101,7 @@ namespace TLabs.ExchangeSdk.Currencies
 
         private async Task<CurrenciesInfo> LoadCurrenciesInfo()
         {
-            var result = await $"depository/currencies".InternalApi()
+            var result = await $"depository/currencies/info".InternalApi()
                 .GetJsonAsync<CurrenciesInfo>().GetQueryResult();
             return result.Data;
         }
