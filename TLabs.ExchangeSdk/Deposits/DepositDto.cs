@@ -19,6 +19,7 @@ namespace TLabs.ExchangeSdk.Deposits
         public ClientType ClientType { get; set; } = ClientType.User;
         public decimal Amount { get; set; }
         public string CurrencyCode { get; set; }
+        public string AdapterCode { get; set; }
         public string TxId { get; set; }
         public string SenderId { get; set; }
         public string SenderName { get; set; }
@@ -29,7 +30,7 @@ namespace TLabs.ExchangeSdk.Deposits
         /// <summary>Calculated in Deposits module</summary>
         public CommissionValue Commission { get; set; }
 
-        public override string ToString() => $"{nameof(DepositDto)}({Type}, {Amount} {CurrencyCode}, {ClientType} {UserId}, " +
+        public override string ToString() => $"{nameof(DepositDto)}({Type}, {Amount} {CurrencyCode} {AdapterCode}, {ClientType} {UserId}, " +
             $"TxId:{TxId}, {Commission?.ToString() ?? ""} )";
     }
 }
