@@ -70,7 +70,16 @@ namespace TLabs.ExchangeSdk.Currencies
                 _logger.LogError($"CurrenciesCache not found {code}");
             return currency;
         }
-        public List<Adapter> GetAdapters() => _adapters;
+
+        public List<Adapter> GetAdapters(bool onlyAvailable = true)
+        {
+            if (onlyAvailable)
+            {
+                var currencyCodes = _currencies.Select(_ => _.Code).ToHashSet();
+                return _adapters.Where(_ => _.MainCurrencyCode == null || currencyCodes.Contains(_.MainCurrencyCode)).ToList();
+            }
+            return _adapters;
+        }
 
         [Obsolete("Use GetAdapterIds()")]
         public string GetAdapterId(string currencyCode) =>

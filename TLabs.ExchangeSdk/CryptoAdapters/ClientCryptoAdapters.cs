@@ -23,11 +23,22 @@ namespace TLabs.ExchangeSdk.CryptoAdapters
             _clientCryptoNownodes = clientCryptoNownodes;
         }
 
+        [Obsolete("Use GetDepositAddress() with adapterCode")]
         public async Task<AddressModel> GetWalletAddress(string currencyCode, string userId,
             ClientType clientType = ClientType.User)
         {
             string adapterId = _currenciesCache.GetAdapterId(currencyCode);
             var result = await $"{adapterId}/address".InternalApi()
+                .SetQueryParam(nameof(userId), userId)
+                .SetQueryParam(nameof(clientType), clientType)
+                .GetJsonAsync<AddressModel>();
+            return result;
+        }
+
+        public async Task<AddressModel> GetDepositAddress(string adapterCode, string userId,
+            ClientType clientType = ClientType.User)
+        {
+            var result = await $"{adapterCode}/address".InternalApi()
                 .SetQueryParam(nameof(userId), userId)
                 .SetQueryParam(nameof(clientType), clientType)
                 .GetJsonAsync<AddressModel>();
@@ -62,20 +73,18 @@ namespace TLabs.ExchangeSdk.CryptoAdapters
 
         #region ETH
 
-        public async Task<QueryResult<string>> ResendTransaction(string currencyCode, string txHash, decimal? newGasPrice = null)
+        public async Task<QueryResult<string>> ResendTransaction(string adapterCode, string txHash, decimal? newGasPrice = null)
         {
-            string adapterId = _currenciesCache.GetAdapterId(currencyCode);
-            string url = $"{adapterId}/transactions/resend/{txHash}" +
+            string url = $"{adapterCode}/transactions/resend/{txHash}" +
                 $"?newGasPrice={newGasPrice?.ToString(CultureInfo.InvariantCulture)}";
             var result = await url.InternalApi().PostJsonAsync<string>(null).GetQueryResult();
             Console.WriteLine($"ResendTransaction txHash change: {txHash} -> {result.Data}  {result.ErrorsString}");
             return result;
         }
 
-        public async Task<QueryResult<string>> CancelTransaction(string currencyCode, string txHash, decimal? newGasPrice = null)
+        public async Task<QueryResult<string>> CancelTransaction(string adapterCode, string txHash, decimal? newGasPrice = null)
         {
-            string adapterId = _currenciesCache.GetAdapterId(currencyCode);
-            var result = await $"{adapterId}/transactions/cancel/{txHash}?newGasPrice={newGasPrice}".InternalApi()
+            var result = await $"{adapterCode}/transactions/cancel/{txHash}?newGasPrice={newGasPrice}".InternalApi()
                 .PostJsonAsync<string>(null).GetQueryResult();
             Console.WriteLine($"CancelTransaction txHash change: {txHash} -> {result.Data}  {result.ErrorsString}");
             return result;
