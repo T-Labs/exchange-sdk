@@ -62,6 +62,12 @@ namespace TLabs.ExchangeSdk.CryptoAdapters
             return result;
         }
 
+        public async Task<AddressOwner> GetAddressOwner(string address, string adapterCode)
+        {
+            var result = await $"{adapterCode}/address/{address}/own".InternalApi().GetJsonAsync<AddressOwner>();
+            return result;
+        }
+
         public async Task<decimal> GetDepositMinAmount(string currencyCode)
         {
             string adapterId = _currenciesCache.GetAdapterId(currencyCode);
