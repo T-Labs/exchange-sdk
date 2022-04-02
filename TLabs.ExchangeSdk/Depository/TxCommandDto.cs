@@ -29,6 +29,8 @@ namespace TLabs.ExchangeSdk.Depository
         [Required]
         public string CurrencyCode { get; set; }
 
+        public string AdapterCode { get; set; }
+
         [Obsolete("Use FromUserId/ToUserId")]
         public string UserId { get; set; }
         [Obsolete("Use FromClientType/ToClientType")]

@@ -19,6 +19,7 @@ namespace TLabs.ExchangeSdk.Trading
             DateTimeOffset? from = null, DateTimeOffset? to = null, bool includeDeals = false)
         {
             var result = await $"marketdata/orders".InternalApi()
+                .WithTimeout(TimeSpan.FromMinutes(10))
                 .SetQueryParam("currencyPairId", currencyPairCode)
                 .SetQueryParam("isBid", isBid)
                 .SetQueryParam("count", count?.ToString())
@@ -43,6 +44,7 @@ namespace TLabs.ExchangeSdk.Trading
             int pageNumber = 1, int pageSize = 20, bool includeOrders = false)
         {
             var result = await $"marketdata/orders/dealresponses".InternalApi()
+                .WithTimeout(TimeSpan.FromMinutes(10))
                 .SetQueryParam("currencyPairId", currencyPairCode)
                 .SetQueryParam(nameof(sinceDate), sinceDate?.ToString("o"))
                 .SetQueryParam(nameof(toDate), toDate?.ToString("o"))

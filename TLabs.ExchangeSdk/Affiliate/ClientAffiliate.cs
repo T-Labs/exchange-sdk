@@ -21,6 +21,7 @@ namespace TLabs.ExchangeSdk.Affiliate
         public async Task<List<Profit>> GetProfits(List<Guid> ids)
         {
             var result = await $"affiliate/profits".InternalApi()
+                .WithTimeout(TimeSpan.FromMinutes(10))
                 .PostJsonAsync<List<Profit>>(ids);
             return result;
         }

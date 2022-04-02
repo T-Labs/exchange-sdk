@@ -32,6 +32,7 @@ namespace TLabs.ExchangeSdk.Verification
                 return new();
             string url = $"verification/verifications?verificationIds={string.Join(",", userIds ?? new())}";
             var result = await url.InternalApi()
+                .WithTimeout(TimeSpan.FromMinutes(10))
                 .GetJsonAsync<List<VerificationUser>>();
             return result;
         }
@@ -67,6 +68,7 @@ namespace TLabs.ExchangeSdk.Verification
         public async Task<List<string>> GetCitizenshipUserIds(int citizenshipId)
         {
             return await $"verification/citizenships/{citizenshipId}/user-ids".InternalApi()
+                .WithTimeout(TimeSpan.FromMinutes(10))
                 .GetJsonAsync<List<string>>();
         }
     }

@@ -35,6 +35,7 @@ namespace TLabs.ExchangeSdk.Users
             string merchantId = null, bool? otonFlag = null, bool? emailConfirmed = false)
         {
             var users = await "userprofiles/users".InternalApi()
+                .WithTimeout(TimeSpan.FromMinutes(10))
                 .SetQueryParam(nameof(minRegisterDate), minRegisterDate?.ToString("o"))
                 .SetQueryParam(nameof(page), page.ToString())
                 .SetQueryParam(nameof(pageSize), pageSize.ToString())
@@ -51,6 +52,7 @@ namespace TLabs.ExchangeSdk.Users
             if (email.NotHasValue())
                 return null;
             var result = await $"userprofiles/identityusers/byemail/{email}".InternalApi()
+                .WithTimeout(TimeSpan.FromMinutes(10))
                 .GetJsonAsync<List<ApplicationUser>>();
             return result;
         }
@@ -58,6 +60,7 @@ namespace TLabs.ExchangeSdk.Users
         public async Task<List<ApplicationUser>> GetUsersByRestriction(string restrictionName)
         {
             var result = await $"userprofiles/users/get-users-by-restriction/{restrictionName}".InternalApi()
+                .WithTimeout(TimeSpan.FromMinutes(10))
                 .GetJsonAsync<List<ApplicationUser>>();
             return result;
         }
@@ -65,6 +68,7 @@ namespace TLabs.ExchangeSdk.Users
         public async Task<List<string>> GetUserIdsByMerchantId(string merchantId)
         {
             var result = await $"userprofiles/users/ids-by-merchant".InternalApi()
+                .WithTimeout(TimeSpan.FromMinutes(10))
                 .SetQueryParam(nameof(merchantId), merchantId)
                 .GetJsonAsync<List<string>>();
             return result;

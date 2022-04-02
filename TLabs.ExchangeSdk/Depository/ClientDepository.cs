@@ -29,6 +29,7 @@ namespace TLabs.ExchangeSdk.Depository
                 command.TxId = command.TxId?.Trim().NullIfEmpty();
             }
             var result = await $"depository/transaction/commands".InternalApi()
+                .WithTimeout(TimeSpan.FromMinutes(10))
                 .SetQueryParam(nameof(checkBalances), checkBalances)
                 .SetQueryParam(nameof(use2StepTransfer), use2StepTransfer)
                 .PostJsonAsync(txCommands).GetQueryResult();
@@ -44,6 +45,7 @@ namespace TLabs.ExchangeSdk.Depository
             bool includeRollbacks = false)
         {
             var request = "depository/transaction".InternalApi()
+                .WithTimeout(TimeSpan.FromMinutes(10))
                 .SetQueryParam(nameof(userId), userId)
                 .SetQueryParam(nameof(currencyCode), currencyCode)
                 .SetQueryParam(nameof(from), from?.ToString("o"))
@@ -59,6 +61,7 @@ namespace TLabs.ExchangeSdk.Depository
         public async Task<List<TransactionDto>> GetTransactionsByActionIds(List<string> actionIds)
         {
             var result = await $"depository/transaction/actionid-transactions".InternalApi()
+                .WithTimeout(TimeSpan.FromMinutes(10))
                 .PostJsonAsync<List<TransactionDto>>(actionIds);
             return result;
         }
@@ -67,6 +70,7 @@ namespace TLabs.ExchangeSdk.Depository
             List<string> accountChartCodes = null, DateTimeOffset? toDate = null)
         {
             var request = $"depository/balances".InternalApi()
+                .WithTimeout(TimeSpan.FromMinutes(10))
                 .SetQueryParam(nameof(userId), userId)
                 .SetQueryParam(nameof(currencyCode), currencyCode)
                 .SetQueryParam(nameof(accountChartCodes), accountChartCodes)
@@ -79,6 +83,7 @@ namespace TLabs.ExchangeSdk.Depository
             IEnumerable<string> currencyCodes = null, DateTimeOffset? toDate = null)
         {
             var request = $"depository/user/{userId}/balances".InternalApi()
+                .WithTimeout(TimeSpan.FromMinutes(10))
                 .SetQueryParam(nameof(toDate), toDate?.ToString("o"))
                 .SetQueryParam(nameof(currencyCodes), currencyCodes);
             var result = await request.GetJsonAsync<UserBalancesDto>();
@@ -115,6 +120,7 @@ namespace TLabs.ExchangeSdk.Depository
             if (userId.NotHasValue())
                 throw new ArgumentNullException(nameof(userId));
             var result = await $"depository/nullification".InternalApi()
+                .WithTimeout(TimeSpan.FromMinutes(10))
                 .SetQueryParam(nameof(userId), userId)
                 .PostJsonAsync(null);
             return result;
