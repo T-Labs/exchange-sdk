@@ -11,6 +11,7 @@ namespace TLabs.ExchangeSdk.Currencies
         public string CurrencyCode { get; set; }
         public string AdapterCode { get; set; }
         public string TokenAddress { get; set; }
+        public Adapter Adapter { get; set; }
 
         public override string ToString() =>
             $"{nameof(CurrencyAdapter)}({CurrencyCode} - {AdapterCode}, Address:{TokenAddress})";
