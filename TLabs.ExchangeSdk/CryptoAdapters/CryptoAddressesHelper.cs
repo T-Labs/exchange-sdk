@@ -11,13 +11,9 @@ namespace TLabs.ExchangeSdk.CryptoAdapters
     {
         public static bool IsValidAddress(string adapterCode)
         {
-            return adapterCode switch
-            {
-                "btc" => new Regex("/^0x[a-fA-F0-9]{40}$/").IsMatch(adapterCode),
-                "eth" => new Regex("/^0x[a-fA-F0-9]{40}$/").IsMatch(adapterCode),
-                "trx" => new Regex("T[A-Za-z1-9]{33}").IsMatch(adapterCode),
-                _ => false
-            };
+            return new Regex("^0x[a-fA-F0-9]{40}$").IsMatch(adapterCode) ? true
+                : new Regex("^0x[a-fA-F0-9]{40}$").IsMatch(adapterCode) ? true // eth bsc
+                : new Regex("T[A-Za-z1-9]{33}").IsMatch(adapterCode) ? true : false; // trx
         }
     }
 }
