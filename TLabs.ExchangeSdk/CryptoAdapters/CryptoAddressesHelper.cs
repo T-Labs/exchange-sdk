@@ -21,7 +21,6 @@ namespace TLabs.ExchangeSdk.CryptoAdapters
             "del" => new Regex("^dx1[ac-hj-np-z0-9]{38}$").IsMatch(adapterAddress),
             "pzm" => new Regex("^PRIZM-[A-Z2-9]{4}-[A-Z2-9]{4}-[A-Z2-9]{4}-[A-Z2-9]{5}$").IsMatch(adapterAddress),
             "umi" => new Regex("^umi1[ac-np-z0-9]{58}$").IsMatch(adapterAddress),
-            "advcash" => new Regex("").IsMatch(adapterAddress),//?
             _ => false
         };
     }
