@@ -18,8 +18,6 @@ namespace TLabs.ExchangeSdk.Currencies
         public string MainCurrencyCode { get; set; }
         public bool IsFiat { get; set; }
 
-        public List<CurrencyAdapter> CurrencyAdapters { get; set; }
-
         public static Adapter AdapterBtc = new() { Code = "btc", Name = "Bitcoin", MainCurrencyCode = "BTC", };
         public static Adapter AdapterDash = new() { Code = "dash", Name = "Dash", MainCurrencyCode = "DASH", };
         public static Adapter AdapterDoge = new() { Code = "doge", Name = "Dogecoin", MainCurrencyCode = "DOGE", };
