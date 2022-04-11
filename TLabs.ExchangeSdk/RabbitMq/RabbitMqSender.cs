@@ -52,5 +52,17 @@ namespace TLabs.ExchangeSdk.RabbitMq
                 return QueryResult.CreateFailed($"{e.Message}\n  {requestInfo}");
             }
         }
+
+        public void SendEmailToAdmins(string subject, string text)
+        {
+            Send(RabbitMqQueues.Notifications, new NotificationEmail
+            {
+                To = "",
+                Subject = subject,
+                HtmlBody = text,
+                Body = text.Replace("<br/>", "\n"),
+                UserGroup = UserGroup.Admins,
+            });
+        }
     }
 }
