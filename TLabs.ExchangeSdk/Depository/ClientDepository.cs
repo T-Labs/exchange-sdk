@@ -98,6 +98,15 @@ namespace TLabs.ExchangeSdk.Depository
             return result;
         }
 
+        public async Task<List<TurnoversDto>> GetTurnoversDtos(string userId = null, DateTimeOffset? toDate = null)
+        {
+            var result = await $"depository/turnovers".InternalApi()
+                .SetQueryParam(nameof(userId), userId)
+                .SetQueryParam(nameof(toDate), toDate?.ToString("o"))
+                .GetJsonAsync<List<TurnoversDto>>();
+            return result;
+        }
+
         public async Task<string> OrderBlockOrUnblock(DepositoryReservationType type, string actionId, ClientType clientType, string userId,
             decimal amount, string currencyCode)
         {
