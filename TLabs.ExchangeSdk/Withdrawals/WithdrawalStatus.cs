@@ -1,3 +1,4 @@
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace TLabs.ExchangeSdk.Withdrawals
@@ -30,6 +31,21 @@ namespace TLabs.ExchangeSdk.Withdrawals
 
         public WithdrawalStatus()
         {
+        }
+
+        public static WithdrawalStatus GetWithdrawalStatusByCode(int code)
+        {
+            return code switch
+            {
+                1 => new WithdrawalStatus(1, "Создано", "Created"),
+                2 => new WithdrawalStatus(2, "Ожидание подтверждения", "AwaitsApproval"),
+                10 => new WithdrawalStatus(10, "Отложено", nameof(Postponed)),
+                3 => new WithdrawalStatus(3, "Отправлено", "Sent"),
+                4 => new WithdrawalStatus(4, "Ошибка", "Error"),
+                5 => new WithdrawalStatus(5, "Подтверждено сетью", "Confirmed"),
+                6 => new WithdrawalStatus(6, "Отклонено", "Declined"),
+                _ => throw new ArgumentException("Incorrect Code!")
+            };
         }
 
         public static readonly WithdrawalStatus Created = new WithdrawalStatus(1, "Создано", "Created");
