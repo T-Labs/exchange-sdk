@@ -24,6 +24,7 @@ namespace TLabs.ExchangeSdk
             services.AddTransient<LiquidityImport.ClientLiquidityMain>();
             services.AddTransient<Ordering.ClientOrdering>();
             services.AddTransient<RabbitMq.RabbitMqSender>();
+            services.AddTransient<Staking.ClientStaking>();
             services.AddTransient<Trading.ClientMarketdata>();
             services.AddTransient<Trading.ClientMatchingEngine>();
             services.AddTransient<Trading.ClientTradingBrokerage>();
