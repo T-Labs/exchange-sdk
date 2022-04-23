@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using TLabs.ExchangeSdk.Depository;
 
 namespace TLabs.ExchangeSdk.Staking
 {
@@ -20,4 +21,21 @@ namespace TLabs.ExchangeSdk.Staking
         /// </summary>
         LockedForStepn = 20,
     };
+
+    public static class StakingTypeExtensions
+    {
+        public static AccountChart GetAccountChartLocked(this StakingType type) => type switch
+        {
+            StakingType.Locked => AccountChart.StakingLocked,
+            StakingType.LockedForStepn => AccountChart.StakingLockedForStepn,
+            _ => throw new ArgumentException($"InvalidStakingType {type}"),
+        };
+
+        public static AccountChart GetAccountChartLockedWithdrawal(this StakingType type) => type switch
+        {
+            StakingType.Locked => AccountChart.StakingLockedWithdrawal,
+            StakingType.LockedForStepn => AccountChart.StakingLockedForStepnWithdrawal,
+            _ => throw new ArgumentException($"InvalidStakingType {type}"),
+        };
+    }
 }

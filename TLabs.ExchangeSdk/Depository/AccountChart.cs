@@ -53,8 +53,11 @@ namespace TLabs.ExchangeSdk.Depository
 
         public static readonly AccountChart StakingBlockchainAccruals = new AccountChart("851", "Стейкинг Начисления в блокчейне", nameof(StakingBlockchainAccruals));
         public static readonly AccountChart StakingFundProfits = new AccountChart("852", "Стейкинг фонд прибыли", nameof(StakingFundProfits));
+
         public static readonly AccountChart StakingLocked = new AccountChart("855", "Стейкинг замороженные средства", nameof(StakingLocked));
         public static readonly AccountChart StakingLockedWithdrawal = new AccountChart("856", "Стейкинг замороженные средства на выводе", nameof(StakingLockedWithdrawal));
+        public static readonly AccountChart StakingLockedForStepn = new AccountChart("857", "Стейкинг STEPN замороженные средства", nameof(StakingLockedForStepn));
+        public static readonly AccountChart StakingLockedForStepnWithdrawal = new AccountChart("858", "Стейкинг STEPN замороженные средства на выводе", nameof(StakingLockedForStepnWithdrawal));
 
         public static readonly AccountChart CurrencyListingPaymentBlocked = new AccountChart("871", "CurrencyListing блокировка оплаты", nameof(CurrencyListingPaymentBlocked));
 

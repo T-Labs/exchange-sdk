@@ -68,5 +68,14 @@ namespace TLabs.ExchangeSdk.Staking
                 _logger.LogError($"{result.ErrorsString} for {dto}");
             return result;
         }
+
+        public async Task<decimal> GetTotalLockedAmount(StakingType type, string currencyCode)
+        {
+            var result = await $"depository/stakes/total-locked".InternalApi()
+                .SetQueryParam(nameof(type), (int)type)
+                .SetQueryParam(nameof(currencyCode), currencyCode)
+                .GetJsonAsync<decimal>();
+            return result;
+        }
     }
 }
