@@ -39,6 +39,10 @@ namespace TLabs.ExchangeSdk.Users
         /// <summary>If true then other users can specify this user's id in MerchantId</summary>
         public bool IsMerchant { get; set; }
 
+        public string PublicId { get; set; }
+
+        public string PrivateId { get; set; }
+
         public bool TwoFactorEmail {
             get => FlagsHelper.IsSet(TwoFactorMethods, TwoFactorMethods.Email);
             set => TwoFactorMethods =
