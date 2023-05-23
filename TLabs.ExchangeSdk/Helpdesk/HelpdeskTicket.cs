@@ -25,12 +25,12 @@ namespace TLabs.ExchangeSdk.Helpdesk
         /// <summary>
         /// Date ticket created
         /// </summary>
-        public DateTime Created { get; set; }
+        public DateTimeOffset Created { get; set; }
 
         /// <summary>
         /// Date ticket updated
         /// </summary>
-        public DateTime Updated { get; set; }
+        public DateTimeOffset Updated { get; set; }
 
         /// <summary>
         /// Status
@@ -43,11 +43,6 @@ namespace TLabs.ExchangeSdk.Helpdesk
         public string UserId { get; set; }
 
         /// <summary>
-        /// Ticket creator UserName
-        /// </summary>
-        public string UserName { get; set; }
-
-        /// <summary>
         /// Last Message
         /// </summary>
         public string LastMessage { get; set; }
@@ -55,40 +50,10 @@ namespace TLabs.ExchangeSdk.Helpdesk
         /// <summary>
         /// History
         /// </summary>
-        public List<HelpdeskTicketHistory> History { get; set; }
+        public List<HelpdeskTicketMessage> History { get; set; }
     }
 
-    public class HelpdeskTicketHistory
-    {
-        /// <summary>
-        /// History id
-        /// </summary>
-        public Guid Id { get; set; }
+    
 
-        /// <summary>
-        /// Ticket message
-        /// </summary>
-        public string Message { get; set; }
-
-        /// <summary>
-        /// Is Admin Reply
-        /// </summary>
-        public bool IsReply { get; set; }
-
-        /// <summary>
-        /// Date message created
-        /// </summary>
-        public DateTime Created { get; set; }
-
-        public HelpdeskTicket HelpdeskTicket { get; set; }
-    }
-
-    public enum HelpdeskTicketStatus
-    {
-        Created = 0,
-
-        InProgress = 1,
-
-        Closed = 2
-    }
+    
 }
