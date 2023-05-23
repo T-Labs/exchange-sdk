@@ -52,8 +52,4 @@ namespace TLabs.ExchangeSdk.Helpdesk
         /// </summary>
         public List<HelpdeskTicketMessage> History { get; set; }
     }
-
-    
-
-    
 }

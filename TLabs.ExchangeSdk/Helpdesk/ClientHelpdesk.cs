@@ -2,7 +2,6 @@ using Flurl.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Threading.Tasks;
 using TLabs.DotnetHelpers;
 
@@ -35,11 +34,10 @@ namespace TLabs.ExchangeSdk.Helpdesk
                 .PostJsonAsync(ticket);
         }
 
-        public async Task AddMessage(Guid ticketId, bool isAdminReply, [FromBody] string text = null)
+        public async Task AddMessage(AddTicketMessageDto model)
         {
-            await $"helpdesk/helpdesk/{ticketId}/message".InternalApi()
-                .SetQueryParam(nameof(isAdminReply), isAdminReply)
-                .PostJsonAsync(text);
+            await $"helpdesk/helpdesk/message".InternalApi()
+                .PostJsonAsync(model);
         }
 
         public async Task ChangeStatus(Guid ticketId, HelpdeskTicketStatus status)
