@@ -7,6 +7,7 @@ namespace TLabs.ExchangeSdk.Trading
         /// <summary>Becomes order Id in matching-engine</summary>
         public string ActionId { get; set; }
 
+        public bool IsMarket { get; set; }
         public bool IsBid { get; set; }
         public string CurrencyPairCode { get; set; }
         public decimal Amount { get; set; }
@@ -23,6 +24,7 @@ namespace TLabs.ExchangeSdk.Trading
             return new Order
             {
                 Id = Guid.Parse(ActionId),
+                IsMarket = IsMarket,
                 IsBid = IsBid,
                 Price = Price,
                 Amount = Amount,
@@ -34,7 +36,7 @@ namespace TLabs.ExchangeSdk.Trading
             };
         }
 
-        public override string ToString() => $"{nameof(OrderCreateRequest)}({(IsBid ? "Bid" : "Ask")} " +
+        public override string ToString() => $"{nameof(OrderCreateRequest)}({(IsBid ? "Bid" : "Ask")} {(IsMarket ? "Market" : "")}" +
             $"{CurrencyPairCode}, Amount:{Amount}, Price:{Price}, {ClientType} {UserId}, ActionId: {ActionId})";
     }
 }

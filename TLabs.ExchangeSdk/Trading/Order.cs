@@ -18,7 +18,7 @@ namespace TLabs.ExchangeSdk.Trading
         }
 
         public Guid Id { get; set; }
-
+        public bool IsMarket { get; set; }
         public ClientType ClientType { get; set; }
 
         [Required]
