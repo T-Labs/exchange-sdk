@@ -38,15 +38,21 @@ namespace TLabs.ExchangeSdk.Trading
         /// <summary>Amount that was blocked in Depository for a market bid</summary>
         public decimal MarketBidTotalBlocked { get; set; }
 
+        /// <summary>Amount that was fulfilled in MatchingEngine for a market bid</summary>
+        public decimal MarketBidTotalFulfilled { get; set; }
+
         /// <summary>How many times was this order sent to other exchange</summary>
         public int LiquidityBlocksCount { get; set; }
 
         public decimal AvailableAmount => Amount - Fulfilled - Blocked;
 
         /// <summary>Completely fullfilled or canceled (won't be in matching pool anymore)</summary>
-        public bool IsActive => !IsCanceled && Fulfilled < Amount;
+        public bool IsActive => !IsCanceled && Fulfilled < Amount
+            && (!IsMarketBid || MarketBidTotalFulfilled < MarketBidTotalBlocked);
 
         public bool IsLocal => Exchange == Exchange.Local;
+
+        public bool IsMarketBid => IsMarket && IsBid;
 
         public string Status => (Fulfilled == 0 && !IsCanceled) ? "Created"
             : (Fulfilled == Amount) ? "Completed"
@@ -62,7 +68,7 @@ namespace TLabs.ExchangeSdk.Trading
             return isOrder1FromDealsBot == isOrder2FromDealsBot;
         }
 
-        public override string ToString() => $"{nameof(Order)}{(IsBid ? "Bid" : "Ask")}({Id} {CurrencyPairCode} " +
+        public override string ToString() => $"{nameof(Order)}{(IsMarket ? "Market" : "")}{(IsBid ? "Bid" : "Ask")}({Id} {CurrencyPairCode} " +
             $"created:{DateCreated} {Status} {(IsCanceled ? "canceled" : "")}, {ClientType} {UserId}, {Exchange} " +
             $"Available:{AvailableAmount} filled:{Fulfilled}+{Blocked}/{Amount} for price:{Price})";
 
