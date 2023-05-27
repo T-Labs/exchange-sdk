@@ -19,6 +19,9 @@ namespace TLabs.ExchangeSdk.Trading
         /// <summary>Local, unless order is from LiquidtyImport</summary>
         public Exchange Exchange { get; set; } = Exchange.Local;
 
+        /// <summary>Amount that was blocked in Depository for a market bid</summary>
+        public decimal MarketBidTotalBlocked { get; set; }
+
         public Order GetOrder()
         {
             return new Order
@@ -33,6 +36,7 @@ namespace TLabs.ExchangeSdk.Trading
                 UserId = UserId,
                 ClientType = ClientType,
                 Exchange = Exchange,
+                MarketBidTotalBlocked = MarketBidTotalBlocked,
             };
         }
 

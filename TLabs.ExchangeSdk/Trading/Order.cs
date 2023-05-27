@@ -35,6 +35,9 @@ namespace TLabs.ExchangeSdk.Trading
         /// <summary>Original order exchange</summary>
         public Exchange Exchange { get; set; } = Exchange.Local;
 
+        /// <summary>Amount that was blocked in Depository for a market bid</summary>
+        public decimal MarketBidTotalBlocked { get; set; }
+
         /// <summary>How many times was this order sent to other exchange</summary>
         public int LiquidityBlocksCount { get; set; }
 

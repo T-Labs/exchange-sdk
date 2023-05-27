@@ -67,5 +67,19 @@ namespace TLabs.ExchangeSdk.Trading
             var quotes = await $"marketdata/quotes".InternalApi().GetJsonAsync<List<Quote>>();
             return quotes;
         }
+
+        public async Task<List<PriceSpread>> GetPriceSpreads(List<string> currencyPairCodes)
+        {
+            var result = await $"marketdata/orders/spreads/{string.Join(",", currencyPairCodes)}"
+                .InternalApi().GetJsonAsync<List<PriceSpread>>();
+            return result;
+        }
+
+        public async Task<PriceSpread> GetPriceSpread(string currencyPairCode)
+        {
+            var priceSpread = (await GetPriceSpreads(new List<string>() { currencyPairCode }))
+                .First(_ => _.CurrencyPair == currencyPairCode);
+            return priceSpread;
+        }
     }
 }
