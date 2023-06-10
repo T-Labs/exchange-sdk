@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 using TLabs.DotnetHelpers;
+using TLabs.ExchangeSdk.Currencies;
 
 namespace TLabs.ExchangeSdk.Depository
 {
@@ -107,8 +108,8 @@ namespace TLabs.ExchangeSdk.Depository
             return result;
         }
 
-        public async Task<string> OrderBlockOrUnblock(DepositoryReservationType type, string actionId, ClientType clientType, string userId,
-            decimal amount, string currencyCode)
+        public async Task<string> OrderBlockOrUnblock(DepositoryReservationType type, string actionId,
+            ClientType clientType, string userId, decimal amount, string currencyCode)
         {
             var dto = new DepositoryReservationDto
             {
@@ -134,5 +135,41 @@ namespace TLabs.ExchangeSdk.Depository
                 .PostJsonAsync(null);
             return result;
         }
+
+        #region Currencies
+
+        public async Task<Currency> CreateCurrency(Currency currency)
+        {
+            var result = await $"depository/currencies".InternalApi()
+                .PostJsonAsync<Currency>(currency);
+            return result;
+        }
+
+        public async Task<CurrencyPair> CreateCurrencyPair(CurrencyPair pair)
+        {
+            var result = await $"depository/currency-pairs".InternalApi()
+                .PostJsonAsync<CurrencyPair>(pair);
+            return result;
+        }
+
+
+        public async Task CreateOrUpdateCurrencyAdapter(CurrencyAdapter currencyAdapter)
+        {
+            await $"depository/currency-adapters".InternalApi()
+                .PostJsonAsync<CurrencyPair>(currencyAdapter);
+        }
+
+        /// <summary>
+        /// Delete test currencies and their transactions
+        /// Test currencies are currencies with codes starting with "Test_"
+        /// </summary>
+        public async Task<IFlurlResponse> DeleteTestCurrenciesPairsTransactions()
+        {
+            var result = await $"depository/currencies/test".InternalApi()
+                .DeleteAsync();
+            return result;
+        }
+
+        #endregion Currencies
     }
 }

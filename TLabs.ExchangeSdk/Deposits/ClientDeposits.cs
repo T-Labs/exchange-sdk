@@ -17,5 +17,18 @@ namespace TLabs.ExchangeSdk.Deposits
                 .PostJsonAsync(deposit);
             return result;
         }
+
+        public async Task<IFlurlResponse> AddAdminDeposit(string userId, decimal amount, string currencyCode)
+        {
+            var result = await Deposit(new DepositDto
+            {
+                Type = DepositType.FromAdmin,
+                Amount = amount,
+                CurrencyCode = currencyCode,
+                UserId = userId,
+                TxId = $"{nameof(DepositType.FromAdmin)}_{Guid.NewGuid()}",
+            });
+            return result;
+        }
     }
 }
