@@ -23,5 +23,14 @@ namespace TLabs.ExchangeSdk.Trading
                 .GetJsonAsync<MatchingOrder>();
             return result;
         }
+
+        /// <summary>Delete events for test CurrencyPair</summary>
+        public async Task<IFlurlResponse> DeleteTestData(string currencyPairCode)
+        {
+            var result = await $"trading/order/test-data".InternalApi()
+                .SetQueryParam("currencyPairCode", currencyPairCode)
+                .DeleteAsync();
+            return result;
+        }
     }
 }

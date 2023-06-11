@@ -81,5 +81,14 @@ namespace TLabs.ExchangeSdk.Trading
                 .First(_ => _.CurrencyPair == currencyPairCode);
             return priceSpread;
         }
+
+        /// <summary>Delete events for test CurrencyPair</summary>
+        public async Task<IFlurlResponse> DeleteTestData(string currencyPairCode)
+        {
+            var result = await $"marketdata/orders/test-data".InternalApi()
+                .SetQueryParam("currencyPairCode", currencyPairCode)
+                .DeleteAsync();
+            return result;
+        }
     }
 }
