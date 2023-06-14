@@ -30,5 +30,13 @@ namespace TLabs.ExchangeSdk.Commissions
                 .GetJsonAsync<CommissionValue>();
             return commission;
         }
+
+        /// <summary>Update currencies and create missing commission values</summary>
+        public async Task<IFlurlResponse> NotifyCurrenciesChange()
+        {
+            var result = await $"commissions/currencies/reload".InternalApi()
+                .PostAsync();
+            return result;
+        }
     }
 }
