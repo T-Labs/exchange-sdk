@@ -65,5 +65,8 @@ namespace TLabs.ExchangeSdk.Trading
                 .GetJsonAsync<List<OrderLimit>>();
             return result;
         }
+
+        public async Task<string> Healthcheck() =>
+            await $"brokerage/healthcheck".InternalApi().GetStringAsync();
     }
 }
