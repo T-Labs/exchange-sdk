@@ -105,5 +105,8 @@ namespace TLabs.ExchangeSdk.Users
                 .GetJsonAsync<bool>();
             return result;
         }
+
+        public async Task<string> Healthcheck() =>
+            await $"userprofiles/healthcheck".InternalApi().GetStringAsync();
     }
 }

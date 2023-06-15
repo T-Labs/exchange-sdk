@@ -26,5 +26,8 @@ namespace TLabs.ExchangeSdk.Ordering
             return await $"dealending/orders/cancel".InternalApi()
                 .PostJsonAsync(order);
         }
+
+        public async Task<string> Healthcheck() =>
+            await $"dealending/healthcheck".InternalApi().GetStringAsync();
     }
 }

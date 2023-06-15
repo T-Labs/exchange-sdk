@@ -30,5 +30,8 @@ namespace TLabs.ExchangeSdk.Deposits
             });
             return result;
         }
+
+        public async Task<string> Healthcheck() =>
+            await $"cashrefill/healthcheck".InternalApi().GetStringAsync();
     }
 }

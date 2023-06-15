@@ -71,5 +71,8 @@ namespace TLabs.ExchangeSdk.Verification
                 .WithTimeout(TimeSpan.FromMinutes(10))
                 .GetJsonAsync<List<string>>();
         }
+
+        public async Task<string> Healthcheck() =>
+            await $"verification/healthcheck".InternalApi().GetStringAsync();
     }
 }

@@ -90,5 +90,8 @@ namespace TLabs.ExchangeSdk.Trading
                 .DeleteAsync();
             return result;
         }
+
+        public async Task<string> Healthcheck() =>
+            await $"marketdata/healthcheck".InternalApi().GetStringAsync();
     }
 }

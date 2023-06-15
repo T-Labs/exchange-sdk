@@ -38,5 +38,8 @@ namespace TLabs.ExchangeSdk.Commissions
                 .PostAsync();
             return result;
         }
+
+        public async Task<string> Healthcheck() =>
+            await $"commissions/healthcheck".InternalApi().GetStringAsync();
     }
 }

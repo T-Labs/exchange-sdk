@@ -46,5 +46,8 @@ namespace TLabs.ExchangeSdk.Helpdesk
                 .SetQueryParam(nameof(status), (int)status)
                 .PostJsonAsync(null);
         }
+
+        public async Task<string> Healthcheck() =>
+            await $"helpdesk/healthcheck".InternalApi().GetStringAsync();
     }
 }

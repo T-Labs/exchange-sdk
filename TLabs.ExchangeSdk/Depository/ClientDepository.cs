@@ -171,5 +171,8 @@ namespace TLabs.ExchangeSdk.Depository
         }
 
         #endregion Currencies
+       
+        public async Task<string> Healthcheck() =>
+            await $"depository/healthcheck".InternalApi().GetStringAsync();
     }
 }

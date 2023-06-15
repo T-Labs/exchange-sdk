@@ -32,5 +32,8 @@ namespace TLabs.ExchangeSdk.Trading
                 .DeleteAsync();
             return result;
         }
+
+        public async Task<string> Healthcheck() =>
+            await $"trading/healthcheck".InternalApi().GetStringAsync();
     }
 }
