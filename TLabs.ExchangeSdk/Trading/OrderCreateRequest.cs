@@ -40,7 +40,7 @@ namespace TLabs.ExchangeSdk.Trading
             };
         }
 
-        public override string ToString() => $"{nameof(OrderCreateRequest)}({(IsBid ? "Bid" : "Ask")} {(IsMarket ? "Market" : "")}" +
+        public override string ToString() => $"{nameof(OrderCreateRequest)}({(IsMarket ? "Market" : "")}{(IsBid ? "Bid" : "Ask")} " +
             $"{CurrencyPairCode}, Amount:{Amount}, Price:{Price}, {ClientType} {UserId}, ActionId: {ActionId})";
     }
 }

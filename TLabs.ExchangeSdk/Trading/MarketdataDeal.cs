@@ -43,5 +43,9 @@ namespace TLabs.ExchangeSdk.Trading
 
         /// <summary>Buy or Sell type</summary>
         public bool IsBuy { get; set; }
+
+        public override string ToString() => $"{nameof(MatchingDeal)}({DealId}, {DealDateUtc}, Volume:{Volume}, " +
+            $"Price:{Price}, {CurrencyPairId}, " +
+            $"\n{Bid?.ToString() ?? BidId.ToString()} ,\n{Ask?.ToString() ?? AskId.ToString()} )";
     }
 }
