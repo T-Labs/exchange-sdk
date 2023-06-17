@@ -19,6 +19,13 @@ namespace TLabs.ExchangeSdk.Commissions
             return result;
         }
 
+        public async Task<IFlurlResponse> UpdateCommission(Commission commission)
+        {
+            var result = await $"commissions/commission".InternalApi()
+                .PostJsonAsync(commission);
+            return result;
+        }
+
         public async Task<CommissionValue> CalculateCommission(string commissionTypeCode, string currency, decimal amount,
             string userId, string currencyPair = "", bool isAmountAfterCommission = false)
         {
