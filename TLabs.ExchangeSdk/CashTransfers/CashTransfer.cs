@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel.DataAnnotations;
+using TLabs.ExchangeSdk.Depository;
 
 namespace TLabs.ExchangeSdk.CashTransfers
 {
@@ -31,6 +32,9 @@ namespace TLabs.ExchangeSdk.CashTransfers
         public bool IsCanceled => Status == CashTransferStatus.CanceledByUser
             || Status == CashTransferStatus.CanceledByAdmin
             || Status == CashTransferStatus.AutoCanceled;
+
+        public override string ToString() => $"{nameof(CashTransfer)}{(IsDeposit ? "Deposit" : "Withdrawal")}" +
+            $"({Status}, {Amount} {CurrencyCode}, Id:{Id}, user:{UserId}, {DateCreated})";
     }
 
     public enum CashTransferStatus

@@ -37,8 +37,8 @@ namespace TLabs.ExchangeSdk.Depository
             return result;
         }
 
-        public Task<QueryResult> SendTxCommand(TxCommandDto txCommand, bool checkBalances = true)
-            => SendTxCommands(new List<TxCommandDto> { txCommand }, checkBalances);
+        public Task<QueryResult> SendTxCommand(TxCommandDto txCommand, bool checkBalances = true, bool use2StepTransfer = false)
+            => SendTxCommands(new List<TxCommandDto> { txCommand }, checkBalances, use2StepTransfer);
 
         public async Task<PagedList<TransactionDto>> GetTransactions(string userId = null, string currencyCode = null,
             DateTimeOffset? from = null, DateTimeOffset? to = null,
