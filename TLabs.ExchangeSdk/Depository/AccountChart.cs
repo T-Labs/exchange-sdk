@@ -33,19 +33,18 @@ namespace TLabs.ExchangeSdk.Depository
 
         public static readonly AccountChart Deposit = new AccountChart("5", "Введеные средства", nameof(Deposit));
         public static readonly AccountChart DepositAdmin = new AccountChart("51", "Введеные средства админом", nameof(DepositAdmin));
+        public static readonly AccountChart DepositCash = new AccountChart("52", "Введеные средства наличными", nameof(DepositCash));
         public static readonly AccountChart DepositStaking = new AccountChart("54", "Введеные средства стейкингом", nameof(DepositStaking));
         public static readonly AccountChart DepositAirdrop = new AccountChart("53", "Введеные средства аирдропом", nameof(DepositAirdrop));
         public static readonly AccountChart DepositReplacement = new AccountChart("58", "Введеные средства взамен удаленной валюты", nameof(DepositReplacement));
         public static readonly AccountChart DepositCorrection = new AccountChart("59", "Корректировочное пополнение баланса", nameof(DepositCorrection));
 
-        public static readonly AccountChart BlockedForWithdrawn = new AccountChart("6", "Заморозка средств к выводу", nameof(BlockedForWithdrawn));
+        public static readonly AccountChart WithdrawalBlockedTemp = new AccountChart("61", "Заморозка средств к выводу временная", nameof(WithdrawalBlockedTemp));
+        public static readonly AccountChart WithdrawalBlocked = new AccountChart("6", "Заморозка средств к выводу", nameof(WithdrawalBlocked));
+        public static readonly AccountChart WithdrawalBlockCanceledTemp = new AccountChart("63", "Отмена заморозки средств к выводу временная", nameof(WithdrawalBlockCanceledTemp));
+        public static readonly AccountChart WithdrawnTemp = new AccountChart("65", "Выведенные средства временная", nameof(WithdrawnTemp));
         public static readonly AccountChart Withdrawn = new AccountChart("4", "Выведенные средства", nameof(Withdrawn));
-
-        public static readonly AccountChart WithdrawalCashBlockedTemp = new AccountChart("61", "Заморозка средств к наличному выводу временная", nameof(WithdrawalCashBlockedTemp));
-        public static readonly AccountChart WithdrawalCashBlocked = new AccountChart("62", "Заморозка средств к наличному выводу", nameof(WithdrawalCashBlocked));
-        public static readonly AccountChart WithdrawalCashCompletedTemp = new AccountChart("63", "Исполнение наличного вывода временное", nameof(WithdrawalCashCompletedTemp));
-        public static readonly AccountChart WithdrawalCashCompleted = new AccountChart("64", "Исполнение наличного вывода", nameof(WithdrawalCashCompleted));
-        public static readonly AccountChart WithdrawalCashCanceledTemp = new AccountChart("65", "Отмена наличного вывода временная", nameof(WithdrawalCashCanceledTemp));
+        public static readonly AccountChart WithdrawalStockCommissionTemp = new AccountChart("67", "Комиссия успешного вывода временная", nameof(WithdrawalStockCommissionTemp));
 
         public static readonly AccountChart BlockedForExchangeTransfer = new AccountChart("431", "Заморозка средств при ExchangeTransfer", nameof(BlockedForExchangeTransfer));
 
@@ -76,9 +75,9 @@ namespace TLabs.ExchangeSdk.Depository
             Users,
             BlockedForExchangeTransfer,
             BlockedForOrder, BlockedForCancelOrder, BlockedForDeal, OnOrders,
-            BlockedForWithdrawn,
-            WithdrawalCashBlockedTemp, WithdrawalCashBlocked, WithdrawalCashCompletedTemp, WithdrawalCashCanceledTemp,
+            WithdrawalBlockedTemp, WithdrawalBlocked, WithdrawalBlockCanceledTemp, WithdrawnTemp, WithdrawalStockCommissionTemp,
             StakingLocked, StakingLockedWithdrawal,
+            StakingLockedForStepn, StakingLockedForStepnWithdrawal,
             CurrencyListingPaymentBlocked,
             CurrencyOfferingsBlocked, CurrencyOfferingsVesting,
 
@@ -93,9 +92,9 @@ namespace TLabs.ExchangeSdk.Depository
             FundBountyBonusesForDistribution,
             Nullification,
 
-            Deposit, DepositAdmin, DepositStaking, DepositAirdrop, DepositReplacement, DepositCorrection,
+            Deposit, DepositAdmin, DepositCash, DepositStaking, DepositAirdrop, DepositReplacement, DepositCorrection,
 
-            Withdrawn, WithdrawalCashCompleted,
+            Withdrawn,
             ColdWallets,
             NetworkComission, WithdrawalNetworkCommissionFunds,
             NodeAgregationFunds,
@@ -105,7 +104,12 @@ namespace TLabs.ExchangeSdk.Depository
 
         public static readonly List<AccountChart> DepositCharts = new List<AccountChart>
         {
-            Deposit, DepositAdmin, DepositStaking, DepositAirdrop, DepositReplacement, DepositCorrection,
+            Deposit, DepositAdmin, DepositCash, DepositStaking, DepositAirdrop, DepositReplacement, DepositCorrection,
+        };
+
+        public static readonly List<AccountChart> ChartsWithAdapterCode = new List<AccountChart>
+        {
+            Deposit, Withdrawn, NetworkComission,
         };
 
         private AccountChart(string code, string value, string valueKey)

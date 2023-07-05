@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
@@ -32,23 +33,22 @@ namespace TLabs.ExchangeSdk.Depository
         public static readonly TransactionType DepositCorrection = new TransactionType("109", "Корректировочное пополнение баланса", nameof(DepositCorrection));
         public static readonly TransactionType Nullification = new TransactionType("121", "Обнуление баланса", nameof(Nullification));
 
-        public static readonly TransactionType WithdrawalBlock = new TransactionType("06", "Блокировка для вывода", nameof(WithdrawalBlock));
-        public static readonly TransactionType WithdrawalStockCommissionBlock = new TransactionType("061", "Блокировка комиссии биржи для вывода", nameof(WithdrawalStockCommissionBlock));
-        public static readonly TransactionType WithdrawalBlockRollback = new TransactionType("063", "Откат блокировки для вывода", nameof(WithdrawalBlockRollback));
-        public static readonly TransactionType WithdrawalStockCommissionBlockRollback = new TransactionType("064", "Откат блокировки комиссии биржи для вывода", nameof(WithdrawalStockCommissionBlockRollback));
-        public static readonly TransactionType WithdrawalBlockCancel = new TransactionType("065", "Отмена блокировки для вывода", nameof(WithdrawalBlockCancel));
-        public static readonly TransactionType WithdrawalStockCommissionBlockCancel = new TransactionType("066", "Отмена блокировки комиссии биржи для вывода", nameof(WithdrawalStockCommissionBlockCancel));
-        public static readonly TransactionType Withdrawal = new TransactionType("05", "Вывод средств", nameof(Withdrawal));
-        public static readonly TransactionType WithdrawalStockCommission = new TransactionType("062", "Комиссия вывода биржи", nameof(WithdrawalStockCommission));
-        public static readonly TransactionType WithdrawalNetworkCommission = new TransactionType("07", "Комиссия вывода блокчейна", nameof(WithdrawalNetworkCommission));
+        public static readonly TransactionType WithdrawalBlockBegin = new TransactionType("06", "Блокировка для вывода начало", nameof(WithdrawalBlockBegin));
+        public static readonly TransactionType WithdrawalBlockEnd = new TransactionType("0610", "Блокировка для вывода конец", nameof(WithdrawalBlockEnd));
+        public static readonly TransactionType WithdrawalStockCommissionBlockBegin = new TransactionType("061", "Блокировка комиссии биржи для вывода начало", nameof(WithdrawalStockCommissionBlockBegin));
+        public static readonly TransactionType WithdrawalStockCommissionBlockEnd = new TransactionType("0611", "Блокировка комиссии биржи для вывода конец", nameof(WithdrawalStockCommissionBlockEnd));
+        public static readonly TransactionType WithdrawalBlockCancelBegin = new TransactionType("065", "Отмена блокировки для вывода начало", nameof(WithdrawalBlockCancelBegin));
+        public static readonly TransactionType WithdrawalBlockCancelEnd = new TransactionType("0615", "Отмена блокировки для вывода конец", nameof(WithdrawalBlockCancelEnd));
+        public static readonly TransactionType WithdrawalStockCommissionBlockCancelBegin = new TransactionType("066", "Отмена блокировки комиссии вывода начало", nameof(WithdrawalStockCommissionBlockCancelBegin));
+        public static readonly TransactionType WithdrawalStockCommissionBlockCancelEnd = new TransactionType("0616", "Отмена блокировки комиссии вывода конец", nameof(WithdrawalStockCommissionBlockCancelEnd));
+        public static readonly TransactionType WithdrawalBegin = new TransactionType("05", "Вывод средств начало", nameof(WithdrawalBegin));
+        public static readonly TransactionType WithdrawalEnd = new TransactionType("0620", "Вывод средств конец", nameof(WithdrawalEnd));
+        public static readonly TransactionType WithdrawalStockCommissionBegin = new TransactionType("062", "Комиссия вывода биржи начало", nameof(WithdrawalStockCommissionBegin));
+        public static readonly TransactionType WithdrawalStockCommissionEnd = new TransactionType("0612", "Комиссия вывода биржи конец", nameof(WithdrawalStockCommissionEnd));
 
-        public static readonly TransactionType WithdrawalCashBlockBegin = new TransactionType("0601", "Блокировка для вывода наличных начало", nameof(WithdrawalCashBlockBegin));
-        public static readonly TransactionType WithdrawalCashBlockEnd = new TransactionType("0602", "Блокировка для вывода наличных конец", nameof(WithdrawalCashBlockEnd));
-        public static readonly TransactionType WithdrawalCashCompletionBegin = new TransactionType("0603", "Исполнение вывода наличных начало", nameof(WithdrawalCashCompletionBegin));
-        public static readonly TransactionType WithdrawalCashCompletionEnd = new TransactionType("0604", "Исполнение вывода наличных конец", nameof(WithdrawalCashCompletionEnd));
-        public static readonly TransactionType WithdrawalCashCancelBegin = new TransactionType("0605", "Отмена вывода наличных начало", nameof(WithdrawalCashCancelBegin));
-        public static readonly TransactionType WithdrawalCashCancelEnd = new TransactionType("0606", "Отмена вывода наличных конец", nameof(WithdrawalCashCancelEnd));
-        public static readonly TransactionType WithdrawalCashCommission = new TransactionType("0609", "Комиссия вывода наличных начало", nameof(WithdrawalCashCommission));
+        public static readonly TransactionType WithdrawalNetworkCommission = new TransactionType("07", "Комиссия вывода блокчейна", nameof(WithdrawalNetworkCommission));
+        [Obsolete] public static readonly TransactionType WithdrawalBlockRollback = new TransactionType("063", "Откат блокировки для вывода", nameof(WithdrawalBlockRollback));
+        [Obsolete] public static readonly TransactionType WithdrawalStockCommissionBlockRollback = new TransactionType("064", "Откат блокировки комиссии биржи для вывода", nameof(WithdrawalStockCommissionBlockRollback));
 
         public static readonly TransactionType OrderingBegin = new TransactionType("201", "Начало выставления ордера", nameof(OrderingBegin));
         public static readonly TransactionType OrderingEnd = new TransactionType("211", "Подтверждение выставления ордера", nameof(OrderingEnd));
@@ -139,13 +139,14 @@ namespace TLabs.ExchangeSdk.Depository
             Deposit, DepositAdmin, DepositStaking, DepositAirdrop, DepositReplacement, DepositCorrection,
             Nullification,
 
-            WithdrawalBlock, WithdrawalStockCommissionBlock,
+            WithdrawalBlockBegin, WithdrawalBlockEnd,
+            WithdrawalStockCommissionBlockBegin, WithdrawalStockCommissionEnd,
+            WithdrawalBlockCancelBegin, WithdrawalBlockCancelEnd,
+            WithdrawalStockCommissionBlockCancelBegin, WithdrawalStockCommissionBlockCancelEnd,
+            WithdrawalBegin, WithdrawalEnd,
+            WithdrawalStockCommissionBegin, WithdrawalStockCommissionEnd,
+            WithdrawalNetworkCommission,
             WithdrawalBlockRollback, WithdrawalStockCommissionBlockRollback,
-            WithdrawalBlockCancel, WithdrawalStockCommissionBlockCancel,
-            Withdrawal, WithdrawalStockCommission, WithdrawalNetworkCommission,
-
-            WithdrawalCashBlockBegin, WithdrawalCashBlockEnd, WithdrawalCashCompletionBegin, WithdrawalCashCompletionEnd,
-            WithdrawalCashCancelBegin, WithdrawalCashCancelEnd, WithdrawalCashCommission,
 
             TransferToColdWallet,
 
