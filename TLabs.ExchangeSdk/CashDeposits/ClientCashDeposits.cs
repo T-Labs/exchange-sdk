@@ -14,11 +14,11 @@ namespace TLabs.ExchangeSdk.CashDeposits
     {
         const string baseUrl = "withdrawals/cash-deposits";
 
-        public async Task<List<CashDeposit>> GetList(bool? isDeposit, string currencyCode)
+        public async Task<List<CashDeposit>> GetList(string currencyCode = null, string userId = null)
         {
             var result = await $"{baseUrl}".InternalApi()
-                .SetQueryParam(nameof(isDeposit), isDeposit)
                 .SetQueryParam(nameof(currencyCode), currencyCode.NullIfEmpty())
+                .SetQueryParam(nameof(userId), userId.NullIfEmpty())
                 .GetJsonAsync<List<CashDeposit>>();
             return result;
         }

@@ -32,6 +32,7 @@ namespace TLabs.ExchangeSdk
             services.AddTransient<Trading.ClientTradingBrokerage>();
             services.AddTransient<Users.ClientUsers>();
             services.AddTransient<Verification.ClientVerifications>();
+            services.AddTransient<Withdrawals.ClientWithdrawals>();
 
             // needs activation in Program.cs and action /currencies/reload
             services.AddSingleton<Currencies.CurrenciesCache>(); 
