@@ -7,38 +7,37 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 using TLabs.DotnetHelpers;
-using TLabs.ExchangeSdk.CashTransfers;
 
-namespace TLabs.ExchangeSdk.CashTransfers
+namespace TLabs.ExchangeSdk.CashDeposits
 {
-    public class ClientCashTransfers
+    public class ClientCashDeposits
     {
-        const string baseUrl = "withdrawals/cash-transfers";
+        const string baseUrl = "withdrawals/cash-deposits";
 
-        public async Task<List<CashTransfer>> GetList(bool? isDeposit, string currencyCode)
+        public async Task<List<CashDeposit>> GetList(bool? isDeposit, string currencyCode)
         {
             var result = await $"{baseUrl}".InternalApi()
                 .SetQueryParam(nameof(isDeposit), isDeposit)
                 .SetQueryParam(nameof(currencyCode), currencyCode.NullIfEmpty())
-                .GetJsonAsync<List<CashTransfer>>();
+                .GetJsonAsync<List<CashDeposit>>();
             return result;
         }
 
-        public async Task<CashTransfer> GetItem(Guid id)
+        public async Task<CashDeposit> GetItem(Guid id)
         {
             var result = await $"{baseUrl}/{id}".InternalApi()
-                .GetJsonAsync<CashTransfer>();
+                .GetJsonAsync<CashDeposit>();
             return result;
         }
 
-        public async Task<CashTransfer> Create(CashTransfer model)
+        public async Task<CashDeposit> Create(CashDeposit model)
         {
             var result = await $"{baseUrl}".InternalApi()
-                .PostJsonAsync<CashTransfer>(model);
+                .PostJsonAsync<CashDeposit>(model);
             return result;
         }
 
-        public async Task<IFlurlResponse> ChangeStatus(Guid id, CashTransferStatus newStatus)
+        public async Task<IFlurlResponse> ChangeStatus(Guid id, CashDepositStatus newStatus)
         {
             var result = await $"{baseUrl}/{id}/status".InternalApi()
                 .SetQueryParam(nameof(newStatus), newStatus)
