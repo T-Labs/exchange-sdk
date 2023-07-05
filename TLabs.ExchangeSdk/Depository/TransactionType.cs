@@ -42,6 +42,14 @@ namespace TLabs.ExchangeSdk.Depository
         public static readonly TransactionType WithdrawalStockCommission = new TransactionType("062", "Комиссия вывода биржи", nameof(WithdrawalStockCommission));
         public static readonly TransactionType WithdrawalNetworkCommission = new TransactionType("07", "Комиссия вывода блокчейна", nameof(WithdrawalNetworkCommission));
 
+        public static readonly TransactionType WithdrawalCashBlockBegin = new TransactionType("0601", "Блокировка для вывода наличных начало", nameof(WithdrawalCashBlockBegin));
+        public static readonly TransactionType WithdrawalCashBlockEnd = new TransactionType("0602", "Блокировка для вывода наличных конец", nameof(WithdrawalCashBlockEnd));
+        public static readonly TransactionType WithdrawalCashCompletionBegin = new TransactionType("0603", "Исполнение вывода наличных начало", nameof(WithdrawalCashCompletionBegin));
+        public static readonly TransactionType WithdrawalCashCompletionEnd = new TransactionType("0604", "Исполнение вывода наличных конец", nameof(WithdrawalCashCompletionEnd));
+        public static readonly TransactionType WithdrawalCashCancelBegin = new TransactionType("0605", "Отмена вывода наличных начало", nameof(WithdrawalCashCancelBegin));
+        public static readonly TransactionType WithdrawalCashCancelEnd = new TransactionType("0606", "Отмена вывода наличных конец", nameof(WithdrawalCashCancelEnd));
+        public static readonly TransactionType WithdrawalCashCommission = new TransactionType("0609", "Комиссия вывода наличных начало", nameof(WithdrawalCashCommission));
+
         public static readonly TransactionType OrderingBegin = new TransactionType("201", "Начало выставления ордера", nameof(OrderingBegin));
         public static readonly TransactionType OrderingEnd = new TransactionType("211", "Подтверждение выставления ордера", nameof(OrderingEnd));
         public static readonly TransactionType OrderCancellingBegin = new TransactionType("202", "Начало отмены ордера", nameof(OrderCancellingBegin));
@@ -135,6 +143,9 @@ namespace TLabs.ExchangeSdk.Depository
             WithdrawalBlockRollback, WithdrawalStockCommissionBlockRollback,
             WithdrawalBlockCancel, WithdrawalStockCommissionBlockCancel,
             Withdrawal, WithdrawalStockCommission, WithdrawalNetworkCommission,
+
+            WithdrawalCashBlockBegin, WithdrawalCashBlockEnd, WithdrawalCashCompletionBegin, WithdrawalCashCompletionEnd,
+            WithdrawalCashCancelBegin, WithdrawalCashCancelEnd, WithdrawalCashCommission,
 
             TransferToColdWallet,
 

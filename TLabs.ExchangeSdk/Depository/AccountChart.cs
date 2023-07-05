@@ -41,6 +41,12 @@ namespace TLabs.ExchangeSdk.Depository
         public static readonly AccountChart BlockedForWithdrawn = new AccountChart("6", "Заморозка средств к выводу", nameof(BlockedForWithdrawn));
         public static readonly AccountChart Withdrawn = new AccountChart("4", "Выведенные средства", nameof(Withdrawn));
 
+        public static readonly AccountChart WithdrawalCashBlockedTemp = new AccountChart("61", "Заморозка средств к наличному выводу временная", nameof(WithdrawalCashBlockedTemp));
+        public static readonly AccountChart WithdrawalCashBlocked = new AccountChart("62", "Заморозка средств к наличному выводу", nameof(WithdrawalCashBlocked));
+        public static readonly AccountChart WithdrawalCashCompletedTemp = new AccountChart("63", "Исполнение наличного вывода временное", nameof(WithdrawalCashCompletedTemp));
+        public static readonly AccountChart WithdrawalCashCompleted = new AccountChart("64", "Исполнение наличного вывода", nameof(WithdrawalCashCompleted));
+        public static readonly AccountChart WithdrawalCashCanceledTemp = new AccountChart("65", "Отмена наличного вывода временная", nameof(WithdrawalCashCanceledTemp));
+
         public static readonly AccountChart BlockedForExchangeTransfer = new AccountChart("431", "Заморозка средств при ExchangeTransfer", nameof(BlockedForExchangeTransfer));
 
         public static readonly AccountChart BlockedForOrder = new AccountChart("7", "Заморозка средств на ордер", nameof(BlockedForOrder));
@@ -71,6 +77,7 @@ namespace TLabs.ExchangeSdk.Depository
             BlockedForExchangeTransfer,
             BlockedForOrder, BlockedForCancelOrder, BlockedForDeal, OnOrders,
             BlockedForWithdrawn,
+            WithdrawalCashBlockedTemp, WithdrawalCashBlocked, WithdrawalCashCompletedTemp, WithdrawalCashCanceledTemp,
             StakingLocked, StakingLockedWithdrawal,
             CurrencyListingPaymentBlocked,
             CurrencyOfferingsBlocked, CurrencyOfferingsVesting,
@@ -88,7 +95,7 @@ namespace TLabs.ExchangeSdk.Depository
 
             Deposit, DepositAdmin, DepositStaking, DepositAirdrop, DepositReplacement, DepositCorrection,
 
-            Withdrawn,
+            Withdrawn, WithdrawalCashCompleted,
             ColdWallets,
             NetworkComission, WithdrawalNetworkCommissionFunds,
             NodeAgregationFunds,
