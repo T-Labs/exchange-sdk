@@ -25,5 +25,19 @@ namespace TLabs.ExchangeSdk.Withdrawals
                 .GetJsonAsync<List<Withdrawal>>();
             return result;
         }
+
+        public async Task<Withdrawal> GetWithdrawal(Guid id)
+        {
+            var result = await $"{baseUrl}/{id}".InternalApi()
+                .GetJsonAsync<Withdrawal>();
+            return result;
+        }
+
+        public async Task<IFlurlResponse> CancelWithdrawal(Guid id)
+        {
+            var result = await $"{baseUrl}/{id}".InternalApi()
+                .DeleteAsync();
+            return result;
+        }
     }
 }
