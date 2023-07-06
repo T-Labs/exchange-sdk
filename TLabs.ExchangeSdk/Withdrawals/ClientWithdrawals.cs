@@ -1,10 +1,6 @@
 using Flurl.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
-using System.Net.Http;
 using System.Threading.Tasks;
 using TLabs.DotnetHelpers;
 
@@ -12,7 +8,7 @@ namespace TLabs.ExchangeSdk.Withdrawals
 {
     public class ClientWithdrawals
     {
-        const string baseUrl = "withdrawals/withdrawal";
+        private const string baseUrl = "withdrawals/withdrawal";
 
         public async Task<List<Withdrawal>> GetWithdrawals(int? statusId = null, WithdrawalType? withdrawalType = null,
             string currencyCode = null, string userId = null)
