@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace TLabs.ExchangeSdk.Withdrawals
 {
-    internal class WithdrawalConfirmationDto
+    public class WithdrawalConfirmationDto
     {
         public Guid TransactionId { get; set; }
 
