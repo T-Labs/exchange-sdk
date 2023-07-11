@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using TLabs.DotnetHelpers;
+using TLabs.ExchangeSdk.CryptoAdapters;
 
 namespace TLabs.ExchangeSdk.Withdrawals
 {
@@ -33,6 +34,13 @@ namespace TLabs.ExchangeSdk.Withdrawals
         {
             var result = await $"{baseUrl}/approve/{id}/{allowErrorStatus}".InternalApi()
                 .PostAsync();
+            return result;
+        }
+
+        public async Task<IFlurlResponse> FinishWithdrawal(WithdrawalAdapterConfirmation dto)
+        {
+            var result = await $"{baseUrl}/finish".InternalApi()
+                .PostJsonAsync(dto);
             return result;
         }
 
