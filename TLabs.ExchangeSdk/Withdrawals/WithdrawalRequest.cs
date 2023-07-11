@@ -11,7 +11,6 @@ namespace TLabs.ExchangeSdk.Withdrawals
         public string UserId { get; set; }
 
         /// <summary> Blockchain address for withdrawal </summary>
-        [Required]
         public string Address { get; set; }
 
         /// <summary> Public key of node's address, required for Prizm (PZM) </summary>

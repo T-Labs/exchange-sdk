@@ -10,15 +10,12 @@ namespace TLabs.ExchangeSdk.CashDeposits
         [Key]
         public Guid Id { get; set; }
 
-        [Required]
         public string PublicId { get; set; }
 
         public CashDepositStatus Status { get; set; }
 
-        [Required]
         public string UserId { get; set; }
 
-        [Required]
         public string CurrencyCode { get; set; }
 
         public decimal Amount { get; set; }
