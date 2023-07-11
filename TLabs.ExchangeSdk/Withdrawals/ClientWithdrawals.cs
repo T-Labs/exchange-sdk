@@ -29,6 +29,13 @@ namespace TLabs.ExchangeSdk.Withdrawals
             return result;
         }
 
+        public async Task<IFlurlResponse> ApproveWithdrawal(Guid id, bool allowErrorStatus = false)
+        {
+            var result = await $"{baseUrl}/approve/{id}/{allowErrorStatus}".InternalApi()
+                .PostAsync();
+            return result;
+        }
+
         public async Task<IFlurlResponse> CancelWithdrawal(Guid id)
         {
             var result = await $"{baseUrl}/{id}".InternalApi()
