@@ -19,6 +19,10 @@ namespace TLabs.ExchangeSdk.CashDeposits
         public string CurrencyCode { get; set; }
 
         public decimal Amount { get; set; }
+
+        public decimal FeeAmount { get; set; }
+        public string FeeCurrencyCode { get; set; }
+
         public DateTimeOffset DateCreated { get; set; }
         public DateTimeOffset DateUpdated { get; set; }
 
