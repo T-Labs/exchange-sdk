@@ -2,6 +2,7 @@ using Flurl.Http;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using TLabs.DotnetHelpers;
@@ -47,7 +48,7 @@ namespace TLabs.ExchangeSdk.CryptoAdapters
 
         public async Task<AdapterInfo> GetAdapterInfo(string mainCurrencyCode, string nownodesApiKey = null)
         {
-            string adapterId = _currenciesCache.GetAdapterId(mainCurrencyCode);
+            string adapterId = _currenciesCache.GetAdapterIds(mainCurrencyCode).First();
             var cancelToken = new CancellationTokenSource(TimeSpan.FromSeconds(5)).Token;
             var result = await $"{adapterId}/adapter-info".InternalApi()
                 .GetJsonAsync<AdapterInfo>(cancelToken);
@@ -75,6 +76,34 @@ namespace TLabs.ExchangeSdk.CryptoAdapters
                 .GetStringAsync();
             decimal result = Convert.ToDecimal(resultStr);
             return result;
+        }
+
+        /// <summary>Get total balance of all node wallets</summary>
+        public async Task<QueryResult<decimal>> GetTotalBalance(string currencyCode, string adapterCode)
+        {
+            var cancelToken = new CancellationTokenSource(TimeSpan.FromSeconds(5)).Token;
+            var result = await $"{adapterCode}/nodebalance?currencyCode={currencyCode}".InternalApi()
+                .GetStringAsync(cancelToken).GetQueryResult();
+            if (!result.Succeeded)
+                return QueryResult<decimal>.CreateFailed(result);
+            bool isParsed = decimal.TryParse(result.Data, out decimal resultDecimal);
+            return isParsed
+                ? QueryResult<decimal>.CreateSucceeded(resultDecimal)
+                : QueryResult<decimal>.CreateFailedLogic($"ParsingError {result.Data}");
+        }
+
+        /// <summary>Get total balance of all cold wallets</summary>
+        public async Task<QueryResult<decimal>> GetColdWalletsBalance(string currencyCode, string adapterCode)
+        {
+            var cancelToken = new CancellationTokenSource(TimeSpan.FromSeconds(5)).Token;
+            var result = await $"{adapterCode}/cold-wallets-balance?currencyCode={currencyCode}".InternalApi()
+                .GetStringAsync(cancelToken).GetQueryResult();
+            if (!result.Succeeded)
+                return QueryResult<decimal>.CreateFailed(result);
+            bool isParsed = decimal.TryParse(result.Data, out decimal resultDecimal);
+            return isParsed
+                ? QueryResult<decimal>.CreateSucceeded(resultDecimal)
+                : QueryResult<decimal>.CreateFailedLogic($"ParsingError {result.Data}");
         }
 
         #region ETH
