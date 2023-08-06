@@ -32,6 +32,7 @@ namespace TLabs.ExchangeSdk
             services.AddTransient<Trading.ClientMatchingEngine>();
             services.AddTransient<Trading.ClientTradingBrokerage>();
             services.AddTransient<Users.ClientUsers>();
+            services.AddTransient<Users.IIPService>();
             services.AddTransient<Verification.ClientVerifications>();
             services.AddTransient<Withdrawals.ClientWithdrawals>();
 
