@@ -1,14 +1,13 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using RabbitMQ.Client;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using TLabs.DotnetHelpers;
+using TLabs.ExchangeSdk.Users;
 
 namespace TLabs.ExchangeSdk.RabbitMq
 {
@@ -53,9 +52,25 @@ namespace TLabs.ExchangeSdk.RabbitMq
             }
         }
 
-        public void SendEmailToAdmins(string subject, string text)
+        public QueryResult SendEmailTemplate(string email, string templateName, Dictionary<string, string> arguments = null,
+            string language = "en", UserGroup userGroup = UserGroup.SingleUser)
         {
-            Send(RabbitMqQueues.Notifications, new NotificationEmail
+            NotificationEmailTemplate emailTemplateMessage = new NotificationEmailTemplate
+            {
+                UserGroup = userGroup,
+                TemplateName = templateName,
+                Locale = language,
+                To = email,
+                Arguments = arguments ?? new(),
+            };
+
+            var result = Send(RabbitMqQueues.Notifications, emailTemplateMessage);
+            return result;
+        }
+
+        public QueryResult SendEmailToAdmins(string subject, string text)
+        {
+            return Send(RabbitMqQueues.Notifications, new NotificationEmail
             {
                 To = "",
                 Subject = subject,
@@ -63,6 +78,29 @@ namespace TLabs.ExchangeSdk.RabbitMq
                 Body = text.Replace("<br/>", "\n"),
                 UserGroup = UserGroup.Admins,
             });
+        }
+
+        public QueryResult SendSms(string phone, string message)
+        {
+            var sms = new NotificationSMS
+            {
+                Phone = phone,
+                Text = message
+            };
+            return Send(RabbitMqQueues.Notifications, sms);
+        }
+
+        public QueryResult NotifyAdminsAboutLogInError(ApplicationUser user, string ip, bool isLockSucceeded)
+        {
+            DateTime time = DateTime.UtcNow;
+            string text = "";
+            if (isLockSucceeded)
+                text += $"The following admin failed to log in and was blocked:";
+            else
+                text += $"The following admin failed to log in, and system wasn't able to block him:";
+            text += $" <br/><br/>User Id: {user.Id}<br/>Username: {user.UserName}<br/>User Email: {user.Email}<br/> Ip:{ip}<br/>Date: {time.ToString("G")}";
+            string subject = "Stock.All: Admin failed to log in";
+            return SendEmailToAdmins(subject, text);
         }
     }
 }
