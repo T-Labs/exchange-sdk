@@ -1,4 +1,7 @@
+using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 
 namespace TLabs.ExchangeSdk.Withdrawals
 {
@@ -49,5 +52,13 @@ namespace TLabs.ExchangeSdk.Withdrawals
 
         /// <summary>canceled</summary>
         public static readonly WithdrawalStatus Declined = new WithdrawalStatus(6, "Отклонено", "Declined");
+
+        public static readonly List<WithdrawalStatus> All = new List<WithdrawalStatus>
+        {
+            Created, AwaitsApproval, Postponed, Sent, Error, Confirmed, Declined
+        };
+
+        public static WithdrawalStatus GetWithdrawalStatusByCode(int code)
+            => All.First(_ => _.Code == code);
     }
 }
