@@ -27,11 +27,12 @@ namespace TLabs.ExchangeSdk.Commissions
         }
 
         public async Task<CommissionValue> CalculateCommission(string commissionTypeCode, string currency, decimal amount,
-            string userId, string currencyPair = "", bool isAmountAfterCommission = false)
+            string userId, string adapterCode = null, string currencyPair = "", bool isAmountAfterCommission = false)
         {
             string url = $"commissions/commission/calculate/{commissionTypeCode}/{currency}/" +
                 $"{amount.ToString(CultureInfo.InvariantCulture)}/{userId}";
             var commission = await url.InternalApi()
+                .SetQueryParam(nameof(adapterCode), adapterCode)
                 .SetQueryParam(nameof(currencyPair), currencyPair)
                 .SetQueryParam(nameof(isAmountAfterCommission), isAmountAfterCommission)
                 .GetJsonAsync<CommissionValue>();
