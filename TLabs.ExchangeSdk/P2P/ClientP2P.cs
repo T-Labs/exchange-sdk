@@ -30,7 +30,7 @@ public class ClientP2P
         return await request.GetJsonAsync<List<Order>>();
     }
 
-    public async Task<List<Order>> GetOrder(Guid orderId)
+    public async Task<Order> GetOrder(Guid orderId)
     {
         return await $"p2p/orders/{orderId}".InternalApi()
             .GetJsonAsync();
@@ -44,7 +44,7 @@ public class ClientP2P
 
     public async Task<IFlurlResponse> CancelOrder(Guid orderId)
     {
-        return await $"p2p/orders".InternalApi()
+        return await $"p2p/orders/{orderId}".InternalApi()
             .PatchJsonAsync(orderId);
     }
 
@@ -53,7 +53,7 @@ public class ClientP2P
         return await $"p2p/deals".InternalApi()
             .GetJsonAsync();
     }
-    public async Task<List<Deal>> GetDeal(Guid dealId)
+    public async Task<Deal> GetDeal(Guid dealId)
     {
         return await $"p2p/deals/{dealId}".InternalApi()
             .GetJsonAsync();
@@ -67,7 +67,7 @@ public class ClientP2P
 
     public async Task<IFlurlResponse> CancelDeal(Guid dealId)
     {
-        return await $"p2p/deals".InternalApi()
+        return await $"p2p/deals/{dealId}".InternalApi()
             .PatchJsonAsync(dealId);
     }
 }

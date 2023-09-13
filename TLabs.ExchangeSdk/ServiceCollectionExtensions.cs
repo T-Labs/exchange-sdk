@@ -35,6 +35,7 @@ namespace TLabs.ExchangeSdk
             services.AddTransient<Users.IIPService, Users.IPService>();
             services.AddTransient<Verification.ClientVerifications>();
             services.AddTransient<Withdrawals.ClientWithdrawals>();
+            services.AddTransient<P2P.ClientP2P>();
 
             // needs activation in Program.cs and action /currencies/reload
             services.AddSingleton<Currencies.CurrenciesCache>(); 

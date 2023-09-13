@@ -26,5 +26,3 @@ public enum OrderStatus
     Active = 10,
     Closed = 20,
 }
-
-
