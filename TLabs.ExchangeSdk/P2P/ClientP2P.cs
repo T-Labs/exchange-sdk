@@ -9,10 +9,25 @@ namespace TLabs.ExchangeSdk.P2P;
 
 public class ClientP2P
 {
-    public async Task<List<Order>> GetOrders()
+    public async Task<List<Order>> GetOrders(string currencyCode = null,
+        int? paymentMethod = null,
+        bool? isBuyingOnExchange = null,
+        string userId = null,
+        OrderStatus? status = null,
+        DateTimeOffset? dateFrom = null,
+        DateTimeOffset? dateTo = null)
     {
-        return await $"p2p/orders".InternalApi()
-            .GetJsonAsync();
+        var request = $"p2p/orders".InternalApi();
+
+        request = request.SetQueryParam("currencyCode", currencyCode);
+        request = request.SetQueryParam("paymentMethod", paymentMethod);
+        request = request.SetQueryParam("isBuyingOnExchange", isBuyingOnExchange);
+        request = request.SetQueryParam("userId", userId);
+        request = request.SetQueryParam("status", status);
+        request = request.SetQueryParam("dateFrom", dateFrom?.ToString("o"));
+        request = request.SetQueryParam("dateTo", dateTo?.ToString("o"));
+
+        return await request.GetJsonAsync<List<Order>>();
     }
 
     public async Task<List<Order>> GetOrder(Guid orderId)
@@ -32,6 +47,7 @@ public class ClientP2P
         return await $"p2p/orders".InternalApi()
             .PatchJsonAsync(orderId);
     }
+
     public async Task<List<Deal>> GetDeals()
     {
         return await $"p2p/deals".InternalApi()
