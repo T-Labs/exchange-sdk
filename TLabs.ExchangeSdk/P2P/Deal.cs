@@ -15,6 +15,7 @@ public class Deal
     public DateTimeOffset? DatePaymentSystemSent { get; set; }
     public DateTimeOffset? DateCryptoReleased { get; set; }
     public DateTimeOffset? DateProcessEnded { get; set; }
+    public Order Order { get; set; }
 }
 public enum DealStatus
 {

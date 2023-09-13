@@ -20,6 +20,7 @@ public class Order
     public DateTimeOffset? DateClosed { get; set; }
     public string Description { get; set; }
     public int MaxTimeMinutes { get; set; }
+    public List<Deal> Deals { get; set; }
 }
 public enum OrderStatus
 {
