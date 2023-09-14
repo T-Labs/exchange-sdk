@@ -64,6 +64,16 @@ namespace TLabs.ExchangeSdk.RabbitMq
             }, language);
         }
 
+        public QueryResult SendDepositSuccess(string email, string language,
+            decimal amount, string currencyCode)
+        {
+            return _sender.SendEmailTemplate(email, "DepositSuccess", new Dictionary<string, string>
+            {
+                { nameof(amount), amount.ToString() },
+                { nameof(currencyCode), currencyCode },
+            }, language);
+        }
+
         public QueryResult SendWithdrawalVerificationCode(string email, string language,
             string verificationCode, decimal amount, string currency, string addressTo, string userIP)
         {
@@ -74,6 +84,42 @@ namespace TLabs.ExchangeSdk.RabbitMq
                 { nameof(currency), currency },
                 { nameof(addressTo), addressTo },
                 { nameof(userIP), userIP },
+            }, language);
+        }
+
+        public QueryResult SendWithdrawalVerificationCodeCash(string email, string language,
+            string verificationCode, decimal amount, string currency, string addressTo, string userIP)
+        {
+            return _sender.SendEmailTemplate(email, "WithdrawalVerificationCodeCash", new Dictionary<string, string>
+            {
+                { nameof(verificationCode), verificationCode },
+                { nameof(amount), amount.ToString() },
+                { nameof(currency), currency },
+                { nameof(addressTo), addressTo },
+                { nameof(userIP), userIP },
+            }, language);
+        }
+
+        public QueryResult SendWithdrawalSuccess(string email, string language,
+            decimal amount, string currencyCode, string adapterCode, string address, string txId)
+        {
+            return _sender.SendEmailTemplate(email, "WithdrawalSuccess", new Dictionary<string, string>
+            {
+                { nameof(amount), amount.ToString() },
+                { nameof(currencyCode), currencyCode },
+                { nameof(adapterCode), adapterCode },
+                { nameof(address), address },
+                { nameof(txId), txId },
+            }, language);
+        }
+
+        public QueryResult SendWithdrawalSuccessCash(string email, string language,
+            decimal amount, string currencyCode)
+        {
+            return _sender.SendEmailTemplate(email, "WithdrawalSuccessCash", new Dictionary<string, string>
+            {
+                { nameof(amount), amount.ToString() },
+                { nameof(currencyCode), currencyCode },
             }, language);
         }
     }
