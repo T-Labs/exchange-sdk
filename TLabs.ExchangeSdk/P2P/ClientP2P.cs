@@ -10,7 +10,7 @@ namespace TLabs.ExchangeSdk.P2P;
 public class ClientP2P
 {
     public async Task<List<Order>> GetOrders(string currencyCode = null,
-        int? paymentMethod = null,
+        int? paymentSystemId = null,
         bool? isBuyingOnExchange = null,
         string userId = null,
         OrderStatus? status = null,
@@ -20,7 +20,7 @@ public class ClientP2P
         var request = $"p2p/orders".InternalApi();
 
         request = request.SetQueryParam("currencyCode", currencyCode);
-        request = request.SetQueryParam("paymentMethod", paymentMethod);
+        request = request.SetQueryParam("paymentSystemId", paymentSystemId);
         request = request.SetQueryParam("isBuyingOnExchange", isBuyingOnExchange);
         request = request.SetQueryParam("userId", userId);
         request = request.SetQueryParam("status", status);
