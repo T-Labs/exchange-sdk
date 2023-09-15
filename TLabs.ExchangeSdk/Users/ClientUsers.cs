@@ -65,6 +65,13 @@ namespace TLabs.ExchangeSdk.Users
             return result;
         }
 
+        public async Task<bool> GetRestrictionValue(string userId, string restrictionName)
+        {
+            string url = $"userprofiles/users/get-restriction/{userId}/{restrictionName}";
+            var result = await url.InternalApi().GetJsonAsync<bool>();
+            return result;
+        }
+
         public async Task<List<ApplicationUser>> GetUsersByRole(string roleName)
         {
             var result = await $"userprofiles/users/byrole/{roleName}".InternalApi()
