@@ -65,6 +65,20 @@ namespace TLabs.ExchangeSdk.Users
             return result;
         }
 
+        public async Task<List<ApplicationUser>> GetUsersByRole(string roleName)
+        {
+            var result = await $"userprofiles/users/byrole/{roleName}".InternalApi()
+                .GetJsonAsync<List<ApplicationUser>>();
+            return result;
+        }
+
+        public async Task<List<ApplicationUser>> GetAdmins()
+        {
+            const string adminRoleName = "Administrator";
+            var result = await GetUsersByRole(adminRoleName);
+            return result;
+        }
+
         public async Task<List<string>> GetUserIdsByMerchantId(string merchantId)
         {
             var result = await $"userprofiles/users/ids-by-merchant".InternalApi()
