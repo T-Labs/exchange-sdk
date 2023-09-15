@@ -13,5 +13,6 @@ namespace TLabs.ExchangeSdk.RabbitMq
         public const string AffiliateOrderFilled = "affiliate-order-filled";
         public const string BountyRecords = "bounty-records";
         public const string Notifications = "notifications"; // Notificator
+        public const string Exchanger = "exchanger-refill";
     }
 }
