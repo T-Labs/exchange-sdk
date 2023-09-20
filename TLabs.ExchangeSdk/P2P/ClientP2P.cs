@@ -53,6 +53,7 @@ public class ClientP2P
         return await $"p2p/deals".InternalApi()
             .GetJsonAsync();
     }
+
     public async Task<Deal> GetDeal(Guid dealId)
     {
         return await $"p2p/deals/{dealId}".InternalApi()
@@ -69,5 +70,37 @@ public class ClientP2P
     {
         return await $"p2p/deals/{dealId}".InternalApi()
             .PatchJsonAsync(dealId);
+    }
+
+
+    public async Task<IFlurlResponse> CreateRequisite(Requisite requisite)
+    {
+        return await $"p2p/requisites".InternalApi()
+            .PostJsonAsync(requisite);
+    }
+
+
+    public async Task<Requisite> GetRequisite(Guid requisiteId)
+    {
+        return await $"p2p/requisites{requisiteId}".InternalApi()
+            .GetJsonAsync();
+    }
+
+    public async Task<IFlurlResponse> UpdateRequisite(Requisite requisite)
+    {
+        return await $"p2p/requisites".InternalApi()
+            .PutJsonAsync(requisite);
+    }
+
+    public async Task<IFlurlResponse> DeleteRequisite(Guid requisiteId)
+    {
+        return await $"p2p/requisites{requisiteId}".InternalApi()
+            .DeleteJsonAsync(requisiteId);
+    }
+
+    public async Task<List<Requisite>> GetRequisite(string userId)
+    {
+        return await $"p2p/requisites{userId}".InternalApi()
+            .GetJsonAsync();
     }
 }
