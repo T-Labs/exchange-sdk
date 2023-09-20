@@ -19,13 +19,13 @@ public class ClientP2P
     {
         var request = $"p2p/orders".InternalApi();
 
-        request = request.SetQueryParam("currencyCode", currencyCode);
-        request = request.SetQueryParam("paymentSystemId", paymentSystemId);
-        request = request.SetQueryParam("isBuyingOnExchange", isBuyingOnExchange);
-        request = request.SetQueryParam("userId", userId);
-        request = request.SetQueryParam("status", status);
-        request = request.SetQueryParam("dateFrom", dateFrom?.ToString("o"));
-        request = request.SetQueryParam("dateTo", dateTo?.ToString("o"));
+        request = request.SetQueryParam(nameof(currencyCode), currencyCode);
+        request = request.SetQueryParam(nameof(paymentSystemId), paymentSystemId);
+        request = request.SetQueryParam(nameof(isBuyingOnExchange), isBuyingOnExchange);
+        request = request.SetQueryParam(nameof(userId), userId);
+        request = request.SetQueryParam(nameof(status), status);
+        request = request.SetQueryParam(nameof(dateFrom), dateFrom?.ToString("o"));
+        request = request.SetQueryParam(nameof(dateTo), dateTo?.ToString("o"));
 
         return await request.GetJsonAsync<List<Order>>();
     }
@@ -82,8 +82,14 @@ public class ClientP2P
 
     public async Task<Requisite> GetRequisite(Guid requisiteId)
     {
-        return await $"p2p/requisites{requisiteId}".InternalApi()
+        return await $"p2p/requisites/{requisiteId}".InternalApi()
             .GetJsonAsync();
+    }
+
+    public async Task<List<Requisite>> GetRequisites(string userId)
+    {
+        return await $"p2p/requisites".InternalApi()
+            .SetQueryParam(nameof(userId), userId).GetJsonAsync();
     }
 
     public async Task<IFlurlResponse> UpdateRequisite(Requisite requisite)
@@ -94,13 +100,7 @@ public class ClientP2P
 
     public async Task<IFlurlResponse> DeleteRequisite(Guid requisiteId)
     {
-        return await $"p2p/requisites{requisiteId}".InternalApi()
+        return await $"p2p/requisites/{requisiteId}".InternalApi()
             .DeleteJsonAsync(requisiteId);
-    }
-
-    public async Task<List<Requisite>> GetRequisite(string userId)
-    {
-        return await $"p2p/requisites{userId}".InternalApi()
-            .GetJsonAsync();
     }
 }
