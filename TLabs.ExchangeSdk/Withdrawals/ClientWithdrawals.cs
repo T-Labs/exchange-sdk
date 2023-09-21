@@ -12,13 +12,14 @@ namespace TLabs.ExchangeSdk.Withdrawals
         private const string baseUrl = "withdrawals/withdrawal";
 
         public async Task<List<Withdrawal>> GetWithdrawals(int? statusId = null, WithdrawalType? withdrawalType = null,
-            string currencyCode = null, string userId = null)
+            string currencyCode = null, string userId = null, string publicId = null)
         {
             var result = await $"{baseUrl}".InternalApi()
                 .SetQueryParam(nameof(statusId), statusId)
                 .SetQueryParam(nameof(withdrawalType), withdrawalType)
-                .SetQueryParam(nameof(currencyCode), currencyCode.NullIfEmpty())
-                .SetQueryParam(nameof(userId), userId.NullIfEmpty())
+                .SetQueryParam(nameof(currencyCode), currencyCode?.Trim().NullIfEmpty())
+                .SetQueryParam(nameof(userId), userId?.Trim().NullIfEmpty())
+                .SetQueryParam(nameof(publicId), publicId?.Trim().NullIfEmpty())
                 .GetJsonAsync<List<Withdrawal>>();
             return result;
         }
