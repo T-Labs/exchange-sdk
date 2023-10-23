@@ -43,6 +43,9 @@ namespace TLabs.ExchangeSdk.Users
 
         public string PrivateId { get; set; }
 
+        /// <summary>Only used in BWP project</summary>
+        public BwpUserType BwpUserType { get; set; } = BwpUserType.Default;
+
         public bool TwoFactorEmail {
             get => FlagsHelper.IsSet(TwoFactorMethods, TwoFactorMethods.Email);
             set => TwoFactorMethods =
@@ -90,5 +93,13 @@ namespace TLabs.ExchangeSdk.Users
         Email = 1,
         Sms = 2,
         GoogleAuthenticator = 4
+    }
+
+    /// <summary>Only used in BWP project</summary>
+    public enum BwpUserType
+    {
+        Default = 0,
+        Merchant = 10,
+        Trader = 20,
     }
 }

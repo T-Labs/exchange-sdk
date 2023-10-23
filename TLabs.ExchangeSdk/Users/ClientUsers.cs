@@ -32,7 +32,7 @@ namespace TLabs.ExchangeSdk.Users
         /// <param name="page">Starts from 1</param>
         public async Task<PagedList<ApplicationUser>> GetUsers(DateTimeOffset? minRegisterDate = null,
             int page = 0, int pageSize = 100, string search = null,
-            string merchantId = null, bool? otonFlag = null, bool? emailConfirmed = false)
+            string merchantId = null, bool? otonFlag = null, bool? emailConfirmed = false, BwpUserType? bwpUserType = null)
         {
             var users = await "userprofiles/users".InternalApi()
                 .WithTimeout(TimeSpan.FromMinutes(10))
@@ -43,6 +43,7 @@ namespace TLabs.ExchangeSdk.Users
                 .SetQueryParam(nameof(merchantId), merchantId)
                 .SetQueryParam(nameof(otonFlag), otonFlag.ToString())
                 .SetQueryParam(nameof(emailConfirmed), emailConfirmed.ToString())
+                .SetQueryParam(nameof(bwpUserType), bwpUserType == null ? "" : ((int)bwpUserType).ToString())
                 .GetJsonAsync<PagedList<ApplicationUser>>();
             return users;
         }
