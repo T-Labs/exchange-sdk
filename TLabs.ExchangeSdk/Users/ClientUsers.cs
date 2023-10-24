@@ -31,7 +31,7 @@ namespace TLabs.ExchangeSdk.Users
         /// <summary>Only works with paginated requests</summary>
         /// <param name="page">Starts from 1</param>
         public async Task<PagedList<ApplicationUser>> GetUsers(DateTimeOffset? minRegisterDate = null,
-            int page = 0, int pageSize = 100, string search = null,
+            int page = 1, int pageSize = 100, string search = null,
             string merchantId = null, bool? otonFlag = null, bool? emailConfirmed = false, BwpUserType? bwpUserType = null)
         {
             var users = await "userprofiles/users".InternalApi()
