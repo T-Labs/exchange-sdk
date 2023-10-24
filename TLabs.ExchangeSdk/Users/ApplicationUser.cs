@@ -43,8 +43,11 @@ namespace TLabs.ExchangeSdk.Users
 
         public string PrivateId { get; set; }
 
-        /// <summary>Only used in BWP project</summary>
+        /// <summary>Only used in BWP project. User can be a Merchant or a Trader</summary>
         public BwpUserType BwpUserType { get; set; } = BwpUserType.Default;
+
+        /// <summary>Only used in BWP project. Admin should confirm user if he is a Merchant or a Trader</summary>
+        public bool IsBwpUserConfirmed { get; set; }
 
         public bool TwoFactorEmail {
             get => FlagsHelper.IsSet(TwoFactorMethods, TwoFactorMethods.Email);

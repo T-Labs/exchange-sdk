@@ -108,7 +108,14 @@ namespace TLabs.ExchangeSdk.Users
 
         public async Task SetUserEmailConfirmed(string userId, bool isConfirmed)
         {
-            await $"userprofiles/users/{userId}/email-confirmed".InternalApi()
+            await $"userprofiles/users/{userId}/email-confirm".InternalApi()
+                .SetQueryParam(nameof(isConfirmed), isConfirmed)
+                .PostJsonAsync(null);
+        }
+
+        public async Task SetBwpUserConfirmed(string userId, bool isConfirmed)
+        {
+            await $"userprofiles/users/{userId}/bwp-confirm".InternalApi()
                 .SetQueryParam(nameof(isConfirmed), isConfirmed)
                 .PostJsonAsync(null);
         }
