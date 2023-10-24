@@ -106,6 +106,13 @@ namespace TLabs.ExchangeSdk.Users
             return result;
         }
 
+        public async Task SetUserEmailConfirmed(string userId, bool isConfirmed)
+        {
+            await $"userprofiles/users/{userId}/email-confirmed".InternalApi()
+                .SetQueryParam(nameof(isConfirmed), isConfirmed)
+                .PostJsonAsync(null);
+        }
+
         public async Task SetNickname(string userId, string nickname)
         {
             await $"userprofiles/users/{userId}/nickname".InternalApi().PostJsonAsync(nickname);
