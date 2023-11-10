@@ -14,7 +14,14 @@ public class Invoice
     public DateTimeOffset Created { get; set; }
     public DateTimeOffset Expires { get; set; }
 
+    /// <summary>
+    /// field for external payment system invoices
+    /// </summary>
     public string? PaymentSystemInvoiceId { get; set; }
+
+    /// <summary>
+    /// fields for widget invoices
+    /// </summary>
     public string? PaymentUrl { get; set; }
 
     public string? RedirectUrl { get; set; }
