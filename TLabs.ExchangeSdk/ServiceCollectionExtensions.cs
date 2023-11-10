@@ -1,9 +1,6 @@
 using Microsoft.Extensions.DependencyInjection;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TLabs.ExchangeSdk
 {
@@ -36,9 +33,10 @@ namespace TLabs.ExchangeSdk
             services.AddTransient<Verification.ClientVerifications>();
             services.AddTransient<Withdrawals.ClientWithdrawals>();
             services.AddTransient<P2P.ClientP2P>();
+            services.AddTransient<Bwp.ClientBwp>();
 
             // needs activation in Program.cs and action /currencies/reload
-            services.AddSingleton<Currencies.CurrenciesCache>(); 
+            services.AddSingleton<Currencies.CurrenciesCache>();
         }
     }
 }
