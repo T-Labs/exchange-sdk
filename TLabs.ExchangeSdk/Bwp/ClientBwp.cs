@@ -8,10 +8,10 @@ namespace TLabs.ExchangeSdk.Bwp;
 
 public class ClientBwp
 {
-    public async Task<List<TraderPaymentMethod>> GetPaymentMethods()
+    public async Task<List<TraderRequisite>> GetPaymentMethods()
     {
         return await "bwp/requisites/payment-methods".InternalApi()
-            .GetJsonAsync<List<TraderPaymentMethod>>();
+            .GetJsonAsync<List<TraderRequisite>>();
     }
 
     public async Task<Invoice> GetInvoice(long id)
