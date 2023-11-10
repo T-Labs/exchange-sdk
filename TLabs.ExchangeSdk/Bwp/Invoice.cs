@@ -9,19 +9,15 @@ public class Invoice
     public decimal Amount { get; set; }
     public string CurrencyCode { get; set; } = "RUB";
     public string CallbackUrl { get; set; }
-    public string PaymentMethodCode { get; set; }
+    public string PaymentMethodKey { get; set; }
 
     public DateTimeOffset Created { get; set; }
     public DateTimeOffset Expires { get; set; }
 
-    /// <summary>
-    /// field for external payment system invoices
-    /// </summary>
+    /// <summary>field for external payment system invoices </summary>
     public string? PaymentSystemInvoiceId { get; set; }
 
-    /// <summary>
-    /// fields for widget invoices
-    /// </summary>
+    /// <summary> fields for widget invoices </summary>
     public string? PaymentUrl { get; set; }
 
     public string? RedirectUrl { get; set; }
