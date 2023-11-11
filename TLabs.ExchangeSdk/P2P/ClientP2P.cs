@@ -66,10 +66,11 @@ public class ClientP2P
             .PostJsonAsync(dealRequest);
     }
 
-    public async Task<IFlurlResponse> CancelDeal(Guid dealId)
+    public async Task<IFlurlResponse> ChangeDealStatus(Guid dealId, DealStatus status)
     {
         return await $"p2p/deals/{dealId}".InternalApi()
-            .PatchJsonAsync(dealId);
+            .SetQueryParam(nameof(status), status.ToString())
+            .PatchJsonAsync(null);
     }
 
 
