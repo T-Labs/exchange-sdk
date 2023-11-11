@@ -11,19 +11,19 @@ public class ClientBwp
     public async Task<List<TraderRequisite>> GetPaymentMethods()
     {
         return await "bwp/requisites/payment-methods".InternalApi()
-            .GetJsonAsync();
+            .GetJsonAsync<List<TraderRequisite>>();
     }
 
     public async Task<Invoice> GetInvoice(long id)
     {
         return await $"bwp/internal/invoices/{id}".InternalApi()
-            .GetJsonAsync();
+            .GetJsonAsync<Invoice>();
     }
 
     public async Task<List<Invoice>> GetInvoices()
     {
         return await "bwp/internal/invoices".InternalApi()
-            .GetJsonAsync();
+            .GetJsonAsync<List<Invoice>>();
     }
 
     public async Task<InvoiceCreateResponse> CreateInvoice(
