@@ -11,5 +11,6 @@ namespace TLabs.ExchangeSdk.Trading
         public string CurrencyPair { get; set; }
         public decimal BidMax { get; set; }
         public decimal AskMin { get; set; }
+        public decimal Average => (BidMax + AskMin) / 2;
     }
 }
