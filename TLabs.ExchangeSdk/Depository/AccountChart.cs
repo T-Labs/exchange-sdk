@@ -68,6 +68,8 @@ namespace TLabs.ExchangeSdk.Depository
         public static readonly AccountChart CurrencyOfferingsBlocked = new AccountChart("901", "Этап блокировки на CurrencyOffering", nameof(CurrencyOfferingsBlocked));
         public static readonly AccountChart CurrencyOfferingsVesting = new AccountChart("903", "Вестинг на CurrencyOffering", nameof(CurrencyOfferingsVesting));
 
+        public static readonly AccountChart BwpCryptoPaymentToMerchantTemp = new AccountChart("715", "Bwp крипто-оплата мерчанту заморозка", nameof(BwpCryptoPaymentToMerchantTemp));
+
         /// <summary>Accounts that have UserId</summary>
         public static readonly List<AccountChart> UsersPersonalCharts = new List<AccountChart>
         {
@@ -81,6 +83,7 @@ namespace TLabs.ExchangeSdk.Depository
             CurrencyOfferingsBlocked, CurrencyOfferingsVesting,
 
             FundBot,
+            BwpCryptoPaymentToMerchantTemp,
         };
 
         public static readonly List<AccountChart> All = new List<AccountChart>(UsersPersonalCharts)

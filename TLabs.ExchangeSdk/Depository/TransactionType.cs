@@ -125,6 +125,12 @@ namespace TLabs.ExchangeSdk.Depository
         public static readonly TransactionType CurrencyOfferingCommission = new TransactionType("917", "Комиссия покупки CurrencyOffering", nameof(CurrencyOfferingCommission));
         public static readonly TransactionType CurrencyOfferingTransfer = new TransactionType("919", "Разблокировка после покупки CurrencyOffering", nameof(CurrencyOfferingTransfer));
 
+        public static readonly TransactionType BwpFiatPaymentToTrader = new TransactionType("711", "Bwp фиат-оплата трейдеру", nameof(BwpFiatPaymentToTrader));
+        public static readonly TransactionType BwpCryptoPaymentToMerchantBegin = new TransactionType("715", "Bwp крипто-оплата мерчанту начало", nameof(BwpCryptoPaymentToMerchantBegin));
+        public static readonly TransactionType BwpCryptoPaymentToMerchantEnd = new TransactionType("716", "Bwp крипто-оплата мерчанту конец", nameof(BwpCryptoPaymentToMerchantEnd));
+        public static readonly TransactionType BwpMerchantFee = new TransactionType("721", "Bwp комиссия с мерчанта", nameof(BwpMerchantFee));
+        public static readonly TransactionType BwpTraderProfit = new TransactionType("722", "Bwp прибыль трейдеру", nameof(BwpTraderProfit));
+
         public static readonly List<TransactionType> TradingTypes = new List<TransactionType>
         {
             Rollback,
@@ -185,6 +191,8 @@ namespace TLabs.ExchangeSdk.Depository
 
             CurrencyOfferingBuyBegin, CurrencyOfferingBuyEnd, CurrencyOfferingSellBegin, CurrencyOfferingSellEnd,
             CurrencyOfferingCommission, CurrencyOfferingTransfer,
+
+            BwpFiatPaymentToTrader, BwpCryptoPaymentToMerchantBegin, BwpCryptoPaymentToMerchantEnd, BwpMerchantFee, BwpTraderProfit,
         };
 
         private TransactionType(string code, string value, string valueKey)
