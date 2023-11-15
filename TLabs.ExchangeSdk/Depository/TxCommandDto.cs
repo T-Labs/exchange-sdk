@@ -1,5 +1,7 @@
+using RabbitMQ.Client.Impl;
 using System;
 using System.ComponentModel.DataAnnotations;
+using TLabs.DotnetHelpers;
 
 namespace TLabs.ExchangeSdk.Depository
 {
@@ -49,5 +51,16 @@ namespace TLabs.ExchangeSdk.Depository
 
         public override string ToString() => $"{nameof(TxCommandDto)}(type:{TxTypeCode}, " +
             $"{Amount} {CurrencyCode}, users: {FromUserId} -> {ToUserId}, actionId:{ActionId}, txId:{TxId})";
+
+        public void Clean()
+        {
+            TxTypeCode = TxTypeCode?.Trim().NullIfEmpty();
+            CurrencyCode = CurrencyCode?.Trim().NullIfEmpty();
+            UserId = UserId?.Trim().NullIfEmpty();
+            FromUserId = FromUserId?.Trim().NullIfEmpty();
+            ToUserId = ToUserId?.Trim().NullIfEmpty();
+            ActionId = ActionId?.Trim().NullIfEmpty();
+            TxId = TxId?.Trim().NullIfEmpty();
+        }
     }
 }

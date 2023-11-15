@@ -16,19 +16,14 @@ namespace TLabs.ExchangeSdk.Depository
         {
         }
 
+        public Task<QueryResult> SendTxCommand(TxCommandDto txCommand, bool checkBalances = true, bool use2StepTransfer = false)
+            => SendTxCommands(new List<TxCommandDto> { txCommand }, checkBalances, use2StepTransfer);
+
         public async Task<QueryResult> SendTxCommands(List<TxCommandDto> txCommands, bool checkBalances = true,
             bool use2StepTransfer = false)
         {
             foreach (var command in txCommands)
-            {
-                command.TxTypeCode = command.TxTypeCode?.Trim().NullIfEmpty();
-                command.CurrencyCode = command.CurrencyCode?.Trim().NullIfEmpty();
-                command.UserId = command.UserId?.Trim().NullIfEmpty();
-                command.FromUserId = command.FromUserId?.Trim().NullIfEmpty();
-                command.ToUserId = command.ToUserId?.Trim().NullIfEmpty();
-                command.ActionId = command.ActionId?.Trim().NullIfEmpty();
-                command.TxId = command.TxId?.Trim().NullIfEmpty();
-            }
+                command.Clean();
             var result = await $"depository/transaction/commands".InternalApi()
                 .WithTimeout(TimeSpan.FromMinutes(10))
                 .SetQueryParam(nameof(checkBalances), checkBalances)
@@ -37,8 +32,25 @@ namespace TLabs.ExchangeSdk.Depository
             return result;
         }
 
-        public Task<QueryResult> SendTxCommand(TxCommandDto txCommand, bool checkBalances = true, bool use2StepTransfer = false)
-            => SendTxCommands(new List<TxCommandDto> { txCommand }, checkBalances, use2StepTransfer);
+        public record TwoStepTxCommandsRequest(List<TxCommandDto> twoStepTxCommands, List<TxCommandDto> oneStepTxCommands);
+
+        /// <summary>Create and save transactions in 2 steps, checking balance between steps</summary>
+        /// <param name="twoStepTxCommands">tx commands that turn in 2 transactions and executed in 2 steps</param>
+        /// <param name="oneStepTxCommands">optional signle-step transactions that will be added to second step</param>
+        public async Task<List<TransactionDto>> SendTwoStepTxCommands(List<TxCommandDto> twoStepTxCommands,
+            List<TxCommandDto> oneStepTxCommands)
+        {
+            foreach (var command in twoStepTxCommands)
+                command.Clean();
+            foreach (var command in oneStepTxCommands)
+                command.Clean();
+
+            var model = new TwoStepTxCommandsRequest(twoStepTxCommands, oneStepTxCommands);
+            var result = await $"depository/transaction/two-step-commands".InternalApi()
+                .WithTimeout(TimeSpan.FromMinutes(10))
+                .PostJsonAsync<List<TransactionDto>>(model);
+            return result;
+        }
 
         public async Task<PagedList<TransactionDto>> GetTransactions(string userId = null, string currencyCode = null,
             DateTimeOffset? from = null, DateTimeOffset? to = null,
