@@ -75,7 +75,7 @@ namespace TLabs.ExchangeSdk.CryptoAdapters
                 adapterCode = _currenciesCache.GetAdapterIds(currencyCode).First();
             string resultStr = await $"{adapterCode}/refill-min-amount/{currencyCode}".InternalApi()
                 .GetStringAsync();
-            decimal result = Convert.ToDecimal(resultStr);
+            decimal result = Convert.ToDecimal(resultStr, CultureInfo.InvariantCulture);
             return result;
         }
 
