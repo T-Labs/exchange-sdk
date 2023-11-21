@@ -1,26 +1,65 @@
 using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TLabs.ExchangeSdk.Bwp;
 
 public class Invoice
 {
-    public long BwpInvoiceId { get; set; }
+    [Key]
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    public long InvoiceId { get; set; }
+
     public long MerchantId { get; set; }
+    public Merchant Merchant { get; set; }
+
+    /// <summary> The total monetary amount that the invoice is requesting for payment.</summary>
     public decimal Amount { get; set; }
+
+    /// <summary> The three-letter ISO currency code representing the type of currency used in the invoice amount,
+    /// with a default value of "RUB" (Russian Ruble).</summary>
     public string CurrencyCode { get; set; } = "RUB";
+
+    /// <summary>
+    /// The URL where payment notifications will be sent upon processing of the invoice.
+    /// </summary>
     public string CallbackUrl { get; set; }
+
+    /// <summary>
+    /// A unique key that identifies the payment method to be used for this invoice,
+    /// which could correspond to a specific bank or financial institution, such as "Sberbank".</summary>
     public string PaymentMethodKey { get; set; }
 
+    /// <summary>
+    /// The unique identifier corresponding to the payment details provided by the trader,
+    /// which are necessary for completing the transaction. </summary>
+    public Guid TraderRequisiteId { get; set; }
+
+    /// <summary>
+    /// Navigation property to the TraderRequisite entity,
+    /// providing all the necessary payment details associated with the trader for this invoice. </summary>
+    public TraderRequisite TraderRequisite { get; set; }
+
+    /// <summary> The exact date and time when the invoice was issued,
+    /// typically set to the current date and time when the invoice record is created. </summary>
     public DateTimeOffset Created { get; set; }
+
+    /// <summary> The date and time at which the invoice will no longer be valid for payment.
+    /// After this timestamp, the invoice should be considered void. </summary>
     public DateTimeOffset Expires { get; set; }
 
-    /// <summary>field for external payment system invoices </summary>
+    /// <summary> An optional identifier that can be used to correlate this invoice with an entry in an external payment system.</summary>
     public string? PaymentSystemInvoiceId { get; set; }
 
-    /// <summary> fields for widget invoices </summary>
+    /// <summary> An optional URL where the customer can be directed to make a payment,
+    /// usually associated with an online payment gateway or widget. </summary>
     public string? PaymentUrl { get; set; }
 
+    /// <summary> An optional URL where the customer will be redirected after a successful payment,
+    /// which could be a thank-you page or order summary page. </summary>
     public string? RedirectUrl { get; set; }
 
+    /// <summary> A computed property that determines whether the invoice has passed
+    /// its expiration date compared to the current date and time in UTC. </summary>
     public bool IsExpired => Expires < DateTimeOffset.UtcNow;
 }
