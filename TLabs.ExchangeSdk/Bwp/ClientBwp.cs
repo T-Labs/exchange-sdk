@@ -13,20 +13,20 @@ public class ClientBwp
 
     public async Task<Invoice> GetInvoice(long id)
     {
-        return await $"api/internal/invoices/{id}".InternalApi()
+        return await $"bwp/internal/invoices/{id}".InternalApi()
             .GetJsonAsync<Invoice>();
     }
 
     public async Task<List<Invoice>> GetInvoices()
     {
-        return await "api/internal/invoices".InternalApi()
+        return await "bwp/internal/invoices".InternalApi()
             .GetJsonAsync<List<Invoice>>();
     }
 
     public async Task<InvoiceCreateResponse> CreateInvoice(
         [FromBody] InvoiceCreateRequest invoiceCreateRequest)
     {
-        return await "api/internal/invoices".InternalApi()
+        return await "bwp/internal/invoices".InternalApi()
             .PostJsonAsync<InvoiceCreateResponse>(invoiceCreateRequest);
     }
 
@@ -36,20 +36,20 @@ public class ClientBwp
 
     public async Task<List<TraderDeal>> GetDeals(string userId = null)
     {
-        return await $"api/deals".InternalApi()
+        return await $"bwp/deals".InternalApi()
             .SetQueryParam(nameof(userId), userId)
             .GetJsonAsync<List<TraderDeal>>();
     }
 
     public async Task<TraderDeal> GetDeal(Guid id)
     {
-        return await $"api/deals/{id}".InternalApi()
+        return await $"bwp/deals/{id}".InternalApi()
             .GetJsonAsync<TraderDeal>();
     }
 
     public async Task<IFlurlResponse> CreateDeal(Invoice invoice)
     {
-        return await $"api/deals".InternalApi()
+        return await $"bwp/deals".InternalApi()
             .PostJsonAsync(invoice);
     }
 
@@ -57,7 +57,7 @@ public class ClientBwp
 
     public async Task<List<TraderPaymentMethod>> GetPaymentMethods()
     {
-        return await "api/requisites/payment-methods".InternalApi()
+        return await "bwp/requisites/payment-methods".InternalApi()
             .GetJsonAsync<List<TraderPaymentMethod>>();
     }
 }
