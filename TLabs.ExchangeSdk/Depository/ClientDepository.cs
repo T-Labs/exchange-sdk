@@ -38,8 +38,9 @@ namespace TLabs.ExchangeSdk.Depository
         /// <param name="twoStepTxCommands">tx commands that turn in 2 transactions and executed in 2 steps</param>
         /// <param name="oneStepTxCommands">optional signle-step transactions that will be added to second step</param>
         public async Task<List<TransactionDto>> SendTwoStepTxCommands(List<TxCommandDto> twoStepTxCommands,
-            List<TxCommandDto> oneStepTxCommands)
+            List<TxCommandDto> oneStepTxCommands = null)
         {
+            oneStepTxCommands ??= new();
             foreach (var command in twoStepTxCommands)
                 command.Clean();
             foreach (var command in oneStepTxCommands)
