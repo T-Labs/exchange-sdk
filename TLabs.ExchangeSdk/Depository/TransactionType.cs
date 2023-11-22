@@ -125,6 +125,12 @@ namespace TLabs.ExchangeSdk.Depository
         public static readonly TransactionType CurrencyOfferingCommission = new TransactionType("917", "Комиссия покупки CurrencyOffering", nameof(CurrencyOfferingCommission));
         public static readonly TransactionType CurrencyOfferingTransfer = new TransactionType("919", "Разблокировка после покупки CurrencyOffering", nameof(CurrencyOfferingTransfer));
 
+        public static readonly TransactionType BwpInvoiceCryptoBlockBegin = new TransactionType("701", "Bwp крипто-блокировка по инвоису начало", nameof(BwpInvoiceCryptoBlockBegin));
+        public static readonly TransactionType BwpInvoiceCryptoBlockEnd = new TransactionType("702", "Bwp крипто-блокировка по инвоису конец", nameof(BwpInvoiceCryptoBlockEnd));
+        public static readonly TransactionType BwpInvoiceCryptoBlockCancelBegin = new TransactionType("703", "Bwp отмена крипто-блокировки по инвоису начало", nameof(BwpInvoiceCryptoBlockCancelBegin));
+        public static readonly TransactionType BwpInvoiceCryptoBlockCancelEnd = new TransactionType("704", "Bwp отмена крипто-блокировки по инвоису конец", nameof(BwpInvoiceCryptoBlockCancelEnd));
+        public static readonly TransactionType BwpInvoiceCryptoBlockCorrection = new TransactionType("705", "Bwp корректировки крипто-блокировки по инвоису", nameof(BwpInvoiceCryptoBlockCorrection));
+
         public static readonly TransactionType BwpFiatPaymentToTrader = new TransactionType("711", "Bwp фиат-оплата трейдеру", nameof(BwpFiatPaymentToTrader));
         public static readonly TransactionType BwpCryptoPaymentToMerchantBegin = new TransactionType("715", "Bwp крипто-оплата мерчанту начало", nameof(BwpCryptoPaymentToMerchantBegin));
         public static readonly TransactionType BwpCryptoPaymentToMerchantEnd = new TransactionType("716", "Bwp крипто-оплата мерчанту конец", nameof(BwpCryptoPaymentToMerchantEnd));
@@ -192,7 +198,10 @@ namespace TLabs.ExchangeSdk.Depository
             CurrencyOfferingBuyBegin, CurrencyOfferingBuyEnd, CurrencyOfferingSellBegin, CurrencyOfferingSellEnd,
             CurrencyOfferingCommission, CurrencyOfferingTransfer,
 
-            BwpFiatPaymentToTrader, BwpCryptoPaymentToMerchantBegin, BwpCryptoPaymentToMerchantEnd, BwpMerchantFee, BwpTraderProfit,
+            BwpInvoiceCryptoBlockBegin, BwpInvoiceCryptoBlockEnd, BwpInvoiceCryptoBlockCancelBegin, BwpInvoiceCryptoBlockCancelEnd,
+            BwpInvoiceCryptoBlockCorrection,
+            BwpFiatPaymentToTrader,
+            BwpCryptoPaymentToMerchantBegin, BwpCryptoPaymentToMerchantEnd, BwpMerchantFee, BwpTraderProfit,
         };
 
         private TransactionType(string code, string value, string valueKey)

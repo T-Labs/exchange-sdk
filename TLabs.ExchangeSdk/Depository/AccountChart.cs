@@ -68,6 +68,9 @@ namespace TLabs.ExchangeSdk.Depository
         public static readonly AccountChart CurrencyOfferingsBlocked = new AccountChart("901", "Этап блокировки на CurrencyOffering", nameof(CurrencyOfferingsBlocked));
         public static readonly AccountChart CurrencyOfferingsVesting = new AccountChart("903", "Вестинг на CurrencyOffering", nameof(CurrencyOfferingsVesting));
 
+        public static readonly AccountChart BwpInvoiceCryptoBlockedTemp = new AccountChart("701", "Bwp крипто-блокировка по инвоису временная", nameof(BwpInvoiceCryptoBlockedTemp));
+        public static readonly AccountChart BwpInvoiceCryptoBlocked = new AccountChart("702", "Bwp крипто-блокировка по инвоису", nameof(BwpInvoiceCryptoBlocked));
+        public static readonly AccountChart BwpInvoiceCryptoBlockCanceledTemp = new AccountChart("703", "Bwp отмена крипто-блокировки по инвоису временная", nameof(BwpInvoiceCryptoBlockCanceledTemp));
         public static readonly AccountChart BwpCryptoPaymentToMerchantTemp = new AccountChart("715", "Bwp крипто-оплата мерчанту заморозка", nameof(BwpCryptoPaymentToMerchantTemp));
 
         /// <summary>Accounts that have UserId</summary>
@@ -83,6 +86,8 @@ namespace TLabs.ExchangeSdk.Depository
             CurrencyOfferingsBlocked, CurrencyOfferingsVesting,
 
             FundBot,
+
+            BwpInvoiceCryptoBlockedTemp, BwpInvoiceCryptoBlocked, BwpInvoiceCryptoBlockCanceledTemp,
             BwpCryptoPaymentToMerchantTemp,
         };
 
