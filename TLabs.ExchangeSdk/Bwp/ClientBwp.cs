@@ -31,6 +31,12 @@ public class ClientBwp
             .PostJsonAsync<InvoiceCreateResponse>(invoiceCreateRequest);
     }
 
+    public async Task<IFlurlResponse> CancelInvoice(long id)
+    {
+        return await $"bwp/internal/invoices/{id}/cancel".InternalApi()
+            .PostAsync();
+    }
+
     #endregion invoices
 
     #region deals

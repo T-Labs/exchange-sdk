@@ -13,8 +13,16 @@ public class Invoice
     public long MerchantId { get; set; }
     public Merchant Merchant { get; set; }
 
-    /// <summary> The total monetary amount that the invoice is requesting for payment.</summary>
-    public decimal Amount { get; set; }
+    /// <summary>Ratio between FiatAmount and CryptoAmount taken from garantex.org.</summary>
+    public decimal ExchangeRate { get; set; }
+
+    /// <summary> The amount of cryptocurrency to be exhange.
+    /// This is calculated based on the current market rate garantex.org and the fiat amount to be exchanged. </summary>
+    public decimal CryptoAmount { get; set; }
+
+    /// <summary> The amount of fiat currency to be exchanged for cryptocurrency.
+    /// FiatAmount in fiat for which the invoice was issued</summary>
+    public decimal FiatAmount { get; set; }
 
     /// <summary> The three-letter ISO currency code representing the type of currency used in the invoice amount,
     /// with a default value of "RUB" (Russian Ruble).</summary>
@@ -62,4 +70,13 @@ public class Invoice
     /// <summary> A computed property that determines whether the invoice has passed
     /// its expiration date compared to the current date and time in UTC. </summary>
     public bool IsExpired => Expires < DateTimeOffset.UtcNow;
+
+    public InvoiceStatus Status { get; set; }
+}
+
+public enum InvoiceStatus
+{
+    Created = 10,
+    TraderAppointed = 20,
+    Canceled = 30,
 }
