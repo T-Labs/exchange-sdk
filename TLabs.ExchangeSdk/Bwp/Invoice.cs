@@ -20,7 +20,7 @@ public class Invoice
     /// This is calculated based on the current market rate garantex.org and the fiat amount to be exchanged. </summary>
     public decimal CryptoAmount { get; set; }
 
-    /// <summary> The amount of fiat currency to be exchanged for cryptocurrency.
+    /// <summary> The amount of fiat currency to be exchanged for crypto currency.
     /// FiatAmount in fiat for which the invoice was issued</summary>
     public decimal FiatAmount { get; set; }
 
@@ -41,7 +41,7 @@ public class Invoice
     /// <summary>
     /// The unique identifier corresponding to the payment details provided by the trader,
     /// which are necessary for completing the transaction. </summary>
-    public Guid TraderRequisiteId { get; set; }
+    public Guid? TraderRequisiteId { get; set; }
 
     /// <summary>
     /// Navigation property to the TraderRequisite entity,
