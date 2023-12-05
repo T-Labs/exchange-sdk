@@ -16,7 +16,7 @@ public class Invoice
     /// <summary>Ratio between FiatAmount and CryptoAmount taken from garantex.org.</summary>
     public decimal ExchangeRate { get; set; }
 
-    /// <summary> The amount of cryptocurrency to be exhange.
+    /// <summary> The amount of crypto currency to be exchange.
     /// This is calculated based on the current market rate garantex.org and the fiat amount to be exchanged. </summary>
     public decimal CryptoAmount { get; set; }
 
@@ -70,13 +70,4 @@ public class Invoice
     /// <summary> A computed property that determines whether the invoice has passed
     /// its expiration date compared to the current date and time in UTC. </summary>
     public bool IsExpired => Expires < DateTimeOffset.UtcNow;
-
-    public InvoiceStatus Status { get; set; }
-}
-
-public enum InvoiceStatus
-{
-    Created = 10,
-    TraderAppointed = 20,
-    Canceled = 30,
 }
