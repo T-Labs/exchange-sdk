@@ -41,7 +41,7 @@ public class Invoice
     /// <summary>
     /// The unique identifier corresponding to the payment details provided by the trader,
     /// which are necessary for completing the transaction. </summary>
-    public Guid TraderRequisiteId { get; set; }
+    public Guid? TraderRequisiteId { get; set; }
 
     /// <summary>
     /// Navigation property to the TraderRequisite entity,
