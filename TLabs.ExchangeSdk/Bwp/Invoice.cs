@@ -20,7 +20,7 @@ public class Invoice
     /// This is calculated based on the current market rate garantex.org and the fiat amount to be exchanged. </summary>
     public decimal CryptoAmount { get; set; }
 
-    /// <summary> The amount of fiat currency to be exchanged for cryptocurrency.
+    /// <summary> The amount of fiat currency to be exchanged for crypto currency.
     /// FiatAmount in fiat for which the invoice was issued</summary>
     public decimal FiatAmount { get; set; }
 

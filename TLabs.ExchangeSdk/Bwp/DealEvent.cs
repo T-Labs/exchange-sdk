@@ -10,8 +10,18 @@ public class DealEvent
     public long InvoiceId { get; set; }
     public DealStatus Status { get; set; }
     public DateTimeOffset DateCreated { get; set; }
-    public long TraderDealId { get; set; }
-    public TraderDeal TraderDeal { get; set; }
+    public TraderDeal? TraderDeal { get; set; }
+
+    public DealEvent()
+    {
+    }
+
+    public DealEvent(long invoiceId, DealStatus status)
+    {
+        InvoiceId = invoiceId;
+        Status = status;
+
+    }
 }
 
 public enum DealStatus
