@@ -1,6 +1,5 @@
 using Flurl.Http;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
@@ -13,17 +12,17 @@ public class ClientBwp
 {
     #region invoices
 
-    public async Task<InvoiceDto> GetInvoice(long id)
+    public async Task<Invoice> GetInvoice(long id)
     {
         return await $"bwp/internal/invoices/{id}".InternalApi()
-            .GetJsonAsync<InvoiceDto>();
+            .GetJsonAsync<Invoice>();
     }
 
-    public async Task<List<InvoiceDto>> GetInvoices(string userId = null)
+    public async Task<List<Invoice>> GetInvoices(string userId = null)
     {
         return await "bwp/internal/invoices".InternalApi()
             .SetQueryParam(nameof(userId), userId)
-            .GetJsonAsync<List<InvoiceDto>>();
+            .GetJsonAsync<List<Invoice>>();
     }
 
     public async Task<InvoiceCreateResponse> CreateInvoice(
@@ -43,17 +42,17 @@ public class ClientBwp
 
     #region deals
 
-    public async Task<List<TraderDealDto>> GetDeals(string userId = null)
+    public async Task<List<TraderDeal>> GetDeals(string userId = null)
     {
         return await $"bwp/deals".InternalApi()
             .SetQueryParam(nameof(userId), userId)
-            .GetJsonAsync<List<TraderDealDto>>();
+            .GetJsonAsync<List<TraderDeal>>();
     }
 
-    public async Task<TraderDealDto> GetDeal(long id)
+    public async Task<TraderDeal> GetDeal(long id)
     {
         return await $"bwp/deals/{id}".InternalApi()
-            .GetJsonAsync<TraderDealDto>();
+            .GetJsonAsync<TraderDeal>();
     }
 
     public async Task<IFlurlResponse> ConfirmInvoiceAndCreateDeal(Invoice invoice)
