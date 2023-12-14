@@ -28,26 +28,27 @@ public class DealEvent
 
 public enum DealStatus
 {
-    TraderAppointed = 10,
-    CryptoFrozen = 20,
+    New = 10,
+    TraderAppointed = 20,
+    CryptoFrozen = 30,
 
     [Description("Пользователь подтвердил оплату.")]
-    UserConfirmedPayment = 30,
+    UserConfirmedPayment = 40,
 
     [Description("Платеж подтвержден.")]
-    TraderConfirmedPayment = 40,
+    TraderConfirmedPayment = 50,
 
     [Description("Сделка завершена.")]
-    CryptoReleased = 50,
+    CryptoReleased = 60,
 
     [Description("Открыт спор по сделке.")]
-    Disputed = 60,
+    Disputed = 70,
 
     [Description("Истекло время подтвержения.")]
-    Expired = 70,
+    Expired = 80,
 
     [Description("Сделка закрыта администратором.")]
-    AdminClosed = 80,
+    AdminClosed = 90,
 
-    CryptoUnfrozen = 90,
+    CryptoUnfrozen = 100,
 }
