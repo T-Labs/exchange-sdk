@@ -13,5 +13,13 @@ public class TraderDealDto
     public decimal FiatAmount { get; set; }
     public DateTimeOffset DateCreated { get; set; }
     public DateTimeOffset Finished { get; set; }
-    public DealStatus Status { get; set; }
+    public DealDtoStatus Status { get; set; }
+}
+public enum DealDtoStatus
+{
+    InProcess = 10,
+    Successful = 20,
+    Disputed = 30,
+    ClosedByExpired = 40,
+    AdminClosed = 50,
 }

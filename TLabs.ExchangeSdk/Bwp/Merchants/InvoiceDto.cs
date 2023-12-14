@@ -13,5 +13,5 @@ public class InvoiceDto
     public string PaymentMethodKey { get; set; }
     public DateTimeOffset Created { get; set; }
     public DateTimeOffset Finished { get; set; }
-    public DealStatus Status { get; set; }
+    public DealDtoStatus Status { get; set; }
 }
