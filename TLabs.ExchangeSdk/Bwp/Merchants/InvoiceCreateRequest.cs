@@ -1,4 +1,4 @@
-namespace TLabs.ExchangeSdk.Bwp;
+namespace TLabs.ExchangeSdk.Bwp.Merchants;
 
 public class InvoiceCreateRequest
 {

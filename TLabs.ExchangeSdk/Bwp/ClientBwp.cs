@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
 using TLabs.DotnetHelpers;
+using TLabs.ExchangeSdk.Bwp.Merchants;
 
 namespace TLabs.ExchangeSdk.Bwp;
 
@@ -12,16 +13,17 @@ public class ClientBwp
 {
     #region invoices
 
-    public async Task<Invoice> GetInvoice(long id)
+    public async Task<InvoiceDto> GetInvoice(long id)
     {
         return await $"bwp/internal/invoices/{id}".InternalApi()
-            .GetJsonAsync<Invoice>();
+            .GetJsonAsync<InvoiceDto>();
     }
 
-    public async Task<List<Invoice>> GetInvoices()
+    public async Task<List<InvoiceDto>> GetInvoices(string userId = null)
     {
         return await "bwp/internal/invoices".InternalApi()
-            .GetJsonAsync<List<Invoice>>();
+            .SetQueryParam(nameof(userId), userId)
+            .GetJsonAsync<List<InvoiceDto>>();
     }
 
     public async Task<InvoiceCreateResponse> CreateInvoice(
@@ -41,20 +43,20 @@ public class ClientBwp
 
     #region deals
 
-    public async Task<List<TraderDeal>> GetDeals(string userId = null)
+    public async Task<List<TraderDealDto>> GetDeals(string userId = null)
     {
         return await $"bwp/deals".InternalApi()
             .SetQueryParam(nameof(userId), userId)
-            .GetJsonAsync<List<TraderDeal>>();
+            .GetJsonAsync<List<TraderDealDto>>();
     }
 
-    public async Task<TraderDeal> GetDeal(Guid id)
+    public async Task<TraderDealDto> GetDeal(long id)
     {
         return await $"bwp/deals/{id}".InternalApi()
-            .GetJsonAsync<TraderDeal>();
+            .GetJsonAsync<TraderDealDto>();
     }
 
-    public async Task<IFlurlResponse> CreateDeal(Invoice invoice)
+    public async Task<IFlurlResponse> ConfirmInvoiceAndCreateDeal(Invoice invoice)
     {
         return await $"bwp/deals".InternalApi()
             .PostJsonAsync(invoice);
@@ -72,21 +74,21 @@ public class ClientBwp
 
     public async Task<IFlurlResponse> SetTraderOnlineStatus(string id, [Required] bool isOnline)
     {
-        return await $"bwp/tradersettings/{id}/onlinestatus".InternalApi()
+        return await $"bwp/tradersettings/{id}/online-status".InternalApi()
             .SetQueryParam("isOnline", isOnline)
             .PostAsync();
     }
 
     public async Task<IFlurlResponse> SetTraderActiveStatus(string id, [Required] bool isAdminSetActive)
     {
-        return await $"bwp/tradersettings/{id}/activestatus".InternalApi()
+        return await $"bwp/tradersettings/{id}/active-status".InternalApi()
             .SetQueryParam("isAdminSetActive", isAdminSetActive)
             .PostAsync();
     }
 
     public async Task<IFlurlResponse> SetAllowedNegativeBalances(string id, [Required] bool allowedNegativeBalances)
     {
-        return await $"bwp/tradersettings/{id}/allowednegativebalances".InternalApi()
+        return await $"bwp/tradersettings/{id}/allowed-negative-balances".InternalApi()
             .SetQueryParam("allowedNegativeBalances", allowedNegativeBalances)
             .PostAsync();
     }

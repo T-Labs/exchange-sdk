@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -52,10 +53,6 @@ public class Invoice
     /// typically set to the current date and time when the invoice record is created. </summary>
     public DateTimeOffset Created { get; set; }
 
-    /// <summary> The date and time at which the invoice will no longer be valid for payment.
-    /// After this timestamp, the invoice should be considered void. </summary>
-    public DateTimeOffset Expires { get; set; }
-
     /// <summary> An optional identifier that can be used to correlate this invoice with an entry in an external payment system.</summary>
     public string? PaymentSystemInvoiceId { get; set; }
 
@@ -66,8 +63,5 @@ public class Invoice
     /// <summary> An optional URL where the customer will be redirected after a successful payment,
     /// which could be a thank-you page or order summary page. </summary>
     public string? RedirectUrl { get; set; }
-
-    /// <summary> A computed property that determines whether the invoice has passed
-    /// its expiration date compared to the current date and time in UTC. </summary>
-    public bool IsExpired => Expires < DateTimeOffset.UtcNow;
+    public List<DealEvent> DealEvents { get; set; }
 }
