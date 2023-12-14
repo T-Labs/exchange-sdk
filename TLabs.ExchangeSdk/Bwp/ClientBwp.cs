@@ -43,17 +43,17 @@ public class ClientBwp
 
     #region deals
 
-    public async Task<List<TraderDealDto>> GetDeals(string userId = null)
+    public async Task<List<TraderDeal>> GetDeals(string userId = null)
     {
         return await $"bwp/deals".InternalApi()
             .SetQueryParam(nameof(userId), userId)
-            .GetJsonAsync<List<TraderDealDto>>();
+            .GetJsonAsync<List<TraderDeal>>();
     }
 
-    public async Task<TraderDealDto> GetDeal(long id)
+    public async Task<TraderDeal> GetDeal(long id)
     {
         return await $"bwp/deals/{id}".InternalApi()
-            .GetJsonAsync<TraderDealDto>();
+            .GetJsonAsync<TraderDeal>();
     }
 
     public async Task<IFlurlResponse> ConfirmInvoiceAndCreateDeal(Invoice invoice)
