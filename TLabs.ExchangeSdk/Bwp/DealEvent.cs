@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
@@ -8,6 +9,7 @@ public class DealEvent
 {
     [Key]
     public Guid EventId { get; set; }
+
     public long InvoiceId { get; set; }
     public DealStatus Status { get; set; }
     public DateTimeOffset DateCreated { get; set; }
@@ -22,8 +24,10 @@ public class DealEvent
     {
         InvoiceId = invoiceId;
         Status = status;
-
     }
+
+    public static readonly List<DealStatus> CanceledDealStatuses = new List<DealStatus>
+        { DealStatus.Expired, DealStatus.AdminClosed };
 }
 
 public enum DealStatus
