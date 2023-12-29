@@ -69,7 +69,7 @@ public class ClientP2P
     public async Task<IFlurlResponse> UpdateDealStatus(Guid id, DealStatus status)
     {
         return await $"p2p/deals/{id}/update-status".InternalApi()
-            .SetQueryParam(nameof(status), status.ToString())
+            .SetQueryParam(nameof(status), status)
             .PostAsync();
     }
 
@@ -104,10 +104,10 @@ public class ClientP2P
             .PostJsonAsync(id);
     }
 
-    public async Task<IFlurlResponse> GetPaymentMethodByCurrencyCode(string exchangeCurrencyCode)
+    public async Task<PaymentMethod> GetPaymentMethodByCurrencyCode(string exchangeCurrencyCode)
     {
         return await $"p2p/payment-method".InternalApi()
             .SetQueryParam(nameof(exchangeCurrencyCode), exchangeCurrencyCode)
-            .GetJsonAsync();
+            .GetJsonAsync<PaymentMethod>();
     }
 }
