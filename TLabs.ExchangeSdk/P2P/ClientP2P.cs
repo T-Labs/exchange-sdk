@@ -66,10 +66,10 @@ public class ClientP2P
             .PostJsonAsync(dealDto);
     }
 
-    public async Task<IFlurlResponse> UpdateDealStatus(Guid id, DealStatus status)
+    public async Task<IFlurlResponse> UpdateDealStatus(Guid id, DealStatus dealStatus)
     {
         return await $"p2p/deals/{id}/update-status".InternalApi()
-            .SetQueryParam(nameof(status), status)
+            .SetQueryParam(nameof(dealStatus), dealStatus)
             .PostAsync();
     }
 
@@ -95,7 +95,7 @@ public class ClientP2P
     public async Task<IFlurlResponse> UpdateRequisite(Guid id, RequisiteDto requisiteDto)
     {
         return await $"p2p/requisites{id}/update".InternalApi()
-            .PutJsonAsync(requisiteDto);
+            .PostJsonAsync(requisiteDto);
     }
 
     public async Task<IFlurlResponse> DeleteRequisite(Guid id)
@@ -106,7 +106,7 @@ public class ClientP2P
 
     public async Task<PaymentMethod> GetPaymentMethodByCurrencyCode(string exchangeCurrencyCode)
     {
-        return await $"p2p/payment-method".InternalApi()
+        return await $"p2p/payment-methods".InternalApi()
             .SetQueryParam(nameof(exchangeCurrencyCode), exchangeCurrencyCode)
             .GetJsonAsync<PaymentMethod>();
     }
