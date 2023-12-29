@@ -94,7 +94,7 @@ public class ClientP2P
 
     public async Task<IFlurlResponse> UpdateRequisite(Guid id, RequisiteDto requisiteDto)
     {
-        return await $"p2p/requisites{id}/update".InternalApi()
+        return await $"p2p/requisites/{id}/update".InternalApi()
             .PostJsonAsync(requisiteDto);
     }
 
