@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using TLabs.DotnetHelpers;
-using TLabs.ExchangeSdk.Trading;
 
 namespace TLabs.ExchangeSdk.P2P;
 
@@ -30,78 +29,85 @@ public class ClientP2P
         return await request.GetJsonAsync<List<Order>>();
     }
 
-    public async Task<Order> GetOrder(Guid orderId)
+    public async Task<Order> GetOrder(Guid id)
     {
-        return await $"p2p/orders/{orderId}".InternalApi()
-            .GetJsonAsync();
+        return await $"p2p/orders/{id}".InternalApi()
+            .GetJsonAsync<Order>();
     }
 
-    public async Task<IFlurlResponse> CreateOrder(OrderRequest orderRequest)
+    public async Task<IFlurlResponse> CreateOrder(OrderDto orderDto)
     {
         return await $"p2p/orders".InternalApi()
-            .PostJsonAsync(orderRequest);
+            .PostJsonAsync(orderDto);
     }
 
-    public async Task<IFlurlResponse> CancelOrder(Guid orderId)
+    public async Task<IFlurlResponse> CancelOrder(Guid id)
     {
-        return await $"p2p/orders/{orderId}".InternalApi()
-            .PatchJsonAsync(orderId);
+        return await $"p2p/orders/{id}/cancel".InternalApi()
+            .PostAsync();
     }
 
-    public async Task<List<Deal>> GetDeals()
-    {
-        return await $"p2p/deals".InternalApi()
-            .GetJsonAsync();
-    }
-
-    public async Task<Deal> GetDeal(Guid dealId)
-    {
-        return await $"p2p/deals/{dealId}".InternalApi()
-            .GetJsonAsync();
-    }
-
-    public async Task<IFlurlResponse> CreateDeal(DealRequest dealRequest)
+    public async Task<List<Deal>> GetDeals(string dealUserId = null)
     {
         return await $"p2p/deals".InternalApi()
-            .PostJsonAsync(dealRequest);
+            .SetQueryParam(nameof(dealUserId), dealUserId)
+            .GetJsonAsync<List<Deal>>();
     }
 
-    public async Task<IFlurlResponse> ChangeDealStatus(Guid dealId, DealStatus status)
+    public async Task<Deal> GetDeal(Guid id)
     {
-        return await $"p2p/deals/{dealId}".InternalApi()
+        return await $"p2p/deals/{id}".InternalApi()
+            .GetJsonAsync<Deal>();
+    }
+
+    public async Task<IFlurlResponse> CreateDeal(DealDto dealDto)
+    {
+        return await $"p2p/deals".InternalApi()
+            .PostJsonAsync(dealDto);
+    }
+
+    public async Task<IFlurlResponse> UpdateDealStatus(Guid id, DealStatus status)
+    {
+        return await $"p2p/deals/{id}/update-status".InternalApi()
             .SetQueryParam(nameof(status), status.ToString())
-            .PatchJsonAsync(null);
+            .PostAsync();
     }
 
-
-    public async Task<IFlurlResponse> CreateRequisite(Requisite requisite)
+    public async Task<List<Requisite>> GetActiveRequisites(string userId = null)
     {
         return await $"p2p/requisites".InternalApi()
-            .PostJsonAsync(requisite);
+            .SetQueryParam(nameof(userId), userId)
+            .GetJsonAsync<List<Requisite>>();
     }
 
-
-    public async Task<Requisite> GetRequisite(Guid requisiteId)
+    public async Task<Requisite> GetActiveRequisite(Guid id)
     {
-        return await $"p2p/requisites/{requisiteId}".InternalApi()
+        return await $"p2p/requisites/{id}".InternalApi()
+            .GetJsonAsync<Requisite>();
+    }
+
+    public async Task<IFlurlResponse> CreateRequisite(RequisiteDto requisiteDto)
+    {
+        return await $"p2p/requisites".InternalApi()
+            .PostJsonAsync(requisiteDto);
+    }
+
+    public async Task<IFlurlResponse> UpdateRequisite(Guid id, RequisiteDto requisiteDto)
+    {
+        return await $"p2p/requisites{id}/update".InternalApi()
+            .PutJsonAsync(requisiteDto);
+    }
+
+    public async Task<IFlurlResponse> DeleteRequisite(Guid id)
+    {
+        return await $"p2p/requisites/{id}/delete".InternalApi()
+            .PostJsonAsync(id);
+    }
+
+    public async Task<IFlurlResponse> GetPaymentMethodByCurrencyCode(string exchangeCurrencyCode)
+    {
+        return await $"p2p/payment-method".InternalApi()
+            .SetQueryParam(nameof(exchangeCurrencyCode), exchangeCurrencyCode)
             .GetJsonAsync();
-    }
-
-    public async Task<List<Requisite>> GetRequisites(string userId)
-    {
-        return await $"p2p/requisites".InternalApi()
-            .SetQueryParam(nameof(userId), userId).GetJsonAsync();
-    }
-
-    public async Task<IFlurlResponse> UpdateRequisite(Requisite requisite)
-    {
-        return await $"p2p/requisites".InternalApi()
-            .PutJsonAsync(requisite);
-    }
-
-    public async Task<IFlurlResponse> DeleteRequisite(Guid requisiteId)
-    {
-        return await $"p2p/requisites/{requisiteId}".InternalApi()
-            .DeleteJsonAsync(requisiteId);
     }
 }
