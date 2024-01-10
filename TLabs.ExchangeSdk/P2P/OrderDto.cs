@@ -19,8 +19,6 @@ public class OrderDto
 
     public decimal MaxDealAmount { get; set; }
 
-    public DateTimeOffset? DateClosed { get; set; }
-
     public string Description { get; set; }
 
     public int MaxTimeMinutes { get; set; }
