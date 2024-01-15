@@ -68,10 +68,16 @@ namespace TLabs.ExchangeSdk.Depository
         public static readonly AccountChart CurrencyOfferingsBlocked = new AccountChart("901", "Этап блокировки на CurrencyOffering", nameof(CurrencyOfferingsBlocked));
         public static readonly AccountChart CurrencyOfferingsVesting = new AccountChart("903", "Вестинг на CurrencyOffering", nameof(CurrencyOfferingsVesting));
 
+
         public static readonly AccountChart BwpInvoiceCryptoBlockedTemp = new AccountChart("701", "Bwp крипто-блокировка по инвоису временная", nameof(BwpInvoiceCryptoBlockedTemp));
         public static readonly AccountChart BwpInvoiceCryptoBlocked = new AccountChart("702", "Bwp крипто-блокировка по инвоису", nameof(BwpInvoiceCryptoBlocked));
         public static readonly AccountChart BwpInvoiceCryptoBlockCanceledTemp = new AccountChart("703", "Bwp отмена крипто-блокировки по инвоису временная", nameof(BwpInvoiceCryptoBlockCanceledTemp));
         public static readonly AccountChart BwpCryptoPaymentToMerchantTemp = new AccountChart("715", "Bwp крипто-оплата мерчанту заморозка", nameof(BwpCryptoPaymentToMerchantTemp));
+
+        public static readonly AccountChart P2pOrderBlockedTemp = new AccountChart("751", "P2P блокировка для ордера временная", nameof(P2pOrderBlockedTemp));
+        public static readonly AccountChart P2pOrderBlocked = new AccountChart("752", "P2P блокировка для ордера", nameof(P2pOrderBlocked));
+        public static readonly AccountChart P2pOrderBlockCanceledTemp = new AccountChart("753", "P2P отмена блокировки для ордера временная", nameof(P2pOrderBlockCanceledTemp));
+        public static readonly AccountChart P2pDealTransferTemp = new AccountChart("761", "P2P перевод для сделки временный", nameof(P2pDealTransferTemp));
 
         /// <summary>Accounts that have UserId</summary>
         public static readonly List<AccountChart> UsersPersonalCharts = new List<AccountChart>
@@ -89,6 +95,8 @@ namespace TLabs.ExchangeSdk.Depository
 
             BwpInvoiceCryptoBlockedTemp, BwpInvoiceCryptoBlocked, BwpInvoiceCryptoBlockCanceledTemp,
             BwpCryptoPaymentToMerchantTemp,
+
+            P2pOrderBlockedTemp, P2pOrderBlocked, P2pOrderBlockCanceledTemp, P2pDealTransferTemp,
         };
 
         public static readonly List<AccountChart> All = new List<AccountChart>(UsersPersonalCharts)
