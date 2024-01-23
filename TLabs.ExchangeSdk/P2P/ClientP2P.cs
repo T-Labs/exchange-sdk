@@ -113,13 +113,13 @@ public class ClientP2P
             .GetJsonAsync<PaymentMethod>();
     }
 
-    public async Task<IFlurlResponse> GetPaymentCurrency()
+    public async Task<List<PaymentCurrency>> GetPaymentCurrencies()
     {
         return await $"p2p/payment-currencies".InternalApi()
             .GetJsonAsync();
     }
 
-    public async Task<IFlurlResponse> GetPaymentSystem(string? currencyCode)
+    public async Task<List<PaymentSystem>> GetPaymentSystems(string? currencyCode)
     {
         return await $"p2p/payment-systems".InternalApi()
             .SetQueryParam(nameof(currencyCode), currencyCode)
