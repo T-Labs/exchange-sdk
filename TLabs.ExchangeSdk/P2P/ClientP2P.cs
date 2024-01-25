@@ -116,13 +116,13 @@ public class ClientP2P
     public async Task<List<PaymentCurrency>> GetPaymentCurrencies()
     {
         return await $"p2p/payment-currencies".InternalApi()
-            .GetJsonAsync();
+            .GetJsonAsync<List<PaymentCurrency>>();
     }
 
     public async Task<List<PaymentSystem>> GetPaymentSystems(string? currencyCode)
     {
         return await $"p2p/payment-systems".InternalApi()
             .SetQueryParam(nameof(currencyCode), currencyCode)
-            .GetJsonAsync();
+            .GetJsonAsync<List<PaymentSystem>>();
     }
 }
