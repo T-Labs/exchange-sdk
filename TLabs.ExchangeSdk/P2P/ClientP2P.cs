@@ -8,27 +8,26 @@ namespace TLabs.ExchangeSdk.P2P;
 
 public class ClientP2P
 {
-    public async Task<List<Order>> GetOrders(string currencyCode = null,
+    public async Task<List<Order>> GetOrders(string exchangeCurrencyCode = null, string paymentCurrencyCode = null,
         int? paymentSystemId = null,
         bool? isBuyingOnExchange = null,
         string userId = null,
         OrderStatus? status = null,
-        DateTimeOffset? dateFrom = null,
-        DateTimeOffset? dateTo = null,
+        DateTimeOffset? dateFrom = null, DateTimeOffset? dateTo = null,
         decimal? dealAmount = null)
     {
-        var request = $"p2p/orders".InternalApi();
-
-        request = request.SetQueryParam(nameof(currencyCode), currencyCode);
-        request = request.SetQueryParam(nameof(paymentSystemId), paymentSystemId);
-        request = request.SetQueryParam(nameof(isBuyingOnExchange), isBuyingOnExchange);
-        request = request.SetQueryParam(nameof(userId), userId);
-        request = request.SetQueryParam(nameof(status), status);
-        request = request.SetQueryParam(nameof(dateFrom), dateFrom?.ToString("o"));
-        request = request.SetQueryParam(nameof(dateTo), dateTo?.ToString("o"));
-        request = request.SetQueryParam(nameof(dealAmount), dealAmount);
-
-        return await request.GetJsonAsync<List<Order>>();
+        var result = await $"p2p/orders".InternalApi()
+            .SetQueryParam(nameof(exchangeCurrencyCode), exchangeCurrencyCode)
+            .SetQueryParam(nameof(paymentCurrencyCode), paymentCurrencyCode)
+            .SetQueryParam(nameof(paymentSystemId), paymentSystemId)
+            .SetQueryParam(nameof(isBuyingOnExchange), isBuyingOnExchange)
+            .SetQueryParam(nameof(userId), userId)
+            .SetQueryParam(nameof(status), status)
+            .SetQueryParam(nameof(dateFrom), dateFrom?.ToString("o"))
+            .SetQueryParam(nameof(dateTo), dateTo?.ToString("o"))
+            .SetQueryParam(nameof(dealAmount), dealAmount)
+            .GetJsonAsync<List<Order>>();
+        return result;
     }
 
     public async Task<Order> GetOrder(Guid id)
