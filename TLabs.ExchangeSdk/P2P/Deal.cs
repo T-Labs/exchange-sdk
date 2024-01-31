@@ -10,10 +10,14 @@ public class Deal
     public string PaymentMethodCurrencyCode { get; set; }
     public string DealUserId { get; set; }
 
-    /// <summary>Crypto amount</summary>
-    public decimal Amount { get; set; }
-
     public decimal Price { get; set; }
+
+    /// <summary>Amount in crypto currency</summary>
+    public decimal CryptoAmount { get; set; }
+
+    /// <summary>Amount in fiat currency</summary>
+    public decimal FiatAmount => (CryptoAmount * Price).RoundDown(2);
+
     public DealStatus Status { get; set; }
     public DateTimeOffset DateCreated { get; set; }
     public DateTimeOffset? DatePaymentSystemSent { get; set; }

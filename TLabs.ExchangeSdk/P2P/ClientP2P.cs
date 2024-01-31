@@ -14,7 +14,7 @@ public class ClientP2P
         string userId = null,
         OrderStatus? status = null,
         DateTimeOffset? dateFrom = null, DateTimeOffset? dateTo = null,
-        decimal? dealAmount = null)
+        decimal? dealCryptoAmount = null, decimal? dealPaymentAmount = null)
     {
         var result = await $"p2p/orders".InternalApi()
             .SetQueryParam(nameof(exchangeCurrencyCode), exchangeCurrencyCode)
@@ -25,7 +25,8 @@ public class ClientP2P
             .SetQueryParam(nameof(status), status)
             .SetQueryParam(nameof(dateFrom), dateFrom?.ToString("o"))
             .SetQueryParam(nameof(dateTo), dateTo?.ToString("o"))
-            .SetQueryParam(nameof(dealAmount), dealAmount)
+            .SetQueryParam(nameof(dealCryptoAmount), dealCryptoAmount)
+            .SetQueryParam(nameof(dealPaymentAmount), dealPaymentAmount)
             .GetJsonAsync<List<Order>>();
         return result;
     }
