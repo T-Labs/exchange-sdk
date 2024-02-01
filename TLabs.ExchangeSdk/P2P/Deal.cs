@@ -8,7 +8,6 @@ public class Deal
     public Guid Id { get; set; }
     public Guid OrderId { get; set; }
     public int PaymentSystemId { get; set; }
-    public string PaymentMethodCurrencyCode { get; set; }
     public string DealUserId { get; set; }
 
     public decimal Price { get; set; }
