@@ -1,4 +1,5 @@
 using Flurl.Http;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -49,10 +50,11 @@ public class ClientP2P
             .PostAsync();
     }
 
-    public async Task<List<Deal>> GetDeals(string dealUserId = null)
+    public async Task<List<Deal>> GetDeals(string dealUserId = null, [FromQuery] List<DealStatus> statuses = null)
     {
         return await $"p2p/deals".InternalApi()
             .SetQueryParam(nameof(dealUserId), dealUserId)
+            .SetQueryParam(nameof(statuses), statuses)
             .GetJsonAsync<List<Deal>>();
     }
 
