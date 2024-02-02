@@ -33,6 +33,7 @@ public class Order
     public string Description { get; set; }
 
     public int MaxTimeMinutes { get; set; }
+    public long DisplayId { get; set; }
     public List<Deal> Deals { get; set; }
 }
 
