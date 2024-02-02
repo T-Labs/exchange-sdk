@@ -64,7 +64,7 @@ public class ClientP2P
             .GetJsonAsync<Deal>();
     }
 
-    public async Task<IFlurlResponse> CreateDeal(DealDto dealDto)
+    public async Task<IFlurlResponse> CreateDeal(DealCreateDto dealDto)
     {
         return await $"p2p/deals".InternalApi()
             .PostJsonAsync(dealDto);
