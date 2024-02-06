@@ -48,6 +48,16 @@ namespace TLabs.ExchangeSdk.Users
             return users;
         }
 
+        public async Task<List<ApplicationUser>> GetUsersByIds(List<string> userIds = null,
+            DateTimeOffset? minRegisterDate = null)
+        {
+            var url = "userprofiles/users/by-ids".InternalApi()
+                .WithTimeout(TimeSpan.FromMinutes(5))
+                .SetQueryParam(nameof(minRegisterDate), minRegisterDate?.ToString("o"));
+            var appUsers = await url.PostJsonAsync<List<ApplicationUser>>(userIds);
+            return appUsers;
+        }
+
         public async Task<List<ApplicationUser>> GetUsersByEmail(string email)
         {
             if (email.NotHasValue())

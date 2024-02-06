@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel.DataAnnotations.Schema;
 using TLabs.DotnetHelpers;
 
 namespace TLabs.ExchangeSdk.P2P;
@@ -25,6 +26,9 @@ public class Deal
     public DateTimeOffset? DateProcessEnded { get; set; }
     public long DisplayId { get; set; }
     public Order Order { get; set; }
+
+    [NotMapped]
+    public string UserNickname { get; set; }
 }
 
 public enum DealStatus

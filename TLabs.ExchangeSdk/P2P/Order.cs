@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TLabs.ExchangeSdk.P2P;
 
@@ -35,6 +36,9 @@ public class Order
     public int MaxTimeMinutes { get; set; }
     public long DisplayId { get; set; }
     public List<Deal> Deals { get; set; }
+
+    [NotMapped]
+    public string UserNickname { get; set; }
 }
 
 public enum OrderStatus
