@@ -127,4 +127,10 @@ public class ClientP2P
             .SetQueryParam(nameof(currencyCode), currencyCode)
             .GetJsonAsync<List<PaymentSystem>>();
     }
+
+    public async Task<UserInfoDto> GetUserOrdersInfo(string userId)
+    {
+        return await $"p2p/users/info/{userId}".InternalApi()
+            .GetJsonAsync<UserInfoDto>();
+    }
 }
