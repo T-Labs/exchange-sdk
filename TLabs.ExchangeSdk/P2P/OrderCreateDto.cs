@@ -2,7 +2,7 @@ using System;
 
 namespace TLabs.ExchangeSdk.P2P;
 
-public class OrderDto
+public class OrderCreateDto
 {
     public string UserId { get; set; }
 

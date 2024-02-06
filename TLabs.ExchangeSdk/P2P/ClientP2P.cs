@@ -38,7 +38,7 @@ public class ClientP2P
             .GetJsonAsync<Order>();
     }
 
-    public async Task<IFlurlResponse> CreateOrder(OrderDto orderDto)
+    public async Task<IFlurlResponse> CreateOrder(OrderCreateDto orderDto)
     {
         return await $"p2p/orders".InternalApi()
             .PostJsonAsync(orderDto);
