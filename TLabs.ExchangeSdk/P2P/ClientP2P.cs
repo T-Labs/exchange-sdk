@@ -130,7 +130,7 @@ public class ClientP2P
 
     public async Task<UserInfoDto> GetUserOrdersInfo(string userId)
     {
-        return await $"p2p/users/info{userId}".InternalApi()
+        return await $"p2p/users/info/{userId}".InternalApi()
             .GetJsonAsync<UserInfoDto>();
     }
 }
