@@ -50,10 +50,11 @@ public class ClientP2P
             .PostAsync();
     }
 
-    public async Task<List<Deal>> GetDeals(string dealUserId = null, [FromQuery] List<DealStatus> statuses = null)
+    public async Task<List<Deal>> GetDeals(string dealUserId = null, string orderUserId = null, [FromQuery] List<DealStatus> statuses = null)
     {
         return await $"p2p/deals".InternalApi()
             .SetQueryParam(nameof(dealUserId), dealUserId)
+            .SetQueryParam(nameof(orderUserId), orderUserId)
             .SetQueryParam(nameof(statuses), statuses)
             .GetJsonAsync<List<Deal>>();
     }
