@@ -7,8 +7,13 @@ namespace TLabs.ExchangeSdk.P2P;
 public class Deal
 {
     public Guid Id { get; set; }
+
     public Guid OrderId { get; set; }
-    public int PaymentSystemId { get; set; }
+    public Order Order { get; set; }
+
+    public Guid RequisiteId { get; set; }
+    public Requisite Requisite { get; set; }
+
     public string DealUserId { get; set; }
 
     public decimal Price { get; set; }
@@ -25,10 +30,13 @@ public class Deal
     public DateTimeOffset? DateCryptoReleased { get; set; }
     public DateTimeOffset? DateProcessEnded { get; set; }
     public long DisplayId { get; set; }
-    public Order Order { get; set; }
 
     [NotMapped]
     public string UserNickname { get; set; }
+
+    public override string ToString() => $"{nameof(Deal)}(OrderId:{OrderId}, Crypto:{CryptoAmount} {Order?.ExchangeCurrencyCode}, " +
+        $"Fiat:{FiatAmount} {Order?.PaymentCurrencyCode}, " +
+        $"DealUserId:{DealUserId})";
 }
 
 public enum DealStatus

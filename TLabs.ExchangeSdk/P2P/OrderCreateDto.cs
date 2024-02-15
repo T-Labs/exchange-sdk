@@ -1,5 +1,6 @@
 using RabbitMQ.Client;
 using System;
+using System.Collections.Generic;
 
 namespace TLabs.ExchangeSdk.P2P;
 
@@ -13,6 +14,8 @@ public class OrderCreateDto
     public string ExchangeCurrencyCode { get; set; }
 
     public string PaymentCurrencyCode { get; set; }
+
+    public List<Guid> RequisiteIds { get; set; }
 
     public decimal Price { get; set; }
 
@@ -29,4 +32,7 @@ public class OrderCreateDto
     public int MinDaysSinceRegistration { get; set; }
     public int MinOrdersRequired { get; set; }
     public int MinOrderCompletionRate { get; set; }
+
+    public override string ToString() => $"{nameof(OrderCreateDto)}({ExchangeCurrencyCode}-{PaymentCurrencyCode}, " +
+        $"RequisitesCount:{RequisiteIds.Count} user:{UserId})";
 }

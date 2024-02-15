@@ -40,10 +40,16 @@ public class Order
     public int MinDaysSinceRegistration { get; set; }
     public int MinOrdersRequired { get; set; }
     public int MinOrderCompletionRate { get; set; }
+
+    public List<Requisite> Requisites { get; set; }
+
     public List<Deal> Deals { get; set; }
 
     [NotMapped]
     public string UserNickname { get; set; }
+
+    public override string ToString() => $"{nameof(Order)}({ExchangeCurrencyCode}-{PaymentCurrencyCode}, {(IsBuyingOnExchange ? "buy" : "sell")}" +
+        $"Price:{Price}, TotalAmount:{TotalOrderAmount}, RequisitesCount:{Requisites.Count}, user:{UserId})";
 }
 
 public enum OrderStatus
