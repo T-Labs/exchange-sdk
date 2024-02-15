@@ -49,7 +49,7 @@ public class Order
     public string UserNickname { get; set; }
 
     public override string ToString() => $"{nameof(Order)}({ExchangeCurrencyCode}-{PaymentCurrencyCode}, {(IsBuyingOnExchange ? "buy" : "sell")}" +
-        $"Price:{Price}, TotalAmount:{TotalOrderAmount}, RequisitesCount:{Requisites.Count}, user:{UserId})";
+        $"Price:{Price}, TotalAmount:{TotalOrderAmount}, RequisitesCount:{Requisites?.Count}, user:{UserId})";
 }
 
 public enum OrderStatus
