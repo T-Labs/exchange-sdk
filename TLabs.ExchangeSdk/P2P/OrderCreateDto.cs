@@ -1,4 +1,3 @@
-using RabbitMQ.Client;
 using System;
 using System.Collections.Generic;
 
@@ -34,5 +33,5 @@ public class OrderCreateDto
     public int MinOrderCompletionRate { get; set; }
 
     public override string ToString() => $"{nameof(OrderCreateDto)}({ExchangeCurrencyCode}-{PaymentCurrencyCode}, " +
-        $"RequisitesCount:{RequisiteIds.Count} user:{UserId})";
+                                         $"RequisitesCount:{RequisiteIds?.Count} user:{UserId})";
 }

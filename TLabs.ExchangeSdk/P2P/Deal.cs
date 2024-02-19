@@ -26,6 +26,7 @@ public class Deal
 
     public DealStatus Status { get; set; }
     public DateTimeOffset DateCreated { get; set; }
+    public DateTimeOffset? DatePaymentSystemConfirmed { get; set; }
     public DateTimeOffset? DatePaymentSystemSent { get; set; }
     public DateTimeOffset? DateCryptoReleased { get; set; }
     public DateTimeOffset? DateProcessEnded { get; set; }
@@ -42,9 +43,10 @@ public class Deal
 public enum DealStatus
 {
     CreatedAwaitingPaymentSystem = 10,
-    PaymentSystemSentAwaitingCryptoRelease = 20,
-    CryptoReleased = 30,
-    Completed = 40,
-    Canceled = 50,
-    Appealed = 60,
+    PaymentSystemConfirmed = 20,
+    PaymentSystemSent = 30,
+    CryptoReleased = 40,
+    Completed = 50,
+    Canceled = 60,
+    Appealed = 70,
 }
