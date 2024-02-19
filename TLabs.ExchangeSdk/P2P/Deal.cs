@@ -43,8 +43,8 @@ public class Deal
 public enum DealStatus
 {
     CreatedAwaitingPaymentSystem = 10,
-    PaymentSystemConfirmed = 20,
-    PaymentSystemSent = 30,
+    PaymentSystemSent = 20,
+    PaymentSystemConfirmed = 30,
     CryptoReleased = 40,
     Completed = 50,
     Canceled = 60,
