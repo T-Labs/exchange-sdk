@@ -71,11 +71,12 @@ public class ClientP2P
             .PostJsonAsync(dealDto);
     }
 
-    public async Task<IFlurlResponse> UpdateDealStatus(Guid id, DealStatus dealStatus)
+    public async Task<Deal> UpdateDealStatus(Guid id, DealStatus dealStatus)
     {
         return await $"p2p/deals/{id}/update-status".InternalApi()
             .SetQueryParam(nameof(dealStatus), dealStatus)
-            .PostAsync();
+            .PostAsync()
+            .ReceiveJson<Deal>(); ;
     }
 
     public async Task<List<Requisite>> GetActiveRequisites(string userId = null)
