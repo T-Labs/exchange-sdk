@@ -1,7 +1,8 @@
-﻿namespace TLabs.ExchangeSdk.P2P;
+namespace TLabs.ExchangeSdk.P2P;
 
 public class UserInfoDto
 {
+    public string UserNickname { get; set; }
     public int CompletedBuys { get; set; }
     public int CompletedSells { get; set; }
     public int HighRatingBuys { get; set; }
