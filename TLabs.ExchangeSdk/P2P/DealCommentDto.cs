@@ -9,4 +9,5 @@ public class DealCommentDto
     public string FromUserId { get; set; }
     public bool IsPositive { get; set; }
     public string Comment { get; set; }
+    public bool IsAnonymously { get; set; }
 }
