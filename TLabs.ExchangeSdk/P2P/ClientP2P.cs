@@ -50,7 +50,8 @@ public class ClientP2P
             .PostAsync();
     }
 
-    public async Task<List<Deal>> GetDeals(string dealUserId = null, string orderUserId = null, [FromQuery] List<DealStatus> statuses = null)
+    public async Task<List<Deal>> GetDeals(string dealUserId = null, string orderUserId = null,
+        [FromQuery] List<DealStatus> statuses = null)
     {
         return await $"p2p/deals".InternalApi()
             .SetQueryParam(nameof(dealUserId), dealUserId)
@@ -133,5 +134,18 @@ public class ClientP2P
     {
         return await $"p2p/users/info/{userId}".InternalApi()
             .GetJsonAsync<UserInfoDto>();
+    }
+
+    public async Task<List<DealComment>> GetDealComments(Guid dealId)
+    {
+        return await $"p2p/deal-coments/{dealId}".InternalApi()
+            .SetQueryParam(nameof(dealId), dealId)
+            .GetJsonAsync<List<DealComment>>();
+    }
+
+    public async Task<DealComment> CreateDealComment(DealCommentDto dealCommentDto)
+    {
+        return await $"p2p/deal-coments".InternalApi()
+            .PostJsonAsync<DealComment>(dealCommentDto);
     }
 }
