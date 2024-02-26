@@ -66,19 +66,17 @@ public class ClientP2P
             .GetJsonAsync<Deal>();
     }
 
-    public async Task<IFlurlResponse> CreateDeal(DealCreateDto dealDto)
+    public async Task<Deal> CreateDeal(DealCreateDto dealDto)
     {
         return await $"p2p/deals".InternalApi()
-            .PostJsonAsync(dealDto);
+            .PostJsonAsync<Deal>(dealDto);
     }
 
     public async Task<Deal> UpdateDealStatus(Guid id, DealStatus dealStatus)
     {
         return await $"p2p/deals/{id}/update-status".InternalApi()
             .SetQueryParam(nameof(dealStatus), dealStatus)
-            .PostAsync()
-            .ReceiveJson<Deal>();
-        ;
+            .PostJsonAsync<Deal>(null);
     }
 
     public async Task<List<Requisite>> GetActiveRequisites(string userId = null)
