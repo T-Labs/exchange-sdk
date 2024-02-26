@@ -138,14 +138,14 @@ public class ClientP2P
 
     public async Task<List<DealComment>> GetDealComments(Guid dealId)
     {
-        return await $"p2p/deal-coments/{dealId}".InternalApi()
+        return await $"p2p/deal-comments/{dealId}".InternalApi()
             .SetQueryParam(nameof(dealId), dealId)
             .GetJsonAsync<List<DealComment>>();
     }
 
     public async Task<DealComment> CreateDealComment(DealCommentDto dealCommentDto)
     {
-        return await $"p2p/deal-coments".InternalApi()
+        return await $"p2p/deal-comments".InternalApi()
             .PostJsonAsync<DealComment>(dealCommentDto);
     }
 }
