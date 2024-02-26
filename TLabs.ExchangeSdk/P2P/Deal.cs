@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using TLabs.DotnetHelpers;
 
@@ -31,7 +32,7 @@ public class Deal
     public DateTimeOffset? DateCryptoReleased { get; set; }
     public DateTimeOffset? DateProcessEnded { get; set; }
     public long DisplayId { get; set; }
-
+    public List<DealComment> Comments { get; set; }
     [NotMapped]
     public string UserNickname { get; set; }
 

@@ -24,5 +24,6 @@ public class DealComment
     [Required]
     public string Comment { get; set; }
 
+    public bool IsAnonymously { get; set; }
     public DateTimeOffset DateCreated { get; set; }
 }
