@@ -38,10 +38,15 @@ public class ClientP2P
             .GetJsonAsync<Order>();
     }
 
-    public async Task<IFlurlResponse> CreateOrder(OrderCreateDto orderDto)
+    public async Task<Order> CreateOrder(OrderCreateDto orderDto)
     {
         return await $"p2p/orders".InternalApi()
-            .PostJsonAsync(orderDto);
+            .PostJsonAsync<Order>(orderDto);
+    }
+    public async Task<Order> CloneOrder(Guid id, [FromBody] OrderCreateDto orderDto)
+    {
+        return await $"p2p/orders/{id}/clone".InternalApi()
+            .PostJsonAsync<Order>(orderDto);
     }
 
     public async Task<IFlurlResponse> CancelOrder(Guid id)
