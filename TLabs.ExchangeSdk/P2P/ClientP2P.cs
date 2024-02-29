@@ -43,6 +43,7 @@ public class ClientP2P
         return await $"p2p/orders".InternalApi()
             .PostJsonAsync<Order>(orderDto);
     }
+
     public async Task<Order> CloneOrder(Guid id, [FromBody] OrderCreateDto orderDto)
     {
         return await $"p2p/orders/{id}/clone".InternalApi()
@@ -141,10 +142,12 @@ public class ClientP2P
             .GetJsonAsync<UserInfoDto>();
     }
 
-    public async Task<List<DealComment>> GetDealComments(Guid dealId)
+    public async Task<List<DealComment>> GetDealComments(Guid? dealId, string fromUserId = null, string toUserId = null)
     {
-        return await $"p2p/deal-comments/{dealId}".InternalApi()
+        return await $"p2p/deal-comments/".InternalApi()
             .SetQueryParam(nameof(dealId), dealId)
+            .SetQueryParam(nameof(fromUserId), fromUserId)
+            .SetQueryParam(nameof(toUserId), toUserId)
             .GetJsonAsync<List<DealComment>>();
     }
 
