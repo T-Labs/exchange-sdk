@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TLabs.ExchangeSdk.P2P;
 
@@ -26,4 +27,6 @@ public class DealComment
 
     public bool IsAnonymously { get; set; }
     public DateTimeOffset DateCreated { get; set; }
+    [NotMapped]
+    public string UserNickname { get; set; }
 }
