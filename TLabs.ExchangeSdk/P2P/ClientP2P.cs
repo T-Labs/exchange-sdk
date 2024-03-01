@@ -160,7 +160,7 @@ public class ClientP2P
   
     public async Task<List<UserBlock>> GetUserBlockList(string userId = null, string blockedUserId = null)
     {
-        return await $"p2p/user-block/{userId}".InternalApi()
+        return await $"p2p/user-block".InternalApi()
             .SetQueryParam(nameof(blockedUserId), blockedUserId)
             .GetJsonAsync<List<UserBlock>>();
     }
