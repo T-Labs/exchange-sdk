@@ -158,7 +158,7 @@ public class ClientP2P
     }
 
   
-    public async Task<List<UserBlock>> GetUserBlacklist(string userId = null, string blockedUserId = null)
+    public async Task<List<UserBlock>> GetUserBlockList(string userId = null, string blockedUserId = null)
     {
         return await $"p2p/user-block/{userId}".InternalApi()
             .SetQueryParam(nameof(blockedUserId), blockedUserId)
@@ -166,11 +166,10 @@ public class ClientP2P
     }
 
   
-    public async Task<UserBlock> BlockUser(string userId, string blockedUserId)
+    public async Task<UserBlock> BlockUser([FromBody] UserBlockCreateDto userBlockCreateDto)
     {
-        return await $"p2p/user-block/{userId}/block/".InternalApi()
-            .SetQueryParam(nameof(blockedUserId), blockedUserId)
-            .PostJsonAsync<UserBlock>(null);
+        return await $"p2p/user-block/block/".InternalApi()
+            .PostJsonAsync<UserBlock>(userBlockCreateDto);
     }
 
     

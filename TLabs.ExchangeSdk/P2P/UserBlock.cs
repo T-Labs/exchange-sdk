@@ -1,17 +1,16 @@
+using System.ComponentModel.DataAnnotations.Schema;
+using System;
+
 namespace TLabs.ExchangeSdk.P2P;
 
 public class UserBlock
 {
     public string UserId { get; set; }
     public string BlockedUserId { get; set; }
+    public string Comment { get; set; }
 
-    public UserBlock()
-    {
-    }
+    [NotMapped]
+    public string UserNickname { get; set; }
 
-    public UserBlock(string userId, string blockedUserId)
-    {
-        UserId = userId;
-        BlockedUserId = blockedUserId;
-    }
+    public DateTimeOffset BlockingDate { get; set; }
 }
