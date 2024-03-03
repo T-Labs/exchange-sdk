@@ -9,7 +9,6 @@ public class RequisiteDto
 
     public string PaymentMethodCurrencyCode { get; set; }
 
-    [Required]
     public string UserId { get; set; }
 
     [Required]
