@@ -106,14 +106,14 @@ public class ClientP2P
 
     public async Task<IFlurlResponse> UpdateRequisite(Guid id, RequisiteDto requisiteDto)
     {
-        return await $"p2p/requisites/{id}/update".InternalApi()
-            .PostJsonAsync(requisiteDto);
+        return await $"p2p/requisites/{id}".InternalApi()
+            .PutJsonAsync(requisiteDto);
     }
 
     public async Task<IFlurlResponse> DeleteRequisite(Guid id)
     {
-        return await $"p2p/requisites/{id}/delete".InternalApi()
-            .PostJsonAsync(id);
+        return await $"p2p/requisites/{id}".InternalApi()
+            .DeleteAsync();
     }
 
     public async Task<PaymentMethod> GetPaymentMethodByCurrencyCode(string exchangeCurrencyCode)

@@ -10,7 +10,6 @@ public class Requisite
 
     public int PaymentSystemId { get; set; }
 
-    [Required]
     public string PaymentMethodCurrencyCode { get; set; }
 
     [Required]
