@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using TLabs.DotnetHelpers;
 
 namespace TLabs.ExchangeSdk.P2P;
 
@@ -6,10 +7,8 @@ public class RequisiteDto
 {
     public int PaymentSystemId { get; set; }
 
-    [Required]
     public string PaymentMethodCurrencyCode { get; set; }
 
-    [Required]
     public string UserId { get; set; }
 
     [Required]
@@ -21,4 +20,14 @@ public class RequisiteDto
     public string Comment { get; set; }
     public string BankBranch { get; set; }
     public string BankName { get; set; }
+
+    public void Trim()
+    {
+        PaymentMethodCurrencyCode = PaymentMethodCurrencyCode?.Trim()?.NullIfEmpty();
+        CardNumber = CardNumber?.Trim()?.NullIfEmpty();
+        Name = Name?.Trim()?.NullIfEmpty();
+        Comment = Comment?.Trim()?.NullIfEmpty();
+        BankBranch = BankBranch?.Trim()?.NullIfEmpty();
+        BankName = BankName?.Trim()?.NullIfEmpty();
+    }
 }
