@@ -15,8 +15,8 @@ public class UserInfoDto
         ? 100
         : ((decimal)CompletedRecentDealsCount / RecentDealsCount).RoundDown(2);
 
-    public int LikeCounts { get; set; }
-    public int DislikeCounts { get; set; }
+    public int LikesCount { get; set; }
+    public int DislikesCount { get; set; }
     public decimal RatingBasedOnReviews { get; set; }
 
     public int AverageTransferTimeMins { get; set; }
