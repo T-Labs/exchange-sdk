@@ -160,7 +160,7 @@ public class ClientP2P
   
     public async Task<List<UserBlock>> GetUserBlockList(string userId = null, string blockedUserId = null)
     {
-        return await $"p2p/user-block".InternalApi()
+        return await $"p2p/user-blocks".InternalApi()
             .SetQueryParam(nameof(blockedUserId), blockedUserId)
             .GetJsonAsync<List<UserBlock>>();
     }
@@ -168,7 +168,7 @@ public class ClientP2P
   
     public async Task<UserBlock> BlockUser([FromBody] UserBlockCreateDto userBlockCreateDto)
     {
-        return await $"p2p/user-block/block/".InternalApi()
+        return await $"p2p/user-blocks".InternalApi()
             .PostJsonAsync<UserBlock>(userBlockCreateDto);
     }
 
@@ -176,7 +176,7 @@ public class ClientP2P
     public async Task<IFlurlResponse> RemoveBlockUser(string userId, string unblockedUserId)
     {
 
-        return await $"p2p/user-block/{userId}/block/".InternalApi()
+        return await $"p2p/user-blocks/{userId}".InternalApi()
             .SetQueryParam(nameof(unblockedUserId), unblockedUserId)
             .DeleteAsync();
     }
