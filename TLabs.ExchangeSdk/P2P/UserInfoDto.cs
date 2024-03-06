@@ -12,7 +12,7 @@ public class UserInfoDto
     public int CompletedSellsCount { get; set; }
 
     public decimal CompletedRecentDealsPercentage => RecentDealsCount == 0
-        ? 100
+        ? 1
         : ((decimal)CompletedRecentDealsCount / RecentDealsCount).RoundDown(2);
 
     public int LikesCount { get; set; }
