@@ -123,9 +123,10 @@ public class ClientP2P
             .GetJsonAsync<PaymentMethod>();
     }
 
-    public async Task<List<PaymentCurrency>> GetPaymentCurrencies()
+    public async Task<List<PaymentCurrency>> GetPaymentCurrencies([FromQuery] int? paymentSystemId)
     {
         return await $"p2p/payment-currencies".InternalApi()
+            .SetQueryParam(nameof(paymentSystemId), paymentSystemId)
             .GetJsonAsync<List<PaymentCurrency>>();
     }
 
