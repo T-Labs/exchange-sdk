@@ -160,7 +160,7 @@ public class ClientP2P
 
     public async Task<DealComment> UpdateDealComment([FromBody] DealCommentDto dealCommentDto)
     {
-        return await $"p2p/deal-comments/update".InternalApi()
+        return await $"p2p/deal-comments".InternalApi()
             .PutJsonAsync<DealComment>(dealCommentDto);
     }
 
