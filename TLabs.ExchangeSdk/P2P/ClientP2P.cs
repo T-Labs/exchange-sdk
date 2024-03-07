@@ -161,7 +161,7 @@ public class ClientP2P
     public async Task<DealComment> UpdateDealComment([FromBody] DealCommentDto dealCommentDto)
     {
         return await $"p2p/deal-comments/update".InternalApi()
-            .PostJsonAsync<DealComment>(dealCommentDto);
+            .PutJsonAsync<DealComment>(dealCommentDto);
     }
 
     public async Task<IFlurlResponse> DeleteDealComment(Guid dealCommentId, string fromUserId)
