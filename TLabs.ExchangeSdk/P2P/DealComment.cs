@@ -29,4 +29,5 @@ public class DealComment
     public DateTimeOffset DateCreated { get; set; }
     [NotMapped]
     public string UserNickname { get; set; }
+    public bool IsDelete { get; set; }
 }

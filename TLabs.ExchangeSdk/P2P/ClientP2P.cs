@@ -164,9 +164,17 @@ public class ClientP2P
             .PostJsonAsync<DealComment>(dealCommentDto);
     }
 
+    public async Task<IFlurlResponse> DeleteDealComment(Guid dealCommentId, string fromUserId)
+    {
+        return await $"p2p/deal-comments/{dealCommentId}".InternalApi()
+            .SetQueryParam(nameof(fromUserId), fromUserId)
+            .DeleteAsync();
+    }
+
     public async Task<List<UserBlock>> GetUserBlockList(string userId = null, string blockedUserId = null)
     {
         return await $"p2p/user-blocks".InternalApi()
+            .SetQueryParam(nameof(userId), userId)
             .SetQueryParam(nameof(blockedUserId), blockedUserId)
             .GetJsonAsync<List<UserBlock>>();
     }
@@ -177,7 +185,7 @@ public class ClientP2P
             .PostJsonAsync<UserBlock>(userBlockCreateDto);
     }
 
-    public async Task<IFlurlResponse> RemoveBlockUser(string userId, string unblockedUserId)
+    public async Task<IFlurlResponse> DeleteBlockUser(string userId, string unblockedUserId)
     {
         return await $"p2p/user-blocks/{userId}".InternalApi()
             .SetQueryParam(nameof(unblockedUserId), unblockedUserId)
