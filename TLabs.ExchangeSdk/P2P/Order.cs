@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
+using TLabs.ExchangeSdk.P2P.Deals;
 
 namespace TLabs.ExchangeSdk.P2P;
 
@@ -47,9 +48,12 @@ public class Order
 
     [NotMapped]
     public string UserNickname { get; set; }
+
     [NotMapped]
     public OrderUserInfo UserInfo { get; set; }
-    public override string ToString() => $"{nameof(Order)}({ExchangeCurrencyCode}-{PaymentCurrencyCode}, {(IsBuyingOnExchange ? "buy" : "sell")}" +
+
+    public override string ToString() =>
+        $"{nameof(Order)}({ExchangeCurrencyCode}-{PaymentCurrencyCode}, {(IsBuyingOnExchange ? "buy" : "sell")}" +
         $"Price:{Price}, TotalAmount:{TotalOrderAmount}, RequisitesCount:{Requisites?.Count}, user:{UserId})";
 }
 

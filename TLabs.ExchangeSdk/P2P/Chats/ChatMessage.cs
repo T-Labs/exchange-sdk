@@ -1,0 +1,29 @@
+using System;
+using System.ComponentModel.DataAnnotations;
+
+namespace TLabs.ExchangeSdk.P2P.Chats
+{
+    public class ChatMessage
+    {
+        [Key]
+        public Guid Id { get; set; }
+
+        [Required]
+        public Guid DealId { get; set; }
+
+        /// <summary>Can be order.UserId, deal.DealUserId, deal.AppealAdminId or "system"</summary>
+        [Required]
+        public string UserId { get; set; }
+
+        public DateTimeOffset DateCreated { get; set; }
+
+        [Required]
+        public string Text { get; set; }
+
+        /// <summary>True if message was read by the opposite user</summary>
+        public bool WasRead { get; set; }
+
+        const string SystemUserId = "system";
+        public bool IsSystemMessage => UserId == SystemUserId;
+    }
+}
