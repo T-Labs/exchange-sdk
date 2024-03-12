@@ -2,8 +2,11 @@ using Flurl.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Threading.Tasks;
 using TLabs.DotnetHelpers;
+using TLabs.ExchangeSdk.P2P.Chats;
+using TLabs.ExchangeSdk.P2P.Deals;
 
 namespace TLabs.ExchangeSdk.P2P;
 
@@ -191,5 +194,46 @@ public class ClientP2P
         return await $"p2p/user-blocks/{userId}".InternalApi()
             .SetQueryParam(nameof(unblockedUserId), unblockedUserId)
             .DeleteAsync();
+    }
+
+    public async Task<List<ChatMessage>> GetMessage(Guid dealId)
+    {
+        return await $"p2p/chats".InternalApi()
+            .SetQueryParam(nameof(dealId), dealId)
+            .GetJsonAsync<List<ChatMessage>>();
+    }
+
+    public async Task<ChatMessage> GetMessages(Guid id)
+    {
+        return await $"p2p/chats/{id}".InternalApi()
+            .GetJsonAsync<ChatMessage>();
+    }
+
+    public async Task<IFlurlResponse> AddMessage([FromBody] ChatMessageCreateDto dto)
+    {
+        return await $"p2p/chats".InternalApi()
+            .PostJsonAsync(dto);
+    }
+
+    public async Task<IFlurlResponse> SetMessageWasRead(Guid id)
+    {
+        return await $"p2p/chats/{id}/read".InternalApi()
+            .PostAsync();
+    }
+
+    public async Task<IFlurlResponse> UploadImage([FromBody] ChatFile model)
+    {
+        return await $"p2p/chats/files".InternalApi()
+            .PostJsonAsync(model);
+    }
+
+    public async Task<Stream> GetFileStream(Guid id)
+    {
+        var response = await $"p2p/chats/files/{id}".InternalApi().GetAsync();
+        if (!response.ResponseMessage.IsSuccessStatusCode)
+            throw new FileNotFoundException("File not found or error occurred.");
+
+        var stream = await response.ResponseMessage.Content.ReadAsStreamAsync();
+        return stream;
     }
 }

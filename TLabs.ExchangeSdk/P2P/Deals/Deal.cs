@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using TLabs.DotnetHelpers;
 
-namespace TLabs.ExchangeSdk.P2P;
+namespace TLabs.ExchangeSdk.P2P.Deals;
 
 public class Deal
 {

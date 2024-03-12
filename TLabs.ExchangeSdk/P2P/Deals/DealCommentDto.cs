@@ -1,6 +1,6 @@
 using System;
 
-namespace TLabs.ExchangeSdk.P2P;
+namespace TLabs.ExchangeSdk.P2P.Deals;
 
 public class DealCommentDto
 {
