@@ -27,7 +27,8 @@ public class DealComment
 
     public bool IsAnonymously { get; set; }
     public DateTimeOffset DateCreated { get; set; }
+    public bool IsDelete { get; set; }
+
     [NotMapped]
     public string UserNickname { get; set; }
-    public bool IsDelete { get; set; }
 }

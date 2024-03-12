@@ -33,10 +33,13 @@ public class Deal
     public DateTimeOffset? DateProcessEnded { get; set; }
     public long DisplayId { get; set; }
     public List<DealComment> Comments { get; set; }
+    public decimal USDTRate { get; set; }
+
     [NotMapped]
     public string UserNickname { get; set; }
 
-    public override string ToString() => $"{nameof(Deal)}(OrderId:{OrderId}, Crypto:{CryptoAmount} {Order?.ExchangeCurrencyCode}, " +
+    public override string ToString() =>
+        $"{nameof(Deal)}(OrderId:{OrderId}, Crypto:{CryptoAmount} {Order?.ExchangeCurrencyCode}, " +
         $"Fiat:{FiatAmount} {Order?.PaymentCurrencyCode}, " +
         $"DealUserId:{DealUserId})";
 }
