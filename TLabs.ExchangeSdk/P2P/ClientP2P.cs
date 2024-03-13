@@ -1,8 +1,10 @@
 using Flurl.Http;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Net.Http;
 using System.Threading.Tasks;
 using TLabs.DotnetHelpers;
 using TLabs.ExchangeSdk.P2P.Chats;
@@ -126,14 +128,14 @@ public class ClientP2P
             .GetJsonAsync<PaymentMethod>();
     }
 
-    public async Task<List<PaymentCurrency>> GetPaymentCurrencies([FromQuery] int? paymentSystemId)
+    public async Task<List<PaymentCurrency>> GetPaymentCurrencies([FromQuery] int? paymentSystemId = null)
     {
         return await $"p2p/payment-currencies".InternalApi()
             .SetQueryParam(nameof(paymentSystemId), paymentSystemId)
             .GetJsonAsync<List<PaymentCurrency>>();
     }
 
-    public async Task<List<PaymentSystem>> GetPaymentSystems(string? currencyCode)
+    public async Task<List<PaymentSystem>> GetPaymentSystems(string currencyCode = null)
     {
         return await $"p2p/payment-systems".InternalApi()
             .SetQueryParam(nameof(currencyCode), currencyCode)
@@ -221,10 +223,10 @@ public class ClientP2P
             .PostAsync();
     }
 
-    public async Task<IFlurlResponse> UploadImage([FromBody] ChatFile model)
+    public async Task<IFlurlResponse> UploadFile(MultipartFormDataContent data)
     {
-        return await $"p2p/chats/files".InternalApi()
-            .PostJsonAsync(model);
+        return await $"p2p/chats/upload-file".InternalApi()
+            .PostAsync(data);
     }
 
     public async Task<Stream> GetFileStream(Guid id)
