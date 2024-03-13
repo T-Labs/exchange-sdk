@@ -196,14 +196,14 @@ public class ClientP2P
             .DeleteAsync();
     }
 
-    public async Task<List<ChatMessage>> GetMessage(Guid dealId)
+    public async Task<List<ChatMessage>> GetMessages(Guid dealId)
     {
         return await $"p2p/chats".InternalApi()
             .SetQueryParam(nameof(dealId), dealId)
             .GetJsonAsync<List<ChatMessage>>();
     }
 
-    public async Task<ChatMessage> GetMessages(Guid id)
+    public async Task<ChatMessage> GetMessage(Guid id)
     {
         return await $"p2p/chats/{id}".InternalApi()
             .GetJsonAsync<ChatMessage>();

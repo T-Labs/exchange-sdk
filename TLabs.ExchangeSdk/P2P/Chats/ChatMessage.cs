@@ -17,8 +17,8 @@ namespace TLabs.ExchangeSdk.P2P.Chats
 
         public DateTimeOffset DateCreated { get; set; }
 
-        [Required]
         public string Text { get; set; }
+        public ChatFile ChatFile { get; set; }
 
         /// <summary>True if message was read by the opposite user</summary>
         public bool WasRead { get; set; }
