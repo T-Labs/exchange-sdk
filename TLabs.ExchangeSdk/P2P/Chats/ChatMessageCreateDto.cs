@@ -11,6 +11,7 @@ namespace TLabs.ExchangeSdk.P2P.Chats
         [Required]
         public string UserId { get; set; }
 
+        [Required]
         public string Text { get; set; }
     }
 }
