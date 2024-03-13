@@ -9,7 +9,7 @@ namespace TLabs.ExchangeSdk.P2P.Chats
         public Guid Id { get; set; }
 
         [Required]
-        public Guid DealId { get; set; }
+        public Guid ChatMessageId { get; set; }
 
         [Required]
         public string Extension { get; set; }
