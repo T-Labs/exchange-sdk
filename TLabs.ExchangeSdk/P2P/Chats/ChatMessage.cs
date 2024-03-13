@@ -15,15 +15,16 @@ namespace TLabs.ExchangeSdk.P2P.Chats
         [Required]
         public string UserId { get; set; }
 
-        public DateTimeOffset DateCreated { get; set; }
+        public Guid? ChatFileId { get; set; }
 
-        public string Text { get; set; }
         public ChatFile ChatFile { get; set; }
+        public string Text { get; set; }
+        public DateTimeOffset DateCreated { get; set; }
 
         /// <summary>True if message was read by the opposite user</summary>
         public bool WasRead { get; set; }
 
-        const string SystemUserId = "system";
+        public const string SystemUserId = "system";
         public bool IsSystemMessage => UserId == SystemUserId;
     }
 }
