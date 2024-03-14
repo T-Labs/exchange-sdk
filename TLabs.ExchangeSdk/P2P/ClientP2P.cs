@@ -1,5 +1,4 @@
 using Flurl.Http;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -198,16 +197,18 @@ public class ClientP2P
             .DeleteAsync();
     }
 
-    public async Task<List<ChatMessage>> GetMessages(Guid dealId)
+    public async Task<List<ChatMessage>> GetMessages(Guid dealId, string userId)
     {
         return await $"p2p/chats".InternalApi()
             .SetQueryParam(nameof(dealId), dealId)
+            .SetQueryParam(nameof(userId), userId)
             .GetJsonAsync<List<ChatMessage>>();
     }
 
-    public async Task<ChatMessage> GetMessage(Guid id)
+    public async Task<ChatMessage> GetMessage(Guid id, string userId)
     {
         return await $"p2p/chats/{id}".InternalApi()
+            .SetQueryParam(nameof(userId), userId)
             .GetJsonAsync<ChatMessage>();
     }
 
@@ -217,9 +218,10 @@ public class ClientP2P
             .PostJsonAsync(dto);
     }
 
-    public async Task<IFlurlResponse> SetMessageWasRead(Guid id)
+    public async Task<IFlurlResponse> SetMessageWasRead(Guid id, [FromQuery] string userId)
     {
         return await $"p2p/chats/{id}/read".InternalApi()
+            .SetQueryParam(nameof(userId), userId)
             .PostAsync();
     }
 
@@ -229,9 +231,11 @@ public class ClientP2P
             .PostAsync(data);
     }
 
-    public async Task<Stream> GetFileStream(Guid id)
+    public async Task<Stream> GetFileStream(Guid id, string userId)
     {
-        var response = await $"p2p/chats/files/{id}".InternalApi().GetAsync();
+        var response = await $"p2p/chats/files/{id}".InternalApi()
+            .SetQueryParam(nameof(userId), userId)
+            .GetAsync();
         if (!response.ResponseMessage.IsSuccessStatusCode)
             throw new FileNotFoundException("File not found or error occurred.");
 

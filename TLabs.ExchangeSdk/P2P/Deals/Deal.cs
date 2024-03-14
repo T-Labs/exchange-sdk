@@ -34,6 +34,7 @@ public class Deal
     public long DisplayId { get; set; }
     public List<DealComment> Comments { get; set; }
     public decimal USDTRate { get; set; }
+    public string AppealAdminId { get; set; }
 
     [NotMapped]
     public string UserNickname { get; set; }
