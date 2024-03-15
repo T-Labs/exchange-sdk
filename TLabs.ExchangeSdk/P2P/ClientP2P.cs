@@ -2,7 +2,6 @@ using Flurl.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
 using TLabs.DotnetHelpers;
@@ -239,8 +238,14 @@ public class ClientP2P
 
     public async Task<ChatFile> GetChatFile(Guid id, string userId)
     {
-        return  await $"p2p/chats/files/{id}".InternalApi()
+        return await $"p2p/chats/files/{id}".InternalApi()
             .SetQueryParam(nameof(userId), userId)
             .GetJsonAsync<ChatFile>();
+    }
+
+    public async Task<string> GetChatFileMetadata(Guid id)
+    {
+        return await $"p2p/chats/files/{id}/metadata".InternalApi()
+            .GetJsonAsync<string>();
     }
 }
