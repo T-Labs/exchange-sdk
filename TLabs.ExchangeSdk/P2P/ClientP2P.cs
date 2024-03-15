@@ -246,6 +246,6 @@ public class ClientP2P
     public async Task<string> GetChatFileMetadata(Guid id)
     {
         return await $"p2p/chats/files/{id}/metadata".InternalApi()
-            .GetJsonAsync<string>();
+            .GetStringAsync();
     }
 }
