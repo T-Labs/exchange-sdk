@@ -89,6 +89,12 @@ public class ClientP2P
             .PostJsonAsync<Deal>(null);
     }
 
+    public async Task<IFlurlResponse> CancelDeal(Guid id)
+    {
+        return await $"p2p/deals/{id}/cancel".InternalApi()
+            .PostAsync();
+    }
+
     public async Task<List<Requisite>> GetActiveRequisites(string userId = null)
     {
         return await $"p2p/requisites".InternalApi()
