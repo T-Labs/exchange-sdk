@@ -11,6 +11,11 @@ namespace TLabs.ExchangeSdk.P2P.Chats
         [Required]
         public Guid ChatMessageId { get; set; }
 
+        public ChatMessage ChatMessage { get; set; }
+
+        [Required]
+        public string FileName { get; set; }
+
         [Required]
         public string Extension { get; set; }
 

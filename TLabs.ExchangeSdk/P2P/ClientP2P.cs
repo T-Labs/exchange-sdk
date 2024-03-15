@@ -237,15 +237,10 @@ public class ClientP2P
             .PostAsync(data);
     }
 
-    public async Task<Stream> GetFileStream(Guid id, string userId)
+    public async Task<ChatFile> GetChatFile(Guid id, string userId)
     {
-        var response = await $"p2p/chats/files/{id}".InternalApi()
+        return  await $"p2p/chats/files/{id}".InternalApi()
             .SetQueryParam(nameof(userId), userId)
-            .GetAsync();
-        if (!response.ResponseMessage.IsSuccessStatusCode)
-            throw new FileNotFoundException("File not found or error occurred.");
-
-        var stream = await response.ResponseMessage.Content.ReadAsStreamAsync();
-        return stream;
+            .GetJsonAsync<ChatFile>();
     }
 }
