@@ -27,10 +27,13 @@ public class Deal
 
     public DealStatus Status { get; set; }
     public DateTimeOffset DateCreated { get; set; }
-    public DateTimeOffset? DatePaymentSystemConfirmed { get; set; }
     public DateTimeOffset? DatePaymentSystemSent { get; set; }
-    public DateTimeOffset? DateCryptoReleased { get; set; }
+    public DateTimeOffset? DatePaymentSystemConfirmed { get; set; }
+    public DateTimeOffset? DateCanceled { get; set; }
+
+    /// <summary> For CanceledCryptoUnfrozen status after Crypto Unfreeze and CryptoRealese status after FinishDeal</summary>
     public DateTimeOffset? DateProcessEnded { get; set; }
+
     public long DisplayId { get; set; }
     public List<DealComment> Comments { get; set; }
     public decimal USDTRate { get; set; }
@@ -41,17 +44,16 @@ public class Deal
 
     public override string ToString() =>
         $"{nameof(Deal)}(OrderId:{OrderId}, Crypto:{CryptoAmount} {Order?.ExchangeCurrencyCode}, " +
-        $"Fiat:{FiatAmount} {Order?.PaymentCurrencyCode}, " +
-        $"DealUserId:{DealUserId})";
+        $"Fiat:{FiatAmount} {Order?.PaymentCurrencyCode}, DealUserId:{DealUserId}, DealStatus:{Status})";
 }
 
 public enum DealStatus
 {
     CreatedAwaitingPaymentSystem = 10,
     PaymentSystemSent = 20,
-    PaymentSystemConfirmed = 30,
-    CryptoReleased = 40,
-    Completed = 50,
+    PaymentSystemConfirmed = 40,
+    CryptoReleased = 50,
     Canceled = 60,
     Appealed = 70,
+    CanceledCryptoUnfrozen = 80,
 }
