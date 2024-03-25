@@ -11,4 +11,6 @@ public class OrderUserInfo
     public decimal CompletedRecentDealsPercentage => RecentDealsCount == 0
         ? 1
         : ((decimal)CompletedRecentDealsCount / RecentDealsCount).RoundDown(2);
+
+    public int DaysSinceRegistration { get; set; }
 }

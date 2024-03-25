@@ -30,6 +30,7 @@ public class Order
     public OrderStatus Status { get; set; }
     public DateTimeOffset DateCreated { get; set; }
     public DateTimeOffset? DateClosed { get; set; }
+    public DateTimeOffset? DateProcessEnded { get; set; }
 
     [Required]
     public string Description { get; set; }
@@ -54,11 +55,12 @@ public class Order
 
     public override string ToString() =>
         $"{nameof(Order)}({ExchangeCurrencyCode}-{PaymentCurrencyCode}, {(IsBuyingOnExchange ? "buy" : "sell")}" +
-        $"Price:{Price}, TotalAmount:{TotalOrderAmount}, RequisitesCount:{Requisites?.Count}, user:{UserId})";
+        $"Price:{Price}, TotalAmount:{TotalOrderAmount}, RequisitesCount:{Requisites?.Count}, user:{UserId}), OrderStatus:{Status}";
 }
 
 public enum OrderStatus
 {
     Active = 10,
     Closed = 20,
+    ClosedCryptoUnfrozen = 30,
 }
