@@ -1,6 +1,7 @@
 using Flurl.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -248,5 +249,13 @@ public class ClientP2P
     {
         return await $"p2p/chats/files/{id}/metadata".InternalApi()
             .GetStringAsync();
+    }
+
+    public async Task<ArrayList> GetTradeVolume([FromQuery] DateTimeOffset? dateFrom, [FromQuery] DateTimeOffset? dateTo)
+    {
+        return await $"p2p/statistics/trade-volume".InternalApi()
+            .SetQueryParam(nameof(dateFrom), dateFrom?.ToString("o"))
+            .SetQueryParam(nameof(dateTo), dateTo?.ToString("o"))
+            .GetJsonAsync<ArrayList>();
     }
 }
