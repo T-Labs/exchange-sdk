@@ -39,15 +39,12 @@ public class Order
     public string Description { get; set; }
 
     public int MaxTimeMinutes { get; set; }
-
     public long DisplayId { get; set; }
     public bool IsKYCPassed { get; set; }
     public int MinDaysSinceRegistration { get; set; }
     public int MinOrdersRequired { get; set; }
     public int MinOrderCompletionRate { get; set; }
-
     public List<Requisite> Requisites { get; set; }
-
     public List<Deal> Deals { get; set; }
 
     [NotMapped]
