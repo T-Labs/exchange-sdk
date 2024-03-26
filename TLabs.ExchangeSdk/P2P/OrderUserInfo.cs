@@ -13,4 +13,6 @@ public class OrderUserInfo
         : ((decimal)CompletedRecentDealsCount / RecentDealsCount).RoundDown(2);
 
     public int DaysSinceRegistration { get; set; }
+    public bool IsKYCPassed { get; set; }
+    public bool RequesterCanOpenDeal { get; set; }
 }
