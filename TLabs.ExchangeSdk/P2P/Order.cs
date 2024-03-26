@@ -1,6 +1,6 @@
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System;
 using System.ComponentModel.DataAnnotations.Schema;
 using TLabs.ExchangeSdk.P2P.Deals;
 
@@ -22,9 +22,12 @@ public class Order
     [Required]
     public string PaymentCurrencyCode { get; set; }
 
-    public List<PaymentSystem> PaymentSystems { get; set; }
+    /// <summary>cryptoAmount * price = fiatAmount</summary>
     public decimal Price { get; set; }
+
+    /// <summary>All amounts are in crypto</summary>
     public decimal TotalOrderAmount { get; set; }
+
     public decimal MinDealAmount { get; set; }
     public decimal MaxDealAmount { get; set; }
     public OrderStatus Status { get; set; }
@@ -36,15 +39,12 @@ public class Order
     public string Description { get; set; }
 
     public int MaxTimeMinutes { get; set; }
-
     public long DisplayId { get; set; }
     public bool IsKYCPassed { get; set; }
     public int MinDaysSinceRegistration { get; set; }
     public int MinOrdersRequired { get; set; }
     public int MinOrderCompletionRate { get; set; }
-
     public List<Requisite> Requisites { get; set; }
-
     public List<Deal> Deals { get; set; }
 
     [NotMapped]

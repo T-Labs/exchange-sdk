@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using TLabs.DotnetHelpers;
 
@@ -7,6 +8,7 @@ namespace TLabs.ExchangeSdk.P2P.Deals;
 
 public class Deal
 {
+    [Key]
     public Guid Id { get; set; }
 
     public Guid OrderId { get; set; }
@@ -15,6 +17,7 @@ public class Deal
     public Guid RequisiteId { get; set; }
     public Requisite Requisite { get; set; }
 
+    [Required]
     public string DealUserId { get; set; }
 
     public decimal Price { get; set; }
