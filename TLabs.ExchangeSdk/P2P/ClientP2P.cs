@@ -251,11 +251,11 @@ public class ClientP2P
             .GetStringAsync();
     }
 
-    public async Task<ArrayList> GetTradeVolume([FromQuery] DateTimeOffset? dateFrom, [FromQuery] DateTimeOffset? dateTo)
+    public async Task<List<CurrencyPairTradingVolume> > GetTradeVolume([FromQuery] DateTimeOffset? dateFrom, [FromQuery] DateTimeOffset? dateTo)
     {
-        return await $"p2p/statistics/trade-volume".InternalApi()
+        return await $"p2p/statistics/trade-volumes".InternalApi()
             .SetQueryParam(nameof(dateFrom), dateFrom?.ToString("o"))
             .SetQueryParam(nameof(dateTo), dateTo?.ToString("o"))
-            .GetJsonAsync<ArrayList>();
+            .GetJsonAsync<List<CurrencyPairTradingVolume>>();
     }
 }
