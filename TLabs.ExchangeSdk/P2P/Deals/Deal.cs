@@ -32,6 +32,7 @@ public class Deal
     public DateTimeOffset DateCreated { get; set; }
     public DateTimeOffset? DatePaymentSystemSent { get; set; }
     public DateTimeOffset? DatePaymentSystemConfirmed { get; set; }
+    public DateTimeOffset? DateAppealed { get; set; }
     public DateTimeOffset? DateCanceled { get; set; }
 
     /// <summary> For CanceledCryptoUnfrozen status after Crypto Unfreeze and CryptoRealese status after FinishDeal</summary>
@@ -39,7 +40,7 @@ public class Deal
 
     public long DisplayId { get; set; }
     public List<DealComment> Comments { get; set; }
-    public decimal USDTRate { get; set; }
+    public decimal CryptoAmountInUsdt { get; set; }
     public string AppealAdminId { get; set; }
 
     [NotMapped]

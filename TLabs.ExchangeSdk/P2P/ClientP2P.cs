@@ -55,9 +55,10 @@ public class ClientP2P
             .PostJsonAsync<Order>(orderDto);
     }
 
-    public async Task<IFlurlResponse> CancelOrder(Guid id)
+    public async Task<IFlurlResponse> CancelOrder(Guid id, string orderUserId)
     {
         return await $"p2p/orders/{id}/cancel".InternalApi()
+            .SetQueryParam(nameof(orderUserId), orderUserId)
             .PostAsync();
     }
 
@@ -83,16 +84,25 @@ public class ClientP2P
             .PostJsonAsync<Deal>(dealDto);
     }
 
-    public async Task<Deal> UpdateDealStatus(Guid id, DealStatus dealStatus)
+    public async Task<Deal> UpdateDealPaymentStatus(Guid id, DealStatus newDealStatus, string userId)
     {
-        return await $"p2p/deals/{id}/update-status".InternalApi()
-            .SetQueryParam(nameof(dealStatus), dealStatus)
+        return await $"p2p/deals/{id}/update-payment-status".InternalApi()
+            .SetQueryParam(nameof(newDealStatus), newDealStatus)
+            .SetQueryParam(nameof(userId), userId)
             .PostJsonAsync<Deal>(null);
     }
 
-    public async Task<IFlurlResponse> CancelDeal(Guid id)
+    public async Task<Deal> OpenDealAppeal(Guid id, string userId)
+    {
+        return await $"p2p/deals/{id}/appeal".InternalApi()
+            .SetQueryParam(nameof(userId), userId)
+            .PostJsonAsync<Deal>(null);
+    }
+
+    public async Task<IFlurlResponse> CancelDeal(Guid id, string userId)
     {
         return await $"p2p/deals/{id}/cancel".InternalApi()
+            .SetQueryParam(nameof(userId), userId)
             .PostAsync();
     }
 
