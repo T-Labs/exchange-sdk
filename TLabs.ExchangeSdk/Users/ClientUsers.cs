@@ -1,10 +1,8 @@
 using Flurl.Http;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Http;
 using System.Threading.Tasks;
 using TLabs.DotnetHelpers;
 
@@ -33,7 +31,8 @@ namespace TLabs.ExchangeSdk.Users
         /// <param name="page">Starts from 1</param>
         public async Task<PagedList<ApplicationUser>> GetUsers(DateTimeOffset? minRegisterDate = null,
             int page = 1, int pageSize = 100, string search = null,
-            string merchantId = null, bool? otonFlag = null, bool? emailConfirmed = false, BwpUserType? bwpUserType = null)
+            string merchantId = null, bool? otonFlag = null, bool? emailConfirmed = false,
+            BwpUserType? bwpUserType = null)
         {
             var users = await "userprofiles/users".InternalApi()
                 .WithTimeout(TimeSpan.FromMinutes(10))
@@ -148,13 +147,13 @@ namespace TLabs.ExchangeSdk.Users
                 return true;
             if (!authCode.HasValue())
                 return false;
-            bool result = await $"identity/manage/google-auth-key/check?userId={userId}&authCode={authCode}".InternalApi()
+            bool result = await $"identity/manage/google-auth-key/check?userId={userId}&authCode={authCode}"
+                .InternalApi()
                 .GetJsonAsync<bool>();
             return result;
         }
 
-        public async Task<string> Healthcheck() =>
-            await $"userprofiles/healthcheck".InternalApi().GetStringAsync();
+        public async Task<string> Healthcheck() => await $"userprofiles/healthcheck".InternalApi().GetStringAsync();
 
         public async Task<IEnumerable<CustomClaim>> GetClaims(string userId, string claimType = null)
         {
@@ -181,6 +180,34 @@ namespace TLabs.ExchangeSdk.Users
         public async Task CreateOrUpdateClaim(string userId, CustomClaim claim)
         {
             await CreateOrUpdateClaims(userId, new List<CustomClaim> { claim });
+        }
+
+        public async Task<List<IdentityRole>> GetAllRoles()
+        {
+            var result = await "userprofiles/identityroles/roles/".InternalApi()
+                .GetJsonAsync<List<IdentityRole>>();
+            return result;
+        }
+
+        public async Task<List<string>> GetAllRolesByUser(string userId)
+        {
+            var result = await $"userprofiles/identityusers/{userId}/roles".InternalApi()
+                .GetJsonAsync<List<string>>();
+            return result;
+        }
+
+        public async Task<List<string>> SetRoles(List<UserRolesModel> model, string userId)
+        {
+            List<string> roles = new List<string>();
+            foreach (var item in model)
+            {
+                if (item.Allowed)
+                    roles.Add(item.Name);
+            }
+
+            var result = await $"userprofiles/identityusers/{userId}/roles/addroles".InternalApi()
+                .PostJsonAsync<List<string>>(roles);
+            return result;
         }
     }
 }
