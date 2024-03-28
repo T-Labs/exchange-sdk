@@ -3,6 +3,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using TLabs.DotnetHelpers;
@@ -154,5 +155,32 @@ namespace TLabs.ExchangeSdk.Users
 
         public async Task<string> Healthcheck() =>
             await $"userprofiles/healthcheck".InternalApi().GetStringAsync();
+
+        public async Task<IEnumerable<CustomClaim>> GetClaims(string userId, string claimType = null)
+        {
+            string url = $"userprofiles/identityusers/{userId}/claims";
+            if (!string.IsNullOrWhiteSpace(claimType))
+                url += $"/{claimType}";
+
+            var result = await url.InternalApi()
+                .GetJsonAsync<IEnumerable<CustomClaim>>();
+            return result;
+        }
+
+        public async Task<string> GetClaimValue(string userId, string claimType)
+        {
+            var claims = await GetClaims(userId, claimType);
+            return claims.FirstOrDefault()?.Value;
+        }
+
+        public async Task CreateOrUpdateClaims(string userId, IEnumerable<CustomClaim> claims)
+        {
+            await $"userprofiles/identityusers/{userId}/claims".PostJsonAsync(claims);
+        }
+
+        public async Task CreateOrUpdateClaim(string userId, CustomClaim claim)
+        {
+            await CreateOrUpdateClaims(userId, new List<CustomClaim> { claim });
+        }
     }
 }
