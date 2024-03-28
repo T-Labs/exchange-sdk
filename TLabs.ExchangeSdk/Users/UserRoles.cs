@@ -18,6 +18,8 @@ namespace TLabs.ExchangeSdk.Users
         public const string ContentMaker = "Content maker";
         public const string ApitradeReadonly = "ApitradeReadonly";
         public const string ApitradeAdmin = "ApitradeAdmin";
+        public const string P2PWatch = "P2PWatch";
+        public const string P2PAppealManager = "P2PAppealManager";
 
         /// <summary>Unused</summary>
         public const string CommonQuestions = "Common questions";
@@ -25,7 +27,7 @@ namespace TLabs.ExchangeSdk.Users
         public static List<string> AllRoles = new List<string>
         {
             Admin, Manager, SupportFull, KYC, ColdWallets, CashOperations, TokensAndCommissions,
-            FinancialReports, ContentMaker, ApitradeReadonly, ApitradeAdmin, CommonQuestions,
+            FinancialReports, ContentMaker, ApitradeReadonly, ApitradeAdmin, CommonQuestions, P2PWatch, P2PAppealManager,
         };
     }
 }
