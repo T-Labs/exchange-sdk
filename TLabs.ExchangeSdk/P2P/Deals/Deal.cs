@@ -41,7 +41,7 @@ public class Deal
     public long DisplayId { get; set; }
     public List<DealComment> Comments { get; set; }
     public decimal CryptoAmountInUsdt { get; set; }
-    public string AppealAdminId { get; set; }
+    public List<DealAppeal> DealAppeals { get; set; }
 
     [NotMapped]
     public string UserNickname { get; set; }
