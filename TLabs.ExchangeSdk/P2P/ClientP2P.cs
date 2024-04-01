@@ -268,4 +268,29 @@ public class ClientP2P
             .SetQueryParam(nameof(dateTo), dateTo?.ToString("o"))
             .GetJsonAsync<List<CurrencyPairTradingVolume>>();
     }
+    public async Task<List<DealAppeal>> GetDealAppeals(string userId)
+    {
+        return await $"p2p/deal-appeals".InternalApi()
+            .SetQueryParam(nameof(userId), userId)
+            .GetJsonAsync<List<DealAppeal>>();
+    }
+    public async Task<DealAppeal> GetDealAppeal(Guid id, string userId)
+    {
+        return await $"p2p/deal-appeals/{id}".InternalApi()
+            .SetQueryParam(nameof(userId), userId)
+            .GetJsonAsync<DealAppeal>();
+    }
+    public async Task<IFlurlResponse> OpenDealAppeal(DealAppealCreateDto dealAppealCreateDto)
+    {
+        return await $"p2p/deal-appeals".InternalApi()
+            .PostJsonAsync(dealAppealCreateDto);
+    }
+
+    public async Task<IFlurlResponse> FinishAppeal(Guid id, string userId, AppealStatus appealStatus)
+    {
+        return await $"p2p/deal-appeals/{id}".InternalApi()
+            .SetQueryParam(nameof(userId), userId)
+            .SetQueryParam(nameof(appealStatus), appealStatus)
+            .PutAsync();
+    }
 }
