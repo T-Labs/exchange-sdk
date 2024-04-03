@@ -1,7 +1,6 @@
 using Flurl.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -261,25 +260,29 @@ public class ClientP2P
             .GetStringAsync();
     }
 
-    public async Task<List<CurrencyPairTradingVolume> > GetTradeVolume([FromQuery] DateTimeOffset? dateFrom, [FromQuery] DateTimeOffset? dateTo)
+    public async Task<List<CurrencyPairTradingVolume>> GetTradeVolume([FromQuery] DateTimeOffset? dateFrom,
+        [FromQuery] DateTimeOffset? dateTo)
     {
         return await $"p2p/statistics/trade-volumes".InternalApi()
             .SetQueryParam(nameof(dateFrom), dateFrom?.ToString("o"))
             .SetQueryParam(nameof(dateTo), dateTo?.ToString("o"))
             .GetJsonAsync<List<CurrencyPairTradingVolume>>();
     }
+
     public async Task<List<DealAppeal>> GetDealAppeals(string userId)
     {
         return await $"p2p/deal-appeals".InternalApi()
             .SetQueryParam(nameof(userId), userId)
             .GetJsonAsync<List<DealAppeal>>();
     }
+
     public async Task<DealAppeal> GetDealAppeal(Guid id, string userId)
     {
         return await $"p2p/deal-appeals/{id}".InternalApi()
             .SetQueryParam(nameof(userId), userId)
             .GetJsonAsync<DealAppeal>();
     }
+
     public async Task<IFlurlResponse> OpenDealAppeal(DealAppealCreateDto dealAppealCreateDto)
     {
         return await $"p2p/deal-appeals".InternalApi()

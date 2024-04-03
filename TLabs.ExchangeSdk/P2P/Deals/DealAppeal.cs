@@ -24,3 +24,9 @@ public enum AppealStatus
     SetPaymentSystemConfirmed = 20,
     SetCanceled = 30,
 }
+
+public enum AppealType
+{
+    ForActiveDeal = 10,
+    AfterFinish = 20,
+}
