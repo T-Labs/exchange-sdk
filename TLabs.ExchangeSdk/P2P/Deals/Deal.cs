@@ -60,4 +60,5 @@ public enum DealStatus
     Canceled = 60,
     Appealed = 70,
     CanceledCryptoUnfrozen = 80,
+    AppealedAfterFinish = 90,
 }
