@@ -228,23 +228,26 @@ public class ClientP2P
             .GetJsonAsync<ChatMessage>();
     }
 
-    public async Task<IFlurlResponse> AddMessage([FromBody] ChatMessageCreateDto dto)
+    public async Task<string> AddMessage([FromBody] ChatMessageCreateDto dto)
     {
         return await $"p2p/chats".InternalApi()
-            .PostJsonAsync(dto);
+            .PostJsonAsync(dto)
+            .ReceiveString(); ;
     }
 
-    public async Task<IFlurlResponse> SetMessageWasRead(Guid id, [FromQuery] string userId)
+    public async Task<string> SetMessageWasRead(Guid id, [FromQuery] string userId)
     {
         return await $"p2p/chats/{id}/read".InternalApi()
             .SetQueryParam(nameof(userId), userId)
-            .PostAsync();
+            .PostAsync()
+            .ReceiveString(); ;
     }
 
-    public async Task<IFlurlResponse> UploadFile(MultipartFormDataContent data)
+    public async Task<string> UploadFile(MultipartFormDataContent data)
     {
         return await $"p2p/chats/upload-file".InternalApi()
-            .PostAsync(data);
+            .PostAsync(data)
+            .ReceiveString(); ;
     }
 
     public async Task<ChatFile> GetChatFile(Guid id, string userId)
