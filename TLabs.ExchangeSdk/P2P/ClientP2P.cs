@@ -232,22 +232,31 @@ public class ClientP2P
     {
         return await $"p2p/chats".InternalApi()
             .PostJsonAsync(dto)
-            .ReceiveString(); ;
+            .ReceiveString();
+    }
+
+    public async Task<string> SetMessagesWasRead(List<Guid> ids, [FromQuery] string userId)
+    {
+        return await $"p2p/chats/reads".InternalApi()
+            .SetQueryParam(nameof(ids), ids)
+            .SetQueryParam(nameof(userId), userId)
+            .PutAsync()
+            .ReceiveString();
     }
 
     public async Task<string> SetMessageWasRead(Guid id, [FromQuery] string userId)
     {
         return await $"p2p/chats/{id}/read".InternalApi()
             .SetQueryParam(nameof(userId), userId)
-            .PostAsync()
-            .ReceiveString(); ;
+            .PutAsync()
+            .ReceiveString();
     }
 
     public async Task<string> UploadFile(MultipartFormDataContent data)
     {
         return await $"p2p/chats/upload-file".InternalApi()
             .PostAsync(data)
-            .ReceiveString(); ;
+            .ReceiveString();
     }
 
     public async Task<ChatFile> GetChatFile(Guid id, string userId)
