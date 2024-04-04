@@ -233,7 +233,6 @@ public class ClientP2P
         return await $"p2p/chats".InternalApi()
             .PostJsonAsync(dto)
             .ReceiveString();
-        ;
     }
 
     public async Task<string> SetMessagesWasRead(List<Guid> ids, [FromQuery] string userId)
