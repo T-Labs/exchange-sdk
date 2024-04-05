@@ -266,11 +266,11 @@ public class ClientP2P
             .GetJsonAsync<ChatFile>();
     }
 
-    public async Task<FileMetadataDto> GetChatFileMetadata(Guid id, string userId)
+    public async Task<ChatFileMetadataDto> GetChatFileMetadata(Guid id, string userId)
     {
         return await $"p2p/chats/files/{id}/metadata".InternalApi()
             .SetQueryParam(nameof(userId), userId)
-            .GetJsonAsync<FileMetadataDto>();
+            .GetJsonAsync<ChatFileMetadataDto>();
     }
 
     public async Task<List<CurrencyPairTradingVolume>> GetTradeVolume([FromQuery] DateTimeOffset? dateFrom,
