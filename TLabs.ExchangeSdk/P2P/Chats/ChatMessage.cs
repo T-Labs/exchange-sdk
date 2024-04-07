@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel.DataAnnotations;
+using TLabs.ExchangeSdk.P2P.Deals;
 
 namespace TLabs.ExchangeSdk.P2P.Chats
 {
@@ -10,6 +11,8 @@ namespace TLabs.ExchangeSdk.P2P.Chats
 
         [Required]
         public Guid DealId { get; set; }
+
+        public Deal Deal { get; set; }
 
         /// <summary>Can be order.UserId, deal.DealUserId, deal.AppealAdminId or "system"</summary>
         [Required]
