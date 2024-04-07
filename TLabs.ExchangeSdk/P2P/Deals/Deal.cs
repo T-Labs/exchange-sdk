@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using TLabs.DotnetHelpers;
+using TLabs.ExchangeSdk.P2P.Chats;
 
 namespace TLabs.ExchangeSdk.P2P.Deals;
 
@@ -32,7 +33,6 @@ public class Deal
     public DateTimeOffset DateCreated { get; set; }
     public DateTimeOffset? DatePaymentSystemSent { get; set; }
     public DateTimeOffset? DatePaymentSystemConfirmed { get; set; }
-    public DateTimeOffset? DateAppealed { get; set; }
     public DateTimeOffset? DateCanceled { get; set; }
 
     /// <summary> For CanceledCryptoUnfrozen status after Crypto Unfreeze and CryptoRealese status after FinishDeal</summary>
@@ -41,14 +41,19 @@ public class Deal
     public long DisplayId { get; set; }
     public List<DealComment> Comments { get; set; }
     public decimal CryptoAmountInUsdt { get; set; }
+    public List<ChatMessage> ChatMessages { get; set; }
     public List<DealAppeal> DealAppeals { get; set; }
 
     [NotMapped]
     public string UserNickname { get; set; }
 
+    [NotMapped]
+    public string UserVerificationName { get; set; }
+
     public override string ToString() =>
         $"{nameof(Deal)}(OrderId:{OrderId}, Crypto:{CryptoAmount} {Order?.ExchangeCurrencyCode}, " +
         $"Fiat:{FiatAmount} {Order?.PaymentCurrencyCode}, DealUserId:{DealUserId}, DealStatus:{Status})";
+
 }
 
 public enum DealStatus
@@ -58,7 +63,7 @@ public enum DealStatus
     PaymentSystemConfirmed = 40,
     CryptoReleased = 50,
     Canceled = 60,
-    Appealed = 70,
     CanceledCryptoUnfrozen = 80,
-    AppealedAfterFinish = 90,
 }
+
+
