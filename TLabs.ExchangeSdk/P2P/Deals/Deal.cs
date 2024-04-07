@@ -47,13 +47,9 @@ public class Deal
     [NotMapped]
     public string UserNickname { get; set; }
 
-    [NotMapped]
-    public string UserVerificationName { get; set; }
-
     public override string ToString() =>
         $"{nameof(Deal)}(OrderId:{OrderId}, Crypto:{CryptoAmount} {Order?.ExchangeCurrencyCode}, " +
         $"Fiat:{FiatAmount} {Order?.PaymentCurrencyCode}, DealUserId:{DealUserId}, DealStatus:{Status})";
-
 }
 
 public enum DealStatus
@@ -65,5 +61,3 @@ public enum DealStatus
     Canceled = 60,
     CanceledCryptoUnfrozen = 80,
 }
-
-
