@@ -313,6 +313,7 @@ public class ClientP2P
     public async Task<IFlurlResponse> FinishAppeal(Guid dealId, string userId, AppealStatus appealStatus)
     {
         return await $"p2p/deal-appeals".InternalApi()
+            .SetQueryParam(nameof(dealId), dealId)
             .SetQueryParam(nameof(userId), userId)
             .SetQueryParam(nameof(appealStatus), appealStatus)
             .PutAsync();
