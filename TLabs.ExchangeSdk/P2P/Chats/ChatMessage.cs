@@ -27,7 +27,15 @@ namespace TLabs.ExchangeSdk.P2P.Chats
         /// <summary>True if message was read by the opposite user</summary>
         public bool WasRead { get; set; }
 
-        public const string SystemUserId = "system";
-        public bool IsSystemMessage => UserId == SystemUserId;
+        public SystemMessageType SystemMessageType { get; set; }
+        public bool IsSystemMessage => SystemMessageType != SystemMessageType.NoSystem;
+    }
+
+    public enum SystemMessageType
+    {
+        NoSystem,
+        Megaphone,
+        Warning,
+        Admin
     }
 }
