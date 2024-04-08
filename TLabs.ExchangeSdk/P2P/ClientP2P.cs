@@ -98,11 +98,11 @@ public class ClientP2P
             .PostJsonAsync<Deal>(null);
     }
 
-    public async Task<IFlurlResponse> CancelDeal(Guid id, string userId)
+    public async Task<Deal> CancelDeal(Guid id, string userId)
     {
         return await $"p2p/deals/{id}/cancel".InternalApi()
             .SetQueryParam(nameof(userId), userId)
-            .PostAsync();
+            .PostJsonAsync<Deal>(null);
     }
 
     public async Task<List<Requisite>> GetActiveRequisites(string userId = null)
@@ -310,9 +310,9 @@ public class ClientP2P
             .PostJsonAsync(dealAppealCreateDto);
     }
 
-    public async Task<IFlurlResponse> FinishAppeal(Guid id, string userId, AppealStatus appealStatus)
+    public async Task<IFlurlResponse> FinishAppeal(Guid dealId, string userId, AppealStatus appealStatus)
     {
-        return await $"p2p/deal-appeals/{id}".InternalApi()
+        return await $"p2p/deal-appeals".InternalApi()
             .SetQueryParam(nameof(userId), userId)
             .SetQueryParam(nameof(appealStatus), appealStatus)
             .PutAsync();
