@@ -33,9 +33,9 @@ namespace TLabs.ExchangeSdk.P2P.Chats
 
     public enum SystemMessageType
     {
-        NoSystem,
-        Megaphone,
-        Warning,
-        Admin
+        NoSystem = 10,
+        Megaphone = 20,
+        Warning = 30,
+        Admin = 40
     }
 }
