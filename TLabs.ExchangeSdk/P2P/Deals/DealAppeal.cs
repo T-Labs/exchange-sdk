@@ -16,6 +16,7 @@ public class DealAppeal
     public DateTimeOffset DateCreated { get; set; }
     public DateTimeOffset? DateCompleted { get; set; }
     public AppealStatus Status { get; set; }
+    public AppealType AppealType { get; set; }
 }
 
 public enum AppealStatus
