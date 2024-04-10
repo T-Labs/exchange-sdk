@@ -19,6 +19,9 @@ namespace TLabs.ExchangeSdk.Users
 
         public const string NoTradeCommissions = "NoTradeCommissions";
 
+        public const string PolicyBanOnP2P = "PolicyBanOnP2P";
+        public const string BanOnP2P = "BanOnP2P";
+
         public const string Last2FAAccessToken = "Last2FAAccessToken";
         public const string LastWithdrawalEmailDate = "LastWithdrawalEmailDate";
 
