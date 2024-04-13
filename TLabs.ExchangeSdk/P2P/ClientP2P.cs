@@ -300,6 +300,12 @@ public class ClientP2P
             .GetJsonAsync<DealAppeal>();
     }
 
+    public async Task<List<DealAppeal>> GetAllDealAppeals()
+    {
+        return await $"p2p/deal-appeals/all".InternalApi()
+            .GetJsonAsync<List<DealAppeal>>();
+    }
+
     public async Task<IFlurlResponse> OpenDealAppeal(DealAppealCreateDto dealAppealCreateDto)
     {
         return await $"p2p/deal-appeals".InternalApi()
