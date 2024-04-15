@@ -28,6 +28,7 @@ public class Order
     /// <summary>All amounts are in crypto</summary>
     public decimal TotalOrderAmount { get; set; }
 
+    public decimal FilledOrderAmount { get; set; }
     public decimal MinDealAmount { get; set; }
     public decimal MaxDealAmount { get; set; }
     public OrderStatus Status { get; set; }
