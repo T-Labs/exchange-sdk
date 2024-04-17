@@ -1,7 +1,7 @@
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace TLabs.ExchangeSdk.P2P;
+namespace TLabs.ExchangeSdk.P2P.Users;
 
 public class UserBlock
 {

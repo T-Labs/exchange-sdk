@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using TLabs.DotnetHelpers;
 using TLabs.ExchangeSdk.P2P.Chats;
 using TLabs.ExchangeSdk.P2P.Deals;
+using TLabs.ExchangeSdk.P2P.Users;
 
 namespace TLabs.ExchangeSdk.P2P;
 

@@ -1,4 +1,4 @@
-namespace TLabs.ExchangeSdk.P2P;
+namespace TLabs.ExchangeSdk.P2P.Users;
 
 public class UserBlockCreateDto
 {
