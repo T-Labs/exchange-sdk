@@ -1,4 +1,4 @@
-namespace P2P.Users;
+namespace TLabs.ExchangeSdk.P2P.Users;
 
 public class UserDealLimitsDto
 {

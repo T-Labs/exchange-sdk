@@ -1,7 +1,4 @@
-using P2P.Requisites;
-using System.Collections.Generic;
-
-namespace P2P.Users;
+namespace TLabs.ExchangeSdk.P2P.Users;
 
 public class UserOrderLimitsDto
 {
