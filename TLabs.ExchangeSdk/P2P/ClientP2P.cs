@@ -1,5 +1,6 @@
 using Flurl.Http;
 using Microsoft.AspNetCore.Mvc;
+using P2P.Users;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
@@ -160,8 +161,26 @@ public class ClientP2P
 
     public async Task<UserInfoDto> GetUserOrdersInfo(string userId)
     {
-        return await $"p2p/users/info/{userId}".InternalApi()
+        return await $"p2p/users/{userId}/info".InternalApi()
             .GetJsonAsync<UserInfoDto>();
+    }
+
+    public async Task<UserOrderLimitsDto> GetUserOrderOpeningLimits(string userId, bool isBuyingOnExchange,
+        string exchangeCurrencyCode, string paymentCurrencyCode, decimal price, List<Guid> requisiteIds = null)
+    {
+        return await $"p2p/users/{userId}/trading-limits/order".InternalApi()
+            .SetQueryParam(nameof(isBuyingOnExchange), isBuyingOnExchange)
+            .SetQueryParam(nameof(exchangeCurrencyCode), exchangeCurrencyCode)
+            .SetQueryParam(nameof(paymentCurrencyCode), paymentCurrencyCode)
+            .SetQueryParam(nameof(price), price)
+            .SetQueryParam(nameof(requisiteIds), requisiteIds)
+            .GetJsonAsync<UserOrderLimitsDto>();
+    }
+
+    public async Task<UserDealLimitsDto> GetUserDealOpeningLimits(string userId)
+    {
+        return await $"p2p/users/{userId}/trading-limits/deal".InternalApi()
+            .GetJsonAsync<UserDealLimitsDto>();
     }
 
     public async Task<List<DealComment>> GetDealComments(Guid? dealId = null, string fromUserId = null,
