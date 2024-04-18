@@ -161,14 +161,14 @@ public class ClientP2P
 
     public async Task<UserInfoDto> GetUserOrdersInfo(string userId)
     {
-        return await $"p2p/users/{userId}/info/".InternalApi()
+        return await $"p2p/users/{userId}/info".InternalApi()
             .GetJsonAsync<UserInfoDto>();
     }
 
     public async Task<UserOrderLimitsDto> GetUserOrderOpeningLimits(string userId, bool isBuyingOnExchange,
         string exchangeCurrencyCode, string paymentCurrencyCode, decimal price, List<Guid> requisiteIds = null)
     {
-        return await $"p2p/users/{userId}/trading-limits/order/".InternalApi()
+        return await $"p2p/users/{userId}/trading-limits/order".InternalApi()
             .SetQueryParam(nameof(isBuyingOnExchange), isBuyingOnExchange)
             .SetQueryParam(nameof(exchangeCurrencyCode), exchangeCurrencyCode)
             .SetQueryParam(nameof(paymentCurrencyCode), paymentCurrencyCode)
@@ -179,7 +179,7 @@ public class ClientP2P
 
     public async Task<UserDealLimitsDto> GetUserDealOpeningLimits(string userId)
     {
-        return await $"p2p/users/{userId}/trading-limits/deal/".InternalApi()
+        return await $"p2p/users/{userId}/trading-limits/deal".InternalApi()
             .GetJsonAsync<UserDealLimitsDto>();
     }
 
