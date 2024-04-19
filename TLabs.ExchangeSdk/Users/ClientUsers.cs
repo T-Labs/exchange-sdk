@@ -174,7 +174,8 @@ namespace TLabs.ExchangeSdk.Users
 
         public async Task CreateOrUpdateClaims(string userId, IEnumerable<CustomClaim> claims)
         {
-            await $"userprofiles/identityusers/{userId}/claims".PostJsonAsync(claims);
+            await $"userprofiles/identityusers/{userId}/claims".InternalApi()
+                .PostJsonAsync(claims);
         }
 
         public async Task CreateOrUpdateClaim(string userId, CustomClaim claim)
