@@ -6,7 +6,7 @@ namespace TLabs.ExchangeSdk.WebApp;
 
 public class ClientWebapp
 {
-    public async Task<IFlurlResponse> SendP2PDealNotification(P2PNotification notification)
+    public async Task<IFlurlResponse> SendP2PNotification(P2PNotification notification)
     {
         var result = await $"webapp/p2p/notify".InternalApi()
             .PostJsonAsync(notification);
