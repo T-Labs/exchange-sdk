@@ -1,14 +1,15 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TLabs.ExchangeSdk.Verification
 {
     public class VerificationUser
     {
         public string Id { get; set; }
+
+        /// <summary>
+        /// Этап верификации
+        /// </summary>
+        public UserVerificationStage VerificationStage { get; set; }
 
         /// <summary>
         /// Статус документа
@@ -150,6 +151,13 @@ namespace TLabs.ExchangeSdk.Verification
 
         /// <summary>Confirmed</summary>
         Success = 3
+    }
+
+    public enum UserVerificationStage
+    {
+        NoVerification = 0,
+        BasicVerification = 10,
+        AdvancedVerification = 20,
     }
 
     /// <summary>Country</summary>
