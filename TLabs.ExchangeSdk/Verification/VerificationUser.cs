@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace TLabs.ExchangeSdk.Verification
 {
@@ -105,9 +106,19 @@ namespace TLabs.ExchangeSdk.Verification
         public int? TypeProofOfAddressId { get; set; }
 
         /// <summary>
+        /// Тип потверждения  адреса
+        /// </summary>
+        public TypeProofOfAddress TypeProofOfAddress { get; set; }
+
+        /// <summary>
         /// Тип удостоверение личности
         /// </summary>
-        public int? TypeIdentityCardId { get; set; }         
+        public int? TypeIdentityCardId { get; set; }
+
+        /// <summary>
+        /// Тип удостоверение личности
+        /// </summary>
+        public TypeIdentityCard TypeIdentityCard { get; set; }
 
         /// <summary>
         /// Удостоверение личности (имя файла)
@@ -127,7 +138,9 @@ namespace TLabs.ExchangeSdk.Verification
         /// <summary>
         /// Видео человека  
         /// </summary>
-        public string UserVideo { get; set; }   
+        public string UserVideo { get; set; }
+
+        public List<VerificationCard> VerificationCards { get; set; }
 
         /// <summary>
         /// Место верификации
