@@ -105,19 +105,29 @@ namespace TLabs.ExchangeSdk.Verification
         public int? TypeProofOfAddressId { get; set; }
 
         /// <summary>
+        /// Тип удостоверение личности
+        /// </summary>
+        public int? TypeIdentityCardId { get; set; }         
+
+        /// <summary>
         /// Удостоверение личности (имя файла)
         /// </summary>
         public string IdentityCard { get; set; }
 
         /// <summary>
-        /// Тип удостоверение личности
+        /// Удостоверение личности обратная сторона
         /// </summary>
-        public int? TypeIdentityCardId { get; set; }
-
+        public string IdentityCardBackside { get; set; }
+                                                
         /// <summary>
         /// Фото человека с документом (имя файла)
         /// </summary>
         public string PhotoWithDocument { get; set; }
+
+        /// <summary>
+        /// Видео человека  
+        /// </summary>
+        public string UserVideo { get; set; }   
 
         /// <summary>
         /// Место верификации
@@ -136,6 +146,11 @@ namespace TLabs.ExchangeSdk.Verification
         /// Дата верификации
         /// </summary>
         public DateTimeOffset? DateVerification { get; set; }
+
+        /// <summary>
+        /// Дата заполнения верификации
+        /// </summary>
+        public DateTimeOffset? DateFilled { get; set; }
     }
 
     public enum StatusVerificationUser
