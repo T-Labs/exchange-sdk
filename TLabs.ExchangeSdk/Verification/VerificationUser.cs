@@ -136,9 +136,9 @@ namespace TLabs.ExchangeSdk.Verification
         public string PhotoWithDocument { get; set; }
 
         /// <summary>
-        /// Видео человека  
+        /// Видео аутентификации с человеком   
         /// </summary>
-        public string UserVideo { get; set; }
+        public string UserAuthenticationVideo { get; set; }
 
         public List<VerificationCard> VerificationCards { get; set; }
 
