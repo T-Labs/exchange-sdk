@@ -320,15 +320,15 @@ public class ClientP2P
     }
 
     public async Task<List<DealAppeal>> GetAllDealAppeals(string userId = null, string dealUserId = null,
-        Guid? dealId = null,long? dealDisplayId = null, AppealStatus? appealStatus = null,
+        Guid? dealId = null, long? dealDisplayId = null, AppealStatus? appealStatus = null,
         string ExchangeCurrencyCode = null, string PaymentCurrencyCode = null)
     {
         return await $"p2p/deal-appeals/all".InternalApi()
             .SetQueryParam(nameof(userId), userId)
             .SetQueryParam(nameof(dealUserId), dealUserId)
-            .SetQueryParam(nameof(dealId),dealId)
+            .SetQueryParam(nameof(dealId), dealId)
             .SetQueryParam(nameof(dealDisplayId), dealDisplayId)
-            .SetQueryParam(nameof(appealStatus),appealStatus)
+            .SetQueryParam(nameof(appealStatus), appealStatus)
             .SetQueryParam(nameof(ExchangeCurrencyCode), ExchangeCurrencyCode)
             .SetQueryParam(nameof(PaymentCurrencyCode), PaymentCurrencyCode)
             .GetJsonAsync<List<DealAppeal>>();
