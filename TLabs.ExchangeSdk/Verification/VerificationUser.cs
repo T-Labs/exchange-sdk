@@ -29,6 +29,7 @@ namespace TLabs.ExchangeSdk.Verification
         public string DocumentNumber { get; set; }
         public DateTimeOffset? DocumentDateIssued { get; set; }
         public DateTimeOffset? DocumentDateExpire { get; set; }
+        public string VerificationCode { get; set; }
 
         /* Document images ids */
         public string ProofOfAddress { get; set; }
