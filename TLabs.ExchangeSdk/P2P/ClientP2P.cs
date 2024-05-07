@@ -86,10 +86,10 @@ public class ClientP2P
 
     public async Task<Deal> UpdateDealPaymentStatus(Guid id, DealStatus newDealStatus, string userId)
     {
-        return await $"p2p/deals/{id}/update-payment-status".InternalApi()
+        return await $"p2p/deals/{id}/payment-status".InternalApi()
             .SetQueryParam(nameof(newDealStatus), newDealStatus)
             .SetQueryParam(nameof(userId), userId)
-            .PostJsonAsync<Deal>(null);
+            .PutJsonAsync<Deal>(null);
     }
 
     public async Task<Deal> OpenDealAppeal(Guid id, string userId)
@@ -101,9 +101,9 @@ public class ClientP2P
 
     public async Task<Deal> CancelDeal(Guid id, string userId)
     {
-        return await $"p2p/deals/{id}/cancel".InternalApi()
+        return await $"p2p/deals/{id}".InternalApi()
             .SetQueryParam(nameof(userId), userId)
-            .PostJsonAsync<Deal>(null);
+            .DeleteJsonAsync<Deal>(null);
     }
 
     public async Task<List<Requisite>> GetActiveRequisites(string userId = null)
