@@ -23,7 +23,8 @@ public enum AppealStatus
 {
     InProgress = 10,
     SetPaymentSystemConfirmed = 20,
-    SetCanceled = 30,
+    SetDealCanceled = 30,
+    UserCanceledAppeal = 40,
 }
 
 public enum AppealType
