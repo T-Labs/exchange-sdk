@@ -22,4 +22,5 @@ public static class P2PNotificationTarget
 {
     public const string P2PDeal = "P2PDeal";
     public const string P2PChat = "P2PChat";
+    public const string P2PSellerDispute = "P2PSellerDispute";
 }

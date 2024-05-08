@@ -355,9 +355,18 @@ public class ClientP2P
             .GetJsonAsync<DealCancellationDispute>();
     }
 
+    public async Task<List<DealCancellationDispute>> GetDealDisputes(string userId,
+        DealDisputeStatus? dealDisputeStatus = null)
+    {
+        return await $"p2p/deal-disputes".InternalApi()
+            .SetQueryParam(nameof(userId), userId)
+            .SetQueryParam(nameof(dealDisputeStatus), dealDisputeStatus)
+            .GetJsonAsync<List<DealCancellationDispute>>();
+    }
+
     public async Task<DealCancellationDispute> OpenDealDispute(DealDisputeCreateDto dealDisputeCreateDto)
     {
-        return await $"p2p/deal-disputes".InternalApi()    
+        return await $"p2p/deal-disputes".InternalApi()
             .PostJsonAsync<DealCancellationDispute>(dealDisputeCreateDto);
     }
 
