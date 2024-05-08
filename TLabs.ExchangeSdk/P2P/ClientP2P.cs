@@ -342,17 +342,23 @@ public class ClientP2P
 
     public async Task<IFlurlResponse> FinishAppeal(Guid dealId, string userId, AppealStatus appealStatus)
     {
-        return await $"p2p/deals/{dealId}/finish-appeal".InternalApi()
+        return await $"p2p/deals/{dealId}/appeal-status".InternalApi()
             .SetQueryParam(nameof(userId), userId)
             .SetQueryParam(nameof(appealStatus), appealStatus)
             .PutAsync();
     }
 
-    public async Task<DealCancellationDispute> GetDealDispute(Guid dealId, string userId = null)
+    public async Task<DealCancellationDispute> GetDealDispute(Guid dealId, string userId)
     {
         return await $"p2p/deals/{dealId}/dispute".InternalApi()
             .SetQueryParam(nameof(userId), userId)
             .GetJsonAsync<DealCancellationDispute>();
+    }
+
+    public async Task<DealCancellationDispute> OpenDealDispute(DealDisputeCreateDto dealDisputeCreateDto)
+    {
+        return await $"p2p/deal-disputes".InternalApi()    
+            .PostJsonAsync<DealCancellationDispute>(dealDisputeCreateDto);
     }
 
     public async Task<DealCancellationDispute> UpdateDealDisputeStatus(Guid dealId, string userId,

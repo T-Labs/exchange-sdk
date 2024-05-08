@@ -20,9 +20,8 @@ public class DealCancellationDispute
 
 public enum DealDisputeStatus
 {
-    InProgress = 10,
-    CreatorAcknowledgedFault = 20,
-    CreatorChallenged = 30,
-    RespondentAgreed = 40,
-    RespondentDisputed = 50, 
+    CreatorAdmitsFault = 10,
+    CreatorDeniesFault = 20,
+    RespondentAdmitsFault = 30,
+    RespondentDeniesFault = 40,
 }
