@@ -17,8 +17,6 @@ public class DealDisputeCreateDto
     [Required]
     public DealDisputeStatus Status { get; set; }
 
-
-
     public override string ToString()
     {
         return $" {nameof(DealDisputeCreateDto)}(DealId: {DealId}, CreatorUserId: {CreatorUserId}, Cause: {Cause})";
