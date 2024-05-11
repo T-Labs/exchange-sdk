@@ -11,14 +11,15 @@ public class UserInfoDto
     public int CompletedBuysCount { get; set; }
     public int CompletedSellsCount { get; set; }
 
-    public decimal CompletedRecentDealsPercentage => RecentDealsCount == 0
-        ? 1
-        : ((decimal)CompletedRecentDealsCount / RecentDealsCount).RoundDown(2);
+    public decimal CompletedRecentDealsPercentage =>
+        RecentDealsCount == 0
+            ? 1
+            : ((decimal)CompletedRecentDealsCount / RecentDealsCount).RoundDown(2);
 
     public int LikesCount { get; set; }
     public int DislikesCount { get; set; }
     public decimal RatingBasedOnReviews { get; set; }
-
+    public decimal RatingBasedOnDealsAfterDisputes { get; set; }
     public int AverageTransferTimeMins { get; set; }
     public int AveragePaymentTimeMins { get; set; }
     public int AccountAgeDays { get; set; }

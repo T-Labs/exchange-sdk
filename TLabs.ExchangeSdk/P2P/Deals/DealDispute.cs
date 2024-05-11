@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace TLabs.ExchangeSdk.P2P.Deals;
 
-public class DealCancellationDispute
+public class DealDispute
 {
     [Key]
     public Guid Id { get; set; }

@@ -348,34 +348,35 @@ public class ClientP2P
             .PutAsync();
     }
 
-    public async Task<DealCancellationDispute> GetDealDispute(Guid dealId, string userId)
+    public async Task<DealDispute> GetDealDispute(Guid dealId, string userId)
     {
         return await $"p2p/deals/{dealId}/dispute".InternalApi()
             .SetQueryParam(nameof(userId), userId)
-            .GetJsonAsync<DealCancellationDispute>();
+            .GetJsonAsync<DealDispute>();
     }
 
-    public async Task<List<DealCancellationDispute>> GetDealDisputes(string userId,
-        DealDisputeStatus? dealDisputeStatus = null)
+    public async Task<List<DealDispute>> GetDealDisputes(string creatorUserId = null,
+        string respondentUserId = null, DealDisputeStatus? dealDisputeStatus = null)
     {
         return await $"p2p/deal-disputes".InternalApi()
-            .SetQueryParam(nameof(userId), userId)
+            .SetQueryParam(nameof(creatorUserId), creatorUserId)
+            .SetQueryParam(nameof(respondentUserId), respondentUserId)
             .SetQueryParam(nameof(dealDisputeStatus), dealDisputeStatus)
-            .GetJsonAsync<List<DealCancellationDispute>>();
+            .GetJsonAsync<List<DealDispute>>();
     }
 
-    public async Task<DealCancellationDispute> OpenDealDispute(DealDisputeCreateDto dealDisputeCreateDto)
+    public async Task<DealDispute> OpenDealDispute(DealDisputeCreateDto dealDisputeCreateDto)
     {
         return await $"p2p/deal-disputes".InternalApi()
-            .PostJsonAsync<DealCancellationDispute>(dealDisputeCreateDto);
+            .PostJsonAsync<DealDispute>(dealDisputeCreateDto);
     }
 
-    public async Task<DealCancellationDispute> UpdateDealDisputeStatus(Guid dealId, string userId,
+    public async Task<DealDispute> UpdateDealDisputeStatus(Guid dealId, string userId,
         DealDisputeStatus dealDisputeStatus)
     {
         return await $"p2p/deals/{dealId}/dispute-status".InternalApi()
             .SetQueryParam(nameof(userId), userId)
             .SetQueryParam(nameof(dealDisputeStatus), dealDisputeStatus)
-            .PutJsonAsync<DealCancellationDispute>(null);
+            .PutJsonAsync<DealDispute>(null);
     }
 }
