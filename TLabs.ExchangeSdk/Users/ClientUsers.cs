@@ -218,13 +218,43 @@ namespace TLabs.ExchangeSdk.Users
                 .GetJsonAsync<bool>();
             return result;
         }
-        
+
         public async Task<IFlurlResponse> SetUserClaim(string claimValue, string userId, bool isActive)
         {
             var result = await $"userprofiles/users/claims/{claimValue}".InternalApi()
                 .SetQueryParam(nameof(userId), userId)
                 .SetQueryParam(nameof(isActive), isActive)
                 .PostJsonAsync(null);
+            return result;
+        }
+
+        public async Task<UserSettingsModel> GetUserSettings(string userId)
+        {
+            var result = await $"userprofiles/users/settings/{userId}".InternalApi()
+                .GetJsonAsync<UserSettingsModel>();
+            return result;
+        }
+
+        public async Task<IFlurlResponse> SetUserSettings(UserSettingsModel model)
+        {
+            var result = await $"userprofiles/users/settings".InternalApi()
+                .PostJsonAsync(model);
+            return result;
+        }
+
+        public async Task<UserFinancesSetting> GetCommissionConversionSettings(string userId)
+        {
+            var result = await $"userprofiles/users/finances-settings/{userId}".InternalApi()
+                .GetJsonAsync<UserFinancesSetting>();
+            return result;
+        }
+
+        public async Task<IFlurlResponse> SetTradeCommissionConversionSetting(string userId, bool isActive)
+        {
+            var currentSettings = await GetCommissionConversionSettings(userId);
+
+            var result = await $"userprofiles/users/finances-settings".InternalApi()
+                .PostJsonAsync(currentSettings);
             return result;
         }
     }
