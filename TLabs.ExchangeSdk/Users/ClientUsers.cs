@@ -210,5 +210,22 @@ namespace TLabs.ExchangeSdk.Users
                 .PostJsonAsync<List<string>>(roles);
             return result;
         }
+
+        public async Task<bool> GetUserClaimValue(string claimValue, string userId)
+        {
+            var result = await $"userprofiles/users/claims/{claimValue}".InternalApi()
+                .SetQueryParam(nameof(userId), userId)
+                .GetJsonAsync<bool>();
+            return result;
+        }
+        
+        public async Task<IFlurlResponse> SetUserClaim(string claimValue, string userId, bool isActive)
+        {
+            var result = await $"userprofiles/users/claims/{claimValue}".InternalApi()
+                .SetQueryParam(nameof(userId), userId)
+                .SetQueryParam(nameof(isActive), isActive)
+                .PostJsonAsync(null);
+            return result;
+        }
     }
 }
