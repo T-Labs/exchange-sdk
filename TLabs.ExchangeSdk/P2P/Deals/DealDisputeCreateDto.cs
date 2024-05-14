@@ -8,7 +8,6 @@ public class DealDisputeCreateDto
     [Required]
     public Guid DealId { get; set; }
 
-    [Required]
     public string CreatorUserId { get; set; }
 
     [Required]
