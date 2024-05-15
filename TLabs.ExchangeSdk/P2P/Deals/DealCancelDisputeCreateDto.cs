@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace TLabs.ExchangeSdk.P2P.Deals;
 
-public class DealDisputeCreateDto
+public class DealCancelDisputeCreateDto
 {
     [Required]
     public Guid DealId { get; set; }
@@ -14,10 +14,10 @@ public class DealDisputeCreateDto
     public string Cause { get; set; }
 
     [Required]
-    public DealDisputeStatus Status { get; set; }
+    public DealCancelDisputeStatus Status { get; set; }
 
     public override string ToString()
     {
-        return $" {nameof(DealDisputeCreateDto)}(DealId: {DealId}, CreatorUserId: {CreatorUserId}, Cause: {Cause})";
+        return $" {nameof(DealCancelDisputeCreateDto)}(DealId: {DealId}, CreatorUserId: {CreatorUserId}, Cause: {Cause})";
     }
 }

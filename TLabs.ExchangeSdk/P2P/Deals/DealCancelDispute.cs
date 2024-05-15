@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace TLabs.ExchangeSdk.P2P.Deals;
 
-public class DealDispute
+public class DealCancelDispute
 {
     [Key]
     public Guid Id { get; set; }
@@ -15,10 +15,10 @@ public class DealDispute
     public string Cause { get; set; }
     public DateTimeOffset DateCreated { get; set; }
     public DateTimeOffset? DateCompleted { get; set; }
-    public DealDisputeStatus Status { get; set; }
+    public DealCancelDisputeStatus Status { get; set; }
 }
 
-public enum DealDisputeStatus
+public enum DealCancelDisputeStatus
 {
     CreatorAdmitsFault = 10,
     CreatorDeniesFault = 20,
