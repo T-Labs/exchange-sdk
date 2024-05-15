@@ -356,12 +356,12 @@ public class ClientP2P
     }
 
     public async Task<List<DealCancelDispute>> GetDealCancelDisputes(string creatorUserId = null,
-        string respondentUserId = null, DealCancelDisputeStatus? dealDisputeStatus = null)
+        string respondentUserId = null, DealCancelDisputeStatus? dealCancelDisputeStatus = null)
     {
         return await $"p2p/deal-cancel-disputes".InternalApi()
             .SetQueryParam(nameof(creatorUserId), creatorUserId)
             .SetQueryParam(nameof(respondentUserId), respondentUserId)
-            .SetQueryParam(nameof(dealDisputeStatus), dealDisputeStatus)
+            .SetQueryParam(nameof(dealCancelDisputeStatus), dealCancelDisputeStatus)
             .GetJsonAsync<List<DealCancelDispute>>();
     }
 
