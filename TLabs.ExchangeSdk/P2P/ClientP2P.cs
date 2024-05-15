@@ -8,6 +8,7 @@ using TLabs.DotnetHelpers;
 using TLabs.ExchangeSdk.P2P.Chats;
 using TLabs.ExchangeSdk.P2P.Deals;
 using TLabs.ExchangeSdk.P2P.Users;
+using TLabs.ExchangeSdk.Trading;
 
 namespace TLabs.ExchangeSdk.P2P;
 
@@ -19,7 +20,8 @@ public class ClientP2P
         string userId = null,
         OrderStatus? status = null,
         DateTimeOffset? dateFrom = null, DateTimeOffset? dateTo = null,
-        decimal? dealCryptoAmount = null, decimal? dealFiatAmount = null, string dealUserId = null)
+        decimal? dealCryptoAmount = null, decimal? dealFiatAmount = null, string dealUserId = null,
+        decimal? remainingOrderAmount = null)
     {
         var result = await $"p2p/orders".InternalApi()
             .SetQueryParam(nameof(exchangeCurrencyCode), exchangeCurrencyCode)
@@ -33,6 +35,7 @@ public class ClientP2P
             .SetQueryParam(nameof(dealCryptoAmount), dealCryptoAmount)
             .SetQueryParam(nameof(dealFiatAmount), dealFiatAmount)
             .SetQueryParam(nameof(dealUserId), dealUserId)
+            .SetQueryParam(nameof(remainingOrderAmount), remainingOrderAmount)
             .GetJsonAsync<List<Order>>();
         return result;
     }
