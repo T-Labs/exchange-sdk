@@ -43,6 +43,7 @@ public class Deal
     public decimal CryptoAmountInUsdt { get; set; }
     public List<ChatMessage> ChatMessages { get; set; }
     public List<DealAppeal> DealAppeals { get; set; }
+    public DealCancelDispute DealCancelDispute { get; set; }
 
     [NotMapped]
     public string UserNickname { get; set; }

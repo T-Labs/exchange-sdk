@@ -348,35 +348,35 @@ public class ClientP2P
             .PutAsync();
     }
 
-    public async Task<DealDispute> GetDealDispute(Guid dealId, string userId)
+    public async Task<DealCancelDispute> GetDealCancelDisputeByDealId(Guid dealId, string userId)
     {
-        return await $"p2p/deals/{dealId}/dispute".InternalApi()
+        return await $"p2p/deals/{dealId}/cancel-dispute".InternalApi()
             .SetQueryParam(nameof(userId), userId)
-            .GetJsonAsync<DealDispute>();
+            .GetJsonAsync<DealCancelDispute>();
     }
 
-    public async Task<List<DealDispute>> GetDealDisputes(string creatorUserId = null,
-        string respondentUserId = null, DealDisputeStatus? dealDisputeStatus = null)
+    public async Task<List<DealCancelDispute>> GetDealCancelDisputes(string creatorUserId = null,
+        string respondentUserId = null, DealCancelDisputeStatus? dealDisputeStatus = null)
     {
-        return await $"p2p/deal-disputes".InternalApi()
+        return await $"p2p/deal-cancel-disputes".InternalApi()
             .SetQueryParam(nameof(creatorUserId), creatorUserId)
             .SetQueryParam(nameof(respondentUserId), respondentUserId)
             .SetQueryParam(nameof(dealDisputeStatus), dealDisputeStatus)
-            .GetJsonAsync<List<DealDispute>>();
+            .GetJsonAsync<List<DealCancelDispute>>();
     }
 
-    public async Task<DealDispute> OpenDealDispute(DealDisputeCreateDto dealDisputeCreateDto)
+    public async Task<IFlurlResponse> OpenDealCancelDispute(DealCancelDisputeCreateDto dealCancelDisputeCreateDto)
     {
-        return await $"p2p/deal-disputes".InternalApi()
-            .PostJsonAsync<DealDispute>(dealDisputeCreateDto);
+        return await $"p2p/deal-cancel-disputes".InternalApi()
+            .PostJsonAsync(dealCancelDisputeCreateDto);
     }
 
-    public async Task<DealDispute> UpdateDealDisputeStatus(Guid dealId, string userId,
-        DealDisputeStatus dealDisputeStatus)
+    public async Task<IFlurlResponse> UpdateDealCancelDisputeStatus(Guid dealId, string userId,
+        DealCancelDisputeStatus dealCancelDisputeStatus)
     {
-        return await $"p2p/deals/{dealId}/dispute-status".InternalApi()
+        return await $"p2p/deals/{dealId}/cancel-dispute/status".InternalApi()
             .SetQueryParam(nameof(userId), userId)
-            .SetQueryParam(nameof(dealDisputeStatus), dealDisputeStatus)
-            .PutJsonAsync<DealDispute>(null);
+            .SetQueryParam(nameof(dealCancelDisputeStatus), dealCancelDisputeStatus)
+            .PutJsonAsync(null);
     }
 }
