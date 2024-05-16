@@ -45,6 +45,12 @@ namespace TLabs.ExchangeSdk.Currencies
         /// </summary>
         public bool IsForCommissionConversion { get; set; }
 
+        /// <summary>Listed on the exchange</summary>
+        public bool AvailableOnExchange { get; set; }
+
+        /// <summary>Can be traded on P2P outside of exchange</summary>
+        public bool AvailableAsP2pExternalFiat { get; set; }
+
         /// <summary>
         /// Token of which currency (null if not a token)
         /// </summary>

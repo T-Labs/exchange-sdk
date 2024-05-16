@@ -83,6 +83,10 @@ namespace TLabs.ExchangeSdk.Depository
         public static readonly AccountChart P2pTransferFromOrderTemp = new AccountChart("771", "P2P перевод из ордера временный", nameof(P2pTransferFromOrderTemp));
         public static readonly AccountChart P2pTransferFromDealTemp = new AccountChart("772", "P2P перевод из сделки временный", nameof(P2pTransferFromDealTemp));
 
+        // Accounts for P2P fiat transfers (happen outside of the exchange)
+        public static readonly AccountChart P2pExternalPaymentSource = new AccountChart("7501", "P2P внешний счет источника фиата", nameof(P2pExternalPaymentSource));
+        public static readonly AccountChart P2pExternalPaymentDestination = new AccountChart("7502", "P2P внешний счет получателя фиата", nameof(P2pExternalPaymentDestination));
+
         /// <summary>Accounts that have UserId</summary>
         public static readonly List<AccountChart> UsersPersonalCharts = new List<AccountChart>
         {
@@ -103,6 +107,7 @@ namespace TLabs.ExchangeSdk.Depository
             P2pOrderBlockedTemp, P2pOrderBlocked, P2pOrderBlockCanceledTemp,
             P2pDealBlockedTemp, P2pDealBlocked, P2pDealBlockCanceledTemp,
             P2pTransferFromOrderTemp, P2pTransferFromDealTemp,
+            P2pExternalPaymentSource, P2pExternalPaymentDestination,
         };
 
         public static readonly List<AccountChart> All = new List<AccountChart>(UsersPersonalCharts)

@@ -143,14 +143,20 @@ namespace TLabs.ExchangeSdk.Depository
         public static readonly TransactionType P2pOrderBlockEnd = new TransactionType("752", "P2P блокировка для ордера конец", nameof(P2pOrderBlockEnd));
         public static readonly TransactionType P2pOrderBlockCancelBegin = new TransactionType("753", "P2P отмена блокировки для ордера начало", nameof(P2pOrderBlockCancelBegin));
         public static readonly TransactionType P2pOrderBlockCancelEnd = new TransactionType("754", "P2P отмена блокировки для ордера конец", nameof(P2pOrderBlockCancelEnd));
+        public static readonly TransactionType P2pOrderRemainingBlockCancelBegin = new TransactionType("755", "P2P отмена оставшейся блокировки для ордера после сделки начало", nameof(P2pOrderRemainingBlockCancelBegin));
+        public static readonly TransactionType P2pOrderRemainingBlockCancelEnd = new TransactionType("756", "P2P отмена оставшейся блокировки для ордера после сделки конец", nameof(P2pOrderRemainingBlockCancelEnd));
+
         public static readonly TransactionType P2pDealBlockBegin = new TransactionType("761", "P2P блокировка для сделки начало", nameof(P2pDealBlockBegin));
         public static readonly TransactionType P2pDealBlockEnd = new TransactionType("762", "P2P блокировка для сделки конец", nameof(P2pDealBlockEnd));
         public static readonly TransactionType P2pDealBlockCancelBegin = new TransactionType("763", "P2P отмена блокировки для сделки начало", nameof(P2pDealBlockCancelBegin));
         public static readonly TransactionType P2pDealBlockCancelEnd = new TransactionType("764", "P2P отмена блокировки для сделки конец", nameof(P2pDealBlockCancelEnd));
+
         public static readonly TransactionType P2pTransferFromOrderBegin = new TransactionType("771", "P2P перевод средств из ордера начало", nameof(P2pTransferFromOrderBegin));
         public static readonly TransactionType P2pTransferFromOrderEnd = new TransactionType("772", "P2P перевод средств из ордера конец", nameof(P2pTransferFromOrderEnd));
         public static readonly TransactionType P2pTransferFromDealBegin = new TransactionType("773", "P2P перевод средств из сделки начало", nameof(P2pTransferFromDealBegin));
         public static readonly TransactionType P2pTransferFromDealEnd = new TransactionType("774", "P2P перевод средств из сделки конец", nameof(P2pTransferFromDealEnd));
+
+        public static readonly TransactionType P2pExternalFiatTransfer = new TransactionType("7501", "P2P перевод фиата вне биржи", nameof(P2pExternalFiatTransfer));
 
         public static readonly List<TransactionType> TradingTypes = new List<TransactionType>
         {
@@ -218,9 +224,11 @@ namespace TLabs.ExchangeSdk.Depository
             BwpFiatPaymentToTrader,
             BwpCryptoPaymentToMerchantBegin, BwpCryptoPaymentToMerchantEnd, BwpMerchantFee, BwpTraderProfit,
 
-            P2pOrderBlockBegin, P2pOrderBlockEnd, P2pOrderBlockCancelBegin, P2pOrderBlockCancelEnd,
+            P2pOrderBlockBegin, P2pOrderBlockEnd,
+            P2pOrderBlockCancelBegin, P2pOrderBlockCancelEnd, P2pOrderRemainingBlockCancelBegin, P2pOrderRemainingBlockCancelEnd,
             P2pDealBlockBegin, P2pDealBlockEnd, P2pDealBlockCancelBegin, P2pDealBlockCancelEnd,
             P2pTransferFromOrderBegin, P2pTransferFromOrderEnd, P2pTransferFromDealBegin, P2pTransferFromDealEnd,
+            P2pExternalFiatTransfer,
         };
 
         private TransactionType(string code, string value, string valueKey)
