@@ -108,23 +108,24 @@ namespace TLabs.ExchangeSdk.Currencies
             _adapters = currenciesInfo.Adapters;
         }
 
-        private async Task<CurrenciesInfo> LoadCurrenciesInfo()
+        private async Task<CurrenciesInfo> LoadCurrenciesInfo(bool includeP2pExternalCurrencies = false)
         {
             var result = await $"depository/currencies/info".InternalApi()
+                .SetQueryParam("includeP2pExternalCurrencies", includeP2pExternalCurrencies)
                 .GetJsonAsync<CurrenciesInfo>().GetQueryResult();
             return result.Data;
         }
 
-        public async Task LoadData(int countAttempts = 0)
+        public async Task LoadData(int countAttempts = 0, bool includeP2pExternalCurrencies = false)
         {
-            var currencies = await LoadCurrenciesInfo();
+            var currencies = await LoadCurrenciesInfo(includeP2pExternalCurrencies);
             SetCurrenciesInfo(currencies);
 
             if (!IsLoaded)
             {
                 var maxDelay = TimeSpan.FromMinutes(10); // currencies are vital for most services, no reason to wait too much
                 await Task.Delay(TimeHelper.GetDelay(countAttempts, maxDelay)); // use increasing delay and try again
-                _ = LoadData(++countAttempts);
+                _ = LoadData(++countAttempts, includeP2pExternalCurrencies);
             }
         }
 
