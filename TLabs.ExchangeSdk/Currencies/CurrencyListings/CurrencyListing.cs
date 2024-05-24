@@ -34,11 +34,13 @@ namespace TLabs.ExchangeSdk.Currencies.CurrencyListings
 
         public string OfficialLink { get; set; }
         public string WhitePaperLink { get; set; }
+        public string LogoLink { get; set; }
 
         public string Title { get; set; }
         public string Subtitle { get; set; }
         public string Content { get; set; }
         public string PhotoLink { get; set; }
+
         public string NewsDescriptionHtml { get; set; }
 
         public string SocialLink1 { get; set; }
