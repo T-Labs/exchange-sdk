@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 
 namespace TLabs.ExchangeSdk.Currencies.CurrencyListings
 {
-    public enum CurrencyListingStatus { AwaitsPayment = 0, AwaitApproval = 10, Accepted = 20, Rejected = 30 };
+    public enum CurrencyListingStatus
+    { AwaitsPayment = 0, AwaitApproval = 10, Accepted = 20, Rejected = 30 };
 
     public class CurrencyListing
     {
@@ -25,12 +26,20 @@ namespace TLabs.ExchangeSdk.Currencies.CurrencyListings
         [Required]
         public string TokenName { get; set; }
 
-        public string DescriptionHtml { get; set; }
         public string ProjectGoal { get; set; }
         public string InvestmentCondition { get; set; }
         public string InvestmentConditionHint { get; set; }
         public string Category { get; set; }
         public string Location { get; set; }
+
+        public string OfficialLink { get; set; }
+        public string WhitePaperLink { get; set; }
+
+        public string Title { get; set; }
+        public string Subtitle { get; set; }
+        public string Content { get; set; }
+        public string PhotoLink { get; set; }
+        public string NewsDescriptionHtml { get; set; }
 
         public string SocialLink1 { get; set; }
         public string SocialLink2 { get; set; }
