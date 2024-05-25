@@ -16,8 +16,8 @@ namespace TLabs.ExchangeSdk.Currencies.CurrencyListings
         public async Task<List<CurrencyListing>> GetList(string userId = null, CurrencyListingStatus? status = null)
         {
             var result = await $"{baseUrl}".InternalApi()
-                .SetQueryParam(nameof(userId), userId.Trim().NullIfEmpty())
-                .SetQueryParam(nameof(status), ((int)status).ToString() ?? "")
+                .SetQueryParam(nameof(userId), userId?.Trim().NullIfEmpty())
+                .SetQueryParam(nameof(status), status == null ? "" : ((int)status).ToString())
                 .GetJsonAsync<List<CurrencyListing>>();
             return result;
         }
@@ -25,7 +25,7 @@ namespace TLabs.ExchangeSdk.Currencies.CurrencyListings
         public async Task<CurrencyListing> Get(string currencyCode)
         {
             var result = await $"{baseUrl}/{currencyCode}".InternalApi()
-                .SetQueryParam(nameof(currencyCode), currencyCode.Trim())
+                .SetQueryParam(nameof(currencyCode), currencyCode?.Trim())
                 .GetJsonAsync<CurrencyListing>();
             return result;
         }
