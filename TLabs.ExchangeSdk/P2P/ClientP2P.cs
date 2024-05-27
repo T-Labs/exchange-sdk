@@ -165,7 +165,8 @@ public class ClientP2P
     }
 
     public async Task<UserOrderLimitsDto> GetUserOrderOpeningLimits(string userId, bool isBuyingOnExchange,
-        string exchangeCurrencyCode, string paymentCurrencyCode, decimal price, List<Guid> requisiteIds = null)
+        string exchangeCurrencyCode, string paymentCurrencyCode, decimal price, List<Guid> requisiteIds = null,
+        Guid? editableOrderId = null)
     {
         return await $"p2p/users/{userId}/trading-limits/order".InternalApi()
             .SetQueryParam(nameof(isBuyingOnExchange), isBuyingOnExchange)
@@ -173,6 +174,7 @@ public class ClientP2P
             .SetQueryParam(nameof(paymentCurrencyCode), paymentCurrencyCode)
             .SetQueryParam(nameof(price), price)
             .SetQueryParam(nameof(requisiteIds), requisiteIds)
+            .SetQueryParam(nameof(editableOrderId), editableOrderId)
             .GetJsonAsync<UserOrderLimitsDto>();
     }
 
