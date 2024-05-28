@@ -323,7 +323,7 @@ public class ClientP2P
 
     public async Task<List<DealAppeal>> GetAllDealAppeals(string userId = null, string dealUserId = null,
         Guid? dealId = null, long? dealDisplayId = null, AppealStatus? appealStatus = null,
-        string ExchangeCurrencyCode = null, string PaymentCurrencyCode = null)
+        string ExchangeCurrencyCode = null, string PaymentCurrencyCode = null, AppealType? appealType = null)
     {
         return await $"p2p/deal-appeals/all".InternalApi()
             .SetQueryParam(nameof(userId), userId)
@@ -333,6 +333,7 @@ public class ClientP2P
             .SetQueryParam(nameof(appealStatus), appealStatus)
             .SetQueryParam(nameof(ExchangeCurrencyCode), ExchangeCurrencyCode)
             .SetQueryParam(nameof(PaymentCurrencyCode), PaymentCurrencyCode)
+            .SetQueryParam(nameof(appealType), appealType)
             .GetJsonAsync<List<DealAppeal>>();
     }
 
