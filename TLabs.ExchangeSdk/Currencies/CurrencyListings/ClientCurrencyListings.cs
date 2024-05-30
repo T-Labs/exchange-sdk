@@ -32,6 +32,13 @@ namespace TLabs.ExchangeSdk.Currencies.CurrencyListings
 
         public async Task<CurrencyListing> Create(CurrencyListing model)
         {
+            var createdListing = await $"{baseUrl}".InternalApi()
+                .PostJsonAsync<CurrencyListing>(model);
+            return createdListing;
+        }
+
+        public async Task<CurrencyListing> Update(CurrencyListing model)
+        {
             var createdListing = await $"{baseUrl}/{model.CurrencyCode}".InternalApi()
                 .PutJsonAsync<CurrencyListing>(model);
             return createdListing;
@@ -39,9 +46,9 @@ namespace TLabs.ExchangeSdk.Currencies.CurrencyListings
 
         public async Task<QueryResult> ChangeStatus(string currencyCode, CurrencyListingStatus newStatus)
         {
-            var result = await $"{baseUrl}/{currencyCode}".InternalApi()
+            var result = await $"{baseUrl}/status/{currencyCode}".InternalApi()
                 .SetQueryParam(nameof(newStatus), newStatus)
-                .PostJsonAsync(null).GetQueryResult();
+                .PutJsonAsync(null).GetQueryResult();
             return result;
         }
 
