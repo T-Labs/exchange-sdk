@@ -15,8 +15,8 @@ namespace TLabs.ExchangeSdk.Currencies.CurrencyListings
 {
     public class ClientCurrencyListings
     {
-        const string baseUrl = "brokerage/currency-listings";
-        const string newsBaseUrl = "news/currency-listings";
+        private const string baseUrl = "brokerage/currency-listings";
+        private const string newsBaseUrl = "news/currency-listings";
 
         public async Task<List<CurrencyListing>> GetList(string userId = null, CurrencyListingStatus? status = null)
         {
@@ -79,7 +79,8 @@ namespace TLabs.ExchangeSdk.Currencies.CurrencyListings
 
         public async Task<List<CurrencyListingNews>> GetCurrencyListingNews(string currencyCode)
         {
-            var result = await $"{newsBaseUrl}/{currencyCode}/news".InternalApi().GetJsonAsync<List<CurrencyListingNews>>();
+            var result = await $"{newsBaseUrl}/{currencyCode}/news".InternalApi()
+                .GetJsonAsync<List<CurrencyListingNews>>();
             return result;
         }
 
@@ -89,9 +90,11 @@ namespace TLabs.ExchangeSdk.Currencies.CurrencyListings
             return result;
         }
 
-        public async Task<List<CurrencyListingContentReaction>> UpdateLikeForNews(UpdateContentReactionDto contentReactionDto)
+        public async Task<List<CurrencyListingContentReaction>> UpdateLikeForNews(
+            UpdateContentReactionDto contentReactionDto)
         {
-            var result = await $"{newsBaseUrl}/news/likes".InternalApi().PutJsonAsync<List<CurrencyListingContentReaction>>(contentReactionDto);
+            var result = await $"{newsBaseUrl}/news/likes".InternalApi()
+                .PutJsonAsync<List<CurrencyListingContentReaction>>(contentReactionDto);
             return result;
         }
 
@@ -107,9 +110,11 @@ namespace TLabs.ExchangeSdk.Currencies.CurrencyListings
             return result;
         }
 
-        public async Task<List<CurrencyListingContentReaction>> UpdateLikeForComment(UpdateContentReactionDto contentReactionDto)
-        {      
-            var result = await $"news/news-comments/likes".InternalApi().PutJsonAsync<List<CurrencyListingContentReaction>>(contentReactionDto);
+        public async Task<List<CurrencyListingContentReaction>> UpdateLikeForComment(
+            UpdateContentReactionDto contentReactionDto)
+        {
+            var result = await $"news/news-comments/likes".InternalApi()
+                .PutJsonAsync<List<CurrencyListingContentReaction>>(contentReactionDto);
             return result;
         }
     }
