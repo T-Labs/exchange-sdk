@@ -1,4 +1,6 @@
 using Flurl.Http;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,12 +8,15 @@ using System.Text;
 using System.Threading.Tasks;
 using TLabs.DotnetHelpers;
 using TLabs.ExchangeSdk.CashDeposits;
+using TLabs.ExchangeSdk.Currencies.CurrencyListings.News.Dtos;
+using TLabs.ExchangeSdk.Currencies.CurrencyListings.News.Models;
 
 namespace TLabs.ExchangeSdk.Currencies.CurrencyListings
 {
     public class ClientCurrencyListings
     {
         const string baseUrl = "brokerage/currency-listings";
+        const string newsBaseUrl = "news/currency-listings";
 
         public async Task<List<CurrencyListing>> GetList(string userId = null, CurrencyListingStatus? status = null)
         {
@@ -56,6 +61,55 @@ namespace TLabs.ExchangeSdk.Currencies.CurrencyListings
         {
             var result = await $"{baseUrl}/settings".InternalApi()
                 .GetJsonAsync<CurrencyListingSettings>();
+            return result;
+        }
+
+        public async Task<List<NewsComment>> GetComments(string currencyCode)
+        {
+            var result = await $"{newsBaseUrl}/{currencyCode}/comments".InternalApi()
+                .GetJsonAsync<List<NewsComment>>();
+            return result;
+        }
+
+        public async Task<int> GetCommentsCount(string currencyCode)
+        {
+            var result = await $"{newsBaseUrl}/{currencyCode}/comments/count".InternalApi().GetJsonAsync<int>();
+            return result;
+        }
+
+        public async Task<List<CurrencyListingNews>> GetCurrencyListingNews(string currencyCode)
+        {
+            var result = await $"{newsBaseUrl}/{currencyCode}/news".InternalApi().GetJsonAsync<List<CurrencyListingNews>>();
+            return result;
+        }
+
+        public async Task<int> GetNewsCount(string currencyCode)
+        {
+            var result = await $"{newsBaseUrl}/{currencyCode}/news/count".InternalApi().GetJsonAsync<int>();
+            return result;
+        }
+
+        public async Task<List<CurrencyListingContentReaction>> UpdateLikeForNews(UpdateContentReactionDto contentReactionDto)
+        {
+            var result = await $"{newsBaseUrl}/news/likes".InternalApi().PutJsonAsync<List<CurrencyListingContentReaction>>(contentReactionDto);
+            return result;
+        }
+
+        public async Task<List<NewsComment>> GetNewsComments(long id)
+        {
+            var result = await $"{newsBaseUrl}/news/{id}/comments".InternalApi().GetJsonAsync<List<NewsComment>>();
+            return result;
+        }
+
+        public async Task<NewsComment> CreateComment(NewsCommentDto commentDto)
+        {
+            var result = await $"news/news-comments".InternalApi().PostJsonAsync<NewsComment>(commentDto);
+            return result;
+        }
+
+        public async Task<List<CurrencyListingContentReaction>> UpdateLikeForComment(UpdateContentReactionDto contentReactionDto)
+        {      
+            var result = await $"news/news-comments/likes".InternalApi().PutJsonAsync<List<CurrencyListingContentReaction>>(contentReactionDto);
             return result;
         }
     }
