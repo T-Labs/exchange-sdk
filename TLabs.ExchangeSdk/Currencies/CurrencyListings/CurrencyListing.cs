@@ -15,6 +15,8 @@ namespace TLabs.ExchangeSdk.Currencies.CurrencyListings
         [Key]
         public string CurrencyCode { get; set; }
 
+        public const int TotalTokensAmount = 10_000_000;
+
         public CurrencyListingStatus Status { get; set; }
         public DateTimeOffset DateCreated { get; set; }
         public DateTimeOffset DateUpdated { get; set; }
