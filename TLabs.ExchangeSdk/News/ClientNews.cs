@@ -9,7 +9,10 @@ namespace TLabs.ExchangeSdk.News;
 
 public class ClientNews
 {
-    public Task<JsonResult> Get()
+    private const string BaseUrl = "news";
+
+    public Task<JsonResult> Healthcheck()
+
     {
         var result = $"news/healthcheck".InternalApi()
             .GetJsonAsync<JsonResult>();
@@ -18,38 +21,38 @@ public class ClientNews
 
     #region news
 
-    public async Task<List<NewsItem>> GetAll(Language? language)
+    public async Task<List<NewsItemViewModel>> GetNewsViewModels(Language? language = null)
     {
-        var result = await $"news".InternalApi()
+        var result = await $"{BaseUrl}/news".InternalApi()
             .SetQueryParam(nameof(language), language)
-            .GetJsonAsync<List<NewsItem>>();
+            .GetJsonAsync<List<NewsItemViewModel>>();
         return result;
     }
 
-    public async Task<NewsItemViewModel> GetId(long id)
+    public async Task<NewsItemViewModel> GetNewsById(long id)
     {
-        var result = await $"news/{id}".InternalApi()
+        var result = await $"{BaseUrl}/news/{id}".InternalApi()
             .GetJsonAsync<NewsItemViewModel>();
         return result;
     }
 
-    public async Task<long> Create(NewsDto newsItem)
+    public async Task<long> CreateNews(NewsDto newsItem)
     {
-        var result = await $"news".InternalApi()
+        var result = await $"{BaseUrl}/news".InternalApi()
             .PostJsonAsync<long>(newsItem);
         return result;
     }
 
-    public async Task<long> Update(NewsDto newsDto)
+    public async Task<long> UpdateNews(NewsDto newsDto)
     {
-        var result = await $"news".InternalApi()
+        var result = await $"{BaseUrl}/news".InternalApi()
             .PutJsonAsync<long>(newsDto);
         return result;
     }
 
-    public async Task<long> Delete(long id)
+    public async Task<long> DeleteNews(long id)
     {
-        var result = await $"news/{id}".InternalApi()
+        var result = await $"{BaseUrl}/news/{id}".InternalApi()
             .DeleteJsonAsync<long>(null);
         return result;
     }
@@ -60,31 +63,36 @@ public class ClientNews
 
     public async Task<NewsComment> GetComment(long id)
     {
-        var result = await $"news/news-comments/{id}".InternalApi().GetJsonAsync<NewsComment>();
+        var result = await $"{BaseUrl}/news-comments/{id}".InternalApi()
+            .GetJsonAsync<NewsComment>();
         return result;
     }
 
     public async Task<List<NewsComment>> GetComments()
     {
-        var result = await $"news/news-comments".InternalApi().GetJsonAsync<List<NewsComment>>();
+        var result = await $"{BaseUrl}/news-comments".InternalApi()
+            .GetJsonAsync<List<NewsComment>>();
         return result;
     }
 
     public async Task<NewsComment> CreateNewsComment(NewsCommentDto commentDto)
     {
-        var result = await $"news/news-comments".InternalApi().PostJsonAsync<NewsComment>(commentDto);
+        var result = await $"{BaseUrl}/news-comments".InternalApi()
+            .PostJsonAsync<NewsComment>(commentDto);
         return result;
     }
 
-    public async Task<NewsComment> DeleteComment(long id)
+    public async Task<IFlurlResponse> DeleteComment(long id)
     {
-        var result = await $"news/news-comments/{id}".InternalApi().PostJsonAsync<NewsComment>(null);
+        var result = await $"{BaseUrl}/news-comments/{id}".InternalApi()
+            .DeleteAsync();
         return result;
     }
 
     public async Task<List<CommentLike>> UpdateCommentLike(UpdateLikeDto updateLikeDto)
     {
-        var result = await $"news/news-comments".InternalApi().PostJsonAsync<List<CommentLike>>(updateLikeDto);
+        var result = await $"{BaseUrl}/news-comments".InternalApi()
+            .PutJsonAsync<List<CommentLike>>(updateLikeDto);
         return result;
     }
 
@@ -92,9 +100,9 @@ public class ClientNews
 
     #region faq
 
-    public async Task<List<FaqQuestion>> GetFaqQuestions(Language? language)
+    public async Task<List<FaqQuestion>> GetFaqQuestions(Language? language = null)
     {
-        var result = await $"news/faq".InternalApi()
+        var result = await $"{BaseUrl}/faq".InternalApi()
             .SetQueryParam(nameof(language), language)
             .GetJsonAsync<List<FaqQuestion>>();
         return result;
@@ -102,25 +110,29 @@ public class ClientNews
 
     public async Task<FaqQuestion> GetFaqQuestion(int id)
     {
-        var result = await $"news/faq/{id}".InternalApi().GetJsonAsync<FaqQuestion>();
+        var result = await $"{BaseUrl}/faq/{id}".InternalApi()
+            .GetJsonAsync<FaqQuestion>();
         return result;
     }
 
-    public async Task<IFlurlResponse> PutFaqQuestion(int id, FaqQuestion faqQuestion)
+    public async Task<IFlurlResponse> UpdateFaqQuestion(int id, FaqQuestion faqQuestion)
     {
-        var result = await $"news/faq".InternalApi().PutJsonAsync(faqQuestion);
+        var result = await $"{BaseUrl}/faq".InternalApi()
+            .PutJsonAsync(faqQuestion);
         return result;
     }
 
-    public async Task<IFlurlResponse> PostFaqQuestion(FaqQuestion faqQuestion)
+    public async Task<IFlurlResponse> CreateFaqQuestion(FaqQuestion faqQuestion)
     {
-        var result = await $"news/faq".InternalApi().PostJsonAsync(faqQuestion);
+        var result = await $"{BaseUrl}/news".InternalApi()
+            .PostJsonAsync(faqQuestion);
         return result;
     }
 
     public async Task<IFlurlResponse> DeleteFaqQuestion(int id)
     {
-        var result = await $"news/faq/{id}".InternalApi().DeleteAsync();
+        var result = await $"{BaseUrl}/faq/{id}".InternalApi()
+            .DeleteAsync();
         return result;
     }
 
@@ -128,15 +140,17 @@ public class ClientNews
 
     #region image
 
-    public async Task<Image> GetImage(string id)
+    public async Task<byte[]> GetImage(string id)
     {
-        var result = await $"news/image/{id}".InternalApi().GetJsonAsync<Image>();
+        var result = await $"{BaseUrl}/image/{id}".InternalApi()
+            .GetJsonAsync<byte[]>();
         return result;
     }
 
     public async Task<string> UploadImage(UploadImage model)
     {
-        var result = await $"news/image".InternalApi().PutJsonAsync<string>(model);
+        var result = await $"{BaseUrl}/image".InternalApi()
+            .PutJsonAsync<string>(model);
         return result;
     }
 
@@ -146,34 +160,39 @@ public class ClientNews
 
     public async Task<List<SignalChannel>> GetSignalChannels()
     {
-        var result = await $"news/signals/channels".InternalApi().GetJsonAsync<List<SignalChannel>>();
+        var result = await $"{BaseUrl}/signals/channels".InternalApi()
+            .GetJsonAsync<List<SignalChannel>>();
         return result;
     }
 
     public async Task<SignalChannel> GetSignalChannel(int id)
     {
-        var result = await $"news/signals/channels/{id}".InternalApi().GetJsonAsync<SignalChannel>();
+        var result = await $"{BaseUrl}/signals/channels/{id}".InternalApi()
+            .GetJsonAsync<SignalChannel>();
         return result;
     }
 
     [HttpPut("{id}")]
-    public async Task<IFlurlResponse> PutSignalChannel(int id, SignalChannel signalChannel)
+    public async Task<IFlurlResponse> UpdateSignalChannel(int id, SignalChannel signalChannel)
     {
-        var result = await $"news/signals/channels/{id}".InternalApi().PutJsonAsync(signalChannel);
+        var result = await $"{BaseUrl}/signals/channels/{id}".InternalApi()
+            .PutJsonAsync(signalChannel);
         return result;
     }
 
     [HttpPost]
-    public async Task<IFlurlResponse> PostSignalChannel(SignalChannel signalChannel)
+    public async Task<IFlurlResponse> CreateSignalChannel(SignalChannel signalChannel)
     {
-        var result = await $"news/signals/channels".InternalApi().PostJsonAsync(signalChannel);
+        var result = await $"{BaseUrl}/signals/channels".InternalApi()
+            .PostJsonAsync(signalChannel);
         return result;
     }
 
     [HttpDelete("{id}")]
     public async Task<IFlurlResponse> DeleteSignalChannel(int id)
     {
-        var result = await $"news/signals/channels/{id}".InternalApi().DeleteAsync();
+        var result = await $"{BaseUrl}/signals/channels/{id}".InternalApi()
+            .DeleteAsync();
         return result;
     }
 
@@ -181,36 +200,40 @@ public class ClientNews
 
     #region signals
 
-    public async Task<List<Signal>> GetSignals(Language? language, int? channelId = null)
+    public async Task<List<Signal>> GetSignals(Language? language = null, int? channelId = null)
     {
-        var result = await $"news/signals".InternalApi()
+        var result = await $"{BaseUrl}/signals".InternalApi()
             .SetQueryParam(nameof(language), language)
             .SetQueryParam(nameof(channelId), channelId)
             .GetJsonAsync<List<Signal>>();
         return result;
     }
 
-    public async Task<Signal> GetSignal([FromRoute] int id)
+    public async Task<Signal> GetSignal(int id)
     {
-        var result = await $"news/signals/{id}".InternalApi().GetJsonAsync<Signal>();
+        var result = await $"{BaseUrl}/signals/{id}".InternalApi()
+            .GetJsonAsync<Signal>();
         return result;
     }
 
-    public async Task<IFlurlResponse> PutSignal(int id, Signal signal)
+    public async Task<IFlurlResponse> UpdateSignal(int id, Signal signal)
     {
-        var result = await $"news/signals/{id}".InternalApi().PutJsonAsync(signal);
+        var result = await $"{BaseUrl}/signals/{id}".InternalApi()
+            .PutJsonAsync(signal);
         return result;
     }
 
-    public async Task<IFlurlResponse> PostSignal(Signal signal)
+    public async Task<IFlurlResponse> CreateSignal(Signal signal)
     {
-        var result = await $"news/signals".InternalApi().PostJsonAsync(signal);
+        var result = await $"{BaseUrl}/signals".InternalApi()
+            .PostJsonAsync(signal);
         return result;
     }
 
     public async Task<IFlurlResponse> DeleteSignal(int id)
     {
-        var result = await $"news/signals/{id}".InternalApi().DeleteAsync();
+        var result = await $"{BaseUrl}/signals/{id}".InternalApi()
+            .DeleteAsync();
         return result;
     }
 
