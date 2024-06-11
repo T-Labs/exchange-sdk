@@ -117,7 +117,7 @@ public class ClientNews
 
     public async Task<IFlurlResponse> UpdateFaqQuestion(int id, FaqQuestion faqQuestion)
     {
-        var result = await $"{BaseUrl}/faq".InternalApi()
+        var result = await $"{BaseUrl}/faq/{id}".InternalApi()
             .PutJsonAsync(faqQuestion);
         return result;
     }
