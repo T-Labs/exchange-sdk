@@ -2,6 +2,7 @@ using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Linq;
 using TLabs.ExchangeSdk.Currencies.CurrencyListings;
+using TLabs.ExchangeSdk.News;
 
 namespace TLabs.ExchangeSdk
 {
@@ -37,6 +38,7 @@ namespace TLabs.ExchangeSdk
             services.AddTransient<Bwp.ClientBwp>();
             services.AddTransient<WebApp.ClientWebapp>();
             services.AddTransient<ClientCurrencyListings>();
+            services.AddTransient<ClientNews>();
 
             // needs activation in Program.cs and action /currencies/reload
             services.AddSingleton<Currencies.CurrenciesCache>();
