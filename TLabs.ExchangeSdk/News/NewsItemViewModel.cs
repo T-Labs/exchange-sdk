@@ -36,7 +36,7 @@ namespace TLabs.ExchangeSdk.News
             Title = lastVersion.Title;
             Body = lastVersion.Body;
             Preview = lastVersion.Preview;
-            Created = lastVersion.DateCreated;
+            DateCreated = lastVersion.DateCreated;
             ImageId = lastVersion.ImageId;
             ImageUrl = Image.GetUrl(lastVersion.ImageId);
         }
