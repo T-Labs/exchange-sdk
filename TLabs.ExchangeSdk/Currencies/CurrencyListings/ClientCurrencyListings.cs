@@ -124,8 +124,8 @@ namespace TLabs.ExchangeSdk.Currencies.CurrencyListings
             return await $"/news/comments/{id}".InternalApi().DeleteAsync();
         }
 
-        public async Task<List<CurrencyListingContentReaction>> UpdateLikeForComment(
-            UpdateContentReactionDto contentReactionDto)
+        public async Task<List<NewsLike>> UpdateCurrencyListingNewsLike(
+            UpdateLikeDto updateLikeDto)
         {
             var result = await $"{newsBaseUrl}/news/likes".InternalApi().PutJsonAsync<List<NewsLike>>(updateLikeDto);
             return result;
