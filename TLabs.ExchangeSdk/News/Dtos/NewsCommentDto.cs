@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace TLabs.ExchangeSdk.Currencies.CurrencyListings.News.Dtos;
+namespace TLabs.ExchangeSdk.News.Dtos;
 
 public class NewsCommentDto
 {
