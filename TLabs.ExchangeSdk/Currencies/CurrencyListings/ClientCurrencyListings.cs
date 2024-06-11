@@ -110,9 +110,9 @@ namespace TLabs.ExchangeSdk.Currencies.CurrencyListings
             return result;
         }
 
-        public async Task<IFlurlResponse> DeleteComment(NewsComment newsComment)
+        public async Task<IFlurlResponse> DeleteComment(long id)
         {
-            return await $"news/news-comments/{newsComment.Id}".InternalApi().DeleteJsonAsync(newsComment);
+            return await $"/news/comments/{id}".InternalApi().DeleteAsync();
         }
 
         public async Task<List<CurrencyListingContentReaction>> UpdateLikeForComment(
