@@ -124,7 +124,7 @@ public class ClientNews
 
     public async Task<IFlurlResponse> CreateFaqQuestion(FaqQuestion faqQuestion)
     {
-        var result = await $"{BaseUrl}/news".InternalApi()
+        var result = await $"{BaseUrl}/faq".InternalApi()
             .PostJsonAsync(faqQuestion);
         return result;
     }
@@ -149,7 +149,7 @@ public class ClientNews
 
     public async Task<string> UploadImage(UploadImage model)
     {
-        var result = await $"{BaseUrl}/image".InternalApi()
+        var result = await $"{BaseUrl}/image/upload".InternalApi()
             .PutJsonAsync<string>(model);
         return result;
     }

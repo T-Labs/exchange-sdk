@@ -15,7 +15,7 @@ namespace TLabs.ExchangeSdk.News
 
         public string Preview { get; set; }
 
-        public DateTimeOffset Created { get; set; }
+        public DateTimeOffset DateCreated { get; set; }
 
         /// <summary> Image id with extension </summary>
         public string ImageId { get; set; }
