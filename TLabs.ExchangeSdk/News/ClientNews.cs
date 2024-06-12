@@ -95,7 +95,7 @@ public class ClientNews
 
     public async Task<List<CommentLike>> UpdateCommentLike(UpdateLikeDto updateLikeDto)
     {
-        var result = await $"{BaseUrl}/news-comments".InternalApi()
+        var result = await $"{BaseUrl}/news-comments/likes".InternalApi()
             .PutJsonAsync<List<CommentLike>>(updateLikeDto);
         return result;
     }
