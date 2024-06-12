@@ -71,27 +71,15 @@ namespace TLabs.ExchangeSdk.Currencies.CurrencyListings
             return result;
         }
 
-        public async Task<NewsComment> CreateCurrencyListingComment(NewsCommentDto commentDto)
-        {
-            var result = await $"{newsBaseUrl}/comments".InternalApi().PostJsonAsync<NewsComment>(commentDto);
-            return result;
-        }
-
         public async Task<int> GetCurrencyListingCommentCount(string currencyCode)
         {
             var result = await $"{newsBaseUrl}/{currencyCode}/comments/count".InternalApi().GetJsonAsync<int>();
             return result;
         }
 
-        public async Task<List<NewsComment>> GetCurrencyListingNewsComments(long id)
+        public async Task<NewsComment> CreateCurrencyListingComment(NewsCommentDto commentDto)
         {
-            var result = await $"{newsBaseUrl}/news/{id}/comments".InternalApi().GetJsonAsync<List<NewsComment>>();
-            return result;
-        }
-
-        public async Task<int> GetCurrencyListingNewsCommentsCount(long id)
-        {
-            var result = await $"{newsBaseUrl}/news/{id}/comments/count".InternalApi().GetJsonAsync<int>();
+            var result = await $"{newsBaseUrl}/comments".InternalApi().PostJsonAsync<NewsComment>(commentDto);
             return result;
         }
 
@@ -117,7 +105,19 @@ namespace TLabs.ExchangeSdk.Currencies.CurrencyListings
         {
             var result = await $"{newsBaseUrl}/{currencyCode}/news/count".InternalApi().GetJsonAsync<int>();
             return result;
-        }          
+        }
+
+        public async Task<List<NewsComment>> GetCurrencyListingNewsComments(long id)
+        {
+            var result = await $"{newsBaseUrl}/news/{id}/comments".InternalApi().GetJsonAsync<List<NewsComment>>();
+            return result;
+        }
+
+        public async Task<int> GetCurrencyListingNewsCommentCount(long id)
+        {
+            var result = await $"{newsBaseUrl}/news/{id}/comments/count".InternalApi().GetJsonAsync<int>();
+            return result;
+        }
 
         public async Task<List<NewsLike>> UpdateCurrencyListingNewsLike(
             UpdateLikeDto updateLikeDto)
