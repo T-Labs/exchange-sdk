@@ -14,7 +14,7 @@ namespace TLabs.ExchangeSdk.Currencies.CurrencyListings
 
         #region Brokerage
 
-        public async Task<List<CurrencyListing>> GetList(string userId = null, CurrencyListingStatus? status = null)
+        public async Task<List<CurrencyListing>> GetCurrencyListings(string userId = null, CurrencyListingStatus? status = null)
         {
             var result = await $"{baseUrl}".InternalApi()
                 .SetQueryParam(nameof(userId), userId?.Trim().NullIfEmpty())
@@ -23,7 +23,7 @@ namespace TLabs.ExchangeSdk.Currencies.CurrencyListings
             return result;
         }
 
-        public async Task<CurrencyListing> Get(string currencyCode)
+        public async Task<CurrencyListing> GetCurrencyListing(string currencyCode)
         {
             var result = await $"{baseUrl}/{currencyCode}".InternalApi()
                 .SetQueryParam(nameof(currencyCode), currencyCode?.Trim())
@@ -31,21 +31,21 @@ namespace TLabs.ExchangeSdk.Currencies.CurrencyListings
             return result;
         }
 
-        public async Task<CurrencyListing> Create(CurrencyListing model)
+        public async Task<CurrencyListing> CreateCurrencyListing(CurrencyListing model)
         {
             var createdListing = await $"{baseUrl}".InternalApi()
                 .PostJsonAsync<CurrencyListing>(model);
             return createdListing;
         }
 
-        public async Task<CurrencyListing> Update(CurrencyListing model)
+        public async Task<CurrencyListing> UpdateCurrencyListing(CurrencyListing model)
         {
             var createdListing = await $"{baseUrl}/{model.CurrencyCode}".InternalApi()
                 .PutJsonAsync<CurrencyListing>(model);
             return createdListing;
         }
 
-        public async Task<QueryResult> ChangeStatus(string currencyCode, CurrencyListingStatus newStatus)
+        public async Task<QueryResult> ChangeStatusCurrencyListing(string currencyCode, CurrencyListingStatus newStatus)
         {
             var result = await $"{baseUrl}/status/{currencyCode}".InternalApi()
                 .SetQueryParam(nameof(newStatus), newStatus)
