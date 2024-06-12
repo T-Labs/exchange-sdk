@@ -1,5 +1,6 @@
 using Flurl.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using TLabs.DotnetHelpers;
@@ -21,17 +22,20 @@ public class ClientNews
 
     #region news
 
-    public async Task<List<NewsItemViewModel>> GetNewsViewModels(Language? language = null)
+    public async Task<List<NewsItemViewModel>> GetNewsViewModels(Language? language = null,
+        string currencyListingCode = null)
     {
         var result = await $"{BaseUrl}/news".InternalApi()
             .SetQueryParam(nameof(language), language)
+            .SetQueryParam(nameof(currencyListingCode), currencyListingCode)
             .GetJsonAsync<List<NewsItemViewModel>>();
         return result;
     }
 
-    public async Task<NewsItemViewModel> GetNewsById(long id)
+    public async Task<NewsItemViewModel> GetNewsById(long id, string currencyListingCode = null)
     {
         var result = await $"{BaseUrl}/news/{id}".InternalApi()
+            .SetQueryParam(nameof(currencyListingCode), currencyListingCode)
             .GetJsonAsync<NewsItemViewModel>();
         return result;
     }
@@ -152,6 +156,28 @@ public class ClientNews
         var result = await $"{BaseUrl}/image/upload".InternalApi()
             .PutJsonAsync<string>(model);
         return result;
+    }
+
+    public async Task<FileContentResult> GetImageFileContentResult(string id)
+    {
+        var data = await GetImage(id);
+        var idData = id.Split('.', StringSplitOptions.RemoveEmptyEntries);
+        var extension = "";
+        if (idData.Length == 2) extension = idData[1];
+        switch (extension)
+        {
+            case "gif":
+                return new FileContentResult(data, "image/gif");
+
+            case "png":
+                return new FileContentResult(data, "image/png");
+
+            case "webp":
+                return new FileContentResult(data, "image/webp");
+
+            default:
+                return new FileContentResult(data, "image/jpeg");
+        }
     }
 
     #endregion image
