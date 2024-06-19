@@ -16,6 +16,7 @@ namespace TLabs.ExchangeSdk.CryptoAdapters
             "doge" => new Regex("^D[5-9A-HJ-NP-U]{1}[1-9a-km-zA-HJ-NP-Z]{32}$").IsMatch(adapterAddress),
             "btc" => new Regex("^(?:[13]{1}[a-km-zA-HJ-NP-Z1-9]{26,33}|bc1[a-z0-9]{39,59})$").IsMatch(adapterAddress),
             "trx" => new Regex("^T[A-Za-z1-9]{33}$").IsMatch(adapterAddress),
+            "ton" => new Regex("^[A-Za-z0-9\\-_]{48}$").IsMatch(adapterAddress),
             "dash" => new Regex("^X[1-9A-HJ-NP-Za-km-z]{33}$").IsMatch(adapterAddress),
             "ltc" => new Regex("^[LM3][a-km-zA-HJ-NP-Z1-9]{26,33}$").IsMatch(adapterAddress),
             "del" => new Regex("^dx1[ac-hj-np-z0-9]{38}$").IsMatch(adapterAddress),
