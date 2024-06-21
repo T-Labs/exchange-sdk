@@ -32,10 +32,9 @@ public class ClientNews
         return result;
     }
 
-    public async Task<NewsItemViewModel> GetNewsById(long id, string currencyListingCode = null)
+    public async Task<NewsItemViewModel> GetNewsById(long id)
     {
         var result = await $"{BaseUrl}/news/{id}".InternalApi()
-            .SetQueryParam(nameof(currencyListingCode), currencyListingCode)
             .GetJsonAsync<NewsItemViewModel>();
         return result;
     }
@@ -72,9 +71,10 @@ public class ClientNews
         return result;
     }
 
-    public async Task<List<NewsComment>> GetComments()
+    public async Task<List<NewsComment>> GetComments(long? newsItemId = null)
     {
         var result = await $"{BaseUrl}/news-comments".InternalApi()
+            .SetQueryParam(nameof(newsItemId), newsItemId)
             .GetJsonAsync<List<NewsComment>>();
         return result;
     }
