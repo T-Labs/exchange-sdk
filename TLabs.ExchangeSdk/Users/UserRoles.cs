@@ -20,7 +20,7 @@ namespace TLabs.ExchangeSdk.Users
         public const string ApitradeAdmin = "ApitradeAdmin";
         public const string P2PWatch = "P2PWatch";
         public const string P2PAppealManager = "P2PAppealManager";
-        public const string TokenCreator = "TokenCreator";
+        public const string CurrencyListing = "CurrencyListing";
 
         /// <summary>Unused</summary>
         public const string CommonQuestions = "Common questions";
@@ -29,7 +29,7 @@ namespace TLabs.ExchangeSdk.Users
         {
             Admin, Manager, SupportFull, KYC, ColdWallets, CashOperations, TokensAndCommissions,
             FinancialReports, ContentMaker, ApitradeReadonly, ApitradeAdmin, CommonQuestions, P2PWatch, P2PAppealManager,
-            TokenCreator,
+            CurrencyListing,
         };
     }
 }
