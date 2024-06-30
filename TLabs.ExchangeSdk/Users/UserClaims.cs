@@ -33,5 +33,10 @@ namespace TLabs.ExchangeSdk.Users
         public const string LastLoginTime = "LastLoginTime";
         public const string SecondLastLoginIp = "SecondLastLoginIp";
         public const string SecondLastLoginTime = "SecondLastLoginTime";
+
+        /// <summary>Access to all farming Admin panels. Values: "true"</summary>
+        public const string FarmingSuperAdmin = nameof(FarmingSuperAdmin);
+        /// <summary>Access to farming Admin panel for a specefic token. Values: "BLZ", etc</summary>
+        public const string FarmingTokenAdmin = nameof(FarmingTokenAdmin);
     }
 }
