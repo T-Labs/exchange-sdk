@@ -102,10 +102,10 @@ public class ClientFarming
             .PutJsonAsync<List<UserReferralsDto>>(null);
     }
 
-    public async Task<UserReferralsDto> ClaimDaylyReward()
+    public async Task<User> ClaimDailyReward()
     {
         return await "api/users/daily/claim".InternalApi()
-            .PutJsonAsync<UserReferralsDto>(null);
+            .PutJsonAsync<User>(null);
     }
 
     #endregion User
