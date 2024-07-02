@@ -17,11 +17,13 @@ public class Tenant
 
     [Required]
     public string ProjectName { get; set; }
- 
+
     public string? ProjectLogoIconId { get; set; }
 
     public string? TokenLogoIconId { get; set; }
 
     [Required]
     public string TokenName { get; set; }
+
+    public string Url { get; set; }
 }
