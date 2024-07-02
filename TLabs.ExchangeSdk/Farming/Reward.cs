@@ -16,7 +16,6 @@ public class Reward
 
 public enum RewardType
 {
-    subscription = 100,
     day = 200,
     farming = 300,
     firstLevelReferral = 400,
