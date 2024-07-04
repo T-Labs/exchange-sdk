@@ -152,21 +152,7 @@ public class ClientFarming
         if (strArray.Length == 2)
             str = strArray[1];
 
-        FileContentResult fileContentResult = null;
-        switch (str)
-        {
-            case "gif":
-                return new FileContentResult(image, "image/gif");
-
-            case "png":
-                return new FileContentResult(image, "image/png");
-
-            case "webp":
-                return new FileContentResult(image, "image/webp");
-
-            default:
-                return new FileContentResult(image, "image/jpeg");
-        }
+        return FileContentResultHelper.GetFileContentResult(str, image);
     }
 
     public async Task<string> UploadImage([FromBody] UploadImageDto uploadImageDto)
