@@ -10,6 +10,12 @@ namespace TLabs.ExchangeSdk.Farming;
 
 public class ClientFarming
 {
+    public async Task<IFlurlResponse> ReloadTenants()
+    {
+        return await "farmingwebapp/tenants/reload".InternalApi()
+            .PostAsync();
+    }
+
     #region Auth
 
     public async Task<bool> CheckAuth()
