@@ -60,7 +60,7 @@ public class ClientFarmingAdmin
         return await $"farming/admin/users/{id}/referrals".InternalApi()
             .SetQueryParam(nameof(tenantId), tenantId)
             .SetQueryParam(nameof(isActive), isActive)
-            .PutJsonAsync<List<Referral>>(null);
+            .GetJsonAsync<List<Referral>>();
     }
 
     public async Task<User> UpdateReferralLimit(long id, long tenantId, int newLimit)
@@ -101,13 +101,13 @@ public class ClientFarmingAdmin
     public async Task<List<Tenant>> GetTenants()
     {
         return await $"farming/admin/tenants".InternalApi()
-            .PostJsonAsync<List<Tenant>>(null);
+            .GetJsonAsync<List<Tenant>>();
     }
 
     public async Task<Tenant> GetTenant(long id)
     {
         return await $"farming/admin/tenants/{id}".InternalApi()
-            .PostJsonAsync<Tenant>(null);
+            .GetJsonAsync<Tenant>();
     }
 
     public async Task<Tenant> CreateTenant(Tenant tenant)
@@ -119,7 +119,7 @@ public class ClientFarmingAdmin
     public async Task<Tenant> UpdateTenant(long id, Tenant tenant)
     {
         return await $"farming/admin/tenants/{id}".InternalApi()
-            .PostJsonAsync<Tenant>(tenant);
+            .PutJsonAsync<Tenant>(tenant);
     }
 
     #endregion Tenant
