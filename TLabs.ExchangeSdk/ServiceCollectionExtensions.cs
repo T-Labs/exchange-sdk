@@ -41,9 +41,11 @@ namespace TLabs.ExchangeSdk
             services.AddTransient<ClientCurrencyListings>();
             services.AddTransient<ClientNews>();
             services.AddTransient<ClientFarming>();
+            services.AddTransient<ClientFarmingAdmin>();
 
             // needs activation in Program.cs and action /currencies/reload
             services.AddSingleton<Currencies.CurrenciesCache>();
+            services.AddSingleton<TenantsCache>();
         }
     }
 }
