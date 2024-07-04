@@ -7,4 +7,5 @@ public class ActionTaskDto
     public string ActionUrl { get; set; }
     public decimal RewardAmount { get; set; }
     public PlatformType Platform { get; set; }
+    public bool IsActive { get; set; }
 }
