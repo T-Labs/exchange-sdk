@@ -118,7 +118,7 @@ public class ClientFarming
 
     #region Tenant
 
-    public async Task<IFlurlResponse> CreateTenant([FromBody] Tenant tenant)
+    public async Task<IFlurlResponse> CreateTenant(Tenant tenant)
     {
         return await $"farming/tenants".InternalApi()
             .PostJsonAsync(tenant);
@@ -141,7 +141,7 @@ public class ClientFarming
             .GetJsonAsync<bool>();
     }
 
-    public async Task<IFlurlResponse> Registration([FromBody] RegistrationDto registrationDto)
+    public async Task<IFlurlResponse> Registration(RegistrationDto registrationDto)
     {
         return await $"farming/auth/registration".PostJsonAsync(registrationDto);
     }
@@ -161,9 +161,9 @@ public class ClientFarming
         return FileContentResultHelper.GetFileContentResult(str, image);
     }
 
-    public async Task<string> UploadImage([FromBody] UploadImageDto uploadImageDto)
+    public async Task<string> UploadImage(UploadImageDto uploadImageDto)
     {
-        return await "farming/images/upload".InternalApi()
+        return await "farming/images/upload".InternalApi()  
             .PutJsonAsync(uploadImageDto)
             .ReceiveString();
     }
