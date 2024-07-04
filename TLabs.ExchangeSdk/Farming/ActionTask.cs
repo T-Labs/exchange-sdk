@@ -12,10 +12,9 @@ public class ActionTask
     public string ActionUrl { get; set; }
     public PlatformType Platform { get; set; }
     public List<UserTask> UserTasks { get; set; }
- 
     public decimal RewardAmount { get; set; }
-
     public long TenantId { get; set; }
+    public bool IsActive { get; set; }
 }
 
 public enum PlatformType
