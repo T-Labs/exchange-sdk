@@ -82,16 +82,16 @@ public class ClientFarmingAdmin
             .GetJsonAsync<List<Reward>>();
     }
 
-    public async Task<Reward> CreateReward(Reward reward)
+    public async Task<Reward> CreateReward(RewardCreateDto rewardCreateDto)
     {
         return await "farming/admin/tenants".InternalApi()
-            .PostJsonAsync<Reward>(reward);
+            .PostJsonAsync<Reward>(rewardCreateDto);
     }
 
-    public async Task<Reward> UpdateReward(long id, Reward reward)
+    public async Task<Reward> UpdateReward(long id, RewardCreateDto rewardCreateDto)
     {
         return await $"farming/admin/tenants/{id}".InternalApi()
-            .PutJsonAsync<Reward>(reward);
+            .PutJsonAsync<Reward>(rewardCreateDto);
     }
 
     #endregion Reward
@@ -110,16 +110,16 @@ public class ClientFarmingAdmin
             .GetJsonAsync<Tenant>();
     }
 
-    public async Task<Tenant> CreateTenant(Tenant tenant)
+    public async Task<Tenant> CreateTenant(TenantCreateDto tenantCreateDto)
     {
         return await $"farming/admin/tenants".InternalApi()
-            .PostJsonAsync<Tenant>(tenant);
+            .PostJsonAsync<Tenant>(tenantCreateDto);
     }
 
-    public async Task<Tenant> UpdateTenant(long id, Tenant tenant)
+    public async Task<Tenant> UpdateTenant(long id, TenantCreateDto tenantCreateDto)
     {
         return await $"farming/admin/tenants/{id}".InternalApi()
-            .PutJsonAsync<Tenant>(tenant);
+            .PutJsonAsync<Tenant>(tenantCreateDto);
     }
 
     #endregion Tenant

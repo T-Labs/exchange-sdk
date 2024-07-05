@@ -116,16 +116,6 @@ public class ClientFarming
 
     #endregion User
 
-    #region Tenant
-
-    public async Task<IFlurlResponse> CreateTenant(Tenant tenant)
-    {
-        return await $"farming/tenants".InternalApi()
-            .PostJsonAsync(tenant);
-    }
-
-    #endregion Tenant
-
     #region public
 
     public async Task<TenantDataDto> GetTenantData(long id)
