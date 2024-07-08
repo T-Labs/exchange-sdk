@@ -122,13 +122,7 @@ public class ClientFarmingAdmin
         return await $"farming/admin/tenants/{id}".InternalApi()
             .PutJsonAsync<Tenant>(tenantCreateDto);
     }
-                                    
-    public async Task<TenantSettings> GetTenantSettings(long id)
-    {
-        return await $"farming/admin/tenants/{id}/settings".InternalApi()
-            .GetJsonAsync<TenantSettings>();
-    }
-    
+
     public async Task<TenantSettings> CreateTenantSettings(long id, [FromBody] TenantSettingsCreateDto createDto)
     {
         return await $"farming/admin/tenants/{id}/settings".InternalApi()
