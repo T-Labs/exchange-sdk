@@ -26,4 +26,8 @@ public class Tenant
     public string TokenName { get; set; }
 
     public string Url { get; set; }
+
+    public long TenantSettingsId { get; set; }
+
+    public TenantSettings TenantSettings { get; set; }
 }
