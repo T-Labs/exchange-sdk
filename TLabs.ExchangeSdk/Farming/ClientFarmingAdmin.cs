@@ -1,4 +1,5 @@
 using Flurl.Http;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -121,6 +122,24 @@ public class ClientFarmingAdmin
         return await $"farming/admin/tenants/{id}".InternalApi()
             .PutJsonAsync<Tenant>(tenantCreateDto);
     }
+                                    
+    public async Task<TenantSettings> GetTenantSettings(long id)
+    {
+        return await $"farming/admin/tenants/{id}/settings".InternalApi()
+            .GetJsonAsync<TenantSettings>();
+    }
+    
+    public async Task<TenantSettings> CreateTenantSettings(long id, [FromBody] TenantSettingsCreateDto createDto)
+    {
+        return await $"farming/admin/tenants/{id}/settings".InternalApi()
+            .PostJsonAsync<TenantSettings>(createDto);
+    }
+
+    public async Task<TenantSettings> UpdateTenantSettings(long id, [FromBody] TenantSettingsCreateDto createDto)
+    {
+        return await $"farming/admin/tenants/{id}/settings".InternalApi()
+            .PutJsonAsync<TenantSettings>(createDto);
+    }
 
     #endregion Tenant
 
@@ -142,6 +161,14 @@ public class ClientFarmingAdmin
     {
         return await "farming/images/upload".InternalApi()
             .PutJsonAsync(uploadImageDto)
+            .ReceiveString();
+    }
+
+    public async Task<string> UploadTenantImage(IFormFile file, long tenantId)
+    {
+        return await "farming/admin/images/upload/tenant-image".InternalApi()
+            .SetQueryParam(nameof(tenantId), tenantId)
+            .PostJsonAsync(file)
             .ReceiveString();
     }
 
