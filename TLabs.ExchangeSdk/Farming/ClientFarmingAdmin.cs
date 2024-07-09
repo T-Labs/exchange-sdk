@@ -123,18 +123,6 @@ public class ClientFarmingAdmin
             .PutJsonAsync<Tenant>(tenantCreateDto);
     }
 
-    public async Task<TenantSettings> CreateTenantSettings(long id, [FromBody] TenantSettingsCreateDto createDto)
-    {
-        return await $"farming/admin/tenants/{id}/settings".InternalApi()
-            .PostJsonAsync<TenantSettings>(createDto);
-    }
-
-    public async Task<TenantSettings> UpdateTenantSettings(long id, [FromBody] TenantSettingsCreateDto createDto)
-    {
-        return await $"farming/admin/tenants/{id}/settings".InternalApi()
-            .PutJsonAsync<TenantSettings>(createDto);
-    }
-
     #endregion Tenant
 
     #region Image
