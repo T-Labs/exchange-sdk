@@ -16,6 +16,8 @@ public class TenantDataDto
 
     public string Url { get; set; }
 
+    public int FarmingTimeHours { get; set; }
+
     public bool IsShowMiniGame { get; set; }
 
     public string ColorSettingsJson { get; set; }
