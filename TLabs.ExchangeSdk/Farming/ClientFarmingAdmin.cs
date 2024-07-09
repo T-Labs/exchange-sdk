@@ -13,29 +13,29 @@ public class ClientFarmingAdmin
 {
     #region ActionTasks
 
-    public async Task<List<UserTask>> GetActionTasks(long tenantId)
+    public async Task<List<ActionTask>> GetActionTasks(long tenantId)
     {
         return await "farming/admin/action-tasks".InternalApi()
             .SetQueryParam(nameof(tenantId), tenantId)
-            .GetJsonAsync<List<UserTask>>();
+            .GetJsonAsync<List<ActionTask>>();
     }
 
-    public async Task<UserTask> GetActionTask(long id)
+    public async Task<ActionTask> GetActionTask(long id)
     {
         return await $"farming/admin/action-tasks/{id}".InternalApi()
-            .GetJsonAsync<UserTask>();
+            .GetJsonAsync<ActionTask>();
     }
 
-    public async Task<List<UserTask>> CreateActionTask(ActionTaskDto actionTaskDto)
+    public async Task<ActionTask> CreateActionTask(ActionTaskDto actionTaskDto)
     {
         return await $"farming/admin/action-tasks".InternalApi()
-            .PostJsonAsync<List<UserTask>>(actionTaskDto);
+            .PostJsonAsync<ActionTask>(actionTaskDto);
     }
 
-    public async Task<List<UserTask>> UpdateActionTask(long id, ActionTaskDto actionTaskDto)
+    public async Task<ActionTask> UpdateActionTask(long id, ActionTaskDto actionTaskDto)
     {
         return await $"farming/admin/action-tasks/{id}".InternalApi()
-            .PutJsonAsync<List<UserTask>>(actionTaskDto);
+            .PutJsonAsync<ActionTask>(actionTaskDto);
     }
 
     #endregion ActionTasks
