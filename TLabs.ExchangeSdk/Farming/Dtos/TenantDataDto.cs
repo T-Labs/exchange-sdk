@@ -15,4 +15,8 @@ public class TenantDataDto
     public string ProjectLogoIconId { get; set; }
 
     public string Url { get; set; }
+
+    public bool IsShowMiniGame { get; set; }
+
+    public string ColorSettingsJson { get; set; }
 }

@@ -136,12 +136,6 @@ public class ClientFarming
         return await $"farming/auth/registration".PostJsonAsync(registrationDto);
     }
 
-    public async Task<TenantSettingsDto> GetTenantSettings(long id)
-    {
-        return await $"farming/tenants/{id}/settings".InternalApi()
-            .GetJsonAsync<TenantSettingsDto>();
-    }
-
     #region Image
 
     public async Task<IActionResult> GetImages(string id)
