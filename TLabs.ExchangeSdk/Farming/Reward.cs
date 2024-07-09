@@ -20,4 +20,5 @@ public enum RewardType
     farming = 300,
     firstLevelReferral = 400,
     secondLevelReferral = 500,
+    thirdLevelReferral = 600,
 }
