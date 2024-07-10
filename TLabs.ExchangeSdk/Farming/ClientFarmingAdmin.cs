@@ -13,10 +13,11 @@ public class ClientFarmingAdmin
 {
     #region ActionTasks
 
-    public async Task<List<ActionTask>> GetActionTasks(long tenantId)
+    public async Task<List<ActionTask>> GetActionTasks(long tenantId, bool isActive = true)
     {
         return await "farming/admin/action-tasks".InternalApi()
             .SetQueryParam(nameof(tenantId), tenantId)
+            .SetQueryParam(nameof(isActive), isActive)
             .GetJsonAsync<List<ActionTask>>();
     }
 
