@@ -90,6 +90,13 @@ public class ClientFarming
             .GetJsonAsync<User>();
     }
 
+    public async Task<User> UpdateUserName(string userName)
+    {
+        return await "farming/users/name/update".InternalApi()
+            .SetQueryParam(nameof(userName), userName)
+            .GetJsonAsync<User>();
+    }
+
     public async Task<decimal> GetUserBalance()
     {
         return await "farming/users/balance".InternalApi()
