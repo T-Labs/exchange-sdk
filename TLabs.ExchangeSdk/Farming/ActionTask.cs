@@ -8,7 +8,7 @@ public class ActionTask
     [Key]
     public long Id { get; set; }
 
-    public int Priority { get; set; }
+    public int Ordering { get; set; }
     public string Description { get; set; }
     public string ActionUrl { get; set; }
     public PlatformType Platform { get; set; }
@@ -16,6 +16,7 @@ public class ActionTask
     public decimal RewardAmount { get; set; }
     public long TenantId { get; set; }
     public bool IsActive { get; set; }
+    public int? AvailableDayNumber { get; set; }
 }
 
 public enum PlatformType
