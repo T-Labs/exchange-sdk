@@ -5,7 +5,6 @@ namespace TLabs.ExchangeSdk.Farming;
 
 public class Transaction
 {
-
     [Key]
     public Guid Id { get; set; }
 
@@ -19,6 +18,14 @@ public class Transaction
     public int? ReferralLevel { get; set; }
 
     public DateTimeOffset DateCreated { get; set; }
+    public TransactionType TransactionType { get; set; }
+}
 
-
+public enum TransactionType
+{
+    Farming = 100,
+    Daily = 200,
+    Referral = 300,
+    Task = 400,
+    ImportBalance = 500,
 }
