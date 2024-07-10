@@ -12,13 +12,14 @@ public class User
     public long TenantId { get; set; }
 
     public string UserName { get; set; }
+    public string? TgUserName { get; set; }
     public long TgUserId { get; set; }
     public string? AvatarImageId { get; set; }
 
     public DateTimeOffset? DateFarmingStarted { get; set; }
 
     public int MiniGameCounter { get; set; }
-    public int TimeInMiniGameSec { get; set; } 
+    public int TimeInMiniGameSec { get; set; }
     public bool IsMiniGameStarted { get; set; }
 
     public List<UserTask> UserTasks { get; set; }
