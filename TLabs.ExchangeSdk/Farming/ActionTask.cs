@@ -8,6 +8,7 @@ public class ActionTask
     [Key]
     public long Id { get; set; }
 
+    public int Priority { get; set; }
     public string Description { get; set; }
     public string ActionUrl { get; set; }
     public PlatformType Platform { get; set; }
