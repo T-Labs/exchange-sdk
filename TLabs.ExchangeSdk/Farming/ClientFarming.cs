@@ -94,7 +94,7 @@ public class ClientFarming
     {
         return await "farming/users/name/update".InternalApi()
             .SetQueryParam(nameof(userName), userName)
-            .GetJsonAsync<User>();
+            .PutJsonAsync<User>(null);
     }
 
     public async Task<decimal> GetUserBalance()
