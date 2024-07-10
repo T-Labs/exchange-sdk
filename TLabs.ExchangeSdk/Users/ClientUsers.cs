@@ -211,7 +211,7 @@ namespace TLabs.ExchangeSdk.Users
             return result;
         }
 
-        public async Task<bool> GetUserClaimValue(string claimValue, string userId)
+        public async Task<bool> GetBoolClaimValue(string claimValue, string userId)
         {
             var result = await $"userprofiles/users/claims/{claimValue}".InternalApi()
                 .SetQueryParam(nameof(userId), userId)
@@ -219,11 +219,28 @@ namespace TLabs.ExchangeSdk.Users
             return result;
         }
 
-        public async Task<IFlurlResponse> SetUserClaim(string claimValue, string userId, bool isActive)
+        public async Task<IFlurlResponse> SetBoolClaim(string claimValue, string userId, bool isActive)
         {
             var result = await $"userprofiles/users/claims/{claimValue}".InternalApi()
                 .SetQueryParam(nameof(userId), userId)
                 .SetQueryParam(nameof(isActive), isActive)
+                .PostJsonAsync(null);
+            return result;
+        }
+
+        public async Task<string> GetStringClaimValue(string userId, string claimType)
+        {
+            var result = await $"userprofiles/users/claims/string/{claimType}".InternalApi()
+                .SetQueryParam(nameof(userId), userId)
+                .GetStringAsync();
+            return result;
+        }
+
+        public async Task<IFlurlResponse> SetStringClaim(string userId, string claimType, string newValue)
+        {
+            var result = await $"userprofiles/users/claims/string/{claimType}".InternalApi()
+                .SetQueryParam(nameof(userId), userId)
+                .SetQueryParam(nameof(newValue), newValue)
                 .PostJsonAsync(null);
             return result;
         }
