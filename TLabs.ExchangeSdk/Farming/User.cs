@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TLabs.ExchangeSdk.Farming;
 
@@ -29,5 +30,8 @@ public class User
 
     public Guid ReferralCodeId { get; set; } = Guid.NewGuid();
 
-    public int MaxNumberOfInvites { get; set; } = 10;
+    public int? MaxNumberOfInvites { get; set; } 
+
+    [NotMapped]
+    public decimal Balance { get; set; }
 }

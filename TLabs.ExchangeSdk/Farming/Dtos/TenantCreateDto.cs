@@ -11,4 +11,5 @@ public class TenantCreateDto
     public string Url { get; set; }
     public bool IsShowMiniGame { get; set; }
     public string ColorSettingsJson { get; set; }
+    public int? MaxNumberOfInvites { get; set; }
 }
