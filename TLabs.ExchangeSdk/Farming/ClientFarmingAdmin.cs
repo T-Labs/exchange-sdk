@@ -13,11 +13,11 @@ public class ClientFarmingAdmin
 {
     #region ActionTasks
 
-    public async Task<List<ActionTask>> GetActionTasks(long tenantId, bool isActive = true)
+    public async Task<List<ActionTask>> GetActionTasks(long tenantId, bool onlyActive = true)
     {
         return await "farming/admin/action-tasks".InternalApi()
             .SetQueryParam(nameof(tenantId), tenantId)
-            .SetQueryParam(nameof(isActive), isActive)
+            .SetQueryParam(nameof(onlyActive), onlyActive)
             .GetJsonAsync<List<ActionTask>>();
     }
 
@@ -43,11 +43,13 @@ public class ClientFarmingAdmin
 
     #region AdminUsers
 
-    public async Task<List<User>> GetUsers(long tenantId)
+    public async Task<PagedResultDto<User>> GetUsers(long tenantId, int page = 1, int pageSize = 10)
     {
         return await "farming/admin/users".InternalApi()
             .SetQueryParam(nameof(tenantId), tenantId)
-            .GetJsonAsync<List<User>>();
+            .SetQueryParam(nameof(page), page)
+            .SetQueryParam(nameof(pageSize), pageSize)
+            .GetJsonAsync<PagedResultDto<User>>();
     }
 
     public async Task<User> GetUser(long id, long tenantId)

@@ -21,7 +21,6 @@ public class Tenant
     public string ProjectName { get; set; }
 
     public string? ProjectLogoIconId { get; set; }
-
     public string? TokenLogoIconId { get; set; }
 
     [Required]
@@ -30,10 +29,9 @@ public class Tenant
     public string Url { get; set; }
 
     public int FarmingTimeHours { get; set; }
-
     public bool IsShowMiniGame { get; set; }
-
     public string ColorSettingsJson { get; private set; }
+    public int? MaxNumberOfInvites { get; set; }
 
     public Dictionary<string, string> GetColorSettings()
     {

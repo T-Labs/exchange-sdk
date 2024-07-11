@@ -140,7 +140,8 @@ public class ClientFarming
 
     public async Task<IFlurlResponse> Registration(RegistrationDto registrationDto)
     {
-        return await $"farming/auth/registration".PostJsonAsync(registrationDto);
+        return await $"farming/auth/registration".InternalApi()
+            .PostJsonAsync(registrationDto);
     }
 
     #region Image
