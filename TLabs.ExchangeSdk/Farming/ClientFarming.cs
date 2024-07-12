@@ -68,18 +68,6 @@ public class ClientFarming
             .PutJsonAsync<User>(null);
     }
 
-    public async Task<IFlurlResponse> StartMiniGameFarming()
-    {
-        return await "farming/farmings/mini-game/start".InternalApi()
-            .PutAsync();
-    }
-
-    public async Task<IFlurlResponse> FinishMiniGameFarming()
-    {
-        return await "farming/farmings/mini-game/finish".InternalApi()
-            .PutAsync();
-    }
-
     #endregion Farming
 
     #region User
@@ -103,15 +91,17 @@ public class ClientFarming
             .GetJsonAsync<decimal>();
     }
 
-    public async Task<List<UserReferralsDto>> GetUserReferrals()
+    public async Task<List<UserReferralsDto>> GetUserReferrals(int maxLevels = 3)
     {
         return await "farming/users/referrals".InternalApi()
+            .SetQueryParam(nameof(maxLevels), maxLevels)
             .GetJsonAsync<List<UserReferralsDto>>();
     }
 
-    public async Task<List<UserReferralsDto>> ClaimRewardForReferrals()
+    public async Task<List<UserReferralsDto>> ClaimRewardForReferrals(int maxLevels = 3)
     {
         return await "farming/users/referrals/claim".InternalApi()
+            .SetQueryParam(nameof(maxLevels), maxLevels)
             .PutJsonAsync<List<UserReferralsDto>>(null);
     }
 
@@ -119,6 +109,12 @@ public class ClientFarming
     {
         return await "farming/users/daily/claim".InternalApi()
             .PutJsonAsync<User>(null);
+    }
+
+    public async Task<IFlurlResponse> ClaimRewardForMiniGame(MiniGameResultDto miniGameResultDto)
+    {
+        return await "farming/users/mini-game/claim".InternalApi()
+            .PostJsonAsync(miniGameResultDto);
     }
 
     #endregion User
