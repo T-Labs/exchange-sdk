@@ -28,4 +28,6 @@ public enum TransactionType
     Referral = 300,
     Task = 400,
     ImportBalance = 500,
+    ReferralSignUpBonus = 600,
+    MiniGame = 700,
 }

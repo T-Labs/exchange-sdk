@@ -19,9 +19,11 @@ public class Reward
 
 public enum RewardType
 {
-    dailyLogin = 200,
-    farming = 300,
-    firstLevelReferral = 400,
-    secondLevelReferral = 500,
-    thirdLevelReferral = 600,
+    DailyLogin = 200,
+    Farming = 300,
+    FirstLevelReferral = 400,
+    SecondLevelReferral = 500,
+    ThirdLevelReferral = 600,
+    ReferralSignUpBonus = 700,
+    MiniGame = 800,
 }
