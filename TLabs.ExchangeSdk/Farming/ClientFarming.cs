@@ -50,12 +50,6 @@ public class ClientFarming
 
     #region Farming
 
-    public async Task<decimal> GetAmountReward()
-    {
-        return await "farming/farmings/reward".InternalApi()
-            .GetJsonAsync<decimal>();
-    }
-
     public async Task<User> StartFarming()
     {
         return await "farming/farmings/start".InternalApi()
@@ -118,6 +112,24 @@ public class ClientFarming
     }
 
     #endregion User
+
+    #region Rewards
+
+    public async Task<decimal> GetRewardByType(RewardType rewardType)
+    {
+        return await "farming/rewards".InternalApi()
+            .SetQueryParam(nameof(rewardType), rewardType)
+            .GetJsonAsync<decimal>();
+    }
+
+    public async Task<decimal> GetRewardAmount(RewardType rewardType)
+    {
+        return await "farming/rewards/amount".InternalApi()
+            .SetQueryParam(nameof(rewardType), rewardType)
+            .GetJsonAsync<decimal>();
+    }
+
+    #endregion Rewards
 
     #region public
 
