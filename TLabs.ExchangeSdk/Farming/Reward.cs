@@ -25,5 +25,5 @@ public enum RewardType
     SecondLevelReferral = 500,
     ThirdLevelReferral = 600,
     ReferralSignUpBonus = 700,
-    MiniGame = 800,
+    MiniGameRate = 800,
 }
