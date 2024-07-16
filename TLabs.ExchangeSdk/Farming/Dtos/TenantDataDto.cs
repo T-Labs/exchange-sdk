@@ -19,4 +19,5 @@ public class TenantDataDto
     public bool IsShowMiniGame { get; set; }
     public string ColorSettingsJson { get; set; }
     public int? MaxNumberOfInvites { get; set; }
+    public int TokenDecimalPlaces { get; set; }
 }

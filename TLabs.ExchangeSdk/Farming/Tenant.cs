@@ -28,10 +28,11 @@ public class Tenant
 
     public string Url { get; set; }
 
-    public int FarmingTimeHours { get; set; }
+    public int FarmingTimeHours { get; set; } = 8;
     public bool IsShowMiniGame { get; set; }
     public string ColorSettingsJson { get; private set; }
     public int? MaxNumberOfInvites { get; set; }
+    public int TokenDecimalPlaces { get; set; } = 4;
 
     public Dictionary<string, string> GetColorSettings()
     {

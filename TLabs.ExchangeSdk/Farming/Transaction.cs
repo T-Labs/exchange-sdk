@@ -9,6 +9,8 @@ public class Transaction
     public Guid Id { get; set; }
 
     public long RecipientUserId { get; set; }
+    public User RecipientUser { get; set; }
+
     public long TenantId { get; set; }
     public decimal Amount { get; set; }
 

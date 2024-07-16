@@ -29,6 +29,8 @@ public class User
     public Guid ReferralCodeId { get; set; } = Guid.NewGuid();
     public int? MaxNumberOfInvites { get; set; }
 
+    public List<Transaction> Transactions { get; set; }
+
     [NotMapped]
     public decimal Balance { get; set; }
 }
