@@ -37,17 +37,7 @@ public class ClientFarmingAdmin
     {
         return await $"farming/admin/action-tasks/{id}".InternalApi()
             .PutJsonAsync<ActionTask>(actionTaskDto);
-    }
-
-    public async Task<IFlurlResponse> AssignTasksToUsers(long tenantId, List<ActionTask>? actionTasks = null,
-        List<User>? users = null)
-    {
-        return await $"farming/admin/action-tasks/assign".InternalApi()
-            .SetQueryParam(nameof(tenantId), tenantId)
-            .SetQueryParam(nameof(actionTasks), actionTasks)
-            .SetQueryParam(nameof(users), users)
-            .PostAsync(null);
-    }
+    }               
 
     #endregion ActionTasks
 
