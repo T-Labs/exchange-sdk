@@ -28,22 +28,28 @@ public class ClientFarming
 
     #region UserTasks
 
-    public async Task<List<UserTask>> GetUserTasks()
+    public async Task<List<ActionTask>> GetUserTasks()
     {
         return await "farming/user-tasks".InternalApi()
-            .GetJsonAsync<List<UserTask>>();
+            .GetJsonAsync<List<ActionTask>>();
     }
 
-    public async Task<List<UserTask>> StartUserTask(long id)
+    public async Task<ActionTask> GetUserTask(long id)
     {
         return await $"farming/user-tasks/{id}".InternalApi()
-            .PutJsonAsync<List<UserTask>>(null);
+            .GetJsonAsync<ActionTask>();
     }
 
-    public async Task<List<UserTask>> ClaimUserTask(long id)
+    public async Task<ActionTask> StartUserTask(long id)
+    {
+        return await $"farming/user-tasks/{id}".InternalApi()
+            .PutJsonAsync<ActionTask>(null);
+    }
+
+    public async Task<ActionTask> ClaimUserTask(long id)
     {
         return await $"farming/user-tasks/{id}/claim".InternalApi()
-            .PutJsonAsync<List<UserTask>>(null);
+            .PutJsonAsync<ActionTask>(null);
     }
 
     #endregion UserTasks

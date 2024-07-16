@@ -16,12 +16,4 @@ public class UserTask
 
     public DateTimeOffset? DateCompleted { get; set; }
     public DateTimeOffset? DataClaimed { get; set; }
-    public UserTaskStatus Status { get; set; }
-}
-
-public enum UserTaskStatus
-{
-    NotStarted = 0,
-    Completed = 10,
-    Claimed = 20,
 }
