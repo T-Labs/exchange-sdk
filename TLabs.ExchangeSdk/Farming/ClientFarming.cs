@@ -105,21 +105,21 @@ public class ClientFarming
             .PutJsonAsync<User>(null);
     }
 
-    public async Task<IFlurlResponse> ClaimRewardForMiniGame(MiniGameResultDto miniGameResultDto)
+    public async Task<decimal> ClaimRewardForMiniGame(MiniGameResultDto miniGameResultDto)
     {
         return await "farming/users/mini-game/claim".InternalApi()
-            .PostJsonAsync(miniGameResultDto);
+            .PostJsonAsync<decimal>(miniGameResultDto);
     }
 
     #endregion User
 
     #region Rewards
 
-    public async Task<decimal> GetRewardByType(RewardType rewardType)
+    public async Task<Reward> GetRewardByType(RewardType rewardType)
     {
         return await "farming/rewards".InternalApi()
             .SetQueryParam(nameof(rewardType), rewardType)
-            .GetJsonAsync<decimal>();
+            .GetJsonAsync<Reward>();
     }
 
     public async Task<decimal> GetRewardAmount(RewardType rewardType)
