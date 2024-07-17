@@ -15,5 +15,5 @@ public class UserTask
     public User User { get; set; }
 
     public DateTimeOffset? DateCompleted { get; set; }
-    public DateTimeOffset? DataClaimed { get; set; }
+    public DateTimeOffset? DateClaimed { get; set; }
 }
