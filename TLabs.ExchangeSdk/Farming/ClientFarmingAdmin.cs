@@ -149,12 +149,11 @@ public class ClientFarmingAdmin
             .ReceiveString();
     }
 
-    public async Task<string> UploadTenantImage(IFormFile file, long tenantId, string oldImageId = null)
+    public async Task<string> UploadTenantImage(UploadImageDto model, long tenantId)
     {
         return await "farming/admin/images/upload/tenant-image".InternalApi()
             .SetQueryParam(nameof(tenantId), tenantId)
-            .SetQueryParam(nameof(oldImageId), oldImageId)
-            .PostJsonAsync(file)
+            .PostJsonAsync(model)
             .ReceiveString();
     }
 
