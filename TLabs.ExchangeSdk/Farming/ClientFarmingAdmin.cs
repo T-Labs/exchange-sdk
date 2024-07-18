@@ -37,7 +37,7 @@ public class ClientFarmingAdmin
     {
         return await $"farming/admin/action-tasks/{id}".InternalApi()
             .PutJsonAsync<ActionTask>(actionTaskDto);
-    }               
+    }
 
     #endregion ActionTasks
 
@@ -149,11 +149,11 @@ public class ClientFarmingAdmin
             .ReceiveString();
     }
 
-    public async Task<string> UploadTenantImage(IFormFile file, long tenantId)
+    public async Task<string> UploadTenantImage(UploadImageDto model, long tenantId)
     {
         return await "farming/admin/images/upload/tenant-image".InternalApi()
             .SetQueryParam(nameof(tenantId), tenantId)
-            .PostJsonAsync(file)
+            .PostJsonAsync(model)
             .ReceiveString();
     }
 
