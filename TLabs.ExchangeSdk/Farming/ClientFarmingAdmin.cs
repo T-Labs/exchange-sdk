@@ -59,11 +59,11 @@ public class ClientFarmingAdmin
             .GetJsonAsync<User>();
     }
 
-    public async Task<List<Referral>> GetUserReferrals(long id, long tenantId, bool isActive = true)
+    public async Task<List<Referral>> GetUserReferrals(long id, long tenantId, bool isOnlyActive = true)
     {
         return await $"farming/admin/users/{id}/referrals".InternalApi()
             .SetQueryParam(nameof(tenantId), tenantId)
-            .SetQueryParam(nameof(isActive), isActive)
+            .SetQueryParam(nameof(isOnlyActive), isOnlyActive)
             .GetJsonAsync<List<Referral>>();
     }
 
