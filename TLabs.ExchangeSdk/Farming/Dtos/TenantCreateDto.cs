@@ -7,6 +7,7 @@ public class TenantCreateDto
     public string ProjectName { get; set; }
     public string ProjectLogoIconId { get; set; }
     public string TokenLogoIconId { get; set; }
+    public string? FriendsLogoIconId { get; set; }
     public string TokenName { get; set; }
     public string Url { get; set; }
     public int FarmingTimeHours { get; set; }

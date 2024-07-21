@@ -22,6 +22,7 @@ public class Tenant
 
     public string? ProjectLogoIconId { get; set; }
     public string? TokenLogoIconId { get; set; }
+    public string? FriendsLogoIconId { get; set; }
 
     [Required]
     public string TokenName { get; set; }
