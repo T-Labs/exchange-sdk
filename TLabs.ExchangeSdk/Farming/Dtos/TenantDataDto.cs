@@ -12,6 +12,7 @@ public class TenantDataDto
     public string TokenLogoIconId { get; set; }
     public string ProjectLogoIconId { get; set; }
     public string MiniGameLogoIconId { get; set; }
+    public string FriendsLogoIconId { get; set; }
 
     public string Url { get; set; }
 
