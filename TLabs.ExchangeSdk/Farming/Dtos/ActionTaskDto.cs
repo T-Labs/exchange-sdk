@@ -10,4 +10,7 @@ public class ActionTaskDto
     public PlatformType Platform { get; set; }
     public bool IsActive { get; set; }
     public int? AvailableDayNumber { get; set; }
+
+    /// <summary>Only available for Platform.Telegram and when our bot is admin in the channel</summary>
+    public bool CheckTgChannelSubscribed { get; set; }
 }

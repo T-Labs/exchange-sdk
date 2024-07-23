@@ -16,4 +16,7 @@ public class UserTask
 
     public DateTimeOffset? DateCompleted { get; set; }
     public DateTimeOffset? DateClaimed { get; set; }
+
+    /// <summary>Save validation result if it's required for this task</summary>
+    public bool TgChannelSubcriptionValidated { get; set; }
 }
