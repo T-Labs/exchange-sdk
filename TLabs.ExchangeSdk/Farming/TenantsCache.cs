@@ -1,4 +1,5 @@
 using Flurl.Http;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -10,9 +11,13 @@ public class TenantsCache
 {
     private List<Tenant> tenants { get; set; }
 
+    private DateTimeOffset LastLoaded = DateTimeOffset.MinValue;
+
+    private TimeSpan ExpirationTime = TimeSpan.FromMinutes(20);
+
     public async Task<List<Tenant>> GetTenants()
     {
-        if (tenants == null || !tenants.Any())
+        if (tenants == null || !tenants.Any() || LastLoaded.Add(ExpirationTime) < DateTimeOffset.UtcNow)
             await LoadTenants();
 
         return tenants;
@@ -20,7 +25,7 @@ public class TenantsCache
 
     public async Task<Tenant> GetTenantById(long id)
     {
-        if (tenants == null || !tenants.Any())
+        if (tenants == null || !tenants.Any() || LastLoaded.Add(ExpirationTime) < DateTimeOffset.UtcNow)
             await LoadTenants();
 
         return tenants?.FirstOrDefault(x => x.Id == id);
@@ -32,5 +37,6 @@ public class TenantsCache
             .GetJsonAsync<List<Tenant>>();
 
         tenants = result;
+        LastLoaded = DateTimeOffset.UtcNow;
     }
 }
