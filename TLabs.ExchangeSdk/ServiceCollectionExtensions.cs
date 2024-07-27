@@ -1,9 +1,6 @@
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Linq;
-using TLabs.ExchangeSdk.Currencies.CurrencyListings;
-using TLabs.ExchangeSdk.Farming;
-using TLabs.ExchangeSdk.News;
 
 namespace TLabs.ExchangeSdk
 {
@@ -16,6 +13,7 @@ namespace TLabs.ExchangeSdk
             services.AddTransient<CashDeposits.ClientCashDeposits>();
             services.AddTransient<Commissions.ClientCommissions>();
             services.AddTransient<CurrencyOfferings.ClientCurrencyOfferings>();
+            services.AddTransient<Currencies.CurrencyListings.ClientCurrencyListings>();
             services.AddTransient<CryptoAdapters.ClientCryptoAdapters>();
             services.AddTransient<CryptoAdapters.NownodesApi.ClientCryptoNownodes>();
             services.AddTransient<Depository.ClientDepository>();
@@ -38,14 +36,13 @@ namespace TLabs.ExchangeSdk
             services.AddTransient<P2P.ClientP2P>();
             services.AddTransient<Bwp.ClientBwp>();
             services.AddTransient<WebApp.ClientWebapp>();
-            services.AddTransient<ClientCurrencyListings>();
-            services.AddTransient<ClientNews>();
-            services.AddTransient<ClientFarming>();
-            services.AddTransient<ClientFarmingAdmin>();
+            services.AddTransient<News.ClientNews>();
+            services.AddTransient<Farming.ClientFarming>();
+            services.AddTransient<Farming.ClientFarmingAdmin>();
 
             // needs activation in Program.cs and action /currencies/reload
             services.AddSingleton<Currencies.CurrenciesCache>();
-            services.AddSingleton<TenantsCache>();
+            services.AddSingleton<Farming.TenantsCache>();
         }
     }
 }
