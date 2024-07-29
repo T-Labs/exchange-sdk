@@ -76,7 +76,7 @@ public class ClientFarmingAdmin
 
     public async Task<User> UpdateReferralLimit(long id, long tenantId, int newLimit)
     {
-        return await $"farming/admin/users/{id}/referrals/limits".InternalApi()
+        return await $"farming/admin/users/{id}/referrals/limit".InternalApi()
             .SetQueryParam(nameof(tenantId), tenantId)
             .SetQueryParam(nameof(newLimit), newLimit)
             .PutJsonAsync<User>(null);
