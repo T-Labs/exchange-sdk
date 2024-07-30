@@ -4,11 +4,11 @@ namespace TLabs.ExchangeSdk.Currencies.CurrencyListings;
 
 public class CurrencyListingCreateDto
 {
+    [Required]
     public string CurrencyCode { get; set; }
 
     public int TokenDecimalPlaces { get; set; }
 
-    [Required]
     public string UserId { get; set; }
 
     [Required]
