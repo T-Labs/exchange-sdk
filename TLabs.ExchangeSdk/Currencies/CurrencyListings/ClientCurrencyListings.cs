@@ -31,17 +31,17 @@ namespace TLabs.ExchangeSdk.Currencies.CurrencyListings
             return result;
         }
 
-        public async Task<CurrencyListing> CreateCurrencyListing(CurrencyListing model)
+        public async Task<CurrencyListing> CreateCurrencyListing(CurrencyListingCreateDto currencyListingCreateDto)
         {
             var createdListing = await $"{baseUrl}".InternalApi()
-                .PostJsonAsync<CurrencyListing>(model);
+                .PostJsonAsync<CurrencyListing>(currencyListingCreateDto);
             return createdListing;
         }
 
-        public async Task<CurrencyListing> UpdateCurrencyListing(CurrencyListing model)
+        public async Task<CurrencyListing> UpdateCurrencyListing(CurrencyListingCreateDto currencyListingCreateDto)
         {
-            var createdListing = await $"{baseUrl}/{model.CurrencyCode}".InternalApi()
-                .PutJsonAsync<CurrencyListing>(model);
+            var createdListing = await $"{baseUrl}/{currencyListingCreateDto.CurrencyCode}".InternalApi()
+                .PutJsonAsync<CurrencyListing>(currencyListingCreateDto);
             return createdListing;
         }
 

@@ -1,14 +1,15 @@
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TLabs.ExchangeSdk.Currencies.CurrencyListings
 {
     public enum CurrencyListingStatus
-    { AwaitsPayment = 0, AwaitApproval = 10, Accepted = 20, Rejected = 30 };
+    {
+        AwaitsPayment = 0,
+        AwaitApproval = 10,
+        Accepted = 20,
+        Rejected = 30
+    };
 
     public class CurrencyListing
     {
@@ -16,6 +17,7 @@ namespace TLabs.ExchangeSdk.Currencies.CurrencyListings
         public string CurrencyCode { get; set; }
 
         public const int TotalTokensAmount = 10_000_000;
+        public int TokenDecimalPlaces { get; set; }
 
         public CurrencyListingStatus Status { get; set; }
         public DateTimeOffset DateCreated { get; set; }
@@ -36,14 +38,13 @@ namespace TLabs.ExchangeSdk.Currencies.CurrencyListings
 
         public string OfficialLink { get; set; }
         public string WhitePaperLink { get; set; }
-        public string LogoLink { get; set; }
+        public string LogoImageId { get; set; }
 
+        public string HeaderImageId { get; set; }
         public string Title { get; set; }
         public string Subtitle { get; set; }
         public string Content { get; set; }
-        public string PhotoLink { get; set; }
-
-        public string NewsDescriptionHtml { get; set; }
+        public string ProjectImageId { get; set; }
 
         public string SocialLink1 { get; set; }
         public string SocialLink2 { get; set; }
