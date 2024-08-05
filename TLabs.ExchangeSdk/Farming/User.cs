@@ -19,6 +19,7 @@ public class User
 
     public string? AvatarImageId { get; set; }
 
+    public DateTimeOffset DateRegistered { get; set; }
     public DateTimeOffset? DateFarmingStarted { get; set; }
 
     public List<UserTask> UserTasks { get; set; }
