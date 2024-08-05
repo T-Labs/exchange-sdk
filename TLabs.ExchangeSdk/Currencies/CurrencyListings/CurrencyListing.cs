@@ -50,5 +50,7 @@ namespace TLabs.ExchangeSdk.Currencies.CurrencyListings
         public string SocialLink2 { get; set; }
         public string SocialLink3 { get; set; }
         public string SocialLink4 { get; set; }
+
+        public int MarketPageDisplayOrder { get; set; }
     }
 }
