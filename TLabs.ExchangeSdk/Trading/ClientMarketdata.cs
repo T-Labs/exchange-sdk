@@ -95,7 +95,7 @@ namespace TLabs.ExchangeSdk.Trading
 
         public async Task<List<CurrencyPairData>> CurrencyPairsData()
         {
-            var result = await $"marketdata/currencypairs-price-and-volume".InternalApi()
+            var result = await $"marketdata/orders/currencypairs-price-and-volume".InternalApi()
                 .GetJsonAsync<List<CurrencyPairData>>();
             return result;
         }
@@ -116,7 +116,7 @@ namespace TLabs.ExchangeSdk.Trading
         {
             var result = await $"marketdata/ohlc-last-candles".InternalApi()
                 .SetQueryParam(nameof(currencyId), currencyId)
-                .GetJsonAsync<List<ResponseOHLC>> (); ;
+                .GetJsonAsync<List<ResponseOHLC>>(); ;
             return result;
         }
         public async Task<ResponseOHLC> GetOHLCLastCandle(MarketDataItemRange range, string currencyPairCode,
@@ -128,7 +128,7 @@ namespace TLabs.ExchangeSdk.Trading
                 .SetQueryParam("before", before?.ToString("o"))
                 .GetJsonAsync<ResponseOHLC>();
             return result;
-        }             
-   
+        }
+
     }
 }
