@@ -2,7 +2,6 @@ using Flurl.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using TLabs.DotnetHelpers;
 
@@ -93,5 +92,43 @@ namespace TLabs.ExchangeSdk.Trading
 
         public async Task<string> Healthcheck() =>
             await $"marketdata/healthcheck".InternalApi().GetStringAsync();
+
+        public async Task<List<CurrencyPairData>> CurrencyPairsData()
+        {
+            var result = await $"marketdata/currencypairs-price-and-volume".InternalApi()
+                .GetJsonAsync<List<CurrencyPairData>>();
+            return result;
+        }
+
+        public async Task<List<ResponseOHLC>> GetOHLCData(MarketDataItemRange range, string currencyPairCode,
+            DateTime start, DateTime end)
+        {
+            var result = await $"marketdata/ohlc".InternalApi()
+                .SetQueryParam("range", range)
+                .SetQueryParam("currencyPairCode", currencyPairCode)
+                .SetQueryParam("start", start.ToString("o"))
+                .SetQueryParam("end", end.ToString("o"))
+                .GetJsonAsync<List<ResponseOHLC>>();
+            return result;
+        }
+
+        public async Task<List<ResponseOHLC>> GetOHLCLastCandles(string currencyId)
+        {
+            var result = await $"marketdata/ohlc-last-candles".InternalApi()
+                .SetQueryParam(nameof(currencyId), currencyId)
+                .GetJsonAsync<List<ResponseOHLC>> (); ;
+            return result;
+        }
+        public async Task<ResponseOHLC> GetOHLCLastCandle(MarketDataItemRange range, string currencyPairCode,
+            DateTime? before = null)
+        {
+            var result = await $"marketdata/ohlc/last-candle".InternalApi()
+                .SetQueryParam("range", range)
+                .SetQueryParam("currencyPairCode", currencyPairCode)
+                .SetQueryParam("before", before?.ToString("o"))
+                .GetJsonAsync<ResponseOHLC>();
+            return result;
+        }             
+   
     }
 }
