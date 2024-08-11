@@ -43,12 +43,13 @@ public class ClientFarmingAdmin
 
     #region AdminUsers
 
-    public async Task<PagedList<User>> GetUsers(long tenantId, int page = 1, int pageSize = 10)
+    public async Task<PagedList<User>> GetUsers(long tenantId, int page = 1, int pageSize = 10, string filterText = null)
     {
         return await "farming/admin/users".InternalApi()
             .SetQueryParam(nameof(tenantId), tenantId)
             .SetQueryParam(nameof(page), page)
             .SetQueryParam(nameof(pageSize), pageSize)
+            .SetQueryParam(nameof(filterText), filterText)
             .GetJsonAsync<PagedList<User>>();
     }
 
