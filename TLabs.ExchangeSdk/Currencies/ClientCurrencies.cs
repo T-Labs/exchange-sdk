@@ -10,6 +10,13 @@ namespace TLabs.ExchangeSdk.Currencies
 {
     public class ClientCurrencies
     {
+        public async Task<IFlurlResponse> SetCurrencyVisibility(string currencyCode, bool newValue)
+        {
+            var result = await $"depository/currencies/user-showing-status/{currencyCode}".InternalApi()
+                .PutJsonAsync(newValue);
+            return result;
+        }
+
         public async Task<IFlurlResponse> SetCurrencyPairVisibility(string currencyPairCode, bool newValue)
         {
             var result = await $"depository/currency-pairs/user-showing-status/{currencyPairCode}".InternalApi()
