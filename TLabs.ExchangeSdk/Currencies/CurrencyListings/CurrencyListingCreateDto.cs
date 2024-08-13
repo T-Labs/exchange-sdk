@@ -7,6 +7,7 @@ public class CurrencyListingCreateDto
     [Required]
     public string CurrencyCode { get; set; }
 
+    public long TotalTokensAmount { get; set; }
     public int TokenDecimalPlaces { get; set; }
 
     public string UserId { get; set; }

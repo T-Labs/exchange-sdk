@@ -1,4 +1,5 @@
 using Flurl.Http;
+using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using TLabs.DotnetHelpers;
@@ -57,6 +58,13 @@ namespace TLabs.ExchangeSdk.Currencies.CurrencyListings
         {
             var result = await $"{baseUrl}/settings".InternalApi()
                 .GetJsonAsync<CurrencyListingSettings>();
+            return result;
+        }
+
+        public async Task<List<string>> GetCurrencyListingCodes()
+        {
+            var result = await $"brokerage/currency-listings/codes".InternalApi()
+                .GetJsonAsync<List<string>>();
             return result;
         }
 
