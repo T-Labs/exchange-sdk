@@ -8,7 +8,8 @@ namespace TLabs.ExchangeSdk.Currencies.CurrencyListings
         AwaitsPayment = 0,
         AwaitApproval = 10,
         Accepted = 20,
-        Rejected = 30
+        Rejected = 30,
+        Blocked = 40,
     };
 
     public class CurrencyListing

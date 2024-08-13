@@ -13,6 +13,7 @@ namespace TLabs.ExchangeSdk
             services.AddTransient<CashDeposits.ClientCashDeposits>();
             services.AddTransient<Commissions.ClientCommissions>();
             services.AddTransient<CurrencyOfferings.ClientCurrencyOfferings>();
+            services.AddTransient<Currencies.ClientCurrencies>();
             services.AddTransient<Currencies.CurrencyListings.ClientCurrencyListings>();
             services.AddTransient<CryptoAdapters.ClientCryptoAdapters>();
             services.AddTransient<CryptoAdapters.NownodesApi.ClientCryptoNownodes>();

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using TLabs.DotnetHelpers;
 
@@ -155,14 +156,22 @@ namespace TLabs.ExchangeSdk.Users
 
         public async Task<string> Healthcheck() => await $"userprofiles/healthcheck".InternalApi().GetStringAsync();
 
-        public async Task<IEnumerable<CustomClaim>> GetClaims(string userId, string claimType = null)
+        public async Task<List<CustomClaim>> GetClaims(string userId, string claimType = null)
         {
             string url = $"userprofiles/identityusers/{userId}/claims";
             if (!string.IsNullOrWhiteSpace(claimType))
                 url += $"/{claimType}";
 
             var result = await url.InternalApi()
-                .GetJsonAsync<IEnumerable<CustomClaim>>();
+                .GetJsonAsync<List<CustomClaim>>();
+            return result;
+        }
+
+        public async Task<List<CustomClaim>> GetClaimsByTypes(List<string> claimTypes)
+        {
+            var result = await $"userprofiles/claims/by-types".InternalApi()
+                .SetQueryParam(nameof(claimTypes), claimTypes)
+                .GetJsonAsync<List<CustomClaim>>();
             return result;
         }
 
