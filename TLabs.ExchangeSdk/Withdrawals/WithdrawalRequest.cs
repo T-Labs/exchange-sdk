@@ -16,6 +16,9 @@ namespace TLabs.ExchangeSdk.Withdrawals
         /// <summary> Public key of node's address, required for Prizm (PZM) </summary>
         public string AddressPublicKey { get; set; }
 
+        /// <summary>Additional Id set in blockchain tx comment, used in TON network</summary>
+        public string Memo { get; set; }
+
         public decimal Amount { get; set; }
 
         [Required]

@@ -25,6 +25,9 @@ namespace TLabs.ExchangeSdk.CryptoAdapters
         /// <summary>Public key of node's address, required only for Prizm (PZM)</summary>
         public string AddressPublicKey { get; set; }
 
+        /// <summary>Additional Id set in blockchain tx comment, used in TON network</summary>
+        public string Memo { get; set; }
+
         /// <summary>Transaction number in depository</summary>
         public Guid TransactionId { get; set; }
 
