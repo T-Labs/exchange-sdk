@@ -5,5 +5,6 @@ namespace TLabs.ExchangeSdk.News
         public string Extension { get; set; }
         public byte[] Data { get; set; }
         public long? NewsId { get; set; }
+        public string? OldImageId { get; set; }
     }
 }
