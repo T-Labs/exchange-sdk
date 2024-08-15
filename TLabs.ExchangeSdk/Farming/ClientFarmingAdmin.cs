@@ -89,20 +89,20 @@ public class ClientFarmingAdmin
 
     public async Task<List<Reward>> GetRewards(long tenantId)
     {
-        return await "farming/admin/tenants".InternalApi()
+        return await "farming/admin/rewards".InternalApi()
             .SetQueryParam(nameof(tenantId), tenantId)
             .GetJsonAsync<List<Reward>>();
     }
 
     public async Task<Reward> CreateReward(RewardCreateDto rewardCreateDto)
     {
-        return await "farming/admin/tenants".InternalApi()
+        return await "farming/admin/rewards".InternalApi()
             .PostJsonAsync<Reward>(rewardCreateDto);
     }
 
     public async Task<Reward> UpdateReward(long id, RewardCreateDto rewardCreateDto)
     {
-        return await $"farming/admin/tenants/{id}".InternalApi()
+        return await $"farming/admin/rewards/{id}".InternalApi()
             .PutJsonAsync<Reward>(rewardCreateDto);
     }
 
