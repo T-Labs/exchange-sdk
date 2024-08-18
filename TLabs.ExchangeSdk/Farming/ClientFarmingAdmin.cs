@@ -43,7 +43,8 @@ public class ClientFarmingAdmin
 
     #region AdminUsers
 
-    public async Task<PagedList<User>> GetUsers(long tenantId, int page = 1, int pageSize = 10, string filterText = null)
+    public async Task<PagedList<User>> GetUsers(long tenantId, int page = 1, int pageSize = 10,
+        string filterText = null)
     {
         return await "farming/admin/users".InternalApi()
             .SetQueryParam(nameof(tenantId), tenantId)
@@ -138,8 +139,8 @@ public class ClientFarmingAdmin
 
     #region Transaction
 
-    public async Task<IFlurlResponse> CreateTransaction([FromBody] User user, [FromQuery] decimal amount,
-        [FromQuery] TransactionType transactionType, [FromQuery] long? sourceReferralUserId = null, int? level = null)
+    public async Task<IFlurlResponse> CreateTransaction(User user, decimal amount,
+        TransactionType transactionType, long? sourceReferralUserId = null, int? level = null)
     {
         return await $"farming/admin/transactions".InternalApi()
             .SetQueryParam(nameof(amount), amount)
