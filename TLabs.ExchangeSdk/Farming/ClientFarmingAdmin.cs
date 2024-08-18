@@ -139,18 +139,13 @@ public class ClientFarmingAdmin
 
     #region Transaction
 
-    public async Task<IFlurlResponse> CreateTransaction(User user, decimal amount,
-        TransactionType transactionType, long? sourceReferralUserId = null, int? level = null)
+    public async Task<IFlurlResponse> CreateTransaction(Transaction transaction)
     {
         return await $"farming/admin/transactions".InternalApi()
-            .SetQueryParam(nameof(amount), amount)
-            .SetQueryParam(nameof(transactionType), transactionType)
-            .SetQueryParam(nameof(sourceReferralUserId), sourceReferralUserId)
-            .SetQueryParam(nameof(level), level)
-            .PostJsonAsync(user);
+            .PostJsonAsync(transaction);
     }
 
-    #endregion
+    #endregion Transaction
 
 
     #region Image
