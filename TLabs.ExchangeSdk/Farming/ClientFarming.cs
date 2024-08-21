@@ -94,9 +94,11 @@ public class ClientFarming
             .GetJsonAsync<User>();
     }
 
-    public async Task<decimal> GetUserBalance()
+    public async Task<decimal> GetUserBalance(long tenantId, long tgUserId)
     {
         return await "farming/users/balance".InternalApi()
+            .SetQueryParam(nameof(tenantId), tenantId)
+            .SetQueryParam(nameof(tgUserId), tgUserId)
             .GetJsonAsync<decimal>();
     }
 
@@ -108,8 +110,6 @@ public class ClientFarming
             .SetQueryParam(nameof(userName), userName)
             .PutJsonAsync<User>(null);
     }
-
-
 
     public async Task<List<UserReferralsDto>> GetUserReferrals(long tenantId, long tgUserId, int maxLevels = 3)
     {

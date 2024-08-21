@@ -83,6 +83,7 @@ public class ClientFarmingAdmin
             .SetQueryParam(nameof(tenantId), tenantId)
             .GetJsonAsync<List<UserInfo>>();
     }
+
     #endregion AdminUsers
 
     #region Reward
@@ -145,7 +146,6 @@ public class ClientFarmingAdmin
     }
 
     #endregion Transaction
-
 
     #region Image
 
