@@ -33,7 +33,7 @@ public class TenantsCache
 
     public async Task LoadTenants()
     {
-        var result = await $"farming/admin/tenants".InternalApi()
+        var result = await $"farming/tenants".InternalApi()
             .GetJsonAsync<List<Tenant>>();
 
         tenants = result;
