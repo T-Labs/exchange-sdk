@@ -7,4 +7,7 @@ public class UploadImageDto
 
     /// <summary> used only for admin requests. </summary>
     public string? OldImageId { get; set; }
+
+    public long TenantId { get; set; }
+    public long TgUserId { get; set; }
 }
