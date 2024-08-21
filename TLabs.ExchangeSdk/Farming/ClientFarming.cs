@@ -88,7 +88,7 @@ public class ClientFarming
 
     public async Task<User> GetUserData(long tenantId, long tgUserId)
     {
-        return await "farming/users".InternalApi()
+        return await "farming/users/data".InternalApi()
             .SetQueryParam(nameof(tenantId), tenantId)
             .SetQueryParam(nameof(tgUserId), tgUserId)
             .GetJsonAsync<User>();

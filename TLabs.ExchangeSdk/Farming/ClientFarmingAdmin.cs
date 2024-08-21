@@ -90,7 +90,7 @@ public class ClientFarmingAdmin
 
     public async Task<List<Reward>> GetRewards(long tenantId)
     {
-        return await "farming/rewards".InternalApi()
+        return await "farming/rewards/all".InternalApi()
             .SetQueryParam(nameof(tenantId), tenantId)
             .GetJsonAsync<List<Reward>>();
     }
@@ -136,16 +136,6 @@ public class ClientFarmingAdmin
     }
 
     #endregion Tenant
-
-    #region Transaction
-
-    public async Task<IFlurlResponse> CreateTransaction(Transaction transaction)
-    {
-        return await $"farming/admin/transactions".InternalApi()
-            .PostJsonAsync(transaction);
-    }
-
-    #endregion Transaction
 
     #region Image
 
