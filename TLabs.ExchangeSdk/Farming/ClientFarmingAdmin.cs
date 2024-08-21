@@ -15,7 +15,7 @@ public class ClientFarmingAdmin
 
     public async Task<List<ActionTask>> GetActionTasks(long tenantId, bool onlyActive = true)
     {
-        return await "farming/admin/action-tasks".InternalApi()
+        return await "farming/action-tasks".InternalApi()
             .SetQueryParam(nameof(tenantId), tenantId)
             .SetQueryParam(nameof(onlyActive), onlyActive)
             .GetJsonAsync<List<ActionTask>>();
@@ -23,19 +23,19 @@ public class ClientFarmingAdmin
 
     public async Task<ActionTask> GetActionTask(long id)
     {
-        return await $"farming/admin/action-tasks/{id}".InternalApi()
+        return await $"farming/action-tasks/{id}".InternalApi()
             .GetJsonAsync<ActionTask>();
     }
 
     public async Task<ActionTask> CreateActionTask(ActionTaskDto actionTaskDto)
     {
-        return await $"farming/admin/action-tasks".InternalApi()
+        return await $"farming/action-tasks".InternalApi()
             .PostJsonAsync<ActionTask>(actionTaskDto);
     }
 
     public async Task<ActionTask> UpdateActionTask(long id, ActionTaskDto actionTaskDto)
     {
-        return await $"farming/admin/action-tasks/{id}".InternalApi()
+        return await $"farming/action-tasks/{id}".InternalApi()
             .PutJsonAsync<ActionTask>(actionTaskDto);
     }
 
@@ -43,9 +43,10 @@ public class ClientFarmingAdmin
 
     #region AdminUsers
 
-    public async Task<PagedList<User>> GetUsers(long tenantId, int page = 1, int pageSize = 10, string filterText = null)
+    public async Task<PagedList<User>> GetUsers(long tenantId, int page = 1, int pageSize = 10,
+        string filterText = null)
     {
-        return await "farming/admin/users".InternalApi()
+        return await "farming/users".InternalApi()
             .SetQueryParam(nameof(tenantId), tenantId)
             .SetQueryParam(nameof(page), page)
             .SetQueryParam(nameof(pageSize), pageSize)
@@ -53,56 +54,55 @@ public class ClientFarmingAdmin
             .GetJsonAsync<PagedList<User>>();
     }
 
-    public async Task<User> GetUser(long id, long tenantId)
+    public async Task<User> GetUser(long tenantId, long id)
     {
-        return await $"farming/admin/users/{id}".InternalApi()
+        return await $"farming/users/{id}".InternalApi()
             .SetQueryParam(nameof(tenantId), tenantId)
             .GetJsonAsync<User>();
     }
 
-    public async Task<List<UserInfo>> GetUserInfos(long tenantId)
+    public async Task<List<UserInfo>> GetReferralUsers(long tenantId, long id, bool isOnlyActive = true)
     {
-        return await "farming/admin/users/infos".InternalApi()
-            .SetQueryParam(nameof(tenantId), tenantId)
-            .GetJsonAsync<List<UserInfo>>();
-    }
-
-    public async Task<List<UserInfo>> GetReferralUsers(long id, long tenantId, bool isOnlyActive = true)
-    {
-        return await $"farming/admin/users/{id}/referral-users".InternalApi()
+        return await $"farming/users/{id}/referral-users".InternalApi()
             .SetQueryParam(nameof(tenantId), tenantId)
             .SetQueryParam(nameof(isOnlyActive), isOnlyActive)
             .GetJsonAsync<List<UserInfo>>();
     }
 
-    public async Task<User> UpdateReferralLimit(long id, long tenantId, int newLimit)
+    public async Task<User> UpdateReferralLimit(long tenantId, long id, int newLimit)
     {
-        return await $"farming/admin/users/{id}/referrals/limits".InternalApi()
+        return await $"farming/users/{id}/referrals/limits".InternalApi()
             .SetQueryParam(nameof(tenantId), tenantId)
             .SetQueryParam(nameof(newLimit), newLimit)
             .PutJsonAsync<User>(null);
     }
 
+    public async Task<List<UserInfo>> GetUserInfos(long tenantId)
+    {
+        return await "farming/users/infos".InternalApi()
+            .SetQueryParam(nameof(tenantId), tenantId)
+            .GetJsonAsync<List<UserInfo>>();
+    }
     #endregion AdminUsers
 
     #region Reward
 
     public async Task<List<Reward>> GetRewards(long tenantId)
     {
-        return await "farming/admin/rewards".InternalApi()
+        return await "farming/rewards".InternalApi()
             .SetQueryParam(nameof(tenantId), tenantId)
             .GetJsonAsync<List<Reward>>();
     }
 
     public async Task<Reward> CreateReward(RewardCreateDto rewardCreateDto)
     {
-        return await "farming/admin/rewards".InternalApi()
+        return await "farming/rewards".InternalApi()
             .PostJsonAsync<Reward>(rewardCreateDto);
     }
 
     public async Task<Reward> UpdateReward(long id, RewardCreateDto rewardCreateDto)
     {
-        return await $"farming/admin/rewards/{id}".InternalApi()
+        return await $"farming/rewards/{id}".InternalApi()
             .PutJsonAsync<Reward>(rewardCreateDto);
     }
 
@@ -112,25 +112,25 @@ public class ClientFarmingAdmin
 
     public async Task<List<Tenant>> GetTenants()
     {
-        return await $"farming/admin/tenants".InternalApi()
+        return await $"farming/tenants".InternalApi()
             .GetJsonAsync<List<Tenant>>();
     }
 
     public async Task<Tenant> GetTenant(long id)
     {
-        return await $"farming/admin/tenants/{id}".InternalApi()
+        return await $"farming/tenants/{id}".InternalApi()
             .GetJsonAsync<Tenant>();
     }
 
     public async Task<Tenant> CreateTenant(TenantCreateDto tenantCreateDto)
     {
-        return await $"farming/admin/tenants".InternalApi()
+        return await $"farming/tenants".InternalApi()
             .PostJsonAsync<Tenant>(tenantCreateDto);
     }
 
     public async Task<Tenant> UpdateTenant(long id, TenantCreateDto tenantCreateDto)
     {
-        return await $"farming/admin/tenants/{id}".InternalApi()
+        return await $"farming/tenants/{id}".InternalApi()
             .PutJsonAsync<Tenant>(tenantCreateDto);
     }
 
@@ -159,7 +159,7 @@ public class ClientFarmingAdmin
 
     public async Task<string> UploadTenantImage(UploadImageDto model, long tenantId)
     {
-        return await "farming/admin/images/upload/tenant-image".InternalApi()
+        return await "farming/images/upload/tenant-image".InternalApi()
             .SetQueryParam(nameof(tenantId), tenantId)
             .PostJsonAsync(model)
             .ReceiveString();

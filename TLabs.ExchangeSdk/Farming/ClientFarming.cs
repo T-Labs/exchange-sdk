@@ -18,9 +18,11 @@ public class ClientFarming
 
     #region Auth
 
-    public async Task<bool> CheckAuth()
+    public async Task<bool> CheckAuth(long tenantId, long tgUserId)
     {
         return await "farming/auth".InternalApi()
+            .SetQueryParam(nameof(tenantId), tenantId)
+            .SetQueryParam(nameof(tgUserId), tgUserId)
             .GetJsonAsync<bool>();
     }
 
@@ -28,27 +30,35 @@ public class ClientFarming
 
     #region UserTasks
 
-    public async Task<List<ActionTask>> GetUserTasks()
+    public async Task<List<ActionTask>> GetUserTasks(long tenantId, long tgUserId)
     {
         return await "farming/user-tasks".InternalApi()
+            .SetQueryParam(nameof(tenantId), tenantId)
+            .SetQueryParam(nameof(tgUserId), tgUserId)
             .GetJsonAsync<List<ActionTask>>();
     }
 
-    public async Task<ActionTask> GetUserTask(long id)
+    public async Task<ActionTask> GetUserTask(long tenantId, long tgUserId, long id)
     {
         return await $"farming/user-tasks/{id}".InternalApi()
+            .SetQueryParam(nameof(tenantId), tenantId)
+            .SetQueryParam(nameof(tgUserId), tgUserId)
             .GetJsonAsync<ActionTask>();
     }
 
-    public async Task<ActionTask> StartUserTask(long id)
+    public async Task<ActionTask> StartUserTask(long tenantId, long tgUserId, long id)
     {
         return await $"farming/user-tasks/{id}".InternalApi()
+            .SetQueryParam(nameof(tenantId), tenantId)
+            .SetQueryParam(nameof(tgUserId), tgUserId)
             .PutJsonAsync<ActionTask>(null);
     }
 
-    public async Task<ActionTask> ClaimUserTask(long id)
+    public async Task<ActionTask> ClaimUserTask(long tenantId, long tgUserId, long id)
     {
         return await $"farming/user-tasks/{id}/claim".InternalApi()
+            .SetQueryParam(nameof(tenantId), tenantId)
+            .SetQueryParam(nameof(tgUserId), tgUserId)
             .PutJsonAsync<ActionTask>(null);
     }
 
@@ -56,15 +66,19 @@ public class ClientFarming
 
     #region Farming
 
-    public async Task<User> StartFarming()
+    public async Task<User> StartFarming(long tenantId, long tgUserId)
     {
         return await "farming/farmings/start".InternalApi()
+            .SetQueryParam(nameof(tenantId), tenantId)
+            .SetQueryParam(nameof(tgUserId), tgUserId)
             .PutJsonAsync<User>(null);
     }
 
-    public async Task<User> ClaimRewardFarming()
+    public async Task<User> ClaimRewardFarming(long tenantId, long tgUserId)
     {
         return await "farming/farmings/claim".InternalApi()
+            .SetQueryParam(nameof(tenantId), tenantId)
+            .SetQueryParam(nameof(tgUserId), tgUserId)
             .PutJsonAsync<User>(null);
     }
 
@@ -72,17 +86,12 @@ public class ClientFarming
 
     #region User
 
-    public async Task<User> GetUserData()
+    public async Task<User> GetUserData(long tenantId, long tgUserId)
     {
         return await "farming/users".InternalApi()
+            .SetQueryParam(nameof(tenantId), tenantId)
+            .SetQueryParam(nameof(tgUserId), tgUserId)
             .GetJsonAsync<User>();
-    }
-
-    public async Task<User> UpdateUserName(string userName)
-    {
-        return await "farming/users/name/update".InternalApi()
-            .SetQueryParam(nameof(userName), userName)
-            .PutJsonAsync<User>(null);
     }
 
     public async Task<decimal> GetUserBalance()
@@ -91,23 +100,40 @@ public class ClientFarming
             .GetJsonAsync<decimal>();
     }
 
-    public async Task<List<UserReferralsDto>> GetUserReferrals(int maxLevels = 3)
+    public async Task<User> UpdateUserName(long tenantId, long tgUserId, string userName)
+    {
+        return await "farming/users/name/update".InternalApi()
+            .SetQueryParam(nameof(tenantId), tenantId)
+            .SetQueryParam(nameof(tgUserId), tgUserId)
+            .SetQueryParam(nameof(userName), userName)
+            .PutJsonAsync<User>(null);
+    }
+
+
+
+    public async Task<List<UserReferralsDto>> GetUserReferrals(long tenantId, long tgUserId, int maxLevels = 3)
     {
         return await "farming/users/referrals".InternalApi()
+            .SetQueryParam(nameof(tenantId), tenantId)
+            .SetQueryParam(nameof(tgUserId), tgUserId)
             .SetQueryParam(nameof(maxLevels), maxLevels)
             .GetJsonAsync<List<UserReferralsDto>>();
     }
 
-    public async Task<List<UserReferralsDto>> ClaimRewardForReferrals(int maxLevels = 3)
+    public async Task<List<UserReferralsDto>> ClaimRewardForReferrals(long tenantId, long tgUserId, int maxLevels = 3)
     {
         return await "farming/users/referrals/claim".InternalApi()
+            .SetQueryParam(nameof(tenantId), tenantId)
+            .SetQueryParam(nameof(tgUserId), tgUserId)
             .SetQueryParam(nameof(maxLevels), maxLevels)
             .PutJsonAsync<List<UserReferralsDto>>(null);
     }
 
-    public async Task<User> ClaimDailyReward()
+    public async Task<User> ClaimDailyReward(long tenantId, long tgUserId)
     {
         return await "farming/users/daily/claim".InternalApi()
+            .SetQueryParam(nameof(tenantId), tenantId)
+            .SetQueryParam(nameof(tgUserId), tgUserId)
             .PutJsonAsync<User>(null);
     }
 
@@ -121,16 +147,20 @@ public class ClientFarming
 
     #region Rewards
 
-    public async Task<Reward> GetRewardByType(RewardType rewardType)
+    public async Task<Reward> GetRewardByType(long tenantId, long tgUserId, RewardType rewardType)
     {
         return await "farming/rewards".InternalApi()
+            .SetQueryParam(nameof(tenantId), tenantId)
+            .SetQueryParam(nameof(tgUserId), tgUserId)
             .SetQueryParam(nameof(rewardType), rewardType)
             .GetJsonAsync<Reward>();
     }
 
-    public async Task<decimal> GetRewardAmount(RewardType rewardType)
+    public async Task<decimal> GetRewardAmount(long tenantId, long tgUserId, RewardType rewardType)
     {
         return await "farming/rewards/amount".InternalApi()
+            .SetQueryParam(nameof(tenantId), tenantId)
+            .SetQueryParam(nameof(tgUserId), tgUserId)
             .SetQueryParam(nameof(rewardType), rewardType)
             .GetJsonAsync<decimal>();
     }
@@ -141,7 +171,7 @@ public class ClientFarming
 
     public async Task<TenantDataDto> GetTenantData(long id)
     {
-        return await $"farming/tenants/{id}".InternalApi()
+        return await $"farming/tenants/{id}/data".InternalApi()
             .GetJsonAsync<TenantDataDto>();
     }
 
