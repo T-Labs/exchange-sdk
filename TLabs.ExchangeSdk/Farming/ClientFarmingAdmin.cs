@@ -136,6 +136,17 @@ public class ClientFarmingAdmin
 
     #endregion Tenant
 
+    #region Transaction
+
+    public async Task<IFlurlResponse> CreateTransaction(Transaction transaction)
+    {
+        return await $"farming/admin/transactions".InternalApi()
+            .PostJsonAsync(transaction);
+    }
+
+    #endregion Transaction
+
+
     #region Image
 
     public async Task<IActionResult> GetImages(string id)

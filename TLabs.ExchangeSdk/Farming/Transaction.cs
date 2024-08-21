@@ -32,4 +32,5 @@ public enum TransactionType
     ImportBalance = 500,
     ReferralSignUpBonus = 600,
     MiniGame = 700,
+    AdminTransaction = 800
 }
