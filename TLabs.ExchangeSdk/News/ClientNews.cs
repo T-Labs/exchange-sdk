@@ -1,3 +1,5 @@
+#nullable enable
+
 using Flurl.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -144,7 +146,7 @@ public class ClientNews
 
     #region image
 
-    public async Task<byte[]> GetImage(string id)
+    public async Task<byte[]?> GetImage(string id)
     {
         var result = await $"{BaseUrl}/image/{id}".InternalApi()
             .GetJsonAsync<byte[]>();
@@ -158,9 +160,12 @@ public class ClientNews
         return result;
     }
 
-    public async Task<FileContentResult> GetImageFileContentResult(string id)
+    public async Task<FileContentResult?> GetImageFileContentResult(string id)
     {
         var data = await GetImage(id);
+        if (data == null)
+            return null;
+
         var idData = id.Split('.', StringSplitOptions.RemoveEmptyEntries);
         var extension = "";
         if (idData.Length == 2) extension = idData[1];
