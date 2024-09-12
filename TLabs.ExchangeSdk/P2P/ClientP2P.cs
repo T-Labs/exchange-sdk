@@ -144,6 +144,18 @@ public class ClientP2P
             .GetJsonAsync<PaymentMethod>();
     }
 
+    public async Task<IFlurlResponse> CreatePaymentMethod([FromBody] PaymentMethodDto methodDto)
+    {
+        return await $"p2p/payment-methods".InternalApi()
+            .PostJsonAsync(methodDto);
+    }
+
+    public async Task<List<PaymentMethod>> GetPaymentMethods()
+    {
+        return await $"p2p/payment-methods/all".InternalApi()
+            .GetJsonAsync<List<PaymentMethod>>();
+    }
+
     public async Task<List<PaymentCurrency>> GetPaymentCurrencies([FromQuery] int? paymentSystemId = null)
     {
         return await $"p2p/payment-currencies".InternalApi()
@@ -151,11 +163,25 @@ public class ClientP2P
             .GetJsonAsync<List<PaymentCurrency>>();
     }
 
+    public async Task<IFlurlResponse> CreatePaymentCurrency(string currencyCode)
+    {
+        return await $"p2p/payment-currencies".InternalApi()
+            .SetQueryParam(nameof(currencyCode), currencyCode)
+            .PostAsync();
+    }
+
     public async Task<List<PaymentSystem>> GetPaymentSystems(string currencyCode = null)
     {
         return await $"p2p/payment-systems".InternalApi()
             .SetQueryParam(nameof(currencyCode), currencyCode)
             .GetJsonAsync<List<PaymentSystem>>();
+    }
+
+    public async Task<IFlurlResponse> CreatePaymentSystem(string name)
+    {
+        return await $"p2p/payment-systems".InternalApi()
+            .SetQueryParam(nameof(name), name)
+            .PostAsync();
     }
 
     public async Task<UserInfoDto> GetUserOrdersInfo(string userId)

@@ -17,6 +17,13 @@ namespace TLabs.ExchangeSdk.Verification
         {
         }
 
+        public async Task<IFlurlResponse> SaveVerification(VerificationUser verification)
+        {
+            var result = await $"verification/verifications".InternalApi()
+                .PostJsonAsync(verification);
+            return result;
+        }
+
         public async Task<VerificationUser> GetVerification(string userId)
         {
             var result = await $"verification/verifications/{userId}".InternalApi()

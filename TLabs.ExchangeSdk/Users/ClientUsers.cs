@@ -206,7 +206,7 @@ namespace TLabs.ExchangeSdk.Users
             return result;
         }
 
-        public async Task<List<string>> SetRoles(List<UserRolesModel> model, string userId)
+        public async Task<List<string>> SetUserRoles(List<UserRolesModel> model, string userId)
         {
             List<string> roles = new List<string>();
             foreach (var item in model)
@@ -217,6 +217,20 @@ namespace TLabs.ExchangeSdk.Users
 
             var result = await $"userprofiles/identityusers/{userId}/roles/addroles".InternalApi()
                 .PostJsonAsync<List<string>>(roles);
+            return result;
+        }
+
+        public async Task<IFlurlResponse> AddUserRole(string userId, string roleName)
+        {
+            var result = await $"userprofiles/identityusers/{userId}/roles/AddRole/{roleName}"
+                .InternalApi().PostJsonAsync(null);
+            return result;
+        }
+
+        public async Task<IFlurlResponse> DeleteUserRole(string userId, string roleName)
+        {
+            var result = await $"userprofiles/identityusers/{userId}/roles"
+                .InternalApi().PostStringAsync(roleName);
             return result;
         }
 
