@@ -20,6 +20,8 @@ public class ActionTask
 
     /// <summary>Only available for Platform.Telegram and when our bot is admin in the channel</summary>
     public bool CheckTgChannelSubscribed { get; set; }
+
+    public Region Region { get; set; }
 }
 
 public enum PlatformType

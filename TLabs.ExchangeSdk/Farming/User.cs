@@ -32,6 +32,19 @@ public class User
 
     public List<Transaction> Transactions { get; set; }
 
+    public string? CountryCode { get; set; }
+    public string? LangCode { get; set; }
+    public Region Region { get; set; }
+
     [NotMapped]
     public decimal Balance { get; set; }
+}
+
+public enum Region
+{
+    Undefined = 0,
+    CIS = 10,
+    Europe = 20,
+    Africa = 30,
+    Asia = 40,
 }
