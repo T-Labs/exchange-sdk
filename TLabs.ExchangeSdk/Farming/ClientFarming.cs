@@ -143,6 +143,24 @@ public class ClientFarming
             .PostJsonAsync<decimal>(miniGameResultDto);
     }
 
+    public async Task<User> UpdateUserCountryCode(long tenantId, long tgUserId, string code)
+    {
+        return await "farming/users/country-codes".InternalApi()
+            .SetQueryParam(nameof(tenantId), tenantId)
+            .SetQueryParam(nameof(tgUserId), tgUserId)
+            .SetQueryParam(nameof(code), code)
+            .PutJsonAsync<User>(null);
+    }
+
+    public async Task<User> UpdateUserLanguageCode(long tenantId, long tgUserId, string code)
+    {
+        return await "farming/users/language-codes".InternalApi()
+            .SetQueryParam(nameof(tenantId), tenantId)
+            .SetQueryParam(nameof(tgUserId), tgUserId)
+            .SetQueryParam(nameof(code), code)
+            .PutJsonAsync<User>(null);
+    }
+
     #endregion User
 
     #region Rewards

@@ -10,4 +10,7 @@ public class RegistrationDto
     public long TenantId { get; set; }
     public long TgUserId { get; set; }
     public string TgUserName { get; set; }
+
+    public string? CountryCode { get; set; }
+    public string? LangCode { get; set; }
 }
