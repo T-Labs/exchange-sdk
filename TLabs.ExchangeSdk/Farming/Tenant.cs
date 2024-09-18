@@ -36,6 +36,7 @@ public class Tenant
     public int TokenDecimalPlaces { get; set; } = 4;
 
     public string? AnalyticsScriptId { get; set; }
+    public bool IsSkipRegistration { get; set; }
 
     public Dictionary<string, string> GetColorSettings()
     {
