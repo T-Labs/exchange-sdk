@@ -19,6 +19,6 @@ public class TenantDataDto
     public string ColorSettingsJson { get; set; }
     public int? MaxNumberOfInvites { get; set; }
     public int TokenDecimalPlaces { get; set; }
-
     public string? AnalyticsScriptId { get; set; }
+    public bool ShouldSkipRegistration { get; set; }
 }
