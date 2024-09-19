@@ -47,4 +47,6 @@ public enum Region
     Europe = 20,
     Africa = 30,
     Asia = 40,
+    NorthAmerica = 50,
+    SouthAmerica = 60,
 }
