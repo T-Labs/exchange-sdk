@@ -84,6 +84,15 @@ public class ClientFarmingAdmin
             .GetJsonAsync<List<UserInfo>>();
     }
 
+    /// <summary>Get counts of users in each region and how many connected wallets</summary>
+    public async Task<UserCountsByRegion> GetUserCountsByRegions(long tenantId)
+    {
+        var result = await "farming/users/counts-by-region".InternalApi()
+            .SetQueryParam(nameof(tenantId), tenantId)
+            .GetJsonAsync<UserCountsByRegion>();
+        return result;
+    }
+
     #endregion AdminUsers
 
     #region Reward
