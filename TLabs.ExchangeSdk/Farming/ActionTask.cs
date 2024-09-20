@@ -16,12 +16,11 @@ public class ActionTask
     public decimal RewardAmount { get; set; }
     public long TenantId { get; set; }
     public bool IsActive { get; set; }
+    public Region? Region { get; set; }
     public int? AvailableDayNumber { get; set; }
 
     /// <summary>Only available for Platform.Telegram and when our bot is admin in the channel</summary>
     public bool CheckTgChannelSubscribed { get; set; }
-
-    public Region Region { get; set; }
 }
 
 public enum PlatformType

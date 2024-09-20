@@ -9,6 +9,7 @@ public class ActionTaskDto
     public decimal RewardAmount { get; set; }
     public PlatformType Platform { get; set; }
     public bool IsActive { get; set; }
+    public Region? Region { get; set; }
     public int? AvailableDayNumber { get; set; }
 
     /// <summary>Only available for Platform.Telegram and when our bot is admin in the channel</summary>
