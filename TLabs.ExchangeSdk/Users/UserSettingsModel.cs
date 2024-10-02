@@ -8,8 +8,6 @@ namespace TLabs.ExchangeSdk.Users
         public bool CantRefill { get; set; }
         public bool CantWithdraw { get; set; }
         public bool NoTradeCommissions { get; set; }
-        public bool AllowNegativeBalance { get; set; }
-        public bool IsPriority { get; set; }
         public bool BanOnP2P { get; set; }
 
         /// <summary>Access to all farming Admin panels</summary>
