@@ -26,8 +26,8 @@ namespace TLabs.ExchangeSdk.Users
         public const string Last2FAAccessToken = "Last2FAAccessToken";
         public const string LastWithdrawalEmailDate = "LastWithdrawalEmailDate";
 
-        public const string WithdrawalEmailCode = "WithdrawalEmailCode";
-        public const string WithdrawalEmailCodeExpireDate = "WithdrawalEmailCodeExpireDate";
+        public const string EmailVerificationCode = "EmailVerificationCode";
+        public const string EmailVerificationCodeExpireDate = "EmailVerificationCodeExpireDate";
 
         public const string LastLoginIp = "LastLoginIp";
         public const string LastLoginTime = "LastLoginTime";

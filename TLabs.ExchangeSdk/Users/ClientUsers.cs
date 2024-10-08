@@ -192,6 +192,17 @@ namespace TLabs.ExchangeSdk.Users
             await CreateOrUpdateClaims(userId, new List<CustomClaim> { claim });
         }
 
+        public async Task DeleteClaims(string userId, IEnumerable<CustomClaim> claims)
+        {
+            await $"userprofiles/identityusers/{userId}/claims".InternalApi()
+                .DeleteJsonAsync(claims);
+        }
+
+        public async Task DeleteClaim(string userId, CustomClaim claim)
+        {
+            await DeleteClaims(userId, new List<CustomClaim> { claim });
+        }
+
         public async Task<List<IdentityRole>> GetAllRoles()
         {
             var result = await "userprofiles/identityroles/roles/".InternalApi()
