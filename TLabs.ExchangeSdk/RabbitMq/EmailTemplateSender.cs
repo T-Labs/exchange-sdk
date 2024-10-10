@@ -1,7 +1,6 @@
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using TLabs.DotnetHelpers;
 
 namespace TLabs.ExchangeSdk.RabbitMq
@@ -120,6 +119,15 @@ namespace TLabs.ExchangeSdk.RabbitMq
             {
                 { nameof(amount), amount.ToString() },
                 { nameof(currencyCode), currencyCode },
+            }, language);
+        }
+
+        public QueryResult SendGoogle2FAEmailCode(string email, string language, string code, int codeLifetime)
+        {
+            return _sender.SendEmailTemplate(email, "Google2FAEmailCode", new Dictionary<string, string>
+            {
+                { "CodeLifetime", codeLifetime.ToString() },
+                { "VerificationCode", code }
             }, language);
         }
     }
