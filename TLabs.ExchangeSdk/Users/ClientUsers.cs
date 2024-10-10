@@ -1,11 +1,16 @@
 using Flurl.Http;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using TLabs.DotnetHelpers;
+using TLabs.ExchangeSdk.Farming;
 
 namespace TLabs.ExchangeSdk.Users
 {
@@ -306,6 +311,36 @@ namespace TLabs.ExchangeSdk.Users
 
             var result = await $"userprofiles/users/finances-settings".InternalApi()
                 .PostJsonAsync(currentSettings);
+            return result;
+        }
+
+        public async Task<string> GenerateGoogleAuthKey(string userId, string emailCode)
+        {
+            var result = await $"userprofiles/users/{userId}/2fa/generate-key".InternalApi()
+                .PostJsonAsync<string>(emailCode);
+            return result;
+        }
+
+        public async Task<bool> GetGoogleAuthStatus(string userId)
+        {
+            var result = await $"userprofiles/users/{userId}/2fa/status".InternalApi()
+                .SetQueryParam(nameof(userId), userId)
+                .GetJsonAsync<bool>();
+            return result;
+        }
+
+        public async Task<IFlurlResponse> UpdateGoogleAuthStatus(string userId, string totpCode, bool setActive)
+        {
+            var result = await $"userprofiles/users/{userId}/2fa/status?setActive={setActive}"
+                .InternalApi()
+                .PostJsonAsync(totpCode);
+            return result;
+        }
+
+        public async Task<bool> VerifyGoogleAuthCode(string userId, string totpCode)
+        {
+            var result = await $"userprofiles/users/{userId}/2fa/verify".InternalApi()
+                .PostJsonAsync<bool>(totpCode);
             return result;
         }
     }
