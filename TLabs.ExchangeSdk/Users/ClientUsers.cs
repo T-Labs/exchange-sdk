@@ -314,10 +314,10 @@ namespace TLabs.ExchangeSdk.Users
             return result;
         }
 
-        public async Task<string> GenerateGoogleAuthKey(string userId, string emailCode)
+        public async Task<string> GenerateGoogleAuthKey(string userId)
         {
             var result = await $"userprofiles/users/{userId}/2fa/generate-key".InternalApi()
-                .PostJsonAsync<string>(emailCode);
+                .PostJsonAsync<string>(null);
             return result;
         }
 
