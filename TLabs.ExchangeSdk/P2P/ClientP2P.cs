@@ -49,7 +49,7 @@ public class ClientP2P
             .PostJsonAsync<Order>(orderDto);
     }
 
-    public async Task<Order> CloneOrder(Guid id, [FromBody] OrderCreateDto orderDto)
+    public async Task<Order> CloneOrder(Guid id, OrderCreateDto orderDto)
     {
         return await $"p2p/orders/{id}/clone".InternalApi()
             .PostJsonAsync<Order>(orderDto);
@@ -63,11 +63,12 @@ public class ClientP2P
     }
 
     public async Task<List<Deal>> GetDeals(string dealUserId = null, string orderUserId = null,
-        [FromQuery] List<DealStatus> statuses = null)
+        List<string> ids = null, List<DealStatus> statuses = null)
     {
         return await $"p2p/deals".InternalApi()
             .SetQueryParam(nameof(dealUserId), dealUserId)
             .SetQueryParam(nameof(orderUserId), orderUserId)
+            .SetQueryParam(nameof(ids), ids)
             .SetQueryParam(nameof(statuses), statuses)
             .GetJsonAsync<List<Deal>>();
     }
@@ -144,7 +145,7 @@ public class ClientP2P
             .GetJsonAsync<PaymentMethod>();
     }
 
-    public async Task<IFlurlResponse> CreatePaymentMethod([FromBody] PaymentMethodDto methodDto)
+    public async Task<IFlurlResponse> CreatePaymentMethod(PaymentMethodDto methodDto)
     {
         return await $"p2p/payment-methods".InternalApi()
             .PostJsonAsync(methodDto);
@@ -156,7 +157,7 @@ public class ClientP2P
             .GetJsonAsync<List<PaymentMethod>>();
     }
 
-    public async Task<List<PaymentCurrency>> GetPaymentCurrencies([FromQuery] int? paymentSystemId = null)
+    public async Task<List<PaymentCurrency>> GetPaymentCurrencies(int? paymentSystemId = null)
     {
         return await $"p2p/payment-currencies".InternalApi()
             .SetQueryParam(nameof(paymentSystemId), paymentSystemId)
@@ -226,7 +227,7 @@ public class ClientP2P
             .PostJsonAsync<DealComment>(dealCommentDto);
     }
 
-    public async Task<DealComment> UpdateDealComment([FromBody] DealCommentDto dealCommentDto)
+    public async Task<DealComment> UpdateDealComment(DealCommentDto dealCommentDto)
     {
         return await $"p2p/deal-comments".InternalApi()
             .PutJsonAsync<DealComment>(dealCommentDto);
@@ -247,7 +248,7 @@ public class ClientP2P
             .GetJsonAsync<List<UserBlock>>();
     }
 
-    public async Task<UserBlock> BlockUser([FromBody] UserBlockCreateDto userBlockCreateDto)
+    public async Task<UserBlock> BlockUser(UserBlockCreateDto userBlockCreateDto)
     {
         return await $"p2p/user-blocks".InternalApi()
             .PostJsonAsync<UserBlock>(userBlockCreateDto);
@@ -324,8 +325,7 @@ public class ClientP2P
             .GetJsonAsync<ChatUsersInfo>();
     }
 
-    public async Task<List<CurrencyPairTradingVolume>> GetTradeVolume([FromQuery] DateTimeOffset? dateFrom,
-        [FromQuery] DateTimeOffset? dateTo)
+    public async Task<List<CurrencyPairTradingVolume>> GetTradeVolume(DateTimeOffset? dateFrom, DateTimeOffset? dateTo)
     {
         return await $"p2p/statistics/trade-volumes".InternalApi()
             .SetQueryParam(nameof(dateFrom), dateFrom?.ToString("o"))
