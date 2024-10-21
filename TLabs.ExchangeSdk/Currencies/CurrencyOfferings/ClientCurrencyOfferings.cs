@@ -2,6 +2,7 @@ using Flurl.Http;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -43,7 +44,7 @@ namespace TLabs.ExchangeSdk.CurrencyOfferings
                 throw new ArgumentNullException(nameof(code));
             var result = await $"{BaseUrl}/{code}/total-sales".InternalApi()
                 .GetJsonAsync<string>();
-            return decimal.Parse(result);
+            return result.DecimalTryParse().Value;
         }
 
         public async Task<CurrencyOffering> Add(CurrencyOffering model)
@@ -77,7 +78,7 @@ namespace TLabs.ExchangeSdk.CurrencyOfferings
                 .SetQueryParam(nameof(currencyCode), currencyCode)
                 .SetQueryParam(nameof(payingCurrencyCode), payingCurrencyCode)
                 .GetStringAsync();
-            return decimal.Parse(result);
+            return result.DecimalTryParse().Value;
         }
 
         public async Task MakePurchase(CurrencyOfferingPurchase model)
