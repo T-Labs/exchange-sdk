@@ -87,7 +87,7 @@ namespace TLabs.ExchangeSdk.CryptoAdapters
                 .GetStringAsync(cancelToken).GetQueryResult();
             if (!result.Succeeded)
                 return QueryResult<decimal>.CreateFailed(result);
-            bool isParsed = decimal.TryParse(result.Data, out decimal resultDecimal);
+            bool isParsed = decimal.TryParse(result.Data, NumberStyles.Float, CultureInfo.InvariantCulture, out decimal resultDecimal);
             return isParsed
                 ? QueryResult<decimal>.CreateSucceeded(resultDecimal)
                 : QueryResult<decimal>.CreateFailedLogic($"ParsingError {result.Data}");
@@ -101,7 +101,7 @@ namespace TLabs.ExchangeSdk.CryptoAdapters
                 .GetStringAsync(cancelToken).GetQueryResult();
             if (!result.Succeeded)
                 return QueryResult<decimal>.CreateFailed(result);
-            bool isParsed = decimal.TryParse(result.Data, out decimal resultDecimal);
+            bool isParsed = decimal.TryParse(result.Data, NumberStyles.Float, CultureInfo.InvariantCulture, out decimal resultDecimal);
             return isParsed
                 ? QueryResult<decimal>.CreateSucceeded(resultDecimal)
                 : QueryResult<decimal>.CreateFailedLogic($"ParsingError {result.Data}");
