@@ -30,6 +30,7 @@ namespace TLabs.ExchangeSdk.Depository
         public static readonly TransactionType DepositAirdrop = new TransactionType("103", "Безусловное пополнение баланса аирдропом", nameof(DepositAirdrop));
         public static readonly TransactionType DepositStaking = new TransactionType("104", "Безусловное пополнение баланса стейкингом", nameof(DepositStaking));
         public static readonly TransactionType DepositCash = new TransactionType("105", "Пополнение баланса кэшем", nameof(DepositCash));
+        public static readonly TransactionType DepositToGlobal = new TransactionType("106", "Пополнение баланса фондов", nameof(DepositToGlobal));
         public static readonly TransactionType DepositReplacement = new TransactionType("108", "Пополнение баланса взамен удаленной валюты", nameof(DepositReplacement));
         public static readonly TransactionType DepositCorrection = new TransactionType("109", "Корректировочное пополнение баланса", nameof(DepositCorrection));
 
@@ -172,7 +173,7 @@ namespace TLabs.ExchangeSdk.Depository
         {
             Rollback,
 
-            Deposit, DepositAdmin, DepositStaking, DepositAirdrop, DepositReplacement, DepositCorrection,
+            Deposit, DepositAdmin, DepositStaking, DepositAirdrop, DepositToGlobal, DepositReplacement, DepositCorrection,
 
             Nullification, Confiscation,
 
