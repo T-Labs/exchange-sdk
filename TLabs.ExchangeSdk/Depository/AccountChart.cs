@@ -36,6 +36,7 @@ namespace TLabs.ExchangeSdk.Depository
         public static readonly AccountChart DepositCash = new AccountChart("52", "Введеные средства наличными", nameof(DepositCash));
         public static readonly AccountChart DepositStaking = new AccountChart("54", "Введеные средства стейкингом", nameof(DepositStaking));
         public static readonly AccountChart DepositAirdrop = new AccountChart("53", "Введеные средства аирдропом", nameof(DepositAirdrop));
+        public static readonly AccountChart DepositToFunds = new AccountChart("56", "Введеные средства на фонды", nameof(DepositToFunds));
         public static readonly AccountChart DepositReplacement = new AccountChart("58", "Введеные средства взамен удаленной валюты", nameof(DepositReplacement));
         public static readonly AccountChart DepositCorrection = new AccountChart("59", "Корректировочное пополнение баланса", nameof(DepositCorrection));
 
@@ -118,7 +119,7 @@ namespace TLabs.ExchangeSdk.Depository
             FundBountyBonusesForDistribution,
             Nullification,
 
-            Deposit, DepositAdmin, DepositCash, DepositStaking, DepositAirdrop, DepositReplacement, DepositCorrection,
+            Deposit, DepositAdmin, DepositCash, DepositStaking, DepositAirdrop, DepositToFunds, DepositReplacement, DepositCorrection,
 
             Withdrawn,
             ColdWallets,
@@ -130,12 +131,12 @@ namespace TLabs.ExchangeSdk.Depository
 
         public static readonly List<AccountChart> DepositCharts = new List<AccountChart>
         {
-            Deposit, DepositAdmin, DepositCash, DepositStaking, DepositAirdrop, DepositReplacement, DepositCorrection,
+            Deposit, DepositAdmin, DepositCash, DepositStaking, DepositAirdrop, DepositToFunds, DepositReplacement, DepositCorrection,
         };
 
         public static readonly List<AccountChart> ChartsWithAdapterCode = new List<AccountChart>
         {
-            Deposit, Withdrawn, NetworkComission,
+            Deposit, DepositToFunds, Withdrawn, NetworkComission,
         };
 
         private AccountChart(string code, string value, string valueKey)
