@@ -159,14 +159,14 @@ public class ClientP2P
 
     public async Task<List<PaymentCurrency>> GetPaymentCurrencies(int? paymentSystemId = null)
     {
-        return await $"p2p/payment-currencies".InternalApi()
+        return await $"p2p/currencies/payment-currencies".InternalApi()
             .SetQueryParam(nameof(paymentSystemId), paymentSystemId)
             .GetJsonAsync<List<PaymentCurrency>>();
     }
 
     public async Task<IFlurlResponse> CreatePaymentCurrency(string currencyCode)
     {
-        return await $"p2p/payment-currencies".InternalApi()
+        return await $"p2p/currencies/payment-currencies".InternalApi()
             .SetQueryParam(nameof(currencyCode), currencyCode)
             .PostAsync();
     }
@@ -178,11 +178,18 @@ public class ClientP2P
             .GetJsonAsync<List<PaymentSystem>>();
     }
 
-    public async Task<IFlurlResponse> CreatePaymentSystem(string name)
+    public async Task<PaymentSystem> CreatePaymentSystem(string name)
     {
         return await $"p2p/payment-systems".InternalApi()
             .SetQueryParam(nameof(name), name)
-            .PostAsync();
+            .PostJsonAsync<PaymentSystem>(null);
+    }
+
+    public async Task<PaymentSystem> UpdatePaymentSystem(string id, string name)
+    {
+        return await $"p2p/{id}/payment-systems".InternalApi()
+            .SetQueryParam(nameof(name), name)
+            .PutJsonAsync<PaymentSystem>(null);
     }
 
     public async Task<UserInfoDto> GetUserOrdersInfo(string userId)
