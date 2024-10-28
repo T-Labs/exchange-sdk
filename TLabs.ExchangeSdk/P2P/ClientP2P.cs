@@ -171,6 +171,13 @@ public class ClientP2P
             .PostAsync();
     }
 
+    public async Task<List<P2pCurrencyPair>> GetCurrencyPairs(bool onlyActive = true)
+    {
+        return await $"p2p/currencies/pairs".InternalApi()
+            .SetQueryParam(nameof(onlyActive), onlyActive)
+            .GetJsonAsync<List<P2pCurrencyPair>>();
+    }
+
     public async Task<List<PaymentSystem>> GetPaymentSystems(string currencyCode = null)
     {
         return await $"p2p/payment-systems".InternalApi()
