@@ -145,16 +145,22 @@ public class ClientP2P
             .GetJsonAsync<PaymentMethod>();
     }
 
-    public async Task<IFlurlResponse> CreatePaymentMethod(PaymentMethodDto methodDto)
-    {
-        return await $"p2p/payment-methods".InternalApi()
-            .PostJsonAsync(methodDto);
-    }
-
     public async Task<List<PaymentMethod>> GetPaymentMethods()
     {
         return await $"p2p/payment-methods/all".InternalApi()
             .GetJsonAsync<List<PaymentMethod>>();
+    }
+
+    public async Task<PaymentMethod> CreatePaymentMethod(PaymentMethodDto methodDto)
+    {
+        return await $"p2p/payment-methods".InternalApi()
+            .PostJsonAsync<PaymentMethod>(methodDto);
+    }
+
+    public async Task<PaymentMethod> UpdatePaymentMethod(PaymentMethodDto methodDto)
+    {
+        return await $"p2p/payment-methods".InternalApi()
+            .PutJsonAsync<PaymentMethod>(methodDto);
     }
 
     public async Task<List<PaymentCurrency>> GetPaymentCurrencies(int? paymentSystemId = null)
