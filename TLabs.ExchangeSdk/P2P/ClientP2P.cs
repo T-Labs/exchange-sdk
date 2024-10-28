@@ -192,10 +192,11 @@ public class ClientP2P
             .PostJsonAsync<PaymentSystem>(null);
     }
 
-    public async Task<PaymentSystem> UpdatePaymentSystem(string id, string name)
+    public async Task<PaymentSystem> UpdatePaymentSystem(int id, string name, bool isActive)
     {
-        return await $"p2p/{id}/payment-systems".InternalApi()
+        return await $"p2p/payment-systems/{id}".InternalApi()
             .SetQueryParam(nameof(name), name)
+            .SetQueryParam(nameof(isActive), isActive)
             .PutJsonAsync<PaymentSystem>(null);
     }
 
