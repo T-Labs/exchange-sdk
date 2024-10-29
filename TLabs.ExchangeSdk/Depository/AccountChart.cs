@@ -52,7 +52,7 @@ namespace TLabs.ExchangeSdk.Depository
         public static readonly AccountChart BlockedForOrder = new AccountChart("7", "Заморозка средств на ордер", nameof(BlockedForOrder));
         public static readonly AccountChart BlockedForCancelOrder = new AccountChart("71", "Заморозка средств при отмене ордера", nameof(BlockedForCancelOrder));
         public static readonly AccountChart BlockedForDeal = new AccountChart("73", "Заморозка средств при сделке", nameof(BlockedForDeal));
-        public static readonly AccountChart OnOrders = new AccountChart("75", "Средства на ордерах", "OnOrders");
+        public static readonly AccountChart OnOrders = new AccountChart("75", "Средства на ордерах", nameof(OnOrders));
 
         public static readonly AccountChart NetworkComission = new AccountChart("8", "Комиссия блокчейна", nameof(NetworkComission));
         public static readonly AccountChart ColdWallets = new AccountChart("11", "Холодные кошельки", nameof(ColdWallets));
@@ -78,6 +78,8 @@ namespace TLabs.ExchangeSdk.Depository
         public static readonly AccountChart P2pOrderBlockedTemp = new AccountChart("751", "P2P блокировка для ордера временная", nameof(P2pOrderBlockedTemp));
         public static readonly AccountChart P2pOrderBlocked = new AccountChart("752", "P2P блокировка для ордера", nameof(P2pOrderBlocked));
         public static readonly AccountChart P2pOrderBlockCanceledTemp = new AccountChart("753", "P2P отмена блокировки для ордера временная", nameof(P2pOrderBlockCanceledTemp));
+        public static readonly AccountChart P2pOrderFeeTemp = new AccountChart("757", "P2P комиссия ордера временная", nameof(P2pOrderFeeTemp));
+
         public static readonly AccountChart P2pDealBlockedTemp = new AccountChart("761", "P2P блокировка для сделки временная", nameof(P2pDealBlockedTemp));
         public static readonly AccountChart P2pDealBlocked = new AccountChart("762", "P2P блокировка для сделки", nameof(P2pDealBlocked));
         public static readonly AccountChart P2pDealBlockCanceledTemp = new AccountChart("763", "P2P отмена блокировки для сделки временная", nameof(P2pDealBlockCanceledTemp));
@@ -106,6 +108,7 @@ namespace TLabs.ExchangeSdk.Depository
             BwpCryptoPaymentToMerchantTemp,
 
             P2pOrderBlockedTemp, P2pOrderBlocked, P2pOrderBlockCanceledTemp,
+            P2pOrderFeeTemp,
             P2pDealBlockedTemp, P2pDealBlocked, P2pDealBlockCanceledTemp,
             P2pTransferFromOrderTemp, P2pTransferFromDealTemp,
             P2pExternalPaymentSource, P2pExternalPaymentDestination,
