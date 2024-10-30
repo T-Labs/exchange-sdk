@@ -42,6 +42,11 @@ namespace TLabs.ExchangeSdk.Currencies
 
         public bool SendToCoinmarketcap { get; set; } = true;
 
+        /// <summary>Listed on the exchange</summary>
+        public bool AvailableOnExchange { get; set; }
+
+        public bool AvailableOnP2P { get; set; }
+
         public CurrencyPair()
         {
         }
