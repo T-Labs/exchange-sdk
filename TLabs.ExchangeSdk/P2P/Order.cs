@@ -29,6 +29,13 @@ public class Order
     public decimal TotalOrderAmount { get; set; }
 
     public decimal FilledOrderAmount { get; set; }
+
+    /// <summary>
+    /// Fee amount in crypto, added on top of TotalOrderAmount when freezing.
+    /// 0 for IsBuyingOnExchange=true
+    /// </summary>
+    public decimal TotalFeeAmount { get; set; }
+
     public decimal MinDealAmount { get; set; }
     public decimal MaxDealAmount { get; set; }
     public OrderStatus Status { get; set; }
