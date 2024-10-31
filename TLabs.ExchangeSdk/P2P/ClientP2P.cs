@@ -163,10 +163,11 @@ public class ClientP2P
             .PutJsonAsync<PaymentMethod>(methodDto);
     }
 
-    public async Task<List<PaymentSystem>> GetPaymentSystems(string currencyCode = null)
+    public async Task<List<PaymentSystem>> GetPaymentSystems(string currencyCode = null, bool onlyActive = true)
     {
         return await $"p2p/payment-systems".InternalApi()
             .SetQueryParam(nameof(currencyCode), currencyCode)
+            .SetQueryParam(nameof(onlyActive), onlyActive)
             .GetJsonAsync<List<PaymentSystem>>();
     }
 
