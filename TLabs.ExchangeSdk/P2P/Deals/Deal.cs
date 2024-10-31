@@ -29,6 +29,18 @@ public class Deal
     /// <summary>Amount in fiat currency</summary>
     public decimal FiatAmount => (CryptoAmount * Price).RoundDown(2);
 
+    /// <summary>
+    /// Amount that will be subtracted from CryptoAmount after receiver gets it.
+    /// For Order.IsBuyingOnExchange=false it is always 0.
+    /// </summary>
+    public decimal DealFeeAmount { get; set; }
+
+    /// <summary>
+    /// Crypto Amount that is taken from blocked order balance
+    /// For Order.IsBuyingOnExchange=true it is always 0.
+    /// </summary>
+    public decimal PartOfOrderFeeAmount { get; set; }
+
     public DealStatus Status { get; set; }
     public DateTimeOffset DateCreated { get; set; }
     public DateTimeOffset? DatePaymentSystemSent { get; set; }
