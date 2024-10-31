@@ -1,5 +1,4 @@
 using Flurl.Http;
-using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
@@ -138,16 +137,17 @@ public class ClientP2P
             .DeleteAsync();
     }
 
-    public async Task<PaymentMethod> GetPaymentMethodByCurrencyCode(string exchangeCurrencyCode)
+    public async Task<PaymentMethod> GetPaymentMethodByCurrencyCode(string currencyCode)
     {
-        return await $"p2p/payment-methods".InternalApi()
-            .SetQueryParam(nameof(exchangeCurrencyCode), exchangeCurrencyCode)
+        return await $"p2p/payment-methods/{currencyCode}".InternalApi()
             .GetJsonAsync<PaymentMethod>();
     }
 
-    public async Task<List<PaymentMethod>> GetPaymentMethods()
+    public async Task<List<PaymentMethod>> GetPaymentMethods(int? paymentSystemId = null, bool onlyActive = true)
     {
-        return await $"p2p/payment-methods/all".InternalApi()
+        return await $"p2p/payment-methods".InternalApi()
+            .SetQueryParam(nameof(paymentSystemId), paymentSystemId)
+            .SetQueryParam(nameof(onlyActive), onlyActive)
             .GetJsonAsync<List<PaymentMethod>>();
     }
 
@@ -163,27 +163,6 @@ public class ClientP2P
             .PutJsonAsync<PaymentMethod>(methodDto);
     }
 
-    public async Task<List<PaymentCurrency>> GetPaymentCurrencies(int? paymentSystemId = null)
-    {
-        return await $"p2p/currencies/payment-currencies".InternalApi()
-            .SetQueryParam(nameof(paymentSystemId), paymentSystemId)
-            .GetJsonAsync<List<PaymentCurrency>>();
-    }
-
-    public async Task<IFlurlResponse> CreatePaymentCurrency(string currencyCode)
-    {
-        return await $"p2p/currencies/payment-currencies".InternalApi()
-            .SetQueryParam(nameof(currencyCode), currencyCode)
-            .PostAsync();
-    }
-
-    public async Task<List<P2pCurrencyPair>> GetCurrencyPairs(bool onlyActive = true)
-    {
-        return await $"p2p/currencies/pairs".InternalApi()
-            .SetQueryParam(nameof(onlyActive), onlyActive)
-            .GetJsonAsync<List<P2pCurrencyPair>>();
-    }
-
     public async Task<List<PaymentSystem>> GetPaymentSystems(string currencyCode = null)
     {
         return await $"p2p/payment-systems".InternalApi()
@@ -191,10 +170,11 @@ public class ClientP2P
             .GetJsonAsync<List<PaymentSystem>>();
     }
 
-    public async Task<PaymentSystem> CreatePaymentSystem(string name)
+    public async Task<PaymentSystem> CreatePaymentSystem(string name, bool isActive)
     {
         return await $"p2p/payment-systems".InternalApi()
             .SetQueryParam(nameof(name), name)
+            .SetQueryParam(nameof(isActive), isActive)
             .PostJsonAsync<PaymentSystem>(null);
     }
 
