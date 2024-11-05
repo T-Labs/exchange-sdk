@@ -22,6 +22,11 @@ public class Order
     [Required]
     public string PaymentCurrencyCode { get; set; }
 
+    /// <summary>
+    /// if true then PaymentCurrency is actually a second Exchange Currency
+    /// </summary>
+    public bool AreBothCurrenciesExcahnge { get; set; }
+
     /// <summary>cryptoAmount * price = fiatAmount</summary>
     public decimal Price { get; set; }
 
@@ -60,6 +65,8 @@ public class Order
 
     [NotMapped]
     public OrderUserInfo UserInfo { get; set; }
+
+    public string CurrencyPairCode => $"{PaymentCurrencyCode}_{ExchangeCurrencyCode}";
 
     public override string ToString() =>
         $"{nameof(Order)}({ExchangeCurrencyCode}-{PaymentCurrencyCode}, {(IsBuyingOnExchange ? "buy" : "sell")}" +
