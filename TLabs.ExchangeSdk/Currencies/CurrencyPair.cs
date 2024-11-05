@@ -47,6 +47,9 @@ namespace TLabs.ExchangeSdk.Currencies
 
         public bool AvailableOnP2P { get; set; }
 
+        public int DigitsPriceP2P { get; set; }
+        public int DigitsAmountP2P { get; set; }
+
         public CurrencyPair()
         {
         }
