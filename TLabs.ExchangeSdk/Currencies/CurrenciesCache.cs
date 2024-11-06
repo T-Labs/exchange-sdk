@@ -3,7 +3,6 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using TLabs.DotnetHelpers;
 using TLabs.DotnetHelpers.Helpers;
@@ -17,6 +16,7 @@ namespace TLabs.ExchangeSdk.Currencies
         private List<Currency> _currencies = new();
         private List<CurrencyPair> _currencyPairs = new();
         private List<Adapter> _adapters = new();
+        private List<P2PExchangeCurrency> _p2PExchangeCurrencies = new();
 
         /// <summary>
         /// Use for rounding commissions, quote amounts, deposits, withdrawals
@@ -37,10 +37,12 @@ namespace TLabs.ExchangeSdk.Currencies
         {
             if (onlyVisible)
             {
-                return _currencyPairs.Where(_ => _.IsShowedForUsers
-                    && _.CurrencyFrom.IsShowedForUsers && _.CurrencyTo.IsShowedForUsers)
+                return _currencyPairs
+                    .Where(_ => _.IsShowedForUsers
+                                && _.CurrencyFrom.IsShowedForUsers && _.CurrencyTo.IsShowedForUsers)
                     .ToList();
             }
+
             return _currencyPairs;
         }
 
@@ -76,14 +78,26 @@ namespace TLabs.ExchangeSdk.Currencies
             if (onlyAvailable)
             {
                 var currencyCodes = _currencies.Select(_ => _.Code).ToHashSet();
-                return _adapters.Where(_ => _.MainCurrencyCode == null || currencyCodes.Contains(_.MainCurrencyCode)).ToList();
+                return _adapters
+                    .Where(_ => _.MainCurrencyCode == null || currencyCodes.Contains(_.MainCurrencyCode))
+                    .ToList();
             }
+
             return _adapters;
         }
 
+        public P2PExchangeCurrency GetP2PExchangeCurrency(string currencyCode)
+        {
+            return _p2PExchangeCurrencies.FirstOrDefault(_ => _.CurrencyCode == currencyCode);
+        }
+
+        public List<P2PExchangeCurrency> GetP2PExchangeCurrencies()
+        {
+            return _p2PExchangeCurrencies;
+        }
+
         [Obsolete("Use GetAdapterIds()")]
-        public string GetAdapterId(string currencyCode) =>
-            GetAdapterIds(currencyCode).FirstOrDefault();
+        public string GetAdapterId(string currencyCode) => GetAdapterIds(currencyCode).FirstOrDefault();
 
         public List<string> GetAdapterIds(string currencyCode) =>
             GetCurrency(currencyCode).CurrencyAdapters.Select(_ => _.AdapterCode).ToList();
@@ -96,7 +110,6 @@ namespace TLabs.ExchangeSdk.Currencies
 
         #endregion Getters
 
-
         #region Load methods
 
         public void SetCurrenciesInfo(CurrenciesInfo currenciesInfo)
@@ -108,22 +121,36 @@ namespace TLabs.ExchangeSdk.Currencies
             _adapters = currenciesInfo.Adapters;
         }
 
-        private async Task<CurrenciesInfo> LoadCurrenciesInfo(bool includeP2pExternalCurrencies = false)
+        private async Task<CurrenciesInfo> LoadCurrenciesInfo(bool includeP2pExternalCurrencies = false,
+            bool onlyOnExchange = true)
         {
             var result = await $"depository/currencies/info".InternalApi()
                 .SetQueryParam("includeP2pExternalCurrencies", includeP2pExternalCurrencies)
+                .SetQueryParam("onlyOnExchange", onlyOnExchange)
                 .GetJsonAsync<CurrenciesInfo>().GetQueryResult();
             return result.Data;
         }
 
-        public async Task LoadData(int countAttempts = 0, bool includeP2pExternalCurrencies = false)
+        private async Task<List<P2PExchangeCurrency>> LoadP2PExchangeCurrency()
         {
-            var currencies = await LoadCurrenciesInfo(includeP2pExternalCurrencies);
+            var result = await $"depository/p2p-exchange-currency".InternalApi()
+                .GetJsonAsync<List<P2PExchangeCurrency>>().GetQueryResult();
+            return result.Data;
+        }
+
+        public async Task LoadData(int countAttempts = 0, bool includeP2pExternalCurrencies = false,
+            bool onlyOnExchange = true, bool includeP2PExchangeCurrency = false)
+        {
+            var currencies = await LoadCurrenciesInfo(includeP2pExternalCurrencies, onlyOnExchange);
             SetCurrenciesInfo(currencies);
+
+            if (includeP2PExchangeCurrency)
+                _p2PExchangeCurrencies = await LoadP2PExchangeCurrency();
 
             if (!IsLoaded)
             {
-                var maxDelay = TimeSpan.FromMinutes(10); // currencies are vital for most services, no reason to wait too much
+                var maxDelay =
+                    TimeSpan.FromMinutes(10); // currencies are vital for most services, no reason to wait too much
                 await Task.Delay(TimeHelper.GetDelay(countAttempts, maxDelay)); // use increasing delay and try again
                 _ = LoadData(++countAttempts, includeP2pExternalCurrencies);
             }
