@@ -1,9 +1,6 @@
 using Flurl.Http;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
-using System.Net.Http;
 using System.Threading.Tasks;
 using TLabs.DotnetHelpers;
 using TLabs.ExchangeSdk.Currencies;
@@ -16,8 +13,9 @@ namespace TLabs.ExchangeSdk.Depository
         {
         }
 
-        public Task<QueryResult> SendTxCommand(TxCommandDto txCommand, bool checkBalances = true, bool use2StepTransfer = false)
-            => SendTxCommands(new List<TxCommandDto> { txCommand }, checkBalances, use2StepTransfer);
+        public Task<QueryResult> SendTxCommand(TxCommandDto txCommand, bool checkBalances = true,
+            bool use2StepTransfer = false) =>
+            SendTxCommands(new List<TxCommandDto> { txCommand }, checkBalances, use2StepTransfer);
 
         public async Task<QueryResult> SendTxCommands(List<TxCommandDto> txCommands, bool checkBalances = true,
             bool use2StepTransfer = false)
@@ -32,7 +30,8 @@ namespace TLabs.ExchangeSdk.Depository
             return result;
         }
 
-        public record TwoStepTxCommandsRequest(List<TxCommandDto> twoStepTxCommands, List<TxCommandDto> oneStepTxCommands);
+        public record TwoStepTxCommandsRequest(List<TxCommandDto> twoStepTxCommands,
+            List<TxCommandDto> oneStepTxCommands);
 
         /// <summary>Create and save transactions in 2 steps, checking balance between steps</summary>
         /// <param name="twoStepTxCommands">tx commands that turn in 2 transactions and executed in 2 steps</param>
@@ -151,11 +150,28 @@ namespace TLabs.ExchangeSdk.Depository
 
         #region Currencies
 
+        public async Task<List<Currency>> GetCurrencies(bool includeExchangeCurrencies = true,
+            bool includeP2pExternalCurrencies = false)
+        {
+            var result = await $"depository/currencies".InternalApi()
+                .SetQueryParam("includeExchangeCurrencies", includeExchangeCurrencies)
+                .SetQueryParam("includeP2pExternalCurrencies", includeP2pExternalCurrencies)
+                .GetJsonAsync<List<Currency>>().GetQueryResult();
+            return result.Succeeded ? result.Data : new List<Currency>();
+        }
+
         public async Task<Currency> CreateCurrency(Currency currency)
         {
             var result = await $"depository/currencies".InternalApi()
                 .PostJsonAsync<Currency>(currency);
             return result;
+        }
+
+        public async Task<List<CurrencyPair>> GetCurrencyPairs()
+        {
+            var result = await $"depository/currency-pairs".InternalApi()
+                .GetJsonAsync<List<CurrencyPair>>().GetQueryResult();
+            return result.Succeeded ? result.Data : new List<CurrencyPair>();
         }
 
         public async Task<CurrencyPair> CreateCurrencyPair(CurrencyPair pair)
@@ -164,7 +180,6 @@ namespace TLabs.ExchangeSdk.Depository
                 .PostJsonAsync<CurrencyPair>(pair);
             return result;
         }
-
 
         public async Task CreateOrUpdateCurrencyAdapter(CurrencyAdapter currencyAdapter)
         {
@@ -184,8 +199,7 @@ namespace TLabs.ExchangeSdk.Depository
         }
 
         #endregion Currencies
-       
-        public async Task<string> Healthcheck() =>
-            await $"depository/healthcheck".InternalApi().GetStringAsync();
+
+        public async Task<string> Healthcheck() => await $"depository/healthcheck".InternalApi().GetStringAsync();
     }
 }
