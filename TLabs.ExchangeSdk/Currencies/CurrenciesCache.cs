@@ -32,6 +32,7 @@ namespace TLabs.ExchangeSdk.Currencies
         #region Getters
 
         public bool IsLoaded => _currencies?.Count > 0 && _currencyPairs?.Count > 0;
+        public bool IsLoadedP2PExchangeCurrencies => _p2PExchangeCurrencies?.Count > 0;
 
         public List<CurrencyPair> GetCurrencyPairs(bool onlyVisible = false)
         {
@@ -121,30 +122,30 @@ namespace TLabs.ExchangeSdk.Currencies
             _adapters = currenciesInfo.Adapters;
         }
 
-        private async Task<CurrenciesInfo> LoadCurrenciesInfo(bool includeP2pExternalCurrencies = false,
-            bool onlyOnExchange = true)
+        private async Task<CurrenciesInfo> LoadCurrenciesInfo(bool includeExchangeCurrencies = true,
+            bool includeP2pExternalCurrencies = false)
         {
             var result = await $"depository/currencies/info".InternalApi()
+                .SetQueryParam("includeExchangeCurrencies", includeExchangeCurrencies)
                 .SetQueryParam("includeP2pExternalCurrencies", includeP2pExternalCurrencies)
-                .SetQueryParam("onlyOnExchange", onlyOnExchange)
                 .GetJsonAsync<CurrenciesInfo>().GetQueryResult();
             return result.Data;
         }
 
         private async Task<List<P2PExchangeCurrency>> LoadP2PExchangeCurrency()
         {
-            var result = await $"depository/p2p-exchange-currency".InternalApi()
+            var result = await $"depository/p2p-exchange-currencies".InternalApi()
                 .GetJsonAsync<List<P2PExchangeCurrency>>().GetQueryResult();
             return result.Data;
         }
 
-        public async Task LoadData(int countAttempts = 0, bool includeP2pExternalCurrencies = false,
-            bool onlyOnExchange = true, bool includeP2PExchangeCurrency = false)
+        public async Task LoadData(int countAttempts = 0, bool includeExchangeCurrencies = true,
+            bool includeP2pExternalCurrencies = false, bool includeP2PExchangeCurrency = false)
         {
-            var currencies = await LoadCurrenciesInfo(includeP2pExternalCurrencies, onlyOnExchange);
+            var currencies = await LoadCurrenciesInfo(includeExchangeCurrencies, includeP2pExternalCurrencies);
             SetCurrenciesInfo(currencies);
 
-            if (includeP2PExchangeCurrency)
+            if (includeP2PExchangeCurrency && !IsLoadedP2PExchangeCurrencies)
                 _p2PExchangeCurrencies = await LoadP2PExchangeCurrency();
 
             if (!IsLoaded)
@@ -152,7 +153,8 @@ namespace TLabs.ExchangeSdk.Currencies
                 var maxDelay =
                     TimeSpan.FromMinutes(10); // currencies are vital for most services, no reason to wait too much
                 await Task.Delay(TimeHelper.GetDelay(countAttempts, maxDelay)); // use increasing delay and try again
-                _ = LoadData(++countAttempts, includeP2pExternalCurrencies);
+                _ = LoadData(++countAttempts, includeExchangeCurrencies, includeP2pExternalCurrencies,
+                    includeP2PExchangeCurrency);
             }
         }
 
