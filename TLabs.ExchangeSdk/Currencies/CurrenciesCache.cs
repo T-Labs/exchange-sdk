@@ -132,7 +132,7 @@ namespace TLabs.ExchangeSdk.Currencies
             return result.Data;
         }
 
-        private async Task<List<P2PExchangeCurrency>> LoadP2PExchangeCurrency()
+        private async Task<List<P2PExchangeCurrency>> LoadP2PExchangeCurrencies()
         {
             var result = await $"depository/p2p-exchange-currencies".InternalApi()
                 .GetJsonAsync<List<P2PExchangeCurrency>>().GetQueryResult();
@@ -146,7 +146,7 @@ namespace TLabs.ExchangeSdk.Currencies
             SetCurrenciesInfo(currencies);
 
             if (includeP2PExchangeCurrency && !IsLoadedP2PExchangeCurrencies)
-                _p2PExchangeCurrencies = await LoadP2PExchangeCurrency();
+                _p2PExchangeCurrencies = await LoadP2PExchangeCurrencies();
 
             if (!IsLoaded)
             {
