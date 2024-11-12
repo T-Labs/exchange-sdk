@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using TLabs.DotnetHelpers;
 using TLabs.ExchangeSdk.P2P.Chats;
 
 namespace TLabs.ExchangeSdk.P2P.Deals;
@@ -24,19 +23,19 @@ public class Deal
     public decimal Price { get; set; }
 
     /// <summary>Amount in crypto currency</summary>
-    public decimal CryptoAmount { get; set; }
+    public decimal ExchangeAmount { get; set; }
 
-    /// <summary>Amount in fiat currency</summary>
-    public decimal FiatAmount => (CryptoAmount * Price).RoundDown(2);
+    /// <summary>Amount in fiat currency (or in crypto currency if order.AreBothCurrenciesExchange=true) </summary>
+    public decimal PaymentAmount { get; set; }
 
     /// <summary>
-    /// Amount that will be subtracted from CryptoAmount after receiver gets it.
+    /// Amount that will be subtracted from ExchangeAmount after receiver gets it.
     /// For Order.IsBuyingOnExchange=false it is always 0.
     /// </summary>
     public decimal DealFeeAmount { get; set; }
 
     /// <summary>
-    /// Crypto Amount that is taken from blocked order balance
+    /// Exchange Amount that is taken from blocked order balance
     /// For Order.IsBuyingOnExchange=true it is always 0.
     /// </summary>
     public decimal PartOfOrderFeeAmount { get; set; }
@@ -61,8 +60,8 @@ public class Deal
     public string UserNickname { get; set; }
 
     public override string ToString() =>
-        $"{nameof(Deal)}(OrderId:{OrderId}, Crypto:{CryptoAmount} {Order?.ExchangeCurrencyCode}, " +
-        $"Fiat:{FiatAmount} {Order?.PaymentCurrencyCode}, DealUserId:{DealUserId}, DealStatus:{Status})";
+        $"{nameof(Deal)}(OrderId:{OrderId}, Crypto:{ExchangeAmount} {Order?.ExchangeCurrencyCode}, " +
+        $"Fiat:{PaymentAmount} {Order?.PaymentCurrencyCode}, DealUserId:{DealUserId}, DealStatus:{Status})";
 }
 
 public enum DealStatus

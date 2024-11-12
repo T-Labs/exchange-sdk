@@ -22,27 +22,32 @@ public class Order
     [Required]
     public string PaymentCurrencyCode { get; set; }
 
-    /// <summary>
-    /// if true then PaymentCurrency is actually a second Exchange Currency
-    /// </summary>
-    public bool AreBothCurrenciesExcahnge { get; set; }
+    /// <summary>if true then PaymentCurrency is actually a second Exchange Currency</summary>
+    public bool AreBothCurrenciesExchange { get; set; }
 
-    /// <summary>cryptoAmount * price = fiatAmount</summary>
+    /// <summary>ExchangeAmount * Price = PaymentAmount</summary>
     public decimal Price { get; set; }
 
-    /// <summary>All amounts are in crypto</summary>
-    public decimal TotalOrderAmount { get; set; }
+    /// <summary>Order amount in crypto, without fee</summary>
+    public decimal TotalExchangeAmount { get; set; }
 
-    public decimal FilledOrderAmount { get; set; }
+    /// <summary>Order amount in PaymentCurrency</summary>
+    public decimal TotalPaymentAmount { get; set; }
+
+    public decimal FilledExchangeAmount { get; set; }
 
     /// <summary>
-    /// Fee amount in crypto, added on top of TotalOrderAmount when freezing.
-    /// 0 for IsBuyingOnExchange=true
+    /// Fee amount in crypto, added on top of TotalExchangeAmount when freezing.
+    /// For IsBuyingOnExchange=true it is always 0.
     /// </summary>
     public decimal TotalFeeAmount { get; set; }
 
+    /// <summary>Min possible amount of a single Deal in Crypto</summary>
     public decimal MinDealAmount { get; set; }
+
+    /// <summary>Max possible amount of a single Deal in Crypto</summary>
     public decimal MaxDealAmount { get; set; }
+
     public OrderStatus Status { get; set; }
     public DateTimeOffset DateCreated { get; set; }
     public DateTimeOffset? DateClosed { get; set; }
@@ -52,12 +57,15 @@ public class Order
     public string Description { get; set; }
 
     public int MaxTimeMinutes { get; set; }
+
     public long DisplayId { get; set; }
     public bool IsKYCPassed { get; set; }
     public int MinDaysSinceRegistration { get; set; }
     public int MinOrdersRequired { get; set; }
     public int MinOrderCompletionRate { get; set; }
+
     public List<Requisite> Requisites { get; set; }
+
     public List<Deal> Deals { get; set; }
 
     [NotMapped]
@@ -69,8 +77,9 @@ public class Order
     public string CurrencyPairCode => $"{PaymentCurrencyCode}_{ExchangeCurrencyCode}";
 
     public override string ToString() =>
-        $"{nameof(Order)}({ExchangeCurrencyCode}-{PaymentCurrencyCode}, {(IsBuyingOnExchange ? "buy" : "sell")}" +
-        $"Price:{Price}, TotalAmount:{TotalOrderAmount}, RequisitesCount:{Requisites?.Count}, user:{UserId}), OrderStatus:{Status}";
+        $"{nameof(Order)}({CurrencyPairCode}, {(IsBuyingOnExchange ? "buy" : "sell")}" +
+        $"Price:{Price}, TotalAmount:{TotalExchangeAmount}, Fee:{TotalFeeAmount}, RequisitesCount:{Requisites?.Count}, " +
+        $"user:{UserId}), OrderStatus:{Status}";
 }
 
 public enum OrderStatus

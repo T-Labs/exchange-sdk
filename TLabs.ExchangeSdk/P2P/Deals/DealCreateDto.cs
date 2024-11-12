@@ -7,8 +7,8 @@ public record DealCreateDto
     public Guid OrderId { get; set; }
     public Guid RequisiteId { get; set; }
     public string DealUserId { get; set; }
-    public decimal CryptoAmount { get; set; }
+    public decimal ExchangeAmount { get; set; }
 
     public override string ToString() => $"{nameof(DealCreateDto)}(OrderId:{OrderId}, " +
-        $"RequisiteId:{RequisiteId} DealUserId:{DealUserId}, {CryptoAmount})";
+        $"RequisiteId:{RequisiteId} DealUserId:{DealUserId}, {ExchangeAmount})";
 }
