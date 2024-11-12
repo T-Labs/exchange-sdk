@@ -18,7 +18,7 @@ public class OrderCreateDto
 
     public decimal Price { get; set; }
 
-    public decimal TotalOrderAmount { get; set; }
+    public decimal TotalExchangeAmount { get; set; }
 
     public decimal MinDealAmount { get; set; }
 
