@@ -5,7 +5,7 @@ namespace TLabs.ExchangeSdk.P2P.Deals;
 public record DealCreateDto
 {
     public Guid OrderId { get; set; }
-    public Guid RequisiteId { get; set; }
+    public Guid? RequisiteId { get; set; }
     public string DealUserId { get; set; }
     public decimal ExchangeAmount { get; set; }
 

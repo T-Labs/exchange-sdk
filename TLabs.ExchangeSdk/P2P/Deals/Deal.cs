@@ -14,7 +14,7 @@ public class Deal
     public Guid OrderId { get; set; }
     public Order Order { get; set; }
 
-    public Guid RequisiteId { get; set; }
+    public Guid? RequisiteId { get; set; }
     public Requisite Requisite { get; set; }
 
     [Required]
