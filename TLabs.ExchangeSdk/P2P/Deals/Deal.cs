@@ -66,9 +66,14 @@ public class Deal
 
 public enum DealStatus
 {
+    ///<summary> For Order.AreBothCurrenciesExchange = false </summary> 
     CreatedAwaitingPaymentSystem = 10,
     PaymentSystemSent = 20,
     PaymentSystemConfirmed = 40,
+
+    ///<summary> For Order.AreBothCurrenciesExchange = true </summary> 
+    CreatedAndBlockedForExchange = 90,
+
     CryptoReleased = 50,
     Canceled = 60,
     CanceledCryptoUnfrozen = 80,
