@@ -161,6 +161,14 @@ public class ClientFarming
             .PutJsonAsync<User>(null);
     }
 
+    public async Task<List<User>> GetTopUsersByBalance(long tenantId, int top = 20)
+    {
+        return await "farming/users/top-by-balance".InternalApi()
+            .SetQueryParam(nameof(tenantId), tenantId)
+            .SetQueryParam(nameof(top), top)
+            .GetJsonAsync<List<User>>();
+    }
+
     #endregion User
 
     #region Rewards
@@ -184,6 +192,22 @@ public class ClientFarming
     }
 
     #endregion Rewards
+
+    #region Tenant
+
+    public async Task<decimal> GetUsersBalance(long id)
+    {
+        return await $"farming/tenants/{id}/users/balance".InternalApi()
+            .GetJsonAsync<decimal>();
+    }
+
+    public async Task<long> GetUsersCount(long id)
+    {
+        return await $"farming/tenants/{id}/users/count".InternalApi()
+            .GetJsonAsync<long>();
+    }
+
+    #endregion Tenant
 
     #region public
 
