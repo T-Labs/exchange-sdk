@@ -163,7 +163,7 @@ public class ClientFarming
 
     public async Task<List<User>> GetTopUsersByBalance(long tenantId, int top = 20)
     {
-        return await "farming/users/top-by-balance".InternalApi()
+        return await "farming/users/balances/top".InternalApi()
             .SetQueryParam(nameof(tenantId), tenantId)
             .SetQueryParam(nameof(top), top)
             .GetJsonAsync<List<User>>();
