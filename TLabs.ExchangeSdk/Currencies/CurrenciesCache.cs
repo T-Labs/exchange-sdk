@@ -32,7 +32,6 @@ namespace TLabs.ExchangeSdk.Currencies
         #region Getters
 
         public bool IsLoaded => _currencies?.Count > 0 && _currencyPairs?.Count > 0;
-        public bool IsLoadedP2PExchangeCurrencies => _p2PExchangeCurrencies?.Count > 0;
 
         public List<CurrencyPair> GetCurrencyPairs(bool onlyVisible = false)
         {
@@ -145,7 +144,7 @@ namespace TLabs.ExchangeSdk.Currencies
             var currencies = await LoadCurrenciesInfo(includeExchangeCurrencies, includeP2pExternalCurrencies);
             SetCurrenciesInfo(currencies);
 
-            if (includeP2PExchangeCurrency && !IsLoadedP2PExchangeCurrencies)
+            if (includeP2PExchangeCurrency)
                 _p2PExchangeCurrencies = await LoadP2PExchangeCurrencies();
 
             if (!IsLoaded)
