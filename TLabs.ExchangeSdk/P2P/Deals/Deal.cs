@@ -29,14 +29,8 @@ public class Deal
     public decimal PaymentAmount { get; set; }
 
     /// <summary>
-    /// Amount that will be subtracted from ExchangeAmount after receiver gets it.
-    /// For Order.IsBuyingOnExchange=false it is always 0.
-    /// </summary>
-    public decimal DealFeeAmount { get; set; }
-
-    /// <summary>
-    /// Exchange Amount that is taken from blocked order balance
-    /// For Order.IsBuyingOnExchange=true it is always 0.
+    /// For Order.IsBuyingOnExchange=false it is exchange fee amount that is taken from blocked order balance.
+    /// For Order.IsBuyingOnExchange=true  it is exchange fee amount that will be subtracted from ExchangeAmount after receiver gets it.
     /// </summary>
     public decimal PartOfOrderFeeAmount { get; set; }
 
