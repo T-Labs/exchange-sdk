@@ -1,9 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace TLabs.ExchangeSdk.Users
 {
     public class UserClaims
@@ -23,6 +17,11 @@ namespace TLabs.ExchangeSdk.Users
         public const string BanOnP2P = "BanOnP2P";
         public const string TempBanOnP2PExpiryDate = "TempBanOnP2PExpiryDate";
 
+        public const string P2POrdersEmailNotification = "P2POrdersEmailNotification";
+        public const string P2PDealsEmailNotification = "P2PDealsEmailNotification";
+        public const string P2PAppealsEmailNotification = "P2PAppealsEmailNotification";
+        public const string P2PChatMessagesEmailNotification = "P2PChatMessagesEmailNotification";
+
         public const string Last2FAAccessToken = "Last2FAAccessToken";
         public const string LastWithdrawalEmailDate = "LastWithdrawalEmailDate";
 
@@ -36,6 +35,7 @@ namespace TLabs.ExchangeSdk.Users
 
         /// <summary>Access to all farming Admin panels. Values: "true"</summary>
         public const string FarmingSuperAdmin = nameof(FarmingSuperAdmin);
+
         /// <summary>Access to farming Admin panel for a specefic token. Values: "BLZ", etc</summary>
         public const string FarmingTokenAdmin = nameof(FarmingTokenAdmin);
     }
