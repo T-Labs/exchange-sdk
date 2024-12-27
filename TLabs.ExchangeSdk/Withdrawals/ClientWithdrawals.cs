@@ -1,11 +1,9 @@
 using Flurl.Http;
-using Microsoft.AspNetCore.DataProtection.KeyManagement;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using TLabs.DotnetHelpers;
 using TLabs.ExchangeSdk.CryptoAdapters;
-using TLabs.ExchangeSdk.Verification;
 
 namespace TLabs.ExchangeSdk.Withdrawals
 {
@@ -54,7 +52,7 @@ namespace TLabs.ExchangeSdk.Withdrawals
             return result;
         }
 
-        public async Task<string> GetParameter(string key)
+        public async Task<string> GetParameterValue(string key)
         {
             var result = await $"withdrawals/parameters".InternalApi()
                 .SetQueryParam(nameof(key), key)
@@ -62,7 +60,7 @@ namespace TLabs.ExchangeSdk.Withdrawals
             return result;
         }
 
-        public async Task<IFlurlResponse> UpdateParameter<T>(string key, T value)
+        public async Task<IFlurlResponse> CreateOrUpdateParameter<T>(string key, T value)
         {
             var result = await $"withdrawals/parameters".InternalApi()
                 .SetQueryParam(nameof(key), key)
