@@ -343,5 +343,21 @@ namespace TLabs.ExchangeSdk.Users
                 .PostJsonAsync<bool>(totpCode);
             return result;
         }
+
+        public async Task<string> GetParameterValue(string key)
+        {
+            var result = await $"userprofiles/parameters".InternalApi()
+                .SetQueryParam(nameof(key), key)
+                .GetStringAsync();
+            return result;
+        }
+
+        public async Task<IFlurlResponse> CreateOrUpdateParameter<T>(string key, T value)
+        {
+            var result = await $"userprofiles/parameters".InternalApi()
+                .SetQueryParam(nameof(key), key)
+                .PostJsonAsync(value.ToString());
+            return result;
+        }
     }
 }

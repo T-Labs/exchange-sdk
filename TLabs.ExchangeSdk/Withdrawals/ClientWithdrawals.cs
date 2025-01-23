@@ -50,22 +50,6 @@ namespace TLabs.ExchangeSdk.Withdrawals
             var result = await $"{baseUrl}/{id}".InternalApi()
                 .DeleteAsync();
             return result;
-        }
-
-        public async Task<string> GetParameterValue(string key)
-        {
-            var result = await $"withdrawals/parameters".InternalApi()
-                .SetQueryParam(nameof(key), key)
-                .GetStringAsync();
-            return result;
-        }
-
-        public async Task<IFlurlResponse> CreateOrUpdateParameter<T>(string key, T value)
-        {
-            var result = await $"withdrawals/parameters".InternalApi()
-                .SetQueryParam(nameof(key), key)
-                .PostJsonAsync(value.ToString());
-            return result;
-        }
+        }             
     }
 }
