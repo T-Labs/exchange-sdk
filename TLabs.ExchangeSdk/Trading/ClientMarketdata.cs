@@ -114,8 +114,7 @@ namespace TLabs.ExchangeSdk.Trading
 
         public async Task<List<ResponseOHLC>> GetOHLCLastCandles(string currencyId)
         {
-            var result = await $"marketdata/ohlc-last-candles".InternalApi()
-                .SetQueryParam(nameof(currencyId), currencyId)
+            var result = await $"marketdata/ohlc-last-candles/{currencyId}".InternalApi()  
                 .GetJsonAsync<List<ResponseOHLC>>(); ;
             return result;
         }
