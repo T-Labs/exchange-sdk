@@ -2,7 +2,7 @@ namespace TLabs.ExchangeSdk.Users
 {
     public class UserSettingsKeys
     {
-        public const string VerificationRequired = "VerificationRequired";
-        public const string MinimumVerificationStage = "MinimumVerificationStage";
+        public const string WithdrawalVerificationRequired = "WithdrawalVerificationRequired";
+        public const string WithdrawalMinimumVerificationStage = "WithdrawalMinimumVerificationStage";
     }
 }
