@@ -139,12 +139,12 @@ namespace TLabs.ExchangeSdk.Currencies
         }
 
         public async Task LoadData(int countAttempts = 0, bool includeExchangeCurrencies = true,
-            bool includeP2pExternalCurrencies = false, bool includeP2PExchangeCurrencies = false)
+            bool includeP2PCurrencies = false)
         {
-            var currencies = await LoadCurrenciesInfo(includeExchangeCurrencies, includeP2pExternalCurrencies);
+            var currencies = await LoadCurrenciesInfo(includeExchangeCurrencies, includeP2PCurrencies);
             SetCurrenciesInfo(currencies);
 
-            if (includeP2PExchangeCurrencies)
+            if (includeP2PCurrencies)
                 _p2PExchangeCurrencies = await LoadP2PExchangeCurrencies();
 
             if (!IsLoaded)
@@ -152,8 +152,7 @@ namespace TLabs.ExchangeSdk.Currencies
                 var maxDelay =
                     TimeSpan.FromMinutes(10); // currencies are vital for most services, no reason to wait too much
                 await Task.Delay(TimeHelper.GetDelay(countAttempts, maxDelay)); // use increasing delay and try again
-                _ = LoadData(++countAttempts, includeExchangeCurrencies, includeP2pExternalCurrencies,
-                    includeP2PExchangeCurrencies);
+                _ = LoadData(++countAttempts, includeExchangeCurrencies, includeP2PCurrencies);
             }
         }
 
