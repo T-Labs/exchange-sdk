@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 using TLabs.DotnetHelpers;
@@ -144,6 +145,7 @@ namespace TLabs.ExchangeSdk.CryptoAdapters
 
         #endregion ETH
 
+
         #region TRON
 
         public async Task<TronParamsDto> TronGetParams() =>
@@ -153,5 +155,20 @@ namespace TLabs.ExchangeSdk.CryptoAdapters
             await $"trx/parameters".InternalApi().PostJsonAsync<TronParamsDto>(dto);
 
         #endregion TRON
+
+
+        #region TON
+
+        /// <summary>Deploys token to TON</summary>
+        /// <returns>Token address hash</returns>
+        public async Task<QueryResult<string>> DeployTokenToTON(DeployTokenDto dto)
+        {
+            const string adapterCode = "ton";
+            var result = await $"{adapterCode}/tokens/deploy".InternalApi()
+                .PostJsonAsync<string>(dto).GetQueryResult();
+            return result;
+        }
+
+        #endregion TON
     }
 }
