@@ -54,6 +54,13 @@ namespace TLabs.ExchangeSdk.Currencies.CurrencyListings
             return result;
         }
 
+        public async Task<QueryResult> StartDeployToTon(string currencyCode)
+        {
+            var result = await $"{baseUrl}/deploy/{currencyCode}".InternalApi()
+                .PutJsonAsync(null).GetQueryResult();
+            return result;
+        }
+
         public async Task<CurrencyListingSettings> GetSettings()
         {
             var result = await $"{baseUrl}/settings".InternalApi()

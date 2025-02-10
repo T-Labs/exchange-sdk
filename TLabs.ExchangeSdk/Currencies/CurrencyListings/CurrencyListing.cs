@@ -12,6 +12,14 @@ namespace TLabs.ExchangeSdk.Currencies.CurrencyListings
         Blocked = 40,
     };
 
+    public enum CurrencyListingDeployStatus
+    {
+        NotRequested = 0,
+        AwaitsPayment = 10,
+        AwaitsDeployment = 20,
+        Deployed = 100,
+    };
+
     public class CurrencyListing
     {
         [Key]
@@ -21,8 +29,12 @@ namespace TLabs.ExchangeSdk.Currencies.CurrencyListings
         public int TokenDecimalPlaces { get; set; }
 
         public CurrencyListingStatus Status { get; set; }
+        public CurrencyListingDeployStatus DeployStatus { get; set; }
+
         public DateTimeOffset DateCreated { get; set; }
         public DateTimeOffset DateUpdated { get; set; }
+        public DateTimeOffset? DateDeployed { get; set; }
+
         public decimal PaymentAmount { get; set; }
 
         [Required]

@@ -8,7 +8,7 @@ namespace TLabs.ExchangeSdk.Currencies.CurrencyListings
 {
     public class CurrencyListingSettings
     {
-        public decimal PaymentAmount { get; set; }
-        public string PaymentCurrency { get; set; }
+        public decimal DeployCost { get; set; }
+        public string DeployCostCurrency { get; set; }
     }
 }
