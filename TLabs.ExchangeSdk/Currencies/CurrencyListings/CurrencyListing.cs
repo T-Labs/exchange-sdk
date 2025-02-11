@@ -34,6 +34,7 @@ namespace TLabs.ExchangeSdk.Currencies.CurrencyListings
         public DateTimeOffset DateCreated { get; set; }
         public DateTimeOffset DateUpdated { get; set; }
         public DateTimeOffset? DateDeployed { get; set; }
+        public string AddressInBlockchain { get; set; }
 
         public decimal PaymentAmount { get; set; }
 
