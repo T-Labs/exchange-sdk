@@ -114,6 +114,7 @@ namespace TLabs.ExchangeSdk.Depository
         public static readonly TransactionType StakingUnlockEnd = new TransactionType("857", "Стейкинг конец разморозки средств", nameof(StakingUnlockEnd));
 
         public static readonly TransactionType CurrencyListingDeployPayment = new TransactionType("873", "CurrencyListing оплата за деплой", nameof(CurrencyListingDeployPayment));
+        public static readonly TransactionType CurrencyListingDealFeeProfit = new TransactionType("877", "CurrencyListing прибыль от торговой комиссии", nameof(CurrencyListingDealFeeProfit));
 
         public static readonly TransactionType ApiTradeProfitPayment = new TransactionType("891", "Оплата за прибыль ApiTrade", nameof(ApiTradeProfitPayment));
 
@@ -214,7 +215,7 @@ namespace TLabs.ExchangeSdk.Depository
 
             StakingFundProfit, StakingLock, StakingUnlockBegin, StakingUnlockEnd,
 
-            CurrencyListingDeployPayment,
+            CurrencyListingDeployPayment, CurrencyListingDealFeeProfit,
 
             ApiTradeProfitPayment,
 
