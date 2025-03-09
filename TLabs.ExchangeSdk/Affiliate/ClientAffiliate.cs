@@ -18,6 +18,13 @@ namespace TLabs.ExchangeSdk.Affiliate
             _logger = logger;
         }
 
+        public async Task<List<ReferralUser>> GetUsersByIds(List<string> userIds)
+        {
+            var result = await $"affiliate/users".InternalApi()
+                .PostJsonAsync<List<ReferralUser>>(userIds);
+            return result;
+        }
+
         public async Task<AffiliateUserInfo> GetUserInfo(string userId)
         {
             var result = await $"affiliate/user-info/{userId}".InternalApi()
