@@ -25,6 +25,6 @@ namespace TLabs.ExchangeSdk.Affiliate
 
     public enum TariffType
     {
-        Free, Business, Premium
+        Free, Business
     }
 }
