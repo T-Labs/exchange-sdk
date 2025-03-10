@@ -20,7 +20,7 @@ namespace TLabs.ExchangeSdk.Affiliate
 
         public async Task<List<ReferralUser>> GetUsersByIds(List<string> userIds)
         {
-            var result = await $"affiliate/users".InternalApi()
+            var result = await $"affiliate/users/by-ids".InternalApi()
                 .PostJsonAsync<List<ReferralUser>>(userIds);
             return result;
         }
