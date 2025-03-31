@@ -66,5 +66,8 @@ namespace TLabs.ExchangeSdk.Currencies.CurrencyListings
         public string SocialLink4 { get; set; }
 
         public int MarketPageDisplayOrder { get; set; }
+
+        public override string ToString() => $"{nameof(CurrencyListing)}({TotalTokensAmount} {CurrencyCode}, " +
+            $"status:{Status}, deploy:{DeployStatus})";
     }
 }
