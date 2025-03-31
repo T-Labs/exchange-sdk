@@ -35,6 +35,7 @@ public class User
     public string? CountryCode { get; set; }
     public string? LangCode { get; set; }
     public Region Region { get; set; }
+    public string? ConnectedWalletAddress { get; set; }
 
     [NotMapped]
     public decimal Balance { get; set; }

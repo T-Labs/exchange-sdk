@@ -28,5 +28,7 @@ public enum PlatformType
     Youtube = 10,
     Telegram = 20,
     X = 30,
-    Discord = 40
+    Discord = 40,
+    /// <summary>Allows user to connect his ton wallet</summary>
+    TonConnect = 100,
 }

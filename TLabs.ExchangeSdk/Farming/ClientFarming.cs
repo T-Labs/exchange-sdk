@@ -161,6 +161,15 @@ public class ClientFarming
             .PutJsonAsync<User>(null);
     }
 
+    public async Task<User> SetUserWalletAddress(long tenantId, long tgUserId, string address)
+    {
+        return await "farming/users/wallets".InternalApi()
+            .SetQueryParam(nameof(tenantId), tenantId)
+            .SetQueryParam(nameof(tgUserId), tgUserId)
+            .SetQueryParam(nameof(address), address)
+            .PostJsonAsync<User>(null);
+    }
+
     public async Task<List<User>> GetTopUsersByBalance(long tenantId, int top = 20)
     {
         return await "farming/users/balances/top".InternalApi()
