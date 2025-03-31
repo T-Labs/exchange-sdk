@@ -14,6 +14,8 @@ namespace TLabs.ExchangeSdk.Affiliate
         /// <summary>Readable referral identificator</summary>
         public string FromUsername { get; set; }
 
+        public int Level { get; set; }
+
         public Dictionary<string, decimal> TotalAmountsByCurrency { get; set; }
     }
 }
