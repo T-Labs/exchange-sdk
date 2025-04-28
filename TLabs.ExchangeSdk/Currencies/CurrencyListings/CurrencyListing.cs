@@ -31,6 +31,12 @@ namespace TLabs.ExchangeSdk.Currencies.CurrencyListings
         public CurrencyListingStatus Status { get; set; }
         public CurrencyListingDeployStatus DeployStatus { get; set; }
 
+        /// <summary>
+        /// Fair launch is a special type of listing where the token is sold through bonding curve
+        /// and then deployed to DEX.
+        /// </summary>
+        public bool UseFairLaunch { get; set; }
+
         public DateTimeOffset DateCreated { get; set; }
         public DateTimeOffset DateUpdated { get; set; }
         public DateTimeOffset? DateDeployed { get; set; }

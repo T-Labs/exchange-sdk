@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TLabs.DotnetHelpers;
-using TLabs.DotnetHelpers.Helpers;
 
 namespace TLabs.ExchangeSdk.Currencies
 {

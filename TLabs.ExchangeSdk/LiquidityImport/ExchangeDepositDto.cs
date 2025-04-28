@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TLabs.DotnetHelpers.Helpers;
+using TLabs.DotnetHelpers;
 
 namespace TLabs.ExchangeSdk.LiquidityImport
 {
