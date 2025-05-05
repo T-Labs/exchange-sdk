@@ -16,6 +16,6 @@
 
   <ItemGroup>
     <PackageReference Include="RabbitMQ.Client" Version="5.1.0" />
-    <PackageReference Include="TLabs.DotnetHelpers" Version="1.0.70" />
+    <PackageReference Include="TLabs.DotnetHelpers" Version="1.0.71" />
   </ItemGroup>
 </Project>

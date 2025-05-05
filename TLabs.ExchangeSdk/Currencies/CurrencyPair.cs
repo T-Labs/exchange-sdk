@@ -50,6 +50,12 @@ namespace TLabs.ExchangeSdk.Currencies
         public int DigitsPriceP2P { get; set; }
         public int DigitsAmountP2P { get; set; }
 
+        /// <summary>
+        /// Fair launch is a special type of token listing where the token is sold through bonding curve
+        /// and then deployed to DEX.
+        /// </summary>
+        public bool UseFairLaunchTrading { get; set; }
+
         public CurrencyPair()
         {
         }
