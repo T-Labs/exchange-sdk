@@ -11,10 +11,13 @@ namespace TLabs.ExchangeSdk.CryptoAdapters
         public decimal FrozenTrxPer1Tx { get; set; }
 
         // configurable parameters
-        public bool UseFreezeForConsolidation { get; set; }
-        public bool UseFreezeForWithdrawals { get; set; }
+        public bool ParameterUseFreezeForConsolidation { get; set; }
+        public bool ParameterUseFreezeForWithdrawals { get; set; }
 
-        public int FreezeForTrc20WithdrawalsCount { get; set; }
-        public decimal FreezeForTrc20WithdrawalsPercentage { get; set; }
+        public int ParameterFreezeForTrc20TransactionsCount { get; set; }
+        public decimal ParameterFreezeForTrc20TransactionsPercentage { get; set; }
+
+        public int ParameterTrc20TxMaxEnergy { get; set; }
+        public int ParameterEnergyPer1TrxBurn { get; set; }
     }
 }
