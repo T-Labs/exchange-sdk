@@ -15,6 +15,12 @@ public class CurrencyListingCreateDto
     [Required]
     public string TokenName { get; set; }
 
+    /// <summary>
+    /// Fair launch is a special type of listing where the token is sold through bonding curve
+    /// and then deployed to DEX.
+    /// </summary>
+    public bool UseFairLaunch { get; set; }
+
     public string ProjectGoal { get; set; }
     public string InvestmentCondition { get; set; }
     public string InvestmentConditionHint { get; set; }
