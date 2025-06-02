@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using TLabs.DotnetHelpers;
 using TLabs.ExchangeSdk.News;
 using TLabs.ExchangeSdk.News.Dtos;
+using TLabs.ExchangeSdk.Trading;
 
 namespace TLabs.ExchangeSdk.Currencies.CurrencyListings
 {
@@ -72,6 +73,13 @@ namespace TLabs.ExchangeSdk.Currencies.CurrencyListings
         {
             var result = await $"brokerage/currency-listings/codes".InternalApi()
                 .GetJsonAsync<List<string>>();
+            return result;
+        }
+
+        public async Task<IFlurlResponse> SaveDealWithBotForMirroring(MatchingDeal deal)
+        {
+            var result = await $"brokerage/currency-listings/fair-launch/deals".InternalApi()
+                .PutJsonAsync(deal);
             return result;
         }
 
