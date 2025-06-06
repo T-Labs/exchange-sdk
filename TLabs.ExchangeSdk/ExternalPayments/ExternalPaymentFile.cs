@@ -9,6 +9,8 @@ namespace TLabs.ExchangeSdk.ExternalPayments
         [Key]
         public Guid Id { get; set; }
 
+        public DateTimeOffset DateAdded { get; set; }
+
         [Required]
         public string UserId { get; set; }
 
