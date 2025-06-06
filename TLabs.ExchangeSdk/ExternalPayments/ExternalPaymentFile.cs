@@ -16,6 +16,9 @@ namespace TLabs.ExchangeSdk.ExternalPayments
 
         public string AdminUserId { get; set; }
 
+        [Required]
+        public string FileExtension { get; set; }
+
         public byte[] Data { get; set; }
 
         public override string ToString() => $"{nameof(ExternalPaymentFile)}({Id}, UserId:{UserId}," +
