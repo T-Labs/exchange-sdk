@@ -11,7 +11,8 @@ namespace TLabs.ExchangeSdk.Users
         public const string CantWithdraw = "CantWithdraw";
         public const string PolicyCanWithdraw = "PolicyCanWithdraw";
 
-        public const string NoTradeCommissions = "NoTradeCommissions";
+        public const string NoTradeCommissions = nameof(NoTradeCommissions);
+        public const string AllowExternalPayments = nameof(AllowExternalPayments);
 
         public const string PolicyBanOnP2P = "PolicyBanOnP2P";
         public const string BanOnP2P = "BanOnP2P";

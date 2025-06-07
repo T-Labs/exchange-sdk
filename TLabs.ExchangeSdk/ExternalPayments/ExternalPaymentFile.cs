@@ -20,7 +20,7 @@ namespace TLabs.ExchangeSdk.ExternalPayments
         public string FileExtension { get; set; }
 
         public byte[] Data { get; set; }
-        
+
         public string FileName => $"payment_file_{Id.ToString().Substring(0, 6)}.{FileExtension}";
 
         public override string ToString() => $"{nameof(ExternalPaymentFile)}({Id} {FileExtension}, UserId:{UserId}," +

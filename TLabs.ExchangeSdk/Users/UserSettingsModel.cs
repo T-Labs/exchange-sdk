@@ -9,6 +9,7 @@ namespace TLabs.ExchangeSdk.Users
         public bool CantWithdraw { get; set; }
         public bool NoTradeCommissions { get; set; }
         public bool BanOnP2P { get; set; }
+        public bool AllowExternalPayments { get; set; }
 
         /// <summary>Access to all farming Admin panels</summary>
         public bool FarmingSuperAdmin { get; set; }
