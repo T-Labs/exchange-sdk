@@ -21,7 +21,7 @@ namespace TLabs.ExchangeSdk.ExternalPayments
 
         public byte[] Data { get; set; }
 
-        public override string ToString() => $"{nameof(ExternalPaymentFile)}({Id}, UserId:{UserId}," +
+        public override string ToString() => $"{nameof(ExternalPaymentFile)}({Id} {FileExtension}, UserId:{UserId}," +
             $" DataSize:{Data?.Length ?? 0})";
     }
 }
