@@ -71,6 +71,9 @@ namespace TLabs.ExchangeSdk.Currencies.CurrencyListings
         public string SocialLink3 { get; set; }
         public string SocialLink4 { get; set; }
 
+        public string PartnerLogoUrl { get; set; }
+        public string PartnerPageUrl { get; set; }
+
         public int MarketPageDisplayOrder { get; set; }
 
         public string UsdtCurrencyPairCode => $"{CurrencyCode}_USDT";
