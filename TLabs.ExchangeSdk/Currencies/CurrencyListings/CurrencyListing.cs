@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel.DataAnnotations;
+using TLabs.DotnetHelpers;
 
 namespace TLabs.ExchangeSdk.Currencies.CurrencyListings
 {
@@ -73,6 +74,7 @@ namespace TLabs.ExchangeSdk.Currencies.CurrencyListings
 
         public string PartnerLogoUrl { get; set; }
         public string PartnerPageUrl { get; set; }
+        public bool IsPartnerToken => PartnerLogoUrl.HasValue();
 
         public int MarketPageDisplayOrder { get; set; }
 
