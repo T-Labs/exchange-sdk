@@ -24,6 +24,20 @@ namespace TLabs.ExchangeSdk.Trading
             return result;
         }
 
+        /// <summary>
+        /// Note: orders should generally be canceled through ClientTradingBrokerage because it checks that
+        /// user has enough balance frozen to cancel order.
+        /// </summary>
+        /// <param name="orderId">Order id</param>
+        /// <param name="toForce">Force cancellation through (ignore Liquidity block)</param>
+        public async Task<IFlurlResponse> CancelOrder(Guid orderId, bool toForce = false)
+        {
+            var matchingEngineResponse = await $"trading/order/{orderId}".InternalApi()
+                .SetQueryParam(nameof(toForce), toForce)
+                .DeleteAsync();
+            return matchingEngineResponse;
+        }
+
         /// <summary>Delete events for test CurrencyPair</summary>
         public async Task<IFlurlResponse> DeleteTestData(string currencyPairCode)
         {

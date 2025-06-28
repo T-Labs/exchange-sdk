@@ -76,7 +76,7 @@ namespace TLabs.ExchangeSdk.Currencies.CurrencyListings
             return result;
         }
 
-        public async Task<IFlurlResponse> SaveDealWithBotForMirroring(MatchingDeal deal)
+        public async Task<IFlurlResponse> FairLaunchDealWithBotNotify(MatchingDeal deal)
         {
             var result = await $"brokerage/currency-listings/fair-launch/deals".InternalApi()
                 .PutJsonAsync(deal);
