@@ -20,10 +20,10 @@ public class ClientCashHandovers
     {
         return await $"{BASE_REQUEST_URL}/filtered-list"
             .InternalApi()
-            .SetQueryParam("firstName", firstName)
-            .SetQueryParam("lastName", lastName)
-            .SetQueryParam("clientName", clientName)
-            .SetQueryParam("amount", amount)
+            .SetQueryParam(nameof(firstName), firstName)
+            .SetQueryParam(nameof(lastName), lastName)
+            .SetQueryParam(nameof(clientName), clientName)
+            .SetQueryParam(nameof(amount), amount)
             .GetJsonAsync<List<CashHandoverRequestViewModel>>();
     }
 
