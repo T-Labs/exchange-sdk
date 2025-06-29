@@ -8,8 +8,8 @@ namespace TLabs.ExchangeSdk.CashHandover;
 
 public class ClientCashHandovers
 {
-    private const string BASE_REQUEST_URL = "brokerage/cash-handover/request";
-    private const string BASE_CLIENTS_URL = "brokerage/cash-handover/clients";
+    private const string BASE_REQUEST_URL = "brokerage/cash-handovers/requests";
+    private const string BASE_CLIENTS_URL = "brokerage/cash-handovers/clients";
 
     public async Task<List<CashHandoverRequestViewModel>> GetRequestsFilteredList(
         string firstName = null,
@@ -44,7 +44,10 @@ public class ClientCashHandovers
 
     public async Task DeleteRequestAsync(Guid requestId)
     {
-        await BASE_REQUEST_URL.InternalApi().SetQueryParam("requestId", requestId).DeleteAsync();
+        await BASE_REQUEST_URL
+            .InternalApi()
+            .SetQueryParam(nameof(requestId), requestId)
+            .DeleteAsync();
     }
 
     public async Task<List<CashHandoverClient>> GetClientsSelectListAsync()
