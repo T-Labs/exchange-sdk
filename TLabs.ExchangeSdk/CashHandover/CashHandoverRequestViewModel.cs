@@ -11,4 +11,5 @@ public class CashHandoverRequestViewModel
     public string ClientName { get; set; }
     public decimal Amount { get; set; }
     public IFormFile PayoutImage { get; set; }
+    public CashHandoverRequestStatus Status { get; set; }
 }
