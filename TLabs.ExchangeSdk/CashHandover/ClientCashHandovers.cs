@@ -47,7 +47,7 @@ public class ClientCashHandovers
 
     public async Task MarkAsIssuedAsync(MarkAsIssuedRequest request)
     {
-        await $"{BASE_REQUEST_URL}/issue".InternalApi().PostJsonAsync(request);
+        await $"{BASE_REQUEST_URL}/issue".InternalApi().PutJsonAsync(request);
     }
 
     public async Task CancelRequestAsync(CancelRequestDto dto)
