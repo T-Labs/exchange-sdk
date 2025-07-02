@@ -42,12 +42,9 @@ public class ClientCashHandovers
         await $"{BASE_REQUEST_URL}/issue".InternalApi().PostJsonAsync(request);
     }
 
-    public async Task CancelRequestAsync(Guid requestId)
+    public async Task CancelRequestAsync(CancelRequestDto dto)
     {
-        await $"{BASE_REQUEST_URL}/cancellation"
-            .InternalApi()
-            .SetQueryParam(nameof(requestId), requestId)
-            .PutAsync();
+        await $"{BASE_REQUEST_URL}/cancellation".InternalApi().PutJsonAsync(dto);
     }
 
     public async Task<List<CashHandoverClient>> GetClientsSelectListAsync()
