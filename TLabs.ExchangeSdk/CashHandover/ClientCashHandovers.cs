@@ -27,6 +27,14 @@ public class ClientCashHandovers
             .GetJsonAsync<List<CashHandoverRequestViewModel>>();
     }
 
+    public async Task<CashHandoverRequestDto> GetRequestDetails(Guid requestId)
+    {
+        return await BASE_REQUEST_URL
+            .InternalApi()
+            .SetQueryParam("id", requestId)
+            .GetJsonAsync<CashHandoverRequestDto>();
+    }
+
     public async Task CreateRequestAsync(CreateCashHandoverRequest request)
     {
         await BASE_REQUEST_URL.InternalApi().PostJsonAsync(request);
