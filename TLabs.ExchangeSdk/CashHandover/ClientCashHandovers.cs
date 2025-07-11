@@ -9,6 +9,7 @@ namespace TLabs.ExchangeSdk.CashHandover;
 public class ClientCashHandovers
 {
     private const string BASE_REQUEST_URL = "brokerage/cash-handovers/requests";
+    private const string BASE_DEAL_NUMBERS_URL = "brokerage/cash-handovers/requests/numbers";
     private const string BASE_CLIENTS_URL = "brokerage/cash-handovers/clients";
 
     public async Task<List<CashHandoverRequestViewModel>> GetRequestsFilteredList(
@@ -38,6 +39,12 @@ public class ClientCashHandovers
     public async Task CreateRequestAsync(CreateCashHandoverRequest request)
     {
         await BASE_REQUEST_URL.InternalApi().PostJsonAsync(request);
+    }
+
+    public async Task<string> GenerateDealNumberAsync()
+    {
+        var response = await BASE_DEAL_NUMBERS_URL.InternalApi().PostAsync();
+        return await response.GetJsonAsync<string>();
     }
 
     public async Task CreateClientAsync(CashHandoverClient client)
