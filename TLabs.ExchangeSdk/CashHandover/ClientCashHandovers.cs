@@ -13,8 +13,7 @@ public class ClientCashHandovers
     private const string BASE_CLIENTS_URL = "brokerage/cash-handovers/clients";
 
     public async Task<List<CashHandoverRequestViewModel>> GetRequestsFilteredList(
-        string firstName = null,
-        string lastName = null,
+        string name = null,
         string clientName = null,
         string dealNumber = null,
         decimal? amount = null
@@ -22,8 +21,7 @@ public class ClientCashHandovers
     {
         return await $"{BASE_REQUEST_URL}/filtered-list"
             .InternalApi()
-            .SetQueryParam(nameof(firstName), firstName)
-            .SetQueryParam(nameof(lastName), lastName)
+            .SetQueryParam(nameof(name), name)
             .SetQueryParam(nameof(clientName), clientName)
             .SetQueryParam(nameof(dealNumber), dealNumber)
             .SetQueryParam(nameof(amount), amount)

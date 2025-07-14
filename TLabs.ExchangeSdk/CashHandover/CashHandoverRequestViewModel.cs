@@ -6,8 +6,7 @@ namespace TLabs.ExchangeSdk.CashHandover;
 public class CashHandoverRequestViewModel
 {
     public Guid Id { get; set; }
-    public string FirstName { get; set; }
-    public string LastName { get; set; }
+    public string Name { get; set; }
     public string ClientName { get; set; }
     public decimal Amount { get; set; }
     public string DealNumber { get; set; }
