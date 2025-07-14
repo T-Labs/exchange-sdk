@@ -36,6 +36,11 @@ public class ClientCashHandovers
             .GetJsonAsync<CashHandoverRequestDto>();
     }
 
+    public async Task<List<string>> GetCurrencies()
+    {
+        return await $"{BASE_REQUEST_URL}/currencies".InternalApi().GetJsonAsync<List<string>>();
+    }
+
     public async Task CreateRequestAsync(CreateCashHandoverRequest request)
     {
         await BASE_REQUEST_URL.InternalApi().PostJsonAsync(request);
