@@ -16,6 +16,7 @@ public class ClientCashHandovers
         string firstName = null,
         string lastName = null,
         string clientName = null,
+        string dealNumber = null,
         decimal? amount = null
     )
     {
@@ -24,6 +25,7 @@ public class ClientCashHandovers
             .SetQueryParam(nameof(firstName), firstName)
             .SetQueryParam(nameof(lastName), lastName)
             .SetQueryParam(nameof(clientName), clientName)
+            .SetQueryParam(nameof(dealNumber), dealNumber)
             .SetQueryParam(nameof(amount), amount)
             .GetJsonAsync<List<CashHandoverRequestViewModel>>();
     }
