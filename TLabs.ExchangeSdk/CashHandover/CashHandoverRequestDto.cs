@@ -15,4 +15,5 @@ public class CashHandoverRequestDto
     public byte[] PayoutImage { get; set; }
     public decimal? IssuedAmount { get; set; }
     public CashHandoverRequestStatus Status { get; set; }
+    public DateTimeOffset Created { get; set; }
 }

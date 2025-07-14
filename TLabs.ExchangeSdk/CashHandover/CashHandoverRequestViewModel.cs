@@ -12,4 +12,5 @@ public class CashHandoverRequestViewModel
     public string DealNumber { get; set; }
     public IFormFile PayoutImage { get; set; }
     public CashHandoverRequestStatus Status { get; set; }
+    public DateTimeOffset Created { get; set; }
 }
