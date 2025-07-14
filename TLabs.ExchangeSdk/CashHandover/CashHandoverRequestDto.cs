@@ -13,5 +13,6 @@ public class CashHandoverRequestDto
     public byte[] PassportPhoto { get; set; }
     public byte[] PaymentImage { get; set; }
     public byte[] PayoutImage { get; set; }
+    public decimal? IssuedAmount { get; set; }
     public CashHandoverRequestStatus Status { get; set; }
 }

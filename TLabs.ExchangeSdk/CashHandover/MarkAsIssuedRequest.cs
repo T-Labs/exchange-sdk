@@ -6,4 +6,5 @@ public class MarkAsIssuedRequest
 {
     public Guid RequestId { get; set; }
     public byte[] PayoutImage { get; set; }
+    public decimal IssuedAmount { get; set; }
 }
