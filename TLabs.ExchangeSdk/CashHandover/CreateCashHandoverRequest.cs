@@ -10,4 +10,5 @@ public class CreateCashHandoverRequest
     public decimal Amount { get; set; }
     public byte[] PaymentImage { get; set; }
     public string DealNumber { get; set; }
+    public string CurrencyCode { get; set; }
 }
