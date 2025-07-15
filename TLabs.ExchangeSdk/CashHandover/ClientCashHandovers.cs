@@ -69,6 +69,11 @@ public class ClientCashHandovers
         await $"{BASE_REQUEST_URL}/cancellation".InternalApi().PutJsonAsync(dto);
     }
 
+    public async Task UpdateStatusAsync(UpdateStatusRequest request)
+    {
+        await $"{BASE_REQUEST_URL}/status".InternalApi().PutJsonAsync(request);
+    }
+
     public async Task<List<CashHandoverClient>> GetClientsSelectListAsync()
     {
         return await $"{BASE_CLIENTS_URL}/all"
