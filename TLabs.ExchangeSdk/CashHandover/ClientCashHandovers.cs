@@ -16,7 +16,8 @@ public class ClientCashHandovers
         string name = null,
         string clientName = null,
         string dealNumber = null,
-        decimal? amount = null
+        decimal? amount = null,
+        List<CashHandoverRequestStatus> statuses = null
     )
     {
         return await $"{BASE_REQUEST_URL}/filtered-list"
@@ -25,6 +26,7 @@ public class ClientCashHandovers
             .SetQueryParam(nameof(clientName), clientName)
             .SetQueryParam(nameof(dealNumber), dealNumber)
             .SetQueryParam(nameof(amount), amount)
+            .SetQueryParam(nameof(statuses), statuses)
             .GetJsonAsync<List<CashHandoverRequestViewModel>>();
     }
 

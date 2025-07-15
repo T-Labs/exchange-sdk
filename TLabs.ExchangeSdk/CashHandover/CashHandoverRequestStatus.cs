@@ -2,7 +2,8 @@ namespace TLabs.ExchangeSdk.CashHandover;
 
 public enum CashHandoverRequestStatus
 {
-    Active = 10,
-    Completed = 20,
-    Cancelled = 30,
+    Pending = 10,
+    Active = 20,
+    Completed = 30,
+    Cancelled = 40,
 }
