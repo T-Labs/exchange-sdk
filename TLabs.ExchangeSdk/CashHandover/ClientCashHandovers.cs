@@ -48,10 +48,9 @@ public class ClientCashHandovers
         await BASE_REQUEST_URL.InternalApi().PostJsonAsync(request);
     }
 
-    public async Task<string> GenerateDealNumberAsync()
+    public async Task<int> GetDealNumberAsync()
     {
-        var response = await BASE_DEAL_NUMBERS_URL.InternalApi().PostAsync();
-        return await response.GetStringAsync();
+        return await BASE_DEAL_NUMBERS_URL.InternalApi().GetJsonAsync<int>();
     }
 
     public async Task CreateClientAsync(CashHandoverClient client)
