@@ -15,7 +15,7 @@ public class ClientCashHandovers
     public async Task<List<CashHandoverRequestViewModel>> GetRequestsFilteredList(
         string name = null,
         string clientName = null,
-        string dealNumber = null,
+        int? dealNumber = null,
         decimal? amount = null,
         List<CashHandoverRequestStatus> statuses = null
     )

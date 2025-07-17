@@ -8,7 +8,7 @@ public class CashHandoverRequestDto
     public string Name { get; set; }
     public string ClientName { get; set; }
     public decimal Amount { get; set; }
-    public string DealNumber { get; set; }
+    public int DealNumber { get; set; }
     public string CurrencyCode { get; set; }
     public byte[] PassportPhoto { get; set; }
     public byte[] PaymentImage { get; set; }
