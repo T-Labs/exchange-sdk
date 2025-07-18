@@ -9,6 +9,7 @@ namespace TLabs.ExchangeSdk.CashHandover;
 public class ClientCashHandovers
 {
     private const string BASE_REQUEST_URL = "brokerage/cash-handovers/requests";
+    private const string BASE_REQUEST_WORKFLOW_URL = "brokerage/cash-handovers/requests/workflow";
     private const string BASE_DEAL_NUMBERS_URL = "brokerage/cash-handovers/requests/numbers";
     private const string BASE_CLIENTS_URL = "brokerage/cash-handovers/clients";
 
@@ -60,17 +61,20 @@ public class ClientCashHandovers
 
     public async Task MarkAsIssuedAsync(MarkAsIssuedRequest request)
     {
-        await $"{BASE_REQUEST_URL}/issue".InternalApi().PutJsonAsync(request);
+        await $"{BASE_REQUEST_WORKFLOW_URL}/issue".InternalApi().PutJsonAsync(request);
     }
 
     public async Task CancelRequestAsync(CancelRequestDto dto)
     {
-        await $"{BASE_REQUEST_URL}/cancellation".InternalApi().PutJsonAsync(dto);
+        await $"{BASE_REQUEST_WORKFLOW_URL}/cancellation".InternalApi().PutJsonAsync(dto);
     }
 
-    public async Task UpdateStatusAsync(UpdateStatusRequest request)
+    public async Task ConfirmPaymentAsync(Guid id)
     {
-        await $"{BASE_REQUEST_URL}/status".InternalApi().PutJsonAsync(request);
+        await $"{BASE_REQUEST_WORKFLOW_URL}/payment-confirmation"
+            .InternalApi()
+            .SetQueryParam(nameof(id), id)
+            .PutAsync();
     }
 
     public async Task<List<CashHandoverClient>> GetClientsSelectListAsync()
