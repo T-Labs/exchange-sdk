@@ -20,12 +20,16 @@ public class CashExchange
     public decimal? TrustUsdtOut { get; set; }
     public decimal? TronlinkUsdtIn { get; set; }
     public decimal? TronlinkUsdtOut { get; set; }
+    public decimal? TronlinkTRXIn { get; set; }
+    public decimal? TronlinkTRXOut { get; set; }
     public decimal? CashIstanbulUsdIn { get; set; }
     public decimal? CashIstanbulUsdOut { get; set; }
     public decimal? CashIstanbulEurIn { get; set; }
     public decimal? CashIstanbulEurOut { get; set; }
     public decimal? CashIstanbulTryIn { get; set; }
     public decimal? CashIstanbulTryOut { get; set; }
-    public decimal? BankVakifUsdIn { get; set; }
-    public decimal? BankVakifUsdOut { get; set; }
+    public decimal? BybitRUSDTIn { get; set; }
+    public decimal? BybitRUSDTOut { get; set; }
+    public decimal? TrustTRXIn { get; set; }
+    public decimal? TrustTRXOut { get; set; }
 }
