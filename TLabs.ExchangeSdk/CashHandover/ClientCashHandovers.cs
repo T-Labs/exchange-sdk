@@ -77,10 +77,11 @@ public class ClientCashHandovers
             .PutAsync();
     }
 
-    public async Task<List<CashHandoverClient>> GetClientsSelectListAsync()
+    public async Task<List<CashHandoverClient>> GetClientsSelectListAsync(string searchName = null)
     {
-        return await $"{BASE_CLIENTS_URL}/all"
+        return await BASE_CLIENTS_URL
             .InternalApi()
+            .SetQueryParam(nameof(searchName), searchName)
             .GetJsonAsync<List<CashHandoverClient>>();
     }
 }
