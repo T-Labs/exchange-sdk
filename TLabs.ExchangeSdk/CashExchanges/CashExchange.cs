@@ -8,7 +8,7 @@ public class CashExchange
     public Guid Id { get; set; }
     public string PersonName { get; set; }
     public CashHandoverClient Client { get; set; }
-    public Guid ClientId { get; set; }
+    public Guid? ClientId { get; set; }
     public string Comment { get; set; }
     public int DealNumber { get; set; }
     public DateTimeOffset Created { get; set; }
