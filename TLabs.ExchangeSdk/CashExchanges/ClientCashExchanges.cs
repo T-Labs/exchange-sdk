@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Flurl.Http;
 using TLabs.DotnetHelpers;
@@ -8,7 +9,12 @@ public class ClientCashExchanges
 {
     private const string BASE_EXCHANGE_URL = "brokerage/cash-exchanges";
 
-    public async Task Create(CashExchange cashExchange)
+    public async Task<List<CashExchange>> GetAsync()
+    {
+        return await BASE_EXCHANGE_URL.InternalApi().GetJsonAsync();
+    }
+
+    public async Task CreateAsync(CashExchange cashExchange)
     {
         await BASE_EXCHANGE_URL.InternalApi().PostJsonAsync(cashExchange);
     }
