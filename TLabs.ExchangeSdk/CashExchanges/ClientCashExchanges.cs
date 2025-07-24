@@ -11,7 +11,7 @@ public class ClientCashExchanges
 
     public async Task<List<CashExchange>> GetAsync()
     {
-        return await BASE_EXCHANGE_URL.InternalApi().GetJsonAsync();
+        return await BASE_EXCHANGE_URL.InternalApi().GetJsonAsync<List<CashExchange>>();
     }
 
     public async Task CreateAsync(CashExchange cashExchange)
