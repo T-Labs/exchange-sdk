@@ -12,11 +12,15 @@ namespace TLabs.ExchangeSdk
             services.AddTransient<BinanceHandling.ClientBinanceHandling>();
             services.AddTransient<CashDeposits.ClientCashDeposits>();
             services.AddTransient<Commissions.ClientCommissions>();
-            services.AddTransient<CurrencyOfferings.ClientCurrencyOfferings>();
+
             services.AddTransient<Currencies.ClientCurrencies>();
             services.AddTransient<Currencies.CurrencyListings.ClientCurrencyListings>();
+            services.AddTransient<CurrencyOfferings.ClientCurrencyOfferings>();
+
             services.AddTransient<CryptoAdapters.ClientCryptoAdapters>();
+            services.AddTransient<CryptoAdapters.Tron.ClientCryptoAdapterTron>();
             services.AddTransient<CryptoAdapters.NownodesApi.ClientCryptoNownodes>();
+
             services.AddTransient<Depository.ClientDepository>();
             services.AddTransient<Deposits.ClientDeposits>();
             services.AddTransient<ExternalPayments.ClientExternalPayments>();
@@ -28,17 +32,21 @@ namespace TLabs.ExchangeSdk
             services.AddTransient<RabbitMq.RabbitMqSender>();
             services.AddTransient<RabbitMq.EmailTemplateSender>();
             services.AddTransient<Staking.ClientStaking>();
+
             services.AddTransient<Trading.ClientMarketdata>();
             services.AddTransient<Trading.ClientMatchingEngine>();
             services.AddTransient<Trading.ClientTradingBrokerage>();
+
             services.AddTransient<Users.ClientUsers>();
             services.AddTransient<Users.IIPService, Users.IPService>();
             services.AddTransient<Verification.ClientVerifications>();
+
             services.AddTransient<Withdrawals.ClientWithdrawals>();
             services.AddTransient<P2P.ClientP2P>();
             services.AddTransient<Bwp.ClientBwp>();
             services.AddTransient<WebApp.ClientWebapp>();
             services.AddTransient<News.ClientNews>();
+
             services.AddTransient<Farming.ClientFarming>();
             services.AddTransient<Farming.ClientFarmingAdmin>();
 
