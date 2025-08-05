@@ -14,4 +14,5 @@ public class CashExchangeSummary
     public decimal UsdInUsdt { get; set; }
     public decimal TryInUsdt { get; set; }
     public decimal EurInUsdt { get; set; }
+    public decimal SumOfUsdt { get; set; }
 }
