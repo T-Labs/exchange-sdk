@@ -16,6 +16,14 @@ public class ClientCashExchanges
         return await BASE_EXCHANGE_URL.InternalApi().GetJsonAsync<List<CashExchange>>();
     }
 
+    public async Task<CashExchangeRates> GetRatesAsync(DateTimeOffset date)
+    {
+        return await $"{BASE_EXCHANGE_URL}/rates"
+            .InternalApi()
+            .SetQueryParam(nameof(date), date)
+            .GetJsonAsync<CashExchangeRates>();
+    }
+
     public async Task CreateAsync(CashExchange cashExchange)
     {
         await BASE_EXCHANGE_URL.InternalApi().PostJsonAsync(cashExchange);
