@@ -8,6 +8,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using TLabs.DotnetHelpers;
 using TLabs.ExchangeSdk.CryptoAdapters.NownodesApi;
+using TLabs.ExchangeSdk.CryptoAdapters.Tron;
 using TLabs.ExchangeSdk.Currencies;
 
 namespace TLabs.ExchangeSdk.CryptoAdapters
