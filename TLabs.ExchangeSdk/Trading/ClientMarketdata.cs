@@ -1,8 +1,8 @@
-using Flurl.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Flurl.Http;
 using TLabs.DotnetHelpers;
 
 namespace TLabs.ExchangeSdk.Trading
@@ -15,7 +15,8 @@ namespace TLabs.ExchangeSdk.Trading
 
         public async Task<List<MarketdataOrder>> GetOrders(string currencyPairCode = null, bool? isBid = null, int? count = null,
             string userId = null, OrderStatusRequest status = OrderStatusRequest.Active,
-            DateTimeOffset? from = null, DateTimeOffset? to = null, bool includeDeals = false)
+            DateTimeOffset? from = null, DateTimeOffset? to = null, bool includeDeals = false,
+            decimal? minVolume = null)
         {
             var result = await $"marketdata/orders".InternalApi()
                 .WithTimeout(TimeSpan.FromMinutes(10))
@@ -27,6 +28,7 @@ namespace TLabs.ExchangeSdk.Trading
                 .SetQueryParam(nameof(from), from?.ToString("o"))
                 .SetQueryParam(nameof(to), to?.ToString("o"))
                 .SetQueryParam(nameof(includeDeals), includeDeals)
+                .SetQueryParam(nameof(minVolume), minVolume)
                 .GetJsonAsync<List<MarketdataOrder>>();
             return result;
         }
@@ -114,7 +116,7 @@ namespace TLabs.ExchangeSdk.Trading
 
         public async Task<List<ResponseOHLC>> GetOHLCLastCandles(string currencyId)
         {
-            var result = await $"marketdata/ohlc-last-candles/{currencyId}".InternalApi()  
+            var result = await $"marketdata/ohlc-last-candles/{currencyId}".InternalApi()
                 .GetJsonAsync<List<ResponseOHLC>>(); ;
             return result;
         }
