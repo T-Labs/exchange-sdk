@@ -83,6 +83,8 @@ namespace TLabs.ExchangeSdk.Depository
         public static readonly TransactionType BotProfit = new TransactionType("304", "Прибыль Exchanger", nameof(BotProfit));
         public static readonly TransactionType BotTransferFromUser = new TransactionType("311", "Перевод юзера к боту", nameof(BotTransferFromUser));
         public static readonly TransactionType BotTransferToUser = new TransactionType("312", "Перевод бота к юзеру", nameof(BotTransferToUser));
+        public static readonly TransactionType DealsBotTransferFromUser = new TransactionType("313", "Перевод юзера к боту для сделок", nameof(BotTransferFromUser));
+        public static readonly TransactionType DealsBotTransferToUser = new TransactionType("314", "Перевод бота для сделок к юзеру", nameof(BotTransferToUser));
 
         public static readonly TransactionType InternalTransfer = new TransactionType("401", "Внутренний перевод", nameof(InternalTransfer));
 
@@ -199,6 +201,7 @@ namespace TLabs.ExchangeSdk.Depository
             Fee, NodeAgregationNetworkCommission,
 
             BotDeposit, BotWithdrawal, BotCommission, BotProfit, BotTransferFromUser, BotTransferToUser,
+            DealsBotTransferFromUser, DealsBotTransferToUser,
 
             InternalTransfer,
             ExchangeTransfer, ExchangeTransferBegin, ExchangeTransferEnd,
