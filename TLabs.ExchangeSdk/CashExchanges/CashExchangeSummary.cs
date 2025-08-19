@@ -11,4 +11,5 @@ public class CashExchangeSummary
     public decimal TrySum { get; set; }
     public decimal EurSum { get; set; }
     public decimal SumOfUsdt { get; set; }
+    public decimal PrevDayRemainsInUsdt { get; set; }
 }
