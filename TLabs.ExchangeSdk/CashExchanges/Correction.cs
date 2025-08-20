@@ -5,8 +5,9 @@ namespace TLabs.ExchangeSdk.CashExchanges;
 public class Correction
 {
     public Guid Id { get; set; }
-    public DateTimeOffset Created { get; set; }
-    public string Name { get; set; }
+    public Guid ClientId { get; set; }
+    public string ClientName { get; set; }
+    public DateTimeOffset Date { get; set; }
     public decimal? UsdtValue { get; set; }
     public decimal? TrxValue { get; set; }
     public decimal? UsdValue { get; set; }
