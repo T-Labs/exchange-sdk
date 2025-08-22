@@ -14,6 +14,11 @@ namespace TLabs.ExchangeSdk.Trading
         {
         }
 
+        public async Task<OrderCreateResult> AddOrderAsync(OrderCreateRequest request)
+        {
+            return await "trading/order".InternalApi().PostJsonAsync<OrderCreateResult>(request);
+        }
+
         /// <summary>Get active order (if exists in pools), without deals</summary>
         /// <param name="currencyPairCode">Optional, if null then all pools will be checked</param>
         public async Task<MatchingOrder> GetActiveOrder(Guid id, string currencyPairCode = null)
