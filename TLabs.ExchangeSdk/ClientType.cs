@@ -9,5 +9,6 @@ namespace TLabs.ExchangeSdk
         ExchangerBot = 40,
         CurrencyListingFairLaunchBot = 50,
         TradingBot = 60,
+        LiqBot = 70,
     }
 }
