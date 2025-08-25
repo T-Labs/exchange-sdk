@@ -37,6 +37,6 @@ public class ClientTradingInnerBot
 
     public async Task SendDealEventAsync(MatchingDeal deal)
     {
-        await $"{EVENTS_URL}/trade".PostJsonAsync(deal);
+        await $"{EVENTS_URL}/trade".InternalApi().PostJsonAsync(deal);
     }
 }
