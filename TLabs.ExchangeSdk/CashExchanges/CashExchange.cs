@@ -10,9 +10,9 @@ public class CashExchange
     public CashHandoverClient Client { get; set; }
     public Guid? ClientId { get; set; }
     public string Comment { get; set; }
-    public int DealNumber { get; set; }
+    public int? DealNumber { get; set; }
     public DateTimeOffset Created { get; set; }
-    public Guid DocumentPhotoId { get; set; }
+    public Guid? DocumentPhotoId { get; set; }
     public ImageDto DocumentPhotoDto { get; set; }
     public CashHandoverRequestStatus Status { get; set; }
 
