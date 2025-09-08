@@ -120,6 +120,7 @@ namespace TLabs.ExchangeSdk.Trading
                 .GetJsonAsync<List<ResponseOHLC>>(); ;
             return result;
         }
+
         public async Task<ResponseOHLC> GetOHLCLastCandle(MarketDataItemRange range, string currencyPairCode,
             DateTime? before = null)
         {
@@ -131,5 +132,12 @@ namespace TLabs.ExchangeSdk.Trading
             return result;
         }
 
+        public async Task<decimal> GetLastDealPrice(string currencyPairCode)
+        {
+            var priceStr = await $"marketdata/ohlc/last-price".InternalApi()
+                .SetQueryParam("currencyPairCode", currencyPairCode)
+                .GetStringAsync();
+            return decimal.Parse(priceStr);
+        }
     }
 }
