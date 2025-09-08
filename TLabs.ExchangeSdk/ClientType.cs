@@ -2,13 +2,13 @@ namespace TLabs.ExchangeSdk
 {
     public enum ClientType
     {
-        User = 0,
-        LiquidityBot = 1,
-        DealsBot = 2,
-        AffiliateBot = 3,
-        ExchangerBot = 40,
-        CurrencyListingFairLaunchBot = 50,
-        TradingBot = 60,
-        LiqBot = 70,
+        User = 0, // Created by real user
+        LiquidityBot = 1, // LiquidityImport from other Exchange (Binance, Okex, etc)
+        DealsBot = 2, // InnerTradingBot (creates deals with itself)
+        AffiliateBot = 3, // Affiliate program exchanges other assets into USDT
+        ExchangerBot = 40, // Exchanger service (not used currently)
+        CurrencyListingFairLaunchBot = 50, // LiquidityPool (FairLaunch) creates orderbook for new tokens
+        TradingBot = 60, // Creates market orders to build trading chart
+        LiqBot = 70, // Creates orderbooks
     }
 }
