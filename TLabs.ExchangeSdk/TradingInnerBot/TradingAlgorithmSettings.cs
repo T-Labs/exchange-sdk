@@ -7,8 +7,8 @@ public class TradingAlgorithmSettings
     public decimal OrderRatio { get; set; }
     public TradingAlgorithmPeriod Period { get; set; }
     //order sizes
-    public decimal SizeFrom { get; set; }
-    public decimal SizeTo { get; set; }
+    public decimal AmountFrom { get; set; }
+    public decimal AmountTo { get; set; }
 }
 
 
