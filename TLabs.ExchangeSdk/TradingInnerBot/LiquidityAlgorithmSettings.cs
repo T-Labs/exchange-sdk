@@ -9,5 +9,5 @@ public class LiquidityAlgorithmSettings
     public int OrdersCount { get; set; } = 2;
     public decimal SpreadBetweenOrdersFrom { get; set; }
     public decimal SpreadBetweenOrdersTo { get; set; }
-    public bool IsAutoBillingEnabled { get; set; }
+    public bool IsAutoRecreatingEnabled { get; set; }
 }
