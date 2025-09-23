@@ -69,6 +69,10 @@ namespace TLabs.ExchangeSdk.Trading
             return quotes;
         }
 
+        /// <summary>
+        /// Returns price spreads for specified currency pairs
+        /// BidMax/AskMin can be 0 if there are no bids/asks in the orderbook, or if pair was not found
+        /// </summary>
         public async Task<List<PriceSpread>> GetPriceSpreads(List<string> currencyPairCodes)
         {
             var result = await $"marketdata/orders/spreads/{string.Join(",", currencyPairCodes)}"
