@@ -24,6 +24,7 @@ namespace TLabs.ExchangeSdk.Users
         public const string Cashier = "Cashier";
         public const string CashAdmin = "Cash admin";
         public const string Empty = "Empty";
+        public const string CashExchangeClients = "Cash exchange clients";
 
         /// <summary>Unused</summary>
         public const string CommonQuestions = "Common questions";
@@ -32,7 +33,7 @@ namespace TLabs.ExchangeSdk.Users
         {
             Admin, Manager, SupportFull, KYC, ColdWallets, CashOperations, TokensAndCommissions,
             FinancialReports, ContentMaker, ApitradeReadonly, ApitradeAdmin, CommonQuestions, P2PWatch, P2PAppealManager,
-            CurrencyListing, Cashier, CashAdmin
+            CurrencyListing, Cashier, CashAdmin, Empty, CashExchangeClients
         };
     }
 }
