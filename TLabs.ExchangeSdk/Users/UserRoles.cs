@@ -23,6 +23,7 @@ namespace TLabs.ExchangeSdk.Users
         public const string CurrencyListing = "CurrencyListing";
         public const string Cashier = "Cashier";
         public const string CashAdmin = "Cash admin";
+        public const string Empty = "Empty";
 
         /// <summary>Unused</summary>
         public const string CommonQuestions = "Common questions";
