@@ -14,6 +14,6 @@ public class TradingAlgorithmSettings
 
 public enum TradingAlgorithmPeriod
 {
-    Minute,
-    Minute5,
+    Minute = 10,
+    Minute5 = 20,
 }
