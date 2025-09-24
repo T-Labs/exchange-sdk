@@ -21,6 +21,7 @@ public class CashHandoverClientDocument
     public Guid Id { get; set; }
     public int DocumentTypeId { get; set; }
     public CashHandoverClientDocumentType DocumentType { get; set; }
+    public string Extension { get; set; }
     public byte[] FileContent { get; set; }
 }
 
