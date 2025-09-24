@@ -12,16 +12,22 @@ public class CashHandoverClient
     public string PrimaryContact { get; set; }
     public string Email { get; set; }
     public List<CashHandoverClientDocument> Documents { get; set; } = new();
-    public Guid ContractId { get; set; }
+    public Guid? ContractId { get; set; }
     public CashHandoverClientContract Contract { get; set; }
 }
 
 public class CashHandoverClientDocument
 {
     public Guid Id { get; set; }
-    public string DocumentType { get; set; }
-    public string Extension { get; set; }
+    public int DocumentTypeId { get; set; }
+    public CashHandoverClientDocumentType DocumentType { get; set; }
     public byte[] FileContent { get; set; }
+}
+
+public class CashHandoverClientDocumentType
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
 }
 
 public class CashHandoverClientContract

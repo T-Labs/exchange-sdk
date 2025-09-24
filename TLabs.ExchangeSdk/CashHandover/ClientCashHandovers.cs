@@ -12,6 +12,7 @@ public class ClientCashHandovers
     private const string BASE_REQUEST_WORKFLOW_URL = "brokerage/cash-handovers/requests/workflow";
     private const string BASE_DEAL_NUMBERS_URL = "brokerage/cash-handovers/requests/numbers";
     private const string BASE_CLIENTS_URL = "brokerage/cash-handovers/clients";
+    private const string BASE_CLIENTS_DOCUMENTS_TYPES_URL = $"{BASE_CLIENTS_URL}/document-types";
 
     public async Task<List<CashHandoverRequestViewModel>> GetRequestsFilteredList(
         string name = null,
@@ -83,5 +84,16 @@ public class ClientCashHandovers
             .InternalApi()
             .SetQueryParam(nameof(searchName), searchName)
             .GetJsonAsync<List<CashHandoverClient>>();
+    }
+
+    public async Task<List<CashHandoverClientDocumentType>> GetClientDocumentTypesAsync()
+    {
+        return await BASE_CLIENTS_DOCUMENTS_TYPES_URL.InternalApi()
+            .GetJsonAsync<List<CashHandoverClientDocumentType>>();
+    }
+
+    public async Task CreateClientDocumentTypeAsync(CashHandoverClientDocumentType type)
+    {
+        await BASE_CLIENTS_DOCUMENTS_TYPES_URL.PostJsonAsync(type);
     }
 }
