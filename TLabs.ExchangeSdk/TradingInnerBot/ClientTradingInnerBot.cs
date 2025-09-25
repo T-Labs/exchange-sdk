@@ -68,4 +68,12 @@ public class ClientTradingInnerBot
     {
         await ALGORITHM_LIMITS_URL.InternalApi().PostJsonAsync(limit);
     }
+
+    public async Task<List<AlgorithmsProfit>> GetAlgorithmsProfitsAsync(string currencyPair)
+    {
+        return await $"{BASE_URL}/algorithms-profits"
+            .InternalApi()
+            .SetQueryParam(nameof(currencyPair), currencyPair)
+            .GetJsonAsync<List<AlgorithmsProfit>>();
+    }
 }
