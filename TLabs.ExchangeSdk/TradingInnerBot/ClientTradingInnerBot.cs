@@ -12,6 +12,7 @@ public class ClientTradingInnerBot
     private const string BASE_URL = "tradinginnerbot";
     private const string SETTINGS_URL = $"{BASE_URL}/algorithms-settings";
     private const string EVENTS_URL = $"{BASE_URL}/external-events";
+    private const string ALGORITHM_LIMITS_URL = $"{BASE_URL}/algorithm-loss-limits";
 
     public async Task<List<CurrencyPair>> GetCurrencyPairAsync()
     {
@@ -53,5 +54,18 @@ public class ClientTradingInnerBot
     public async Task SendDealEventAsync(MatchingDeal deal)
     {
         await $"{EVENTS_URL}/deal".InternalApi().PostJsonAsync(deal);
+    }
+
+    public async Task<AlgorithmLossLimit> GetAlgorithmLossLimitAsync(string currencyPair)
+    {
+        return await ALGORITHM_LIMITS_URL
+            .InternalApi()
+            .SetQueryParam(nameof(currencyPair), currencyPair)
+            .GetJsonAsync<AlgorithmLossLimit>();
+    }
+
+    public async Task CreateOrUpdateAlgorithmLossLimitAsync(AlgorithmLossLimit limit)
+    {
+        await ALGORITHM_LIMITS_URL.InternalApi().PostJsonAsync(limit);
     }
 }
