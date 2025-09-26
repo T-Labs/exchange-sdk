@@ -31,6 +31,9 @@ namespace TLabs.ExchangeSdk.Depository
         public static readonly AccountChart FundBot = new AccountChart("361", "Фонды бота", nameof(FundBot));
         public static readonly AccountChart FundBotProfits = new AccountChart("362", "Фонды прибыли бота", nameof(FundBotProfits));
 
+        public static readonly AccountChart FundTradingBot = new AccountChart("371", "Фонды трейдинг бота", nameof(FundTradingBot));
+        public static readonly AccountChart FundLiquidityBot = new AccountChart("372", "Фонды бота ликвидности", nameof(FundLiquidityBot));
+
         public static readonly AccountChart Deposit = new AccountChart("5", "Введеные средства", nameof(Deposit));
         public static readonly AccountChart DepositAdmin = new AccountChart("51", "Введеные средства админом", nameof(DepositAdmin));
         public static readonly AccountChart DepositCash = new AccountChart("52", "Введеные средства наличными", nameof(DepositCash));
