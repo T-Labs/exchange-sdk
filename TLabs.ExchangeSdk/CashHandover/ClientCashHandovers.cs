@@ -86,6 +86,12 @@ public class ClientCashHandovers
             .GetJsonAsync<List<CashHandoverClient>>();
     }
 
+    public async Task<CashHandoverClient> GetClientAsync(Guid id)
+    {
+        return await $"{BASE_CLIENTS_URL}/by-id".InternalApi()
+            .SetQueryParam(nameof(id), id).GetJsonAsync<CashHandoverClient>();
+    }
+
     public async Task<List<CashHandoverClientDocumentType>> GetClientDocumentTypesAsync()
     {
         return await BASE_CLIENTS_DOCUMENTS_TYPES_URL.InternalApi()
