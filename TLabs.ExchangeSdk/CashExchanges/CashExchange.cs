@@ -9,7 +9,7 @@ public class CashExchange
     public Guid Id { get; set; }
 
     /// <summary>Sheets row number</summary>
-    public int? RowId { get; set; }
+    public int? RowIndex { get; set; }
 
     /// <summary>if deal number is null it means that exchange is correction</summary>
     public int? DealNumber { get; set; }
