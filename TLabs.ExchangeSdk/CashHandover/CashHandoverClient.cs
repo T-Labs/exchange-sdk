@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using TLabs.ExchangeSdk.Files;
 
 namespace TLabs.ExchangeSdk.CashHandover;
 
@@ -21,8 +22,7 @@ public class CashHandoverClientDocument
     public Guid Id { get; set; }
     public int DocumentTypeId { get; set; }
     public CashHandoverClientDocumentType DocumentType { get; set; }
-    public string Extension { get; set; }
-    public byte[] FileContent { get; set; }
+    public File File { get; set; }
 }
 
 public class CashHandoverClientDocumentType
@@ -35,12 +35,5 @@ public class CashHandoverClientContract
 {
     public Guid Id { get; set; }
     public string Name { get; set; }
-    public List<CashHandoverClientContractFile> Files { get; set; } = new();
-}
-
-public class CashHandoverClientContractFile
-{
-    public Guid Id { get; set; }
-    public string Extension { get; set; }
-    public byte[] FileContent { get; set; }
+    public List<File> Files { get; set; } = new();
 }
