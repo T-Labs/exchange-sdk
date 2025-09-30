@@ -17,6 +17,7 @@ public class CashExchange
     public string PersonName { get; set; }
     public CashHandoverClient Client { get; set; }
     public Guid? ClientId { get; set; }
+    public string Type { get; set; }
     public string Comment { get; set; }
     public DateTimeOffset Created { get; set; }
     public Guid? DocumentPhotoId { get; set; }
@@ -45,6 +46,10 @@ public class CashExchange
     public decimal? BybitRUSDTOut { get; set; }
     public decimal? TrustTRXIn { get; set; }
     public decimal? TrustTRXOut { get; set; }
+    public decimal? BlackUsdtIn { get; set; }
+    public decimal? BlackUsdtOut { get; set; }
+    public decimal? BlackTRXIn { get; set; }
+    public decimal? BlackTRXOut { get; set; }
 
     //corrections section
     public decimal? CorrectionUsdtValue { get; set; }
