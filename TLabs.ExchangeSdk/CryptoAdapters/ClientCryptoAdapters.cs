@@ -1,4 +1,3 @@
-using Flurl.Http;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -6,6 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
+using Flurl.Http;
 using TLabs.DotnetHelpers;
 using TLabs.ExchangeSdk.CryptoAdapters.NownodesApi;
 using TLabs.ExchangeSdk.CryptoAdapters.Tron;
@@ -156,6 +156,16 @@ namespace TLabs.ExchangeSdk.CryptoAdapters
             await $"trx/parameters".InternalApi().PostJsonAsync<TronParamsDto>(dto);
 
         #endregion TRON
+
+        #region ORGON
+
+        public async Task<TronParamsDto> OrgonGetParams() =>
+            await $"orgon/parameters".InternalApi().GetJsonAsync<TronParamsDto>();
+
+        public async Task<TronParamsDto> OrgonSaveParams(TronParamsDto dto) =>
+            await $"orgon/parameters".InternalApi().PostJsonAsync<TronParamsDto>(dto);
+
+        #endregion ORGON
 
 
         #region TON
