@@ -1,6 +1,4 @@
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Linq;
 
 namespace TLabs.ExchangeSdk
 {
@@ -20,6 +18,7 @@ namespace TLabs.ExchangeSdk
             services.AddTransient<CryptoAdapters.ClientCryptoAdapters>();
             services.AddTransient<CryptoAdapters.Tron.ClientCryptoAdapterTron>();
             services.AddTransient<CryptoAdapters.NownodesApi.ClientCryptoNownodes>();
+            services.AddTransient<CryptoAdapters.Tron.ClientCryptoAdapterOrgon>();
 
             services.AddTransient<Depository.ClientDepository>();
             services.AddTransient<Deposits.ClientDeposits>();
