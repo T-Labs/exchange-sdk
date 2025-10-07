@@ -1,4 +1,5 @@
 using Microsoft.Extensions.DependencyInjection;
+using TLabs.ExchangeSdk.TradingInnerBot;
 
 namespace TLabs.ExchangeSdk
 {
@@ -52,6 +53,8 @@ namespace TLabs.ExchangeSdk
             // needs activation in Program.cs and action /currencies/reload
             services.AddSingleton<Currencies.CurrenciesCache>();
             services.AddSingleton<Farming.TenantsCache>();
+
+            services.AddTransient<ClientTradingInnerBot>();
         }
     }
 }
