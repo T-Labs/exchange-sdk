@@ -34,11 +34,13 @@ namespace TLabs.ExchangeSdk.Currencies
         /// How many decimal digits should price have after rounding
         /// </summary>
         public int DigitsPrice { get; set; }
+        public int UiDigitsPrice { get; set; } = 6;
 
         /// <summary>
         /// How many decimal digits should Order/Deal amount have after rounding
         /// </summary>
         public int DigitsAmount { get; set; }
+        public int UiDigitsAmount { get; set; } = 6;
 
         public bool SendToCoinmarketcap { get; set; } = true;
 
