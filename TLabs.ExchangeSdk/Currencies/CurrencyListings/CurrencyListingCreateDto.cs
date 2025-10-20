@@ -46,4 +46,6 @@ public class CurrencyListingCreateDto
     public string PartnerPageUrl { get; set; }
 
     public int MarketPageDisplayOrder { get; set; }
+
+    public decimal? OverriddenSupply { get; set; }
 }
