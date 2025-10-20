@@ -78,6 +78,8 @@ namespace TLabs.ExchangeSdk.Currencies.CurrencyListings
 
         public int MarketPageDisplayOrder { get; set; }
 
+        public decimal? OverriddenSupply { get; set; }
+
         public string UsdtCurrencyPairCode => $"{CurrencyCode}_USDT";
 
         public override string ToString() => $"{nameof(CurrencyListing)}({TotalTokensAmount} {CurrencyCode}, " +
