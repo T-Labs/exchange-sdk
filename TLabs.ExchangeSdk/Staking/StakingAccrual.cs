@@ -16,19 +16,10 @@ namespace TLabs.ExchangeSdk.Staking
 
         public int TotalUsers { get; set; }
 
-        #region Locked Type fields
-
         /// <summary>
-        /// Blockchain accruals sum
+        /// Total daily rewards sum (computed from user stakes * daily rate)
         /// </summary>
         public decimal? LockedRewardsSum { get; set; }
-
-        /// <summary>
-        /// Users balance multiplier
-        /// </summary>
-        public decimal? LockedBalanceMultiplier { get; set; }
-
-        #endregion Locked Type fields
 
         public override string ToString() => $"{nameof(StakingAccrual)}(Id: {Id}, {StakingSetting?.BaseCurrencyCode}, dividends: {StakingSetting?.AccrualCurrencyCode}, " +
             $"PlannedDate: {DatePlanned.ToString("s")}, Users:{TotalUsers} " +

@@ -69,12 +69,12 @@ namespace TLabs.ExchangeSdk.Staking
             return result;
         }
 
-        public async Task<decimal> GetTotalLockedAmount(string currencyCode)
+        public async Task<List<UserStake>> GetUserStakes(string userId)
         {
-            var result = await $"depository/stakes/total-locked".InternalApi()
-                .SetQueryParam(nameof(currencyCode), currencyCode)
-                .GetJsonAsync<decimal>();
-            return result;
+            var result = await $"brokerage/staking/user-stakes".InternalApi()
+                .SetQueryParam(nameof(userId), userId)
+                .GetJsonAsync<List<UserStake>>().GetQueryResult();
+            return result.Succeeded ? result.Data : null;
         }
     }
 }

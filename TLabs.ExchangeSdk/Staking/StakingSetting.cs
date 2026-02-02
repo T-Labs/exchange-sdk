@@ -29,7 +29,7 @@ namespace TLabs.ExchangeSdk.Staking
         /// </summary>
         public decimal MinBaseCurrencyAmount { get; set; }
 
-        public int UnlockPeriodDays { get; set; }
+        public int LockPeriodDays { get; set; }
 
         public bool NotificationNeeded { get; set; }
 

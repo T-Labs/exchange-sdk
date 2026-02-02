@@ -9,7 +9,7 @@ namespace TLabs.ExchangeSdk.Deposits
         FromAdmin = 3,
         UserToUserTransfer = 4,
         FromAirdrop = 50,
-        FromStakingPassive = 60, FromStakingLocked = 61,
+        FromStakingLocked = 60,
     }
 
     public class DepositDto
