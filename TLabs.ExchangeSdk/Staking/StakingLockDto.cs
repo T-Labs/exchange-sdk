@@ -8,7 +8,6 @@ namespace TLabs.ExchangeSdk.Staking
 
     public class StakingLockDto
     {
-        public StakingType StakingType { get; set; }
         public StakingLockAction Action { get; set; }
         public string UserId { get; set; }
         public decimal Amount { get; set; }
@@ -16,7 +15,7 @@ namespace TLabs.ExchangeSdk.Staking
         public string BlockchainTxId { get; set; }
 
         public override string ToString()
-            => $"{nameof(StakingLockDto)}({StakingType}, {Amount} {CurrencyCode}, action:{Action}, " +
+            => $"{nameof(StakingLockDto)}({Amount} {CurrencyCode}, action:{Action}, " +
             $"userId:{UserId}, BlockchainTxId: {BlockchainTxId})";
     }
 }

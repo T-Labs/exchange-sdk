@@ -69,10 +69,9 @@ namespace TLabs.ExchangeSdk.Staking
             return result;
         }
 
-        public async Task<decimal> GetTotalLockedAmount(StakingType type, string currencyCode)
+        public async Task<decimal> GetTotalLockedAmount(string currencyCode)
         {
             var result = await $"depository/stakes/total-locked".InternalApi()
-                .SetQueryParam(nameof(type), (int)type)
                 .SetQueryParam(nameof(currencyCode), currencyCode)
                 .GetJsonAsync<decimal>();
             return result;

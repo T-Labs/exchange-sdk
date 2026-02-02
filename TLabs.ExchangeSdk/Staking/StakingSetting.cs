@@ -8,8 +8,6 @@ namespace TLabs.ExchangeSdk.Staking
     {
         public int Id { get; set; }
 
-        public StakingType Type { get; set; }
-
         [Required]
         public string BaseCurrencyCode { get; set; }
 
@@ -17,23 +15,20 @@ namespace TLabs.ExchangeSdk.Staking
         public string AccrualCurrencyCode { get; set; }
 
         /// <summary>
-        /// What portion of stake rewards goes to system fund (0 for Passive type)
+        /// What portion of stake rewards goes to system fund
         /// </summary>
         public decimal SystemProfitPercentage { get; set; }
 
         /// <summary>
-        /// For Passive - used in calculation, for Locked - only estimation in interface
+        /// Estimation in interface
         /// </summary>
         public decimal YearlyAccrualPercentage { get; set; }
 
         /// <summary>
-        /// For Passive - min balance for accruals, for Locked - min stake/unstake action
+        /// Min stake/unstake action amount
         /// </summary>
         public decimal MinBaseCurrencyAmount { get; set; }
 
-        /// <summary>
-        /// Only for locked type
-        /// </summary>
         public int UnlockPeriodDays { get; set; }
 
         public bool NotificationNeeded { get; set; }
