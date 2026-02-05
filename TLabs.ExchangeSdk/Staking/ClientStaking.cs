@@ -68,10 +68,28 @@ namespace TLabs.ExchangeSdk.Staking
             return result;
         }
 
-        public async Task<List<UserStake>> GetUserStakes(string userId)
+        public async Task<List<UserStake>> GetUserStakes(string userId, UserStakingStatus? status = null)
         {
             var result = await $"brokerage/staking/user-stakes".InternalApi()
                 .SetQueryParam(nameof(userId), userId)
+                .SetQueryParam(nameof(status), status?.ToString())
+                .GetJsonAsync<List<UserStake>>().GetQueryResult();
+            return result.Succeeded ? result.Data : null;
+        }
+
+        public async Task<decimal> GetUserStakesTotal(string userId, string currencyCode)
+        {
+            var result = await $"brokerage/staking/user-stakes/total".InternalApi()
+                .SetQueryParam(nameof(userId), userId)
+                .SetQueryParam(nameof(currencyCode), currencyCode)
+                .GetJsonAsync<decimal>().GetQueryResult();
+            return result.Succeeded ? result.Data : 0;
+        }
+
+        public async Task<List<UserStake>> GetAllUserStakes(UserStakingStatus? status = null)
+        {
+            var result = await $"brokerage/staking/all-user-stakes".InternalApi()
+                .SetQueryParam(nameof(status), status?.ToString())
                 .GetJsonAsync<List<UserStake>>().GetQueryResult();
             return result.Succeeded ? result.Data : null;
         }
