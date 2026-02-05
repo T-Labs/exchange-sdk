@@ -60,10 +60,9 @@ namespace TLabs.ExchangeSdk.Depository
         public static readonly AccountChart NetworkComission = new AccountChart("8", "Комиссия блокчейна", nameof(NetworkComission));
         public static readonly AccountChart ColdWallets = new AccountChart("11", "Холодные кошельки", nameof(ColdWallets));
 
-        public static readonly AccountChart StakingBlockchainAccruals = new AccountChart("851", "Стейкинг Начисления в блокчейне", nameof(StakingBlockchainAccruals));
-        public static readonly AccountChart StakingFundProfits = new AccountChart("852", "Стейкинг фонд прибыли", nameof(StakingFundProfits));
         public static readonly AccountChart StakingLocked = new AccountChart("855", "Стейкинг замороженные средства", nameof(StakingLocked));
-        public static readonly AccountChart StakingLockedWithdrawal = new AccountChart("856", "Стейкинг замороженные средства на выводе", nameof(StakingLockedWithdrawal));
+        public static readonly AccountChart StakingLockedTemp = new AccountChart("856", "Стейкинг замороженные средства", nameof(StakingLockedTemp));
+        public static readonly AccountChart StakingUnlockedTemp = new AccountChart("857", "Стейкинг замороженные средства", nameof(StakingUnlockedTemp));
 
         public static readonly AccountChart CurrencyListingPaymentBlocked = new AccountChart("871", "CurrencyListing блокировка оплаты", nameof(CurrencyListingPaymentBlocked));
 
@@ -98,11 +97,11 @@ namespace TLabs.ExchangeSdk.Depository
             BlockedForExchangeTransfer,
             BlockedForOrder, BlockedForCancelOrder, BlockedForDeal, OnOrders,
             WithdrawalBlockedTemp, WithdrawalBlocked, WithdrawalBlockCanceledTemp, WithdrawnTemp, WithdrawalStockCommissionTemp,
-            StakingLocked, StakingLockedWithdrawal,
+            StakingLocked, StakingLockedTemp, StakingUnlockedTemp,
             CurrencyListingPaymentBlocked,
             CurrencyOfferingsBlocked, CurrencyOfferingsVesting,
 
-            FundBot,
+            FundBot, FundTradingBot,FundLiquidityBot,
 
             BwpInvoiceCryptoBlockedTemp, BwpInvoiceCryptoBlocked, BwpInvoiceCryptoBlockCanceledTemp,
             BwpCryptoPaymentToMerchantTemp,
@@ -128,8 +127,6 @@ namespace TLabs.ExchangeSdk.Depository
             ColdWallets,
             NetworkComission, WithdrawalNetworkCommissionFunds,
             NodeAgregationFunds,
-
-            StakingBlockchainAccruals, StakingFundProfits,
         };
 
         public static readonly List<AccountChart> DepositCharts = new List<AccountChart>
