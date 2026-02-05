@@ -6,6 +6,7 @@ using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 using Flurl.Http;
+using Microsoft.Extensions.Logging;
 using TLabs.DotnetHelpers;
 using TLabs.ExchangeSdk.CryptoAdapters.NownodesApi;
 using TLabs.ExchangeSdk.CryptoAdapters.Tron;
@@ -17,13 +18,16 @@ namespace TLabs.ExchangeSdk.CryptoAdapters
     {
         private readonly CurrenciesCache _currenciesCache;
         private readonly ClientCryptoNownodes _clientCryptoNownodes;
+        private readonly ILogger<ClientCryptoAdapters> _logger;
 
         public ClientCryptoAdapters(
             CurrenciesCache currenciesCache,
-            ClientCryptoNownodes clientCryptoNownodes)
+            ClientCryptoNownodes clientCryptoNownodes,
+            ILogger<ClientCryptoAdapters> logger)
         {
             _currenciesCache = currenciesCache;
             _clientCryptoNownodes = clientCryptoNownodes;
+            _logger = logger;
         }
 
         [Obsolete("Use GetDepositAddress() with adapterCode")]
@@ -116,7 +120,8 @@ namespace TLabs.ExchangeSdk.CryptoAdapters
             string url = $"{adapterCode}/transactions/resend/{txHash}" +
                 $"?newGasPrice={newGasPrice?.ToString(CultureInfo.InvariantCulture)}";
             var result = await url.InternalApi().PostJsonAsync<string>(null).GetQueryResult();
-            Console.WriteLine($"ResendTransaction txHash change: {txHash} -> {result.Data}  {result.ErrorsString}");
+            _logger.LogInformation("ResendTransaction txHash change: {OldTxHash} -> {NewTxHash} {Errors}",
+                txHash, result.Data, result.ErrorsString);
             return result;
         }
 
@@ -124,7 +129,8 @@ namespace TLabs.ExchangeSdk.CryptoAdapters
         {
             var result = await $"{adapterCode}/transactions/cancel/{txHash}?newGasPrice={newGasPrice}".InternalApi()
                 .PostJsonAsync<string>(null).GetQueryResult();
-            Console.WriteLine($"CancelTransaction txHash change: {txHash} -> {result.Data}  {result.ErrorsString}");
+            _logger.LogInformation("CancelTransaction txHash change: {OldTxHash} -> {NewTxHash} {Errors}",
+                txHash, result.Data, result.ErrorsString);
             return result;
         }
 

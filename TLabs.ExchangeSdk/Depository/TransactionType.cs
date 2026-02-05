@@ -175,7 +175,7 @@ namespace TLabs.ExchangeSdk.Depository
         {
             Rollback,
 
-            Deposit, DepositAdmin, DepositStaking, DepositAirdrop, DepositToFunds, DepositReplacement, DepositCorrection,
+            Deposit, DepositAdmin, DepositStaking, DepositAirdrop, DepositCash, DepositToFunds, DepositReplacement, DepositCorrection,
 
             Nullification, Confiscation,
 

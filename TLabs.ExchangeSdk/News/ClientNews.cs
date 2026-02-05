@@ -14,10 +14,9 @@ public class ClientNews
 {
     private const string BaseUrl = "news";
 
-    public Task<JsonResult> Healthcheck()
-
+    public async Task<JsonResult> Healthcheck()
     {
-        var result = $"news/healthcheck".InternalApi()
+        var result = await $"news/healthcheck".InternalApi()
             .GetJsonAsync<JsonResult>();
         return result;
     }
