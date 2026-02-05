@@ -37,11 +37,10 @@ namespace TLabs.ExchangeSdk.RabbitMq
             {
                 ConnectionFactory factory = new ConnectionFactory();
                 factory.Uri = new Uri(urlRabbitMq);
-                IConnection conn = factory.CreateConnection();
-                IModel channel = conn.CreateModel();
+                using IConnection conn = factory.CreateConnection();
+                using IModel channel = conn.CreateModel();
                 channel.QueueDeclare(queue, true, false, false, null);
                 channel.BasicPublish("", queue, null, Encoding.UTF8.GetBytes(json));
-                conn.Close();
                 _logger.LogInformation($"RabbitMq sent to {requestInfo}");
                 return QueryResult.CreateSucceeded();
             }

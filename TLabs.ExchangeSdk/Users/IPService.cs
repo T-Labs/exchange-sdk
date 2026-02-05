@@ -64,7 +64,7 @@ namespace TLabs.ExchangeSdk.Users
         private T GetHeaderValueAs<T>(string headerName)
         {
             var headers = _httpContextAccessor.HttpContext?.Request?.Headers;
-            if (headers == null)
+            if (headers != null)
             {
                 if (headers.TryGetValue(headerName, out StringValues values))
                 {

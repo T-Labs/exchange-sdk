@@ -203,7 +203,6 @@ public class ClientNews
         return result;
     }
 
-    [HttpPut("{id}")]
     public async Task<IFlurlResponse> UpdateSignalChannel(int id, SignalChannel signalChannel)
     {
         var result = await $"{BaseUrl}/signals/channels/{id}".InternalApi()
@@ -211,7 +210,6 @@ public class ClientNews
         return result;
     }
 
-    [HttpPost]
     public async Task<IFlurlResponse> CreateSignalChannel(SignalChannel signalChannel)
     {
         var result = await $"{BaseUrl}/signals/channels".InternalApi()
@@ -219,7 +217,6 @@ public class ClientNews
         return result;
     }
 
-    [HttpDelete("{id}")]
     public async Task<IFlurlResponse> DeleteSignalChannel(int id)
     {
         var result = await $"{BaseUrl}/signals/channels/{id}".InternalApi()

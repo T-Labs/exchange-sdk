@@ -51,9 +51,9 @@ namespace TLabs.ExchangeSdk.CryptoAdapters
         public async Task<AdapterInfo> GetAdapterInfo(string mainCurrencyCode, string nownodesApiKey = null)
         {
             string adapterId = _currenciesCache.GetAdapterIds(mainCurrencyCode).First();
-            var cancelToken = new CancellationTokenSource(TimeSpan.FromSeconds(5)).Token;
+            using var cts = new CancellationTokenSource(TimeSpan.FromSeconds(5));
             var result = await $"{adapterId}/adapter-info".InternalApi()
-                .GetJsonAsync<AdapterInfo>(cancelToken);
+                .GetJsonAsync<AdapterInfo>(cts.Token);
 
             if (nownodesApiKey.HasValue() && result != null
                 && !ClientCryptoNownodes.UnsupportedCurrencies.Contains(mainCurrencyCode))
@@ -84,9 +84,9 @@ namespace TLabs.ExchangeSdk.CryptoAdapters
         /// <summary>Get total balance of all node wallets</summary>
         public async Task<QueryResult<decimal>> GetTotalBalance(string currencyCode, string adapterCode)
         {
-            var cancelToken = new CancellationTokenSource(TimeSpan.FromSeconds(5)).Token;
+            using var cts = new CancellationTokenSource(TimeSpan.FromSeconds(5));
             var result = await $"{adapterCode}/nodebalance?currencyCode={currencyCode}".InternalApi()
-                .GetStringAsync(cancelToken).GetQueryResult();
+                .GetStringAsync(cts.Token).GetQueryResult();
             if (!result.Succeeded)
                 return QueryResult<decimal>.CreateFailed(result);
             var num = result.Data.DecimalTryParse();
@@ -98,9 +98,9 @@ namespace TLabs.ExchangeSdk.CryptoAdapters
         /// <summary>Get total balance of all cold wallets</summary>
         public async Task<QueryResult<decimal>> GetColdWalletsBalance(string currencyCode, string adapterCode)
         {
-            var cancelToken = new CancellationTokenSource(TimeSpan.FromSeconds(5)).Token;
+            using var cts = new CancellationTokenSource(TimeSpan.FromSeconds(5));
             var result = await $"{adapterCode}/cold-wallets-balance?currencyCode={currencyCode}".InternalApi()
-                .GetStringAsync(cancelToken).GetQueryResult();
+                .GetStringAsync(cts.Token).GetQueryResult();
             if (!result.Succeeded)
                 return QueryResult<decimal>.CreateFailed(result);
             var num = result.Data.DecimalTryParse();
