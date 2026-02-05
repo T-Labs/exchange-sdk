@@ -1,4 +1,3 @@
-using RabbitMQ.Client.Impl;
 using System;
 using System.ComponentModel.DataAnnotations;
 using TLabs.DotnetHelpers;

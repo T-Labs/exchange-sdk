@@ -6,6 +6,7 @@ using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 using Flurl.Http;
+using Microsoft.Extensions.Logging;
 using TLabs.DotnetHelpers;
 using TLabs.ExchangeSdk.CryptoAdapters.NownodesApi;
 using TLabs.ExchangeSdk.CryptoAdapters.Tron;
@@ -17,13 +18,16 @@ namespace TLabs.ExchangeSdk.CryptoAdapters
     {
         private readonly CurrenciesCache _currenciesCache;
         private readonly ClientCryptoNownodes _clientCryptoNownodes;
+        private readonly ILogger<ClientCryptoAdapters> _logger;
 
         public ClientCryptoAdapters(
             CurrenciesCache currenciesCache,
-            ClientCryptoNownodes clientCryptoNownodes)
+            ClientCryptoNownodes clientCryptoNownodes,
+            ILogger<ClientCryptoAdapters> logger)
         {
             _currenciesCache = currenciesCache;
             _clientCryptoNownodes = clientCryptoNownodes;
+            _logger = logger;
         }
 
         [Obsolete("Use GetDepositAddress() with adapterCode")]
@@ -51,9 +55,9 @@ namespace TLabs.ExchangeSdk.CryptoAdapters
         public async Task<AdapterInfo> GetAdapterInfo(string mainCurrencyCode, string nownodesApiKey = null)
         {
             string adapterId = _currenciesCache.GetAdapterIds(mainCurrencyCode).First();
-            var cancelToken = new CancellationTokenSource(TimeSpan.FromSeconds(5)).Token;
+            using var cts = new CancellationTokenSource(TimeSpan.FromSeconds(5));
             var result = await $"{adapterId}/adapter-info".InternalApi()
-                .GetJsonAsync<AdapterInfo>(cancelToken);
+                .GetJsonAsync<AdapterInfo>(cts.Token);
 
             if (nownodesApiKey.HasValue() && result != null
                 && !ClientCryptoNownodes.UnsupportedCurrencies.Contains(mainCurrencyCode))
@@ -84,9 +88,9 @@ namespace TLabs.ExchangeSdk.CryptoAdapters
         /// <summary>Get total balance of all node wallets</summary>
         public async Task<QueryResult<decimal>> GetTotalBalance(string currencyCode, string adapterCode)
         {
-            var cancelToken = new CancellationTokenSource(TimeSpan.FromSeconds(5)).Token;
+            using var cts = new CancellationTokenSource(TimeSpan.FromSeconds(5));
             var result = await $"{adapterCode}/nodebalance?currencyCode={currencyCode}".InternalApi()
-                .GetStringAsync(cancelToken).GetQueryResult();
+                .GetStringAsync(cts.Token).GetQueryResult();
             if (!result.Succeeded)
                 return QueryResult<decimal>.CreateFailed(result);
             var num = result.Data.DecimalTryParse();
@@ -98,9 +102,9 @@ namespace TLabs.ExchangeSdk.CryptoAdapters
         /// <summary>Get total balance of all cold wallets</summary>
         public async Task<QueryResult<decimal>> GetColdWalletsBalance(string currencyCode, string adapterCode)
         {
-            var cancelToken = new CancellationTokenSource(TimeSpan.FromSeconds(5)).Token;
+            using var cts = new CancellationTokenSource(TimeSpan.FromSeconds(5));
             var result = await $"{adapterCode}/cold-wallets-balance?currencyCode={currencyCode}".InternalApi()
-                .GetStringAsync(cancelToken).GetQueryResult();
+                .GetStringAsync(cts.Token).GetQueryResult();
             if (!result.Succeeded)
                 return QueryResult<decimal>.CreateFailed(result);
             var num = result.Data.DecimalTryParse();
@@ -116,7 +120,8 @@ namespace TLabs.ExchangeSdk.CryptoAdapters
             string url = $"{adapterCode}/transactions/resend/{txHash}" +
                 $"?newGasPrice={newGasPrice?.ToString(CultureInfo.InvariantCulture)}";
             var result = await url.InternalApi().PostJsonAsync<string>(null).GetQueryResult();
-            Console.WriteLine($"ResendTransaction txHash change: {txHash} -> {result.Data}  {result.ErrorsString}");
+            _logger.LogInformation("ResendTransaction txHash change: {OldTxHash} -> {NewTxHash} {Errors}",
+                txHash, result.Data, result.ErrorsString);
             return result;
         }
 
@@ -124,7 +129,8 @@ namespace TLabs.ExchangeSdk.CryptoAdapters
         {
             var result = await $"{adapterCode}/transactions/cancel/{txHash}?newGasPrice={newGasPrice}".InternalApi()
                 .PostJsonAsync<string>(null).GetQueryResult();
-            Console.WriteLine($"CancelTransaction txHash change: {txHash} -> {result.Data}  {result.ErrorsString}");
+            _logger.LogInformation("CancelTransaction txHash change: {OldTxHash} -> {NewTxHash} {Errors}",
+                txHash, result.Data, result.ErrorsString);
             return result;
         }
 
