@@ -21,7 +21,7 @@ namespace TLabs.ExchangeSdk.Staking
 
         public UserStakingStatus Status { get; set; }
 
-        public int StakingSettingId { get; set; }
+        public Guid StakingSettingId { get; set; }
         public StakingSetting StakingSetting { get; set; }
 
         public decimal Amount { get; set; }

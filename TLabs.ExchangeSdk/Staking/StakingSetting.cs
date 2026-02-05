@@ -5,7 +5,7 @@ namespace TLabs.ExchangeSdk.Staking
 {
     public class StakingSetting
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
         [Required]
         public string BaseCurrencyCode { get; set; }
