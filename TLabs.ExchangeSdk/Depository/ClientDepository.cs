@@ -55,7 +55,7 @@ namespace TLabs.ExchangeSdk.Depository
         public async Task<PagedList<TransactionDto>> GetTransactions(string userId = null, string currencyCode = null,
             DateTimeOffset? from = null, DateTimeOffset? to = null,
             List<string> transactionTypes = null, int page = 1, int pageSize = 50000,
-            bool includeRollbacks = false)
+            bool includeRollbacks = false, string actionIdContains = null)
         {
             var request = "depository/transaction".InternalApi()
                 .WithTimeout(TimeSpan.FromMinutes(10))
@@ -66,7 +66,8 @@ namespace TLabs.ExchangeSdk.Depository
                 .SetQueryParam(nameof(transactionTypes), transactionTypes)
                 .SetQueryParam(nameof(page), page)
                 .SetQueryParam(nameof(pageSize), pageSize)
-                .SetQueryParam(nameof(includeRollbacks), includeRollbacks.ToString());
+                .SetQueryParam(nameof(includeRollbacks), includeRollbacks.ToString())
+                .SetQueryParam(nameof(actionIdContains), actionIdContains);
             var result = await request.GetJsonAsync<PagedList<TransactionDto>>();
             return result;
         }
