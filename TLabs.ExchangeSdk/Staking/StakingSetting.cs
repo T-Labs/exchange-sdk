@@ -10,17 +10,12 @@ namespace TLabs.ExchangeSdk.Staking
         [Required]
         public string BaseCurrencyCode { get; set; }
 
+        /// <summary>Same as BaseCurrencyCode for now</summary>
         [Required]
         public string AccrualCurrencyCode { get; set; }
 
-        /// <summary>
-        /// Estimation in interface
-        /// </summary>
         public decimal YearlyAccrualPercentage { get; set; }
 
-        /// <summary>
-        /// Min stake/unstake action amount
-        /// </summary>
         public decimal MinBaseCurrencyAmount { get; set; }
 
         public int LockPeriodDays { get; set; }
