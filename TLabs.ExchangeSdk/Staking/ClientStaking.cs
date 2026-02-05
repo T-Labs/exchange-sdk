@@ -35,7 +35,7 @@ namespace TLabs.ExchangeSdk.Staking
             return await $"brokerage/staking/settings".InternalApi().PostJsonAsync(stakingSetting);
         }
 
-        public async Task<IFlurlResponse> DeleteSetting(int stakingSettingId)
+        public async Task<IFlurlResponse> DeleteSetting(Guid stakingSettingId)
         {
             return await $"brokerage/staking/settings/{stakingSettingId}".InternalApi().DeleteAsync();
         }
