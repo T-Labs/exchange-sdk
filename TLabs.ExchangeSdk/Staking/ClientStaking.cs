@@ -2,7 +2,6 @@ using Flurl.Http;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using TLabs.DotnetHelpers;
 
@@ -60,7 +59,7 @@ namespace TLabs.ExchangeSdk.Staking
             return result.Succeeded ? result.Data : null;
         }
 
-        public async Task<QueryResult<string>> StakeLockOrUnlock(StakingLockDto dto)
+        public async Task<QueryResult<string>> Stake(StakingLockDto dto)
         {
             var result = await $"brokerage/staking/stake".InternalApi()
                 .PostJsonAsync<string>(dto).GetQueryResult();

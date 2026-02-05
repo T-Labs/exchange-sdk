@@ -1,6 +1,5 @@
 using System;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
 
 namespace TLabs.ExchangeSdk.Staking
 {
@@ -13,11 +12,6 @@ namespace TLabs.ExchangeSdk.Staking
 
         [Required]
         public string AccrualCurrencyCode { get; set; }
-
-        /// <summary>
-        /// What portion of stake rewards goes to system fund
-        /// </summary>
-        public decimal SystemProfitPercentage { get; set; }
 
         /// <summary>
         /// Estimation in interface
@@ -38,7 +32,5 @@ namespace TLabs.ExchangeSdk.Staking
         public DateTimeOffset? DateDeleted { get; set; }
 
         public bool IsDeleted { get; set; }
-
-        public decimal DailyAccrualRate => (decimal)Math.Pow(1 + (double)(YearlyAccrualPercentage / 100m), 1.0 / 365) - 1;
     }
 }
