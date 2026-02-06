@@ -32,14 +32,6 @@ namespace TLabs.ExchangeSdk.Affiliate
             return result;
         }
 
-        public async Task<IFlurlResponse> ChangeUserTariff(string userId, TariffType tariffType)
-        {
-            var result = await $"affiliate/users/{userId}/tariffs".InternalApi()
-                .SetQueryParam(nameof(tariffType), tariffType)
-                .PostAsync();
-            return result;
-        }
-
         public async Task<List<Profit>> GetProfits(List<Guid> ids)
         {
             var result = await $"affiliate/profits".InternalApi()

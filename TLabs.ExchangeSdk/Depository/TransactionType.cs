@@ -106,8 +106,6 @@ namespace TLabs.ExchangeSdk.Depository
         public static readonly TransactionType BountyDistributionDeposit = new TransactionType("830", "Пополнение BuySell бонусов", nameof(BountyDistributionDeposit));
         public static readonly TransactionType BountyBonusesPayment = new TransactionType("831", "BuySell бонусы юзеру", nameof(BountyBonusesPayment));
 
-        public static readonly TransactionType PaymentCardPurchase = new TransactionType("841", "Покупка Платежной Карты", nameof(PaymentCardPurchase));
-
         public static readonly TransactionType StakingLockBegin = new TransactionType("855", "Стейкинг заморозка средств начало", nameof(StakingLockBegin));
         public static readonly TransactionType StakingLockEnd = new TransactionType("856", "Стейкинг заморозка средств конец", nameof(StakingLockEnd));
         public static readonly TransactionType StakingUnlockBegin = new TransactionType("857", "Стейкинг разморозка средств начало", nameof(StakingUnlockBegin));
@@ -211,8 +209,6 @@ namespace TLabs.ExchangeSdk.Depository
             AffiliateProfitPayment, AffiliateBonusesPayment,
 
             BountyDistributionDeposit, BountyBonusesPayment,
-
-            PaymentCardPurchase,
 
             StakingLockBegin, StakingLockEnd, StakingUnlockBegin, StakingUnlockEnd,
 

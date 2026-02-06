@@ -1,9 +1,5 @@
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TLabs.ExchangeSdk.Affiliate
 {
@@ -13,11 +9,9 @@ namespace TLabs.ExchangeSdk.Affiliate
         public string UserId { get; set; }
 
         /// <summary>
-        /// Refferer user id (not null if user registered by referral link)
+        /// Referrer user id (not null if user registered by referral link)
         /// </summary>
         public string ParentUserId { get; set; }
-
-        public TariffType TariffType { get; set; }
 
         public DateTimeOffset DateCreated { get; set; }
 
@@ -26,7 +20,5 @@ namespace TLabs.ExchangeSdk.Affiliate
 
         /// <summary>Code this user can use to invite other people</summary>
         public string UserInviteCode { get; set; }
-
-        public ReferralTariff Tariff { get; set; }
     }
 }

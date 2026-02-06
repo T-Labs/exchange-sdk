@@ -1,8 +1,5 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TLabs.ExchangeSdk.Affiliate
 {
@@ -12,8 +9,6 @@ namespace TLabs.ExchangeSdk.Affiliate
 
         /// <summary>Referrer user id (not null if user registered by referral link)</summary>
         public string ParentUserId { get; set; }
-
-        public TariffType TariffType { get; set; }
 
         /// <summary>
         /// Info of referrals on each level
