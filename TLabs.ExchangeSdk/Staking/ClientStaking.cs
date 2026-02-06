@@ -59,7 +59,7 @@ namespace TLabs.ExchangeSdk.Staking
             return result.Succeeded ? result.Data : null;
         }
 
-        public async Task<QueryResult<string>> Stake(StakingLockDto dto)
+        public async Task<QueryResult<string>> Stake(CreateUserStakeDto dto)
         {
             var result = await $"brokerage/staking/stake".InternalApi()
                 .PostJsonAsync<string>(dto).GetQueryResult();
