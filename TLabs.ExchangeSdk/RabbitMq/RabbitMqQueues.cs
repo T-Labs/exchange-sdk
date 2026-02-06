@@ -14,5 +14,9 @@ namespace TLabs.ExchangeSdk.RabbitMq
         public const string BountyRecords = "bounty-records";
         public const string Notifications = "notifications"; // Notificator
         public const string Exchanger = "exchanger-refill";
+
+        // Staking Affiliate
+        public const string StakingAffiliateStakeChanged = "staking-affiliate-stake-changed";
+        public const string StakingAffiliateAccrual = "staking-affiliate-accrual";
     }
 }

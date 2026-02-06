@@ -102,6 +102,7 @@ namespace TLabs.ExchangeSdk.Depository
         public static readonly TransactionType AffiliateClear = new TransactionType("809", "Affiliate очистка аккаунтов", nameof(AffiliateClear));
         public static readonly TransactionType AffiliateProfitPayment = new TransactionType("813", "Affiliate прибыль системе", nameof(AffiliateProfitPayment));
         public static readonly TransactionType AffiliateBonusesPayment = new TransactionType("815", "Affiliate бонусы юзеру", nameof(AffiliateBonusesPayment));
+        public static readonly TransactionType StakingAffiliateBonusPayment = new TransactionType("821", "Staking Affiliate бонусы юзеру", nameof(StakingAffiliateBonusPayment));
 
         public static readonly TransactionType BountyDistributionDeposit = new TransactionType("830", "Пополнение BuySell бонусов", nameof(BountyDistributionDeposit));
         public static readonly TransactionType BountyBonusesPayment = new TransactionType("831", "BuySell бонусы юзеру", nameof(BountyBonusesPayment));
@@ -206,7 +207,7 @@ namespace TLabs.ExchangeSdk.Depository
             AffiliateTariffPurchase, AffiliateTariffPurchaseRollback,
             AffiliateDealCommission, AffiliateWithdrawalCommission, AffiliateCurrencyListing, AffiliateApiTradeProfitPayment,
             AffiliateClear,
-            AffiliateProfitPayment, AffiliateBonusesPayment,
+            AffiliateProfitPayment, AffiliateBonusesPayment, StakingAffiliateBonusPayment,
 
             BountyDistributionDeposit, BountyBonusesPayment,
 
