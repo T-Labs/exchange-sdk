@@ -4,7 +4,7 @@ using TLabs.ExchangeSdk.RabbitMq;
 namespace TLabs.ExchangeSdk.Affiliate
 {
     /// <summary>Message sent when staking accrual is deposited to user</summary>
-    public class StakingAffiliateAccrualMessage : Message
+    public class AffiliateStakeAccrualMessage : Message
     {
         /// <summary>User who received the staking accrual</summary>
         public string UserId { get; set; }

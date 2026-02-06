@@ -4,7 +4,7 @@ using TLabs.ExchangeSdk.RabbitMq;
 namespace TLabs.ExchangeSdk.Affiliate
 {
     /// <summary>Message sent when user stake is created or released</summary>
-    public class StakingAffiliateStakeChangedMessage : Message
+    public class AffiliateStakeChangedMessage : Message
     {
         /// <summary>User who created/released the stake</summary>
         public string UserId { get; set; }

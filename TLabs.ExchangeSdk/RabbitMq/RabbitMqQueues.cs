@@ -16,7 +16,7 @@ namespace TLabs.ExchangeSdk.RabbitMq
         public const string Exchanger = "exchanger-refill";
 
         // Staking Affiliate
-        public const string StakingAffiliateStakeChanged = "staking-affiliate-stake-changed";
-        public const string StakingAffiliateAccrual = "staking-affiliate-accrual";
+        public const string AffiliateStakeChanged = "affiliate-stake-changed";
+        public const string AffiliateStakeAccrual = "affiliate-stake-accrual";
     }
 }
