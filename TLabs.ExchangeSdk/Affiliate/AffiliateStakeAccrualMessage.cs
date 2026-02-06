@@ -18,9 +18,6 @@ namespace TLabs.ExchangeSdk.Affiliate
         /// <summary>Currency code of the accrual</summary>
         public string CurrencyCode { get; set; }
 
-        /// <summary>Accrual amount converted to USD at time of event</summary>
-        public decimal AccrualAmountUsd { get; set; }
-
         /// <summary>Time when the accrual was generated</summary>
         public DateTimeOffset AccrualTime { get; set; }
     }

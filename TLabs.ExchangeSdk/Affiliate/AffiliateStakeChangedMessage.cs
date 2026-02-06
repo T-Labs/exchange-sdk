@@ -15,13 +15,7 @@ namespace TLabs.ExchangeSdk.Affiliate
         /// <summary>True if stake was created, false if released</summary>
         public bool IsStakeCreated { get; set; }
 
-        /// <summary>Stake amount in original currency</summary>
-        public decimal StakeAmountInCurrency { get; set; }
-
         /// <summary>Currency code of the stake</summary>
         public string CurrencyCode { get; set; }
-
-        /// <summary>Stake amount converted to USD at time of event</summary>
-        public decimal StakeAmountUsd { get; set; }
     }
 }
