@@ -17,6 +17,5 @@ namespace TLabs.ExchangeSdk.RabbitMq
 
         // Staking Affiliate
         public const string AffiliateStakeChanged = "affiliate-stake-changed";
-        public const string AffiliateStakeAccrual = "affiliate-stake-accrual";
     }
 }
