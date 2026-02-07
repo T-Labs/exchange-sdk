@@ -93,8 +93,6 @@ namespace TLabs.ExchangeSdk.Depository
         public static readonly TransactionType ExchangeCommission = new TransactionType("436", "Комиссия обмена", nameof(ExchangeCommission));
         public static readonly TransactionType ExchangeCommissionConsolidation = new TransactionType("441", "Консолидация комиссии обмена", nameof(ExchangeCommissionConsolidation));
 
-        public static readonly TransactionType AffiliateTariffPurchase = new TransactionType("801", "Покупка RefferalTariff", nameof(AffiliateTariffPurchase));
-        public static readonly TransactionType AffiliateTariffPurchaseRollback = new TransactionType("802", "Откат покупки RefferalTariff", nameof(AffiliateTariffPurchaseRollback));
         public static readonly TransactionType AffiliateDealCommission = new TransactionType("803", "Refferal комиссия сделки", nameof(AffiliateDealCommission));
         public static readonly TransactionType AffiliateWithdrawalCommission = new TransactionType("805", "Refferal комиссия вывода", nameof(AffiliateWithdrawalCommission));
         public static readonly TransactionType AffiliateCurrencyListing = new TransactionType("806", "Refferal листинга валюты", nameof(AffiliateCurrencyListing));
@@ -204,7 +202,6 @@ namespace TLabs.ExchangeSdk.Depository
             ExchangeTransfer, ExchangeTransferBegin, ExchangeTransferEnd,
             ExchangeMarkup, ExchangeCommission, ExchangeCommissionConsolidation,
 
-            AffiliateTariffPurchase, AffiliateTariffPurchaseRollback,
             AffiliateDealCommission, AffiliateWithdrawalCommission, AffiliateCurrencyListing, AffiliateApiTradeProfitPayment,
             AffiliateClear,
             AffiliateProfitPayment, AffiliateBonusesPayment, StakingAffiliateBonusPayment,
