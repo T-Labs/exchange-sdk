@@ -92,6 +92,8 @@ namespace TLabs.ExchangeSdk.Depository
             return result;
         }
 
+        #region Balances
+
         public async Task<List<AccountBalance>> GetAccountsBalances(string userId = null, string currencyCode = null,
             List<string> accountChartCodes = null, DateTimeOffset? toDate = null)
         {
@@ -123,6 +125,15 @@ namespace TLabs.ExchangeSdk.Depository
                 .GetJsonAsync<decimal>();
             return result;
         }
+
+        public async Task<decimal> GetBalanceByAccountId(Guid accountId)
+        {
+            var result = await $"depository/account/{accountId}/balances".InternalApi()
+                .GetJsonAsync<decimal>();
+            return result;
+        }
+
+        #endregion Balances
 
         public async Task<List<TurnoversDto>> GetTurnoversDtos(string userId = null, DateTimeOffset? toDate = null)
         {
