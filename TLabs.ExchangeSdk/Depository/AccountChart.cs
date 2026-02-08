@@ -24,6 +24,7 @@ namespace TLabs.ExchangeSdk.Depository
         public static readonly AccountChart WithdrawalNetworkCommissionFunds = new AccountChart("32", "Фонды служебных расходов на комиссию сети вывода", nameof(WithdrawalNetworkCommissionFunds));
         public static readonly AccountChart FundAffiliateBonusesForDistribution = new AccountChart("346", "Фонд Affiliate бонусов для распределения", nameof(FundAffiliateBonusesForDistribution));
         public static readonly AccountChart FundAffiliateProfits = new AccountChart("347", "Фонд Affiliate прибыли", nameof(FundAffiliateProfits));
+        public static readonly AccountChart FundAffiliateProfitsStaking = new AccountChart("348", "Фонд Affiliate прибыли по стейкингам", nameof(FundAffiliateProfitsStaking));
         public static readonly AccountChart FundBountyBonusesForDistribution = new AccountChart("349", "Фонд BuySell бонусов для распределения", nameof(FundBountyBonusesForDistribution));
         public static readonly AccountChart FundPaymentsComission = new AccountChart("351", "Фонд комиссий платежей", nameof(FundPaymentsComission));
         public static readonly AccountChart Nullification = new AccountChart("359", "Обнуление баланса", nameof(Nullification));
@@ -37,8 +38,9 @@ namespace TLabs.ExchangeSdk.Depository
         public static readonly AccountChart Deposit = new AccountChart("5", "Введеные средства", nameof(Deposit));
         public static readonly AccountChart DepositAdmin = new AccountChart("51", "Введеные средства админом", nameof(DepositAdmin));
         public static readonly AccountChart DepositCash = new AccountChart("52", "Введеные средства наличными", nameof(DepositCash));
-        public static readonly AccountChart DepositStaking = new AccountChart("54", "Введеные средства стейкингом", nameof(DepositStaking));
         public static readonly AccountChart DepositAirdrop = new AccountChart("53", "Введеные средства аирдропом", nameof(DepositAirdrop));
+        public static readonly AccountChart DepositStaking = new AccountChart("54", "Введеные средства стейкингом", nameof(DepositStaking));
+        public static readonly AccountChart DepositStakingAffiliate = new AccountChart("55", "Введеные средства партнерке по стейкингу", nameof(DepositStakingAffiliate));
         public static readonly AccountChart DepositToFunds = new AccountChart("56", "Введеные средства на фонды", nameof(DepositToFunds));
         public static readonly AccountChart DepositReplacement = new AccountChart("58", "Введеные средства взамен удаленной валюты", nameof(DepositReplacement));
         public static readonly AccountChart DepositCorrection = new AccountChart("59", "Корректировочное пополнение баланса", nameof(DepositCorrection));
@@ -116,7 +118,7 @@ namespace TLabs.ExchangeSdk.Depository
         public static readonly List<AccountChart> All = new List<AccountChart>(UsersPersonalCharts)
         {
             Funds,
-            FundAffiliateBonusesForDistribution, FundAffiliateProfits,
+            FundAffiliateBonusesForDistribution, FundAffiliateProfits, FundAffiliateProfitsStaking,
             FundBot, FundBotProfits, FundPaymentsComission, FundsDeposit, FundsWithdrawal,
             FundBountyBonusesForDistribution,
             Nullification,

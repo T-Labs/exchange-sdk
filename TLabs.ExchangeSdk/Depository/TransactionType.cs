@@ -100,7 +100,9 @@ namespace TLabs.ExchangeSdk.Depository
         public static readonly TransactionType AffiliateStakeAccrual = new TransactionType("808", "Refferal стейкинг начисление", nameof(AffiliateStakeAccrual));
         public static readonly TransactionType AffiliateClear = new TransactionType("809", "Affiliate очистка аккаунтов", nameof(AffiliateClear));
         public static readonly TransactionType AffiliateProfitPayment = new TransactionType("813", "Affiliate прибыль системе", nameof(AffiliateProfitPayment));
+        public static readonly TransactionType AffiliateStakingProfitPayment = new TransactionType("814", "Affiliate прибыль системе по стейкингам", nameof(AffiliateStakingProfitPayment));
         public static readonly TransactionType AffiliateBonusesPayment = new TransactionType("815", "Affiliate бонусы юзеру", nameof(AffiliateBonusesPayment));
+        public static readonly TransactionType AffiliateStakingBonusesPayment = new TransactionType("816", "Affiliate бонусы юзеру по стейкингам", nameof(AffiliateStakingBonusesPayment));
 
         public static readonly TransactionType BountyDistributionDeposit = new TransactionType("830", "Пополнение BuySell бонусов", nameof(BountyDistributionDeposit));
         public static readonly TransactionType BountyBonusesPayment = new TransactionType("831", "BuySell бонусы юзеру", nameof(BountyBonusesPayment));
@@ -203,8 +205,9 @@ namespace TLabs.ExchangeSdk.Depository
             ExchangeMarkup, ExchangeCommission, ExchangeCommissionConsolidation,
 
             AffiliateDealCommission, AffiliateWithdrawalCommission, AffiliateCurrencyListing, AffiliateApiTradeProfitPayment,
-            AffiliateClear,
-            AffiliateProfitPayment, AffiliateBonusesPayment, AffiliateStakeAccrual,
+            AffiliateStakeAccrual, AffiliateClear,
+            AffiliateProfitPayment, AffiliateStakingProfitPayment,
+            AffiliateBonusesPayment, AffiliateStakingBonusesPayment,
 
             BountyDistributionDeposit, BountyBonusesPayment,
 
