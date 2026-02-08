@@ -80,6 +80,18 @@ namespace TLabs.ExchangeSdk.Depository
             return result;
         }
 
+        public async Task<QueryResult<List<TransactionDto>>> GetTransactionsByAccountId(Guid accountId,
+            DateTimeOffset? from = null, DateTimeOffset? to = null, List<string> transactionTypes = null)
+        {
+            var request = "depository/transaction/by-account".InternalApi()
+                .SetQueryParam(nameof(accountId), accountId)
+                .SetQueryParam(nameof(from), from?.RemoveTimePart().ToString("o"))
+                .SetQueryParam(nameof(to), to?.RemoveTimePart().ToString("o"))
+                .SetQueryParam(nameof(transactionTypes), transactionTypes);
+            var result = await request.GetJsonAsync<List<TransactionDto>>().GetQueryResult();
+            return result;
+        }
+
         public async Task<List<AccountBalance>> GetAccountsBalances(string userId = null, string currencyCode = null,
             List<string> accountChartCodes = null, DateTimeOffset? toDate = null)
         {
