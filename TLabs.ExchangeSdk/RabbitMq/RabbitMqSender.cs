@@ -26,8 +26,8 @@ namespace TLabs.ExchangeSdk.RabbitMq
 
         public QueryResult Send(string queue, Message message)
         {
-            if (message.Id == Guid.Empty)
-                message.Id = Guid.NewGuid();
+            if (message.Id.NotHasValue())
+                message.Id = Guid.NewGuid().ToString();
             message.Created = DateTimeOffset.UtcNow;
 
             string urlRabbitMq = _config["RabbitMqConnection"];
