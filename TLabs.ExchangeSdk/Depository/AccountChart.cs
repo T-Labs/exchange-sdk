@@ -123,7 +123,8 @@ namespace TLabs.ExchangeSdk.Depository
             FundBountyBonusesForDistribution,
             Nullification,
 
-            Deposit, DepositAdmin, DepositCash, DepositStaking, DepositAirdrop, DepositToFunds, DepositReplacement, DepositCorrection,
+            Deposit, DepositAdmin, DepositCash, DepositStaking, DepositStakingAffiliate, DepositAirdrop, DepositToFunds,
+            DepositReplacement, DepositCorrection,
 
             Withdrawn,
             ColdWallets,
@@ -133,7 +134,8 @@ namespace TLabs.ExchangeSdk.Depository
 
         public static readonly List<AccountChart> DepositCharts = new List<AccountChart>
         {
-            Deposit, DepositAdmin, DepositCash, DepositStaking, DepositAirdrop, DepositToFunds, DepositReplacement, DepositCorrection,
+            Deposit, DepositAdmin, DepositCash, DepositStaking, DepositAirdrop, DepositToFunds,
+            DepositReplacement, DepositCorrection,
         };
 
         public static readonly List<AccountChart> ChartsWithAdapterCode = new List<AccountChart>
