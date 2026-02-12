@@ -103,7 +103,7 @@ namespace TLabs.ExchangeSdk.Depository
             CurrencyListingPaymentBlocked,
             CurrencyOfferingsBlocked, CurrencyOfferingsVesting,
 
-            FundBot, FundTradingBot,FundLiquidityBot,
+            FundTradingBot,FundLiquidityBot,
 
             BwpInvoiceCryptoBlockedTemp, BwpInvoiceCryptoBlocked, BwpInvoiceCryptoBlockCanceledTemp,
             BwpCryptoPaymentToMerchantTemp,
@@ -119,7 +119,7 @@ namespace TLabs.ExchangeSdk.Depository
         {
             Funds,
             FundAffiliateBonusesForDistribution, FundAffiliateProfits, FundAffiliateProfitsStaking,
-            FundBotProfits, FundPaymentsComission, FundsDeposit, FundsWithdrawal,
+            FundBot, FundBotProfits, FundPaymentsComission, FundsDeposit, FundsWithdrawal,
             FundBountyBonusesForDistribution,
             Nullification,
 
