@@ -6,7 +6,7 @@ namespace TLabs.ExchangeSdk.Affiliate
     /// <summary>profit</summary>
     public class Profit
     {
-        public Guid MessageId { get; set; }
+        public string MessageId { get; set; }
 
         /// <summary>User who made profit for referrers</summary>
         public string UserId { get; set; }
