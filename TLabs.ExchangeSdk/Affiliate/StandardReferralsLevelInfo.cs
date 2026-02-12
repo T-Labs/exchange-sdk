@@ -1,6 +1,6 @@
 namespace TLabs.ExchangeSdk.Affiliate
 {
-    public class ReferralsLevelInfo
+    public class StandardReferralsLevelInfo
     {
         public int Level { get; set; }
 

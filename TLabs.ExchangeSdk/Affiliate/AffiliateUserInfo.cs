@@ -13,7 +13,7 @@ namespace TLabs.ExchangeSdk.Affiliate
         /// <summary>
         /// Info of referrals on each level
         /// </summary>
-        public List<ReferralsLevelInfo> ReferralsLevelInfos { get; set; } = new List<ReferralsLevelInfo>();
+        public List<StandardReferralsLevelInfo> ReferralsLevelInfos { get; set; } = new();
 
         public decimal TotalProfitAmount =>
             ReferralsLevelInfos?.Select(_ => _.ProfitAmount).DefaultIfEmpty(0).Sum() ?? 0;
