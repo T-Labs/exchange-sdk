@@ -1,8 +1,8 @@
-using Flurl.Http;
-using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Flurl.Http;
+using Microsoft.Extensions.Logging;
 using TLabs.DotnetHelpers;
 
 namespace TLabs.ExchangeSdk.Staking
@@ -74,6 +74,14 @@ namespace TLabs.ExchangeSdk.Staking
                 .SetQueryParam(nameof(userId), userId)
                 .SetQueryParam(nameof(status), status?.ToString())
                 .GetJsonAsync<List<UserStake>>().GetQueryResult();
+            return result.Succeeded ? result.Data : null;
+        }
+
+        public async Task<UserStake> GetUserStake(string userId, Guid stakeId)
+        {
+            var result = await $"brokerage/staking/user-stakes/{stakeId}".InternalApi()
+                .SetQueryParam(nameof(userId), userId)
+                .GetJsonAsync<UserStake>().GetQueryResult();
             return result.Succeeded ? result.Data : null;
         }
 
