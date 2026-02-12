@@ -119,7 +119,7 @@ namespace TLabs.ExchangeSdk.Depository
         {
             Funds,
             FundAffiliateBonusesForDistribution, FundAffiliateProfits, FundAffiliateProfitsStaking,
-            FundBot, FundBotProfits, FundPaymentsComission, FundsDeposit, FundsWithdrawal,
+            FundBotProfits, FundPaymentsComission, FundsDeposit, FundsWithdrawal,
             FundBountyBonusesForDistribution,
             Nullification,
 

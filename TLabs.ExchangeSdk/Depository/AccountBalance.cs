@@ -13,5 +13,8 @@ namespace TLabs.ExchangeSdk.Depository
         public string UserId { get; set; }
 
         public decimal Balance { get; set; }
+
+        public override string ToString() =>
+            $"{nameof(AccountBalance)}({AccountChart?.ValueKey}, {Balance} {CurrencyCode}, user:{UserId} )";
     }
 }
