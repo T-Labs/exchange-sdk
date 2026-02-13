@@ -146,7 +146,7 @@ namespace TLabs.ExchangeSdk.Trading
 
         public async Task<decimal> GetTotalDailyVolumeUsdt()
         {
-            var result = await $"api/deals/total-daily-volume-usdt".InternalApi()
+            var result = await $"marketdata/deals/total-daily-volume-usdt".InternalApi()
                 .GetJsonAsync<decimal>();
             return result;
         }
