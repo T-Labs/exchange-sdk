@@ -8,7 +8,7 @@ using TLabs.ExchangeSdk.Currencies;
 
 namespace TLabs.ExchangeSdk.Trading
 {
-    public static class MarketdataHelper
+    public static class QuotesHelper
     {
 
         /// <summary>Calculate equivalent of amount</summary>

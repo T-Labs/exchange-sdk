@@ -143,5 +143,12 @@ namespace TLabs.ExchangeSdk.Trading
                 .GetStringAsync();
             return decimal.Parse(priceStr);
         }
+
+        public async Task<decimal> GetTotalDailyVolumeUsdt()
+        {
+            var result = await $"api/deals/total-daily-volume-usdt".InternalApi()
+                .GetJsonAsync<decimal>();
+            return result;
+        }
     }
 }
