@@ -56,6 +56,8 @@ namespace TLabs.ExchangeSdk
             services.AddSingleton<Farming.TenantsCache>();
 
             services.AddTransient<ClientTradingInnerBot>();
+
+            services.AddTransient<Questionnaires.ClientQuestionnaires>();
         }
     }
 }
