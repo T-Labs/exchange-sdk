@@ -42,4 +42,15 @@ namespace TLabs.ExchangeSdk.RabbitMq
         public override string ToString() =>
             $"{nameof(NotificationEmail)}(to {To}, {Subject}, \nHtmlBody: {HtmlBody}\nBody: {Body})";
     }
+
+    public class NotificationTelegram : NotificationMessage
+    {
+        public NotificationTelegram()
+        {
+            Type = NotificationMessageType.Telegram;
+        }
+
+        public long? TelegramId { get; set; }
+        public string Message { get; set; }
+    }
 }
