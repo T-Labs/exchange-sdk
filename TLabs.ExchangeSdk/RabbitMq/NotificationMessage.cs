@@ -12,7 +12,7 @@ namespace TLabs.ExchangeSdk.RabbitMq
         public UserGroup UserGroup { get; set; } = UserGroup.SingleUser;
     }
 
-    public enum NotificationMessageType { EMail = 1, SMS = 2, EMailTemplate = 3 }
+    public enum NotificationMessageType { EMail = 1, SMS = 2, EMailTemplate = 3, Telegram = 4 }
 
     public enum UserGroup { SingleUser = 1, Admins = 2 }
 
