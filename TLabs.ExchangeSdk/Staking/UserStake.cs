@@ -30,6 +30,9 @@ namespace TLabs.ExchangeSdk.Staking
 
         public decimal SingleAccrualAmount { get; set; }
 
+        /// <summary>How much will go to AccountChart UserBonuses</summary>
+        public decimal PercentageToUserBonuses { get; set; }
+
         public DateTimeOffset DateStarted { get; set; }
 
         public DateTimeOffset DateEnding { get; set; }

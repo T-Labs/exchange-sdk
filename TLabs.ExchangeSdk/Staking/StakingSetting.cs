@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel.DataAnnotations;
+using TLabs.ExchangeSdk.Currencies;
 
 namespace TLabs.ExchangeSdk.Staking
 {
@@ -16,11 +17,18 @@ namespace TLabs.ExchangeSdk.Staking
 
         public decimal YearlyAccrualPercentage { get; set; }
 
-        public decimal MinBaseCurrencyAmount { get; set; }
+        public decimal MinAmountUsdt { get; set; }
+
+        public Currency BaseCurrency { get; set; }
+
+        public decimal? MinAmountBaseCurrency { get; set; }
 
         public int LockPeriodDays { get; set; }
 
         public bool NotificationNeeded { get; set; }
+
+        /// <summary>How much will go to AccountChart UserBonuses</summary>
+        public decimal PercentageToUserBonuses { get; set; }
 
         public DateTimeOffset DateCreated { get; set; }
 
