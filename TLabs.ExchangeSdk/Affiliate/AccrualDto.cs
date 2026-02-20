@@ -15,5 +15,7 @@ namespace TLabs.ExchangeSdk.Affiliate
         public decimal Amount { get; set; }
 
         public string CurrencyCode { get; set; }
+
+        public bool IsToUserBonuses { get; set; }
     }
 }
