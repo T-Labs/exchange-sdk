@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using TLabs.ExchangeSdk.Currencies;
 
 namespace TLabs.ExchangeSdk.Staking
@@ -19,9 +20,9 @@ namespace TLabs.ExchangeSdk.Staking
 
         public decimal MinAmountUsdt { get; set; }
 
-        public Currency BaseCurrency { get; set; }
-
-        public decimal? MinAmountBaseCurrency { get; set; }
+        /// <summary>Calculated from MinAmountUsdt</summary>
+        [NotMapped]
+        public decimal MinAmountBaseCurrency { get; set; }
 
         public int LockPeriodDays { get; set; }
 
