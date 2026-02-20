@@ -16,6 +16,7 @@ namespace TLabs.ExchangeSdk.Depository
         public string ValueKey { get; set; }
 
         public static readonly AccountChart Users = new AccountChart("1", "Средства пользователей", nameof(Users));
+        public static readonly AccountChart UserBonuses = new AccountChart("1010", "Бонусный счет пользователя", nameof(UserBonuses));
 
         public static readonly AccountChart FundsDeposit = new AccountChart("38", "Пополнение фондов", nameof(FundsDeposit));
         public static readonly AccountChart FundsWithdrawal = new AccountChart("39", "Выводы из фондов", nameof(FundsWithdrawal));
@@ -95,7 +96,7 @@ namespace TLabs.ExchangeSdk.Depository
         /// <summary>Accounts that have UserId</summary>
         public static readonly List<AccountChart> UsersPersonalCharts = new List<AccountChart>
         {
-            Users,
+            Users, UserBonuses,
             BlockedForExchangeTransfer,
             BlockedForOrder, BlockedForCancelOrder, BlockedForDeal, OnOrders,
             WithdrawalBlockedTemp, WithdrawalBlocked, WithdrawalBlockCanceledTemp, WithdrawnTemp, WithdrawalStockCommissionTemp,
