@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace TLabs.ExchangeSdk.Depository
 {
+
     public class TransactionType
     {
         /// <summary>
@@ -100,10 +101,11 @@ namespace TLabs.ExchangeSdk.Depository
         public static readonly TransactionType AffiliateApiTradeProfitPayment = new TransactionType("807", "Refferal оплаты за прибыль ApiTrade", nameof(AffiliateApiTradeProfitPayment));
         public static readonly TransactionType AffiliateStakeAccrual = new TransactionType("808", "Refferal стейкинг начисление", nameof(AffiliateStakeAccrual));
         public static readonly TransactionType AffiliateClear = new TransactionType("809", "Affiliate очистка аккаунтов", nameof(AffiliateClear));
-        public static readonly TransactionType AffiliateProfitPayment = new TransactionType("813", "Affiliate прибыль системе", nameof(AffiliateProfitPayment));
-        public static readonly TransactionType AffiliateStakingProfitPayment = new TransactionType("814", "Affiliate прибыль системе по стейкингам", nameof(AffiliateStakingProfitPayment));
-        public static readonly TransactionType AffiliateBonusesPayment = new TransactionType("815", "Affiliate бонусы юзеру", nameof(AffiliateBonusesPayment));
-        public static readonly TransactionType AffiliateStakingBonusesPayment = new TransactionType("816", "Affiliate бонусы юзеру по стейкингам", nameof(AffiliateStakingBonusesPayment));
+        public static readonly TransactionType AffiliateSystemProfit = new TransactionType("813", "Affiliate прибыль системе", nameof(AffiliateSystemProfit));
+        public static readonly TransactionType AffiliateStakingSystemProfit = new TransactionType("814", "Affiliate прибыль системе по стейкингам", nameof(AffiliateStakingSystemProfit));
+        public static readonly TransactionType AffiliateUserProfit = new TransactionType("815", "Affiliate прибыль юзеру", nameof(AffiliateUserProfit));
+        public static readonly TransactionType AffiliateStakingUserProfit = new TransactionType("816", "Affiliate прибыль юзеру по стейкингам", nameof(AffiliateStakingUserProfit));
+        public static readonly TransactionType AffiliateStakingUserProfitToBonuses = new TransactionType("817", "Affiliate прибыль юзеру по стейкингам на бонусный счёт", nameof(AffiliateStakingUserProfitToBonuses));
 
         public static readonly TransactionType BountyDistributionDeposit = new TransactionType("830", "Пополнение BuySell бонусов", nameof(BountyDistributionDeposit));
         public static readonly TransactionType BountyBonusesPayment = new TransactionType("831", "BuySell бонусы юзеру", nameof(BountyBonusesPayment));
@@ -207,8 +209,8 @@ namespace TLabs.ExchangeSdk.Depository
 
             AffiliateDealCommission, AffiliateWithdrawalCommission, AffiliateCurrencyListing, AffiliateApiTradeProfitPayment,
             AffiliateStakeAccrual, AffiliateClear,
-            AffiliateProfitPayment, AffiliateStakingProfitPayment,
-            AffiliateBonusesPayment, AffiliateStakingBonusesPayment,
+            AffiliateSystemProfit, AffiliateStakingSystemProfit,
+            AffiliateUserProfit, AffiliateStakingUserProfit, AffiliateStakingUserProfitToBonuses,
 
             BountyDistributionDeposit, BountyBonusesPayment,
 
