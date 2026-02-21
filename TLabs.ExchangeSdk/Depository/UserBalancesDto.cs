@@ -7,6 +7,7 @@ namespace TLabs.ExchangeSdk.Depository
         public List<Balance> Balances { get; set; } = new();
         public List<Balance> BalancesBlockedInOrder { get; set; } = new();
         public List<Balance> BalancesInCurrencyOfferingsVesting { get; set; } = new();
+        public List<Balance> BalancesUserBonuses { get; set; } = new();
 
         public class Balance
         {
