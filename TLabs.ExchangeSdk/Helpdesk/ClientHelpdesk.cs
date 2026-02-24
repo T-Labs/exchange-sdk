@@ -1,8 +1,7 @@
-using Flurl.Http;
-using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Flurl.Http;
 using TLabs.DotnetHelpers;
 
 namespace TLabs.ExchangeSdk.Helpdesk
@@ -36,7 +35,7 @@ namespace TLabs.ExchangeSdk.Helpdesk
 
         public async Task AddMessage(AddTicketMessageDto model)
         {
-            await $"helpdesk/helpdesk/message".InternalApi()
+            await $"helpdesk/helpdesk/messages".InternalApi()
                 .PostJsonAsync(model);
         }
 
