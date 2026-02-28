@@ -49,6 +49,8 @@ namespace TLabs.ExchangeSdk.Users
         /// <summary>Only used in BWP project. Admin should confirm user if he is a Merchant or a Trader</summary>
         public bool IsBwpUserConfirmed { get; set; }
 
+        public string AvatarId { get; set; } = "simple";
+
         public bool TwoFactorEmail {
             get => FlagsHelper.IsSet(TwoFactorMethods, TwoFactorMethods.Email);
             set => TwoFactorMethods =

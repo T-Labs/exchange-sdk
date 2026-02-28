@@ -141,6 +141,11 @@ namespace TLabs.ExchangeSdk.Users
             await $"userprofiles/users/{userId}/nickname".InternalApi().PostJsonAsync(nickname);
         }
 
+        public async Task SetAvatarId(string userId, string avatarId)
+        {
+            await $"userprofiles/users/{userId}/avatar-id".InternalApi().PostJsonAsync(avatarId);
+        }
+
         public async Task<bool> IsGoogleAuthenticatorActive(string userId)
         {
             return await $"userprofiles/users/login-ga-required/{userId}".InternalApi()
