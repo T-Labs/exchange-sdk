@@ -32,10 +32,13 @@ namespace TLabs.ExchangeSdk.Affiliate.StakingAffiliate
             return result;
         }
 
-        public async Task<List<StakingDirectReferralDto>> GetDirectReferrals(string userId)
+        /// <param name="level">Referral depth: 1 = direct referrals, 2 = referrals of direct referrals, null = all levels</param>
+        public async Task<List<StakingDirectReferralDto>> GetReferrals(string userId, int? level = null)
         {
-            var result = await $"{BaseUrl}/direct-referrals/{userId}".InternalApi()
-                .GetJsonAsync<List<StakingDirectReferralDto>>();
+            var request = $"{BaseUrl}/referrals/{userId}".InternalApi();
+            if (level.HasValue)
+                request = request.SetQueryParam(nameof(level), level.Value);
+            var result = await request.GetJsonAsync<List<StakingDirectReferralDto>>();
             return result;
         }
 
