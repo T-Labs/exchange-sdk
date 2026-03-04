@@ -1,7 +1,7 @@
-using Flurl.Http;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Flurl.Http;
 using TLabs.DotnetHelpers;
 using TLabs.ExchangeSdk.Currencies;
 
@@ -77,6 +77,13 @@ namespace TLabs.ExchangeSdk.Depository
             var result = await $"depository/transaction/actionid-transactions".InternalApi()
                 .WithTimeout(TimeSpan.FromMinutes(10))
                 .PostJsonAsync<List<TransactionDto>>(actionIds);
+            return result;
+        }
+
+        public async Task<TransactionDto> GetTransactionById(string txId)
+        {
+            var result = await $"depository/transaction/GetTransaction/{txId}".InternalApi()
+                .GetJsonAsync<TransactionDto>();
             return result;
         }
 
