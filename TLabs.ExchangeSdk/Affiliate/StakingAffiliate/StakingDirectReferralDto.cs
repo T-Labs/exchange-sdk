@@ -9,5 +9,6 @@ namespace TLabs.ExchangeSdk.Affiliate.StakingAffiliate
         public decimal ReferralsStakingTokens { get; set; }
         public decimal PersonalStakingTokens { get; set; }
         public decimal PersonalStakingUsdt { get; set; }
+        public bool HasEverStaked { get; set; }
     }
 }
