@@ -4,6 +4,7 @@ namespace TLabs.ExchangeSdk.Affiliate.StakingAffiliate
     {
         public string CurrentLevel { get; set; }
         public int TotalDescendantsCount { get; set; }
+        public int ActiveStakersCount { get; set; }
         public decimal PersonalStakingTokens { get; set; }
         public decimal PersonalStakingUsdt { get; set; }
         public decimal ReferralsStakingTokens { get; set; }
