@@ -1,9 +1,8 @@
-using Flurl.Http;
-using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
+using Flurl.Http;
+using Microsoft.Extensions.Logging;
 using TLabs.DotnetHelpers;
 
 namespace TLabs.ExchangeSdk.Affiliate
@@ -22,6 +21,13 @@ namespace TLabs.ExchangeSdk.Affiliate
         {
             var result = await $"affiliate/users/by-ids".InternalApi()
                 .PostJsonAsync<List<ReferralUser>>(userIds);
+            return result;
+        }
+
+        public async Task<ReferralUser> GetUser(string inviteCode)
+        {
+            var result = await $"affiliate/users/{inviteCode}".InternalApi()
+                .GetJsonAsync<ReferralUser>();
             return result;
         }
 
