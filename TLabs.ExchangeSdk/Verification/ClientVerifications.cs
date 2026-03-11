@@ -1,11 +1,8 @@
-using Flurl.Http;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Http;
 using System.Threading.Tasks;
+using Flurl.Http;
 using TLabs.DotnetHelpers;
 using TLabs.ExchangeSdk.Users;
 
@@ -77,6 +74,12 @@ namespace TLabs.ExchangeSdk.Verification
             return await $"verification/citizenships/{citizenshipId}/user-ids".InternalApi()
                 .WithTimeout(TimeSpan.FromMinutes(10))
                 .GetJsonAsync<List<string>>();
+        }
+
+        public async Task UpdateFio(VerificationNameDto dto, string userId)
+        {
+            await $"verification/verifications/{userId}/fio".InternalApi()
+                .PutJsonAsync(dto);
         }
 
         public async Task<string> Healthcheck() =>
