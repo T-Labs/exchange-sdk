@@ -76,12 +76,6 @@ namespace TLabs.ExchangeSdk.Verification
                 .GetJsonAsync<List<string>>();
         }
 
-        public async Task UpdateFio(VerificationNameDto dto, string userId)
-        {
-            await $"verification/verifications/{userId}/fio".InternalApi()
-                .PutJsonAsync(dto);
-        }
-
         public async Task<string> Healthcheck() =>
             await $"verification/healthcheck".InternalApi().GetStringAsync();
     }
