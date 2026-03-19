@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace TLabs.ExchangeSdk.Helpdesk
 {
@@ -25,5 +26,7 @@ namespace TLabs.ExchangeSdk.Helpdesk
         public DateTimeOffset Created { get; set; }
 
         public HelpdeskTicket HelpdeskTicket { get; set; }
+
+        public List<File> Files { get; set; }
     }
 }
