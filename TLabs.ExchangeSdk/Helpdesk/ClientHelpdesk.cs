@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Flurl.Http;
+using Microsoft.AspNetCore.Http;
 using TLabs.DotnetHelpers;
 
 namespace TLabs.ExchangeSdk.Helpdesk
@@ -10,6 +11,22 @@ namespace TLabs.ExchangeSdk.Helpdesk
     {
         public ClientHelpdesk()
         {
+        }
+
+        public async Task<byte[]> GetFile(Guid fileId)
+        {
+            return await $"helpdesk/files/{fileId}".InternalApi().GetBytesAsync();
+        }
+
+        public async Task<Guid> UploadFile(IFormFile file)
+        {
+            var uploadFileResponse = await "helpdesk/files".InternalApi().PostMultipartAsync((content) =>
+            {
+                content.AddFile("file", file.OpenReadStream(), file.FileName, file.ContentType);
+            });
+            var fileId = await uploadFileResponse.GetJsonAsync<Guid>();
+
+            return fileId;
         }
 
         public async Task<List<HelpdeskTicket>> GetTickets(string userId = null)
