@@ -42,7 +42,7 @@ namespace TLabs.ExchangeSdk.Staking
         public DateTimeOffset DateLastAccrual { get; set; }
 
 
-        public decimal SingleAccrualRate => YearlyAccrualPercentage / 100m / 365 / 3;
+        public decimal SingleAccrualRate => YearlyAccrualPercentage / 100m / 365;
 
         public override string ToString() => $"{nameof(UserStake)}(Id:{Id}, userId:{UserId}, status:{Status}, settingId:{StakingSettingId}, " +
             $"amount:{Amount}, yearlyRate:{YearlyAccrualPercentage}%, singleAccrual:{SingleAccrualAmount}, " +
