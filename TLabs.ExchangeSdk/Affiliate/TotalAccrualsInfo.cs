@@ -1,8 +1,4 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TLabs.ExchangeSdk.Affiliate
 {
@@ -13,6 +9,10 @@ namespace TLabs.ExchangeSdk.Affiliate
 
         /// <summary>Readable referral identificator</summary>
         public string FromUsername { get; set; }
+
+        public string Name { get; set; }
+
+        public string SecondName { get; set; }
 
         public int Level { get; set; }
 
