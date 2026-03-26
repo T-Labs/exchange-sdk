@@ -51,6 +51,8 @@ namespace TLabs.ExchangeSdk.Users
 
         public string AvatarId { get; set; } = "simple";
 
+        public string TelegramLogin { get; set; }
+
         public bool TwoFactorEmail {
             get => FlagsHelper.IsSet(TwoFactorMethods, TwoFactorMethods.Email);
             set => TwoFactorMethods =
