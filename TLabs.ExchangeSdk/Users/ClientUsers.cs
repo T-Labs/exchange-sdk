@@ -1,14 +1,14 @@
-using Flurl.Http;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Http.HttpResults;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Flurl.Http;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using TLabs.DotnetHelpers;
 using TLabs.ExchangeSdk.Farming;
 
@@ -139,6 +139,14 @@ namespace TLabs.ExchangeSdk.Users
         public async Task SetNickname(string userId, string nickname)
         {
             await $"userprofiles/users/{userId}/nickname".InternalApi().PostJsonAsync(nickname);
+        }
+
+        public async Task<QueryResult> UpdateNames(string userId, NamesDto dto)
+        {
+            return await $"userprofiles/users/{userId}/names"
+                .InternalApi()
+                .PutJsonAsync(dto)
+                .GetQueryResult();
         }
 
         public async Task SetAvatarId(string userId, string avatarId)
