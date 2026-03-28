@@ -23,5 +23,12 @@ namespace TLabs.ExchangeSdk.Currencies
                 .PutJsonAsync(newValue);
             return result;
         }
+
+        public string GetExplorerUrlByTransactionHash(string currencyCode, string txId)
+        {
+            var result = CurrencyExplorer.GetTxUrl(currencyCode, txId);
+
+            return result;
+        }
     }
 }
