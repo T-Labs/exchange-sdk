@@ -122,6 +122,13 @@ namespace TLabs.ExchangeSdk.Users
             return result;
         }
 
+        public async Task SetUserRecordEmailRequest(string userId, string email)
+        {
+            await $"userprofiles/users/{userId}/record-email-request".InternalApi()
+                .SetQueryParam(nameof(email), email)
+                .PostJsonAsync(null);
+        }
+
         public async Task SetUserEmailConfirmed(string userId, bool isConfirmed)
         {
             await $"userprofiles/users/{userId}/email-confirm".InternalApi()
