@@ -1,7 +1,7 @@
-using Flurl.Http;
-using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Flurl.Http;
+using Microsoft.Extensions.Logging;
 using TLabs.DotnetHelpers;
 
 namespace TLabs.ExchangeSdk.Affiliate.StakingAffiliate
@@ -33,9 +33,11 @@ namespace TLabs.ExchangeSdk.Affiliate.StakingAffiliate
         }
 
         /// <param name="referralsDepth">Referral depth: 1 = direct referrals, 2 = referrals of direct referrals, null = all levels</param>
-        public async Task<List<StakingDirectReferralDto>> GetReferrals(string userId, int? referralsDepth = null)
+        public async Task<List<StakingDirectReferralDto>> GetReferrals(string userId, int? referralsDepth = null,
+            bool includeReferralCounts = true)
         {
-            var request = $"{BaseUrl}/referrals/{userId}".InternalApi();
+            var request = $"{BaseUrl}/referrals/{userId}".InternalApi()
+                .SetQueryParam(nameof(includeReferralCounts), includeReferralCounts);
             if (referralsDepth.HasValue)
                 request = request.SetQueryParam(nameof(referralsDepth), referralsDepth.Value);
             var result = await request.GetJsonAsync<List<StakingDirectReferralDto>>();
