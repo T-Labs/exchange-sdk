@@ -10,7 +10,7 @@ namespace TLabs.ExchangeSdk.Affiliate.StakingAffiliate
         public decimal PersonalStakingTokens { get; set; }
         public decimal PersonalStakingUsdt { get; set; }
         public bool HasEverStaked { get; set; }
-        public int DirectReferralsCount { get; set; }
-        public int TotalDescendantsCount { get; set; }
+        public int? DirectReferralsCount { get; set; }
+        public int? TotalDescendantsCount { get; set; }
     }
 }
