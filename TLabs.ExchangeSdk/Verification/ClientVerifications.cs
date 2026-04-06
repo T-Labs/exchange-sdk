@@ -17,7 +17,7 @@ namespace TLabs.ExchangeSdk.Verification
         public async Task<Dictionary<string, NameDto>> GetNames(List<string> userIds)
         {
             return await "verification/verifications/names".InternalApi()
-               .SetQueryParam(nameof(userIds), userIds).GetJsonAsync<Dictionary<string, NameDto>>();
+               .PostJsonAsync<Dictionary<string, NameDto>>(userIds);
         }
 
         public async Task<IFlurlResponse> SaveVerification(VerificationUser verification)
