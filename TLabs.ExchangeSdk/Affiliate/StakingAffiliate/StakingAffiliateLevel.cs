@@ -4,14 +4,14 @@ namespace TLabs.ExchangeSdk.Affiliate.StakingAffiliate
     public enum StakingAffiliateLevel
     {
         None = 0,
-        U0 = 100,
-        U1 = 101,
-        U2 = 102,
-        U3 = 103,
-        U4 = 104,
-        U5 = 105,
-        U6 = 106,
-        U7 = 107,
-        U8 = 108,
+        R0 = 100,
+        R1 = 101,
+        R2 = 102,
+        R3 = 103,
+        R4 = 104,
+        R5 = 105,
+        R6 = 106,
+        R7 = 107,
+        R8 = 108,
     }
 }
