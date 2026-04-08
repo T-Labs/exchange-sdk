@@ -8,6 +8,7 @@ namespace TLabs.ExchangeSdk.Affiliate.StakingAffiliate
         public decimal PersonalStakingTokens { get; set; }
         public decimal PersonalStakingUsdt { get; set; }
         public decimal ReferralsStakingTokens { get; set; }
+        public decimal ReferralsStakingUsdt { get; set; }
         public decimal MissingReferralsStakingTokens { get; set; }
         public int DirectReferralsCount { get; set; }
     }
