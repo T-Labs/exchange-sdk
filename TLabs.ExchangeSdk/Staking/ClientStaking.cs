@@ -90,7 +90,18 @@ namespace TLabs.ExchangeSdk.Staking
             return result.Succeeded ? result.Data : null;
         }
 
-        public virtual async Task<Dictionary<string, decimal>> GetUserStakesTotal(GetUserStakesTotalRequest request)
+        public virtual async Task<decimal> GetUserStakesTotal(string userId, string currencyCode)
+        {
+            var request = new GetUserStakesTotalRequest
+            {
+                UserIds = new List<string> { userId },
+                CurrencyCode = currencyCode
+            };
+            var result = await GetUsersStakesTotal(request);
+            return result.GetValueOrDefault(userId, 0);
+        }
+
+        public virtual async Task<Dictionary<string, decimal>> GetUsersStakesTotal(GetUserStakesTotalRequest request)
         {
             var result = await $"brokerage/staking/user-stakes/total".InternalApi()
                 .PostJsonAsync<Dictionary<string, decimal>>(request).GetQueryResult();
