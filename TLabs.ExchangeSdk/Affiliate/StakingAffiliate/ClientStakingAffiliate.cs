@@ -60,5 +60,27 @@ namespace TLabs.ExchangeSdk.Affiliate.StakingAffiliate
                 .GetJsonAsync<List<StakingAffiliateAccrualsTotalDto>>();
             return result;
         }
+
+        /// <summary>Paged users with staking affiliate metrics (admin).</summary>
+        public async Task<PagedList<StakingAffiliateAdminUserRowDto>> GetAdminUsersPageAsync(
+            int pageNumber, int pageSize, string search = null)
+        {
+            var request = $"{BaseUrl}/admin/users".InternalApi()
+                .SetQueryParam(nameof(pageNumber), pageNumber)
+                .SetQueryParam(nameof(pageSize), pageSize);
+            if (!string.IsNullOrWhiteSpace(search))
+                request = request.SetQueryParam(nameof(search), search.Trim());
+            return await request.GetJsonAsync<PagedList<StakingAffiliateAdminUserRowDto>>();
+        }
+
+        public async Task SetAdminUserLevelAsync(string userId, string level, int freezeDays)
+        {
+            await $"{BaseUrl}/admin/users/{userId}/levels".InternalApi()
+                .PutJsonAsync(new SetStakingAffiliateLevelAdminDto
+                {
+                    Level = level,
+                    FreezeDays = freezeDays,
+                });
+        }
     }
 }
