@@ -100,6 +100,6 @@ public class ClientCashHandovers
 
     public async Task CreateClientDocumentTypeAsync(CashHandoverClientDocumentType type)
     {
-        await BASE_CLIENTS_DOCUMENTS_TYPES_URL.PostJsonAsync(type);
+        await BASE_CLIENTS_DOCUMENTS_TYPES_URL.InternalApi().PostJsonAsync(type);
     }
 }
