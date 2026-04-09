@@ -34,7 +34,7 @@ namespace TLabs.ExchangeSdk.Affiliate.StakingAffiliate
 
         /// <param name="referralsDepth">Referral depth: 1 = direct referrals, 2 = referrals of direct referrals, null = all levels</param>
         public async Task<List<StakingDirectReferralDto>> GetReferrals(string userId, int? referralsDepth = null,
-            bool includeReferralCounts = true)
+            bool includeReferralCounts = false)
         {
             var request = $"{BaseUrl}/referrals/{userId}".InternalApi()
                 .SetQueryParam(nameof(includeReferralCounts), includeReferralCounts);
