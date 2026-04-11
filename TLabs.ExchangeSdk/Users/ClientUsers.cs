@@ -124,7 +124,7 @@ namespace TLabs.ExchangeSdk.Users
 
         public async Task SetUserRecordEmailRequest(string userId, string email)
         {
-            await $"userprofiles/users/{userId}/record-email-request".InternalApi()
+            await $"userprofiles/users/{userId}/email-request-records".InternalApi()
                 .SetQueryParam(nameof(email), email)
                 .PostJsonAsync(null);
         }
