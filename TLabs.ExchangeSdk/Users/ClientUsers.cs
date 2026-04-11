@@ -122,7 +122,7 @@ namespace TLabs.ExchangeSdk.Users
             return result;
         }
 
-        public async Task SetUserRecordEmailRequest(string userId, string email)
+        public async Task SaveEmailRequestRecord(string userId, string email)
         {
             await $"userprofiles/users/{userId}/email-request-records".InternalApi()
                 .SetQueryParam(nameof(email), email)
