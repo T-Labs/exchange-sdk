@@ -17,11 +17,14 @@ public class NewsVersion
     /// <summary> Image id with extension </summary>
     public string ImageId { get; set; }
 
+    /// <summary> Banner image id with extension </summary>
+    public string BannerImageId { get; set; }
+
     public DateTimeOffset DateCreated { get; set; }
 
     public override string ToString()
     {
         return
-            $"Title: {Title}, Preview: {Preview}, Body: {Body}, ImageId: {ImageId}";
+            $"Title: {Title}, Preview: {Preview}, Body: {Body}, ImageId: {ImageId}, BannerImageId: {BannerImageId}";
     }
 }
