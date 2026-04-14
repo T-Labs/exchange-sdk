@@ -116,7 +116,7 @@ namespace TLabs.ExchangeSdk.Staking
             return result.Succeeded ? result.Data : null;
         }
 
-        public virtual async Task<StakingStatisticsDto> GetStakingStatistics(IReadOnlyCollection<string> userIds)
+        public virtual async Task<StakingStatisticsDto> GetStakingStatistics(IReadOnlyCollection<string> userIds = null)
         {
             var result = await $"brokerage/staking/statistics"
                 .InternalApi().PostJsonAsync<StakingStatisticsDto>(userIds).GetQueryResult();
@@ -124,8 +124,15 @@ namespace TLabs.ExchangeSdk.Staking
             return result.Succeeded ? result.Data : new StakingStatisticsDto();
         }
 
-        public virtual async Task<int> GetStakesCountForPeriod(GetStakedCountForPeriodRequest request)
+        public virtual async Task<int> GetStakesCountForPeriod(DateTimeOffset fromDate, DateTimeOffset toDate,
+            List<string> userIds = null)
         {
+            var request = new GetStakedCountForPeriodRequest
+            {
+                FromDate = fromDate,
+                ToDate = toDate,
+                UserIds = userIds
+            };
             var result = await $"brokerage/staking/statistics/stakes-count"
                 .InternalApi().PostJsonAsync<int>(request).GetQueryResult();
 

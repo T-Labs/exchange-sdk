@@ -93,7 +93,7 @@ namespace TLabs.ExchangeSdk.Verification
             return response.Succeeded ? response.Data : new Dictionary<string, int>();
         }
 
-        public virtual async Task<int> GetUsersVerifiedCountAsync(IReadOnlyCollection<string> userIds)
+        public virtual async Task<int> GetUsersVerifiedCountAsync(IReadOnlyCollection<string> userIds = null)
         {
             var response = await "verification/statistics/users/verified-count"
                 .InternalApi().PostJsonAsync<int>(userIds).GetQueryResult();
