@@ -75,7 +75,7 @@ namespace TLabs.ExchangeSdk.Affiliate
 
         public virtual async Task<AffiliateStatisticsDto> GetStatistics()
         {
-            var response = await "affiliate/statistics".InternalApi()
+            var response = await "affiliate/stat".InternalApi()
                 .GetJsonAsync<AffiliateStatisticsDto>().GetQueryResult();
 
             return response.Succeeded ? response.Data : new AffiliateStatisticsDto();
