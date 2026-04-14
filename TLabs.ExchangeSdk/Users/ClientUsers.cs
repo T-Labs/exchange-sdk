@@ -379,5 +379,44 @@ namespace TLabs.ExchangeSdk.Users
                 .PostJsonAsync(value.ToString());
             return result;
         }
+
+        /// <summary>Device verification: checks trusted devices stored in UserProfiles.</summary>
+        public async Task<bool> IsDeviceTrusted(string userId, string deviceId)
+        {
+            var dto = await $"userprofiles/users/device-verification/is-trusted"
+                .InternalApi()
+                .PostJsonAsync(new { userId, deviceId })
+                .ReceiveJson<DeviceTrustedResponse>();
+            return dto?.Trusted ?? false;
+        }
+
+        /// <summary>Device verification: generates and stores pending code (UserProfiles).</summary>
+        public async Task SendDeviceVerificationCode(string userId, string email)
+        {
+            await $"userprofiles/users/device-verification/send-code"
+                .InternalApi()
+                .PostJsonAsync(new { userId, email });
+        }
+
+        /// <summary>Proxied from Identity <c>api/account/verify-device</c>.</summary>
+        public async Task VerifyDevice(string email, string code, string deviceId, string userAgent)
+        {
+            await $"userprofiles/users/device-verification/verify"
+                .InternalApi()
+                .PostJsonAsync(new { email, code, deviceId, userAgent });
+        }
+
+        /// <summary>Proxied from Identity <c>api/account/resend-device-code</c>.</summary>
+        public async Task ResendDeviceVerificationCode(string email)
+        {
+            await $"userprofiles/users/device-verification/resend-code"
+                .InternalApi()
+                .PostJsonAsync(new { email });
+        }
+
+        private sealed class DeviceTrustedResponse
+        {
+            public bool Trusted { get; set; }
+        }
     }
 }
