@@ -414,6 +414,14 @@ namespace TLabs.ExchangeSdk.Users
                 .PostJsonAsync(new { email });
         }
 
+        public virtual async Task<Dictionary<string, DateTimeOffset>> GetUserRegistrationDates()
+        {
+            var response = await "userprofiles/users/registrations"
+                .InternalApi().GetJsonAsync<Dictionary<string, DateTimeOffset>>().GetQueryResult();
+
+            return response.Succeeded ? response.Data : new Dictionary<string, DateTimeOffset>();
+        }
+
         private sealed class DeviceTrustedResponse
         {
             public bool Trusted { get; set; }

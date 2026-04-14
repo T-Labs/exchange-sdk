@@ -84,5 +84,21 @@ namespace TLabs.ExchangeSdk.Verification
 
         public async Task<string> Healthcheck() =>
             await $"verification/healthcheck".InternalApi().GetStringAsync();
+
+        public virtual async Task<Dictionary<string, int>> GetUsersByCountry(IReadOnlyCollection<string> userIds)
+        {
+            var response = await "verification/statistics/users/by-country"
+                .InternalApi().PostJsonAsync<Dictionary<string, int>>(userIds).GetQueryResult();
+
+            return response.Succeeded ? response.Data : new Dictionary<string, int>();
+        }
+
+        public virtual async Task<int> GetUsersVerifiedCountAsync(IReadOnlyCollection<string> userIds)
+        {
+            var response = await "verification/statistics/users/verified-count"
+                .InternalApi().PostJsonAsync<int>(userIds).GetQueryResult();
+
+            return response.Succeeded ? response.Data : 0;
+        }
     }
 }

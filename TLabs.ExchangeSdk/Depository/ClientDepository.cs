@@ -232,5 +232,13 @@ namespace TLabs.ExchangeSdk.Depository
         #endregion Currencies
 
         public async Task<string> Healthcheck() => await $"depository/healthcheck".InternalApi().GetStringAsync();
+
+        public virtual async Task<Dictionary<string, DateTimeOffset>> GetFirstDepositDates()
+        {
+            var response = await "depository/deposits/first-dates"
+                .InternalApi().GetJsonAsync<Dictionary<string, DateTimeOffset>>().GetQueryResult();
+
+            return response.Succeeded ? response.Data : new Dictionary<string, DateTimeOffset>();
+        }
     }
 }

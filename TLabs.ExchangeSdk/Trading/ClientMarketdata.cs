@@ -150,5 +150,13 @@ namespace TLabs.ExchangeSdk.Trading
                 .GetJsonAsync<decimal>();
             return result;
         }
+
+        public virtual async Task<Dictionary<string, DateTimeOffset>> GetFirstOrderDates()
+        {
+            var response = await "marketdata/orders/first-dates"
+                .InternalApi().GetJsonAsync<Dictionary<string, DateTimeOffset>>().GetQueryResult();
+
+            return response.Succeeded ? response.Data : new Dictionary<string, DateTimeOffset>();
+        }
     }
 }

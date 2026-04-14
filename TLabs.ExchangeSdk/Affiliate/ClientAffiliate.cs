@@ -64,5 +64,33 @@ namespace TLabs.ExchangeSdk.Affiliate
                 .GetJsonAsync<List<TotalAccrualsInfo>>();
             return result;
         }
+
+        public virtual async Task<List<string>> GetInvitedUserIds()
+        {
+            var response = await "affiliate/users/invited".InternalApi()
+                .GetJsonAsync<List<string>>().GetQueryResult();
+
+            return response.Succeeded ? response.Data : new List<string>();
+        }
+
+        public virtual async Task<AffiliateStatisticsDto> GetStatistics()
+        {
+            var response = await "affiliate/statistics".InternalApi()
+                .GetJsonAsync<AffiliateStatisticsDto>().GetQueryResult();
+
+            return response.Succeeded ? response.Data : new AffiliateStatisticsDto();
+        }
+
+        public virtual async Task<int> GetInvitedCountForPeriod(DateTimeOffset fromDate, DateTimeOffset toDate)
+        {
+            var response = await "affiliate/stat/invited-count"
+                .InternalApi()
+                .SetQueryParam(nameof(fromDate), fromDate.ToString("o"))
+                .SetQueryParam(nameof(toDate), toDate.ToString("o"))
+                .GetJsonAsync<int>()
+                .GetQueryResult();
+
+            return response.Succeeded ? response.Data : 0;
+        }
     }
 }
