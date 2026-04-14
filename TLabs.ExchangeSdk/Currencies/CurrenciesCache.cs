@@ -99,7 +99,11 @@ namespace TLabs.ExchangeSdk.Currencies
         public string GetAdapterId(string currencyCode) => GetAdapterIds(currencyCode).FirstOrDefault();
 
         public List<string> GetAdapterIds(string currencyCode) =>
-            GetCurrency(currencyCode).CurrencyAdapters.Select(_ => _.AdapterCode).ToList();
+            GetCurrency(currencyCode)?
+                .CurrencyAdapters?
+                .Select(_ => _.AdapterCode)
+                .ToList()
+            ?? new List<string>();
 
         public int GetBalanceDigits(string currencyCode) => GetCurrency(currencyCode).Digits;
 
