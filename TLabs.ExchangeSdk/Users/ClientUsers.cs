@@ -20,7 +20,7 @@ namespace TLabs.ExchangeSdk.Users
         {
         }
 
-        public async Task<int> GetUsersCount()
+        public virtual async Task<int> GetUsersCount()
         {
             return await $"userprofiles/users/count".InternalApi().GetJsonAsync<int>();
         }
