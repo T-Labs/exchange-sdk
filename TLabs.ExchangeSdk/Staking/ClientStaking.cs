@@ -125,7 +125,7 @@ namespace TLabs.ExchangeSdk.Staking
         }
 
         public virtual async Task<int> GetStakesCountForPeriod(DateTimeOffset fromDate, DateTimeOffset toDate,
-            List<string> userIds = null)
+            IReadOnlyCollection<string> userIds = null)
         {
             var request = new GetStakedCountForPeriodRequest
             {
