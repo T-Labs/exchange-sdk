@@ -6,5 +6,6 @@ namespace TLabs.ExchangeSdk.News
         public byte[] Data { get; set; }
         public long? NewsId { get; set; }
         public string? OldImageId { get; set; }
+        public bool IsBanner { get; set; }
     }
 }

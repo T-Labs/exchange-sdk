@@ -11,13 +11,14 @@ public class NewsDto
     public string Preview { get; set; }
     public string Body { get; set; }
     public string ImageId { get; set; }
+    public string BannerImageId { get; set; }
     public DateTimeOffset? DateCreated { get; set; }
 
     public override string ToString()
     {
         return $"{nameof(NewsDto)}" +
                $"NewsItemId: {NewsItemId}, CurrencyListingCode: {CurrencyListingCode}, Language: {Language}, " +
-               $"Title: {Title}, Preview: {Preview}, Body: {Body}, ImageId: {ImageId}, " +
+               $"Title: {Title}, Preview: {Preview}, Body: {Body}, ImageId: {ImageId}, BannerImageId: {BannerImageId}, " +
                $"DateCreated: {(DateCreated.HasValue ? DateCreated.Value.ToString() : "null")}";
     }
 }

@@ -23,6 +23,12 @@ namespace TLabs.ExchangeSdk.News
         /// <summary> Image binary data </summary>
         public string ImageUrl { get; set; }
 
+        /// <summary> Banner image id with extension </summary>
+        public string BannerImageId { get; set; }
+
+        /// <summary> Banner image url </summary>
+        public string BannerImageUrl { get; set; }
+
         public NewsItemViewModel()
         {
         }
@@ -39,6 +45,8 @@ namespace TLabs.ExchangeSdk.News
             DateCreated = lastVersion.DateCreated;
             ImageId = lastVersion.ImageId;
             ImageUrl = Image.GetUrl(lastVersion.ImageId);
+            BannerImageId = lastVersion.BannerImageId;
+            BannerImageUrl = Image.GetUrl(lastVersion.BannerImageId);
         }
     }
 }
