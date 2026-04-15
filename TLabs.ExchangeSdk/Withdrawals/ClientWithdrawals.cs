@@ -1,7 +1,7 @@
-using Flurl.Http;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Flurl.Http;
 using TLabs.DotnetHelpers;
 using TLabs.ExchangeSdk.CryptoAdapters;
 
@@ -57,6 +57,17 @@ namespace TLabs.ExchangeSdk.Withdrawals
             var result = await $"{baseUrl}/{id}".InternalApi()
                 .DeleteAsync();
             return result;
-        }             
+        }
+
+        public virtual async Task<PagedList<Withdrawal>> GetPagedList(int page, int pageSize)
+        {
+            var result = await $"withdrawals/withdrawal/paginated-list".InternalApi()
+                .SetQueryParam(nameof(page), page)
+                .SetQueryParam(nameof(pageSize), pageSize)
+                .GetJsonAsync<PagedList<Withdrawal>>()
+                .GetQueryResult();
+
+            return result.Succeeded ? result.Data : new PagedList<Withdrawal>();
+        }
     }
 }
