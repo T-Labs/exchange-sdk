@@ -98,5 +98,26 @@ namespace TLabs.ExchangeSdk.Affiliate
 
             return response.Succeeded ? response.Data : 0;
         }
+
+        public virtual async Task<Dictionary<string, decimal>> GetAccrualsSummary(string userId,
+            string currencyCode = null, ProfitType? profitType = null)
+        {
+            var result = await $"affiliate/accruals/summary/{userId}".InternalApi()
+               .SetQueryParam("currencyCode", currencyCode)
+               .SetQueryParam("profitType", profitType)
+               .GetJsonAsync<Dictionary<string, decimal>>()
+               .GetQueryResult();
+
+            return result.Succeeded ? result.Data : new Dictionary<string, decimal>();
+        }
+
+        public virtual async Task<AccrualsFiltersResponse> GetAccrualsFilters(string userId)
+        {
+            var result = await $"affiliate/accruals/filters/{userId}".InternalApi()
+                .GetJsonAsync<AccrualsFiltersResponse>()
+                .GetQueryResult();
+
+            return result.Succeeded ? result.Data : new AccrualsFiltersResponse();
+        }
     }
 }
