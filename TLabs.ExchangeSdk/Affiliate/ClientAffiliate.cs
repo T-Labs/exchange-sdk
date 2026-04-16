@@ -46,14 +46,20 @@ namespace TLabs.ExchangeSdk.Affiliate
             return result;
         }
 
-        public async Task<PagedList<AccrualDto>> GetAccruals(string userId,
-            int pageNumber = 1, int pageSize = 20)
+        public async Task<PagedList<AccrualDto>> GetAccruals(string userId, int pageNumber = 1, int pageSize = 20,
+            string currencyCode = null, ProfitType? profitType = null)
         {
-            var result = await $"affiliate/accruals".InternalApi()
+            var request = $"affiliate/accruals".InternalApi()
                 .SetQueryParam(nameof(userId), userId)
                 .SetQueryParam(nameof(pageNumber), pageNumber)
-                .SetQueryParam(nameof(pageSize), pageSize)
-                .GetJsonAsync<PagedList<AccrualDto>>();
+                .SetQueryParam(nameof(pageSize), pageSize);
+
+            if (currencyCode != null)
+                request = request.SetQueryParam(nameof(currencyCode), currencyCode);
+            if (profitType != null)
+                request = request.SetQueryParam(nameof(profitType), profitType);
+
+            var result = await request.GetJsonAsync<PagedList<AccrualDto>>();
             return result;
         }
 
