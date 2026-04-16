@@ -30,9 +30,6 @@ namespace TLabs.ExchangeSdk.Users
         /// <summary>Referral code from n10</summary>
         public string ReferralCode { get; set; }
 
-        /// <summary>Id of user in Oton affiliate program</summary>
-        public string OtonUserId { get; set; }
-
         /// <summary>Id of main user (used in S7 exchange)</summary>
         public string MerchantId { get; set; }
 
@@ -42,12 +39,6 @@ namespace TLabs.ExchangeSdk.Users
         public string PublicId { get; set; }
 
         public string PrivateId { get; set; }
-
-        /// <summary>Only used in BWP project. User can be a Merchant or a Trader</summary>
-        public BwpUserType BwpUserType { get; set; } = BwpUserType.Default;
-
-        /// <summary>Only used in BWP project. Admin should confirm user if he is a Merchant or a Trader</summary>
-        public bool IsBwpUserConfirmed { get; set; }
 
         public string AvatarId { get; set; } = "simple";
 
@@ -102,11 +93,4 @@ namespace TLabs.ExchangeSdk.Users
         GoogleAuthenticator = 4
     }
 
-    /// <summary>Only used in BWP project</summary>
-    public enum BwpUserType
-    {
-        Default = 0,
-        Merchant = 10,
-        Trader = 20,
-    }
 }

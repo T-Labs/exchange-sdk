@@ -37,8 +37,7 @@ namespace TLabs.ExchangeSdk.Users
         /// <param name="page">Starts from 1</param>
         public async Task<PagedList<ApplicationUser>> GetUsers(DateTimeOffset? minRegisterDate = null,
             int page = 1, int pageSize = 100, string search = null,
-            string merchantId = null, bool? otonFlag = null, bool? emailConfirmed = false,
-            BwpUserType? bwpUserType = null)
+            string merchantId = null, bool? emailConfirmed = false)
         {
             var users = await "userprofiles/users".InternalApi()
                 .WithTimeout(TimeSpan.FromMinutes(10))
@@ -47,9 +46,7 @@ namespace TLabs.ExchangeSdk.Users
                 .SetQueryParam(nameof(pageSize), pageSize.ToString())
                 .SetQueryParam(nameof(search), search)
                 .SetQueryParam(nameof(merchantId), merchantId)
-                .SetQueryParam(nameof(otonFlag), otonFlag.ToString())
                 .SetQueryParam(nameof(emailConfirmed), emailConfirmed.ToString())
-                .SetQueryParam(nameof(bwpUserType), bwpUserType == null ? "" : ((int)bwpUserType).ToString())
                 .GetJsonAsync<PagedList<ApplicationUser>>();
             return users;
         }
@@ -132,13 +129,6 @@ namespace TLabs.ExchangeSdk.Users
         public async Task SetUserEmailConfirmed(string userId, bool isConfirmed)
         {
             await $"userprofiles/users/{userId}/email-confirm".InternalApi()
-                .SetQueryParam(nameof(isConfirmed), isConfirmed)
-                .PostJsonAsync(null);
-        }
-
-        public async Task SetBwpUserConfirmed(string userId, bool isConfirmed)
-        {
-            await $"userprofiles/users/{userId}/bwp-confirm".InternalApi()
                 .SetQueryParam(nameof(isConfirmed), isConfirmed)
                 .PostJsonAsync(null);
         }
