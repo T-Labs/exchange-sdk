@@ -119,5 +119,18 @@ namespace TLabs.ExchangeSdk.Affiliate
 
             return result.Succeeded ? result.Data : new AccrualsFiltersResponse();
         }
+
+        public virtual async Task<List<AffiliateAccrualsGroupDto>> GetAccrualGroups(string userId,
+            DateTimeOffset sinceDate, DateTimeOffset endDate, int maxLevel = 1)
+        {
+            var result = await $"affiliate/accrual-groups/{userId}".InternalApi()
+                    .SetQueryParam("sinceDate", sinceDate.ToString("o"))
+                    .SetQueryParam("endDate", endDate.ToString("o"))
+                    .SetQueryParam("maxLevel", maxLevel)
+                    .GetJsonAsync<List<AffiliateAccrualsGroupDto>>()
+                    .GetQueryResult();
+
+            return result.Succeeded ? result.Data : new List<AffiliateAccrualsGroupDto>();
+        }
     }
 }
