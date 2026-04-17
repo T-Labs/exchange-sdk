@@ -30,6 +30,9 @@ namespace TLabs.ExchangeSdk.Staking
 
         public decimal SingleAccrualAmount { get; set; }
 
+        /// <summary>Daily accrual in USDT (fixed at stake open).</summary>
+        public decimal? SingleAccrualAmountUsdt { get; set; }
+
         /// <summary>How much will go to AccountChart UserBonuses</summary>
         public decimal PercentageToUserBonuses { get; set; }
 
@@ -45,7 +48,7 @@ namespace TLabs.ExchangeSdk.Staking
         public decimal SingleAccrualRate => YearlyAccrualPercentage / 100m / 365;
 
         public override string ToString() => $"{nameof(UserStake)}(Id:{Id}, userId:{UserId}, status:{Status}, settingId:{StakingSettingId}, " +
-            $"amount:{Amount}, yearlyRate:{YearlyAccrualPercentage}%, singleAccrual:{SingleAccrualAmount}, " +
+            $"amount:{Amount}, yearlyRate:{YearlyAccrualPercentage}%, singleAccrual:{SingleAccrualAmount}, singleAccrualUsdt:{SingleAccrualAmountUsdt}, " +
             $"{DateStarted:s} - {DateEnding:s}, released:{DateReleased}, lastAccrual:{DateLastAccrual:s})";
     }
 }
