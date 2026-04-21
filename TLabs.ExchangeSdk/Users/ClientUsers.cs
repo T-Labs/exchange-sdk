@@ -422,6 +422,15 @@ namespace TLabs.ExchangeSdk.Users
             return response.Succeeded ? response.Data : new Dictionary<string, DateTimeOffset>();
         }
 
+        public virtual async Task<QueryResult> UpdateReferralCode(string userId, string referralCode)
+        {
+            var result = await $"userprofiles/users/{userId}/referralCode".InternalApi()
+                .PutJsonAsync(new { referralCode })
+                .GetQueryResult();
+
+            return result;
+        }
+
         private sealed class DeviceTrustedResponse
         {
             public bool Trusted { get; set; }
