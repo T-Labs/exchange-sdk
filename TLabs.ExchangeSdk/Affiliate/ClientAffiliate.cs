@@ -146,5 +146,26 @@ namespace TLabs.ExchangeSdk.Affiliate
                 .DeleteAsync()
                 .GetQueryResult();
         }
+
+        public virtual async Task<PagedList<ReferralUser>> GetReferralUsers(string search, int page = 1, int pageSize = 20)
+        {
+            var affiliateResponse = await "affiliate/users".InternalApi()
+                .SetQueryParam("search", search)
+                .SetQueryParam("page", page)
+                .SetQueryParam("pageSize", pageSize)
+                .GetJsonAsync<PagedList<ReferralUser>>()
+                .GetQueryResult();
+
+            return affiliateResponse.Succeeded ? affiliateResponse.Data : new PagedList<ReferralUser>();
+        }
+
+        public virtual async Task<List<ReferralUserFlatTreeItem>> GetReferralUserFlatTree(string userId)
+        {
+            var result = await $"affiliate/referrals-full-tree/{userId}/flat".InternalApi()
+                .GetJsonAsync<List<ReferralUserFlatTreeItem>>()
+                .GetQueryResult();
+
+            return result.Succeeded ? result.Data : new List<ReferralUserFlatTreeItem>();
+        }
     }
 }
