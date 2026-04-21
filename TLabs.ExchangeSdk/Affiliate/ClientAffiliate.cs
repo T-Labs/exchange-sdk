@@ -132,5 +132,19 @@ namespace TLabs.ExchangeSdk.Affiliate
 
             return result.Succeeded ? result.Data : new List<AffiliateAccrualsGroupDto>();
         }
+
+        public virtual async Task<QueryResult> Rebind(string referralUserId, string referrerUserId)
+        {
+            return await "affiliate/rebinding".InternalApi()
+                .PostJsonAsync(new { referralUserId, referrerUserId })
+                .GetQueryResult();
+        }
+
+        public virtual async Task<QueryResult> ClearParent(string referralId)
+        {
+            return await $"affiliate/rebinding/{referralId}/parent".InternalApi()
+                .DeleteAsync()
+                .GetQueryResult();
+        }
     }
 }
