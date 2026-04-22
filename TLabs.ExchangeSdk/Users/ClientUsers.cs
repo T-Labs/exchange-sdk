@@ -425,7 +425,7 @@ namespace TLabs.ExchangeSdk.Users
         public virtual async Task<QueryResult> UpdateReferralCode(string userId, string referralCode)
         {
             var result = await $"userprofiles/users/{userId}/referral-code".InternalApi()
-                .PutJsonAsync(new { referralCode })
+                .PutJsonAsync(referralCode)
                 .GetQueryResult();
 
             return result;
