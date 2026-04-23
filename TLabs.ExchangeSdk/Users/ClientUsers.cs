@@ -37,7 +37,7 @@ namespace TLabs.ExchangeSdk.Users
         /// <param name="page">Starts from 1</param>
         public async Task<PagedList<ApplicationUser>> GetUsers(DateTimeOffset? minRegisterDate = null,
             int page = 1, int pageSize = 100, string search = null,
-            string merchantId = null, bool? emailConfirmed = false)
+            bool? emailConfirmed = false)
         {
             var users = await "userprofiles/users".InternalApi()
                 .WithTimeout(TimeSpan.FromMinutes(10))
@@ -45,7 +45,6 @@ namespace TLabs.ExchangeSdk.Users
                 .SetQueryParam(nameof(page), page.ToString())
                 .SetQueryParam(nameof(pageSize), pageSize.ToString())
                 .SetQueryParam(nameof(search), search)
-                .SetQueryParam(nameof(merchantId), merchantId)
                 .SetQueryParam(nameof(emailConfirmed), emailConfirmed.ToString())
                 .GetJsonAsync<PagedList<ApplicationUser>>();
             return users;
