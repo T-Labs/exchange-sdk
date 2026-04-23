@@ -7,7 +7,49 @@ using TLabs.DotnetHelpers;
 
 namespace TLabs.ExchangeSdk.Trading
 {
-    public class ClientMarketdata
+    public interface IClientMarketdata
+    {
+        Task<List<MarketdataOrder>> GetOrders(string currencyPairCode = null, bool? isBid = null, int? count = null,
+            string userId = null, OrderStatusRequest status = OrderStatusRequest.Active,
+            DateTimeOffset? from = null, DateTimeOffset? to = null, bool includeDeals = false,
+            decimal? minVolume = null);
+
+        Task<MarketdataOrder> GetOrder(Guid id);
+
+        Task<List<MarketdataDeal>> GetDeals(List<string> userIds = null,
+            string currencyPairCode = null, DateTimeOffset? sinceDate = null, DateTimeOffset? toDate = null,
+            int pageNumber = 1, int pageSize = 20, bool includeOrders = false);
+
+        Task<MarketdataDeal> GetDeal(Guid id);
+
+        Task<List<Quote>> GetQuotes();
+
+        Task<List<PriceSpread>> GetPriceSpreads(List<string> currencyPairCodes);
+
+        Task<PriceSpread> GetPriceSpread(string currencyPairCode);
+
+        Task<IFlurlResponse> DeleteTestData(string currencyPairCode);
+
+        Task<string> Healthcheck();
+
+        Task<List<CurrencyPairData>> CurrencyPairsData();
+
+        Task<List<ResponseOHLC>> GetOHLCData(MarketDataItemRange range, string currencyPairCode,
+            DateTime start, DateTime end);
+
+        Task<List<ResponseOHLC>> GetOHLCLastCandles(string currencyId);
+
+        Task<ResponseOHLC> GetOHLCLastCandle(MarketDataItemRange range, string currencyPairCode,
+            DateTime? before = null);
+
+        Task<decimal> GetLastDealPrice(string currencyPairCode);
+
+        Task<decimal> GetTotalDailyVolumeUsdt();
+
+        Task<Dictionary<string, DateTimeOffset>> GetFirstOrderDates();
+    }
+
+    public class ClientMarketdata : IClientMarketdata
     {
         public ClientMarketdata()
         {

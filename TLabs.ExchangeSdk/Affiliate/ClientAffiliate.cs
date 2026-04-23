@@ -98,5 +98,74 @@ namespace TLabs.ExchangeSdk.Affiliate
 
             return response.Succeeded ? response.Data : 0;
         }
+
+        public virtual async Task<Dictionary<string, decimal>> GetAccrualsSummary(string userId,
+            string currencyCode = null, ProfitType? profitType = null)
+        {
+            var result = await $"affiliate/accruals/summary/{userId}".InternalApi()
+               .SetQueryParam("currencyCode", currencyCode)
+               .SetQueryParam("profitType", profitType)
+               .GetJsonAsync<Dictionary<string, decimal>>()
+               .GetQueryResult();
+
+            return result.Succeeded ? result.Data : new Dictionary<string, decimal>();
+        }
+
+        public virtual async Task<AccrualsFiltersResponse> GetAccrualsFilters(string userId)
+        {
+            var result = await $"affiliate/accruals/filters/{userId}".InternalApi()
+                .GetJsonAsync<AccrualsFiltersResponse>()
+                .GetQueryResult();
+
+            return result.Succeeded ? result.Data : new AccrualsFiltersResponse();
+        }
+
+        public virtual async Task<List<AffiliateAccrualsGroupDto>> GetAccrualGroups(string userId,
+            DateTimeOffset sinceDate, DateTimeOffset endDate, int maxLevel = 1)
+        {
+            var result = await $"affiliate/accrual-groups/{userId}".InternalApi()
+                    .SetQueryParam("sinceDate", sinceDate.ToString("o"))
+                    .SetQueryParam("endDate", endDate.ToString("o"))
+                    .SetQueryParam("maxLevel", maxLevel)
+                    .GetJsonAsync<List<AffiliateAccrualsGroupDto>>()
+                    .GetQueryResult();
+
+            return result.Succeeded ? result.Data : new List<AffiliateAccrualsGroupDto>();
+        }
+
+        public virtual async Task<QueryResult> Rebind(string referralUserId, string referrerUserId)
+        {
+            return await "affiliate/rebinding".InternalApi()
+                .PostJsonAsync(new { referralUserId, referrerUserId })
+                .GetQueryResult();
+        }
+
+        public virtual async Task<QueryResult> ClearParent(string referralId)
+        {
+            return await $"affiliate/rebinding/{referralId}/parent".InternalApi()
+                .DeleteAsync()
+                .GetQueryResult();
+        }
+
+        public virtual async Task<PagedList<ReferralUser>> GetReferralUsers(string search, int page = 1, int pageSize = 20)
+        {
+            var affiliateResponse = await "affiliate/users".InternalApi()
+                .SetQueryParam("search", search)
+                .SetQueryParam("page", page)
+                .SetQueryParam("pageSize", pageSize)
+                .GetJsonAsync<PagedList<ReferralUser>>()
+                .GetQueryResult();
+
+            return affiliateResponse.Succeeded ? affiliateResponse.Data : new PagedList<ReferralUser>();
+        }
+
+        public virtual async Task<List<ReferralUserFlatTreeItem>> GetReferralUserFlatTree(string userId)
+        {
+            var result = await $"affiliate/referrals-full-tree/{userId}/flat".InternalApi()
+                .GetJsonAsync<List<ReferralUserFlatTreeItem>>()
+                .GetQueryResult();
+
+            return result.Succeeded ? result.Data : new List<ReferralUserFlatTreeItem>();
+        }
     }
 }

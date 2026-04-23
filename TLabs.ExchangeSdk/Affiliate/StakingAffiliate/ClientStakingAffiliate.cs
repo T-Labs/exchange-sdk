@@ -32,6 +32,13 @@ namespace TLabs.ExchangeSdk.Affiliate.StakingAffiliate
             return result;
         }
 
+        public async Task<List<string>> GetDescendantUserIds(string userId)
+        {
+            var result = await $"{BaseUrl}/descendants/{userId}".InternalApi()
+                .GetJsonAsync<List<string>>();
+            return result ?? new List<string>();
+        }
+
         /// <param name="referralsDepth">Referral depth: 1 = direct referrals, 2 = referrals of direct referrals, null = all levels</param>
         public async Task<List<StakingDirectReferralDto>> GetReferrals(string userId, int? referralsDepth = null,
             bool includeReferralCounts = false)
