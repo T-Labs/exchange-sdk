@@ -7,7 +7,42 @@ using TLabs.DotnetHelpers;
 
 namespace TLabs.ExchangeSdk.Staking
 {
-    public class ClientStaking
+    public interface IClientStaking
+    {
+        Task<List<StakingSetting>> GetSettings();
+
+        Task<StakingSetting> GetSetting(int stakingSettingId);
+
+        Task<IFlurlResponse> AddSetting(StakingSetting stakingSetting);
+
+        Task<IFlurlResponse> UpdateSetting(StakingSetting stakingSetting);
+
+        Task<IFlurlResponse> DeleteSetting(Guid stakingSettingId);
+
+        Task<List<StakingAccrual>> GetAccrualsByStakingSettingId(int stakingSettingId);
+
+        Task<StakingTransactionsDto> GetAccrualTransactions(string userId,
+            string currencyCode = null, int pageNumber = 1, int pageSize = 20);
+
+        Task<QueryResult<string>> Stake(CreateUserStakeDto dto);
+
+        Task<List<UserStake>> GetUserStakes(string userId, UserStakingStatus? status = null);
+
+        Task<UserStake> GetUserStake(string userId, Guid stakeId);
+
+        Task<decimal> GetUserStakesTotal(string userId, string currencyCode);
+
+        Task<Dictionary<string, decimal>> GetUsersStakesTotal(GetUserStakesTotalRequest request);
+
+        Task<List<UserStake>> GetAllUserStakes(UserStakingStatus? status = null);
+
+        Task<StakingStatisticsDto> GetStakingStatistics(IReadOnlyCollection<string> userIds = null);
+
+        Task<int> GetStakesCountForPeriod(DateTimeOffset fromDate, DateTimeOffset toDate,
+            IReadOnlyCollection<string> userIds = null);
+    }
+
+    public class ClientStaking : IClientStaking
     {
         private readonly ILogger _logger;
 
