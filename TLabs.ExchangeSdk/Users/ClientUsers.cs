@@ -380,11 +380,17 @@ namespace TLabs.ExchangeSdk.Users
         }
 
         /// <summary>Device verification: generates and stores pending code (UserProfiles).</summary>
-        public async Task SendDeviceVerificationCode(string userId, string email)
+        public async Task SendDeviceVerificationCode(string userId, string email, bool isResend = false)
         {
             await $"userprofiles/users/device-verification/send-code"
                 .InternalApi()
-                .PostJsonAsync(new { userId, email });
+                .PostJsonAsync(new { userId, email, isResend });
+        }
+
+        /// <summary>Proxied from Identity <c>api/account/resend-device-code</c>.</summary>
+        public async Task ResendDeviceVerificationCode(string email)
+        {
+            await SendDeviceVerificationCode(null, email, true);
         }
 
         /// <summary>Proxied from Identity <c>api/account/verify-device</c>.</summary>
@@ -393,14 +399,6 @@ namespace TLabs.ExchangeSdk.Users
             await $"userprofiles/users/device-verification/verify"
                 .InternalApi()
                 .PostJsonAsync(new { email, code, deviceId, userAgent });
-        }
-
-        /// <summary>Proxied from Identity <c>api/account/resend-device-code</c>.</summary>
-        public async Task ResendDeviceVerificationCode(string email)
-        {
-            await $"userprofiles/users/device-verification/resend-code"
-                .InternalApi()
-                .PostJsonAsync(new { email });
         }
 
         public virtual async Task<Dictionary<string, DateTimeOffset>> GetUserRegistrationDates()
