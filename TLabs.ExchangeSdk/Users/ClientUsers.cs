@@ -379,18 +379,15 @@ namespace TLabs.ExchangeSdk.Users
             return dto?.Trusted ?? false;
         }
 
-        /// <summary>Device verification: generates and stores pending code (UserProfiles).</summary>
+        /// <summary>
+        /// Device verification: generates and stores pending code (UserProfiles).
+        /// Used for both initial send and resend scenarios.
+        /// </summary>
         public async Task SendDeviceVerificationCode(string userId, string email, bool isResend = false)
         {
             await $"userprofiles/users/device-verification/send-code"
                 .InternalApi()
                 .PostJsonAsync(new { userId, email, isResend });
-        }
-
-        /// <summary>Proxied from Identity <c>api/account/resend-device-code</c>.</summary>
-        public async Task ResendDeviceVerificationCode(string email)
-        {
-            await SendDeviceVerificationCode(null, email, true);
         }
 
         /// <summary>Proxied from Identity <c>api/account/verify-device</c>.</summary>
