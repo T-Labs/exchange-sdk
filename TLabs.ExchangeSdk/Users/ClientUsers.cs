@@ -403,26 +403,6 @@ namespace TLabs.ExchangeSdk.Users
                 .PostJsonAsync(new { email });
         }
 
-        public virtual async Task<List<string>> GetFavoritePairs(string userId)
-        {
-            if (userId.NotHasValue())
-                return new List<string>();
-            return await $"userprofiles/users/{userId}/favorite-pairs".InternalApi()
-                .GetJsonAsync<List<string>>();
-        }
-
-        public virtual async Task AddFavoritePair(string userId, string symbol)
-        {
-            await $"userprofiles/users/{userId}/favorite-pairs/{symbol}".InternalApi()
-                .PostJsonAsync(null);
-        }
-
-        public virtual async Task RemoveFavoritePair(string userId, string symbol)
-        {
-            await $"userprofiles/users/{userId}/favorite-pairs/{symbol}".InternalApi()
-                .DeleteAsync();
-        }
-
         public virtual async Task<Dictionary<string, DateTimeOffset>> GetUserRegistrationDates()
         {
             var response = await "userprofiles/users/registrations"
