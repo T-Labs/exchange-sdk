@@ -33,6 +33,7 @@ namespace TLabs.ExchangeSdk
             services.AddTransient<RabbitMq.RabbitMqSender>();
             services.AddTransient<RabbitMq.EmailTemplateSender>();
             services.AddTransient<Staking.ClientStaking>();
+            services.AddTransient<Staking.IClientStaking, Staking.ClientStaking>();
 
             services.AddTransient<Trading.ClientMarketdata>();
             services.AddTransient<Trading.IClientMarketdata, Trading.ClientMarketdata>();
