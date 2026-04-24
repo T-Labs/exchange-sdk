@@ -51,6 +51,21 @@ public class ClientTradingInnerBot
         await $"{SETTINGS_URL}/liquidity".InternalApi().PostJsonAsync(settings);
     }
 
+    public async Task<PassiveLiquidityAlgorithmSettings> GetPassiveLiquidityAlgorithmSettingsAsync(
+       string currencyPairCode
+    )
+    {
+        return await $"{SETTINGS_URL}/passive-liquidity"
+            .InternalApi()
+            .SetQueryParam(nameof(currencyPairCode), currencyPairCode)
+            .GetJsonAsync<PassiveLiquidityAlgorithmSettings>();
+    }
+
+    public async Task AddOrUpdatePassiveLiquidityAlgorithmSettingAsync(PassiveLiquidityAlgorithmSettings settings)
+    {
+        await $"{SETTINGS_URL}/passive-liquidity".InternalApi().PostJsonAsync(settings);
+    }
+
     public async Task SendDealEventAsync(MatchingDeal deal)
     {
         await $"{EVENTS_URL}/deal".InternalApi().PostJsonAsync(deal);
