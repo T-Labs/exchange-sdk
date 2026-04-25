@@ -372,11 +372,11 @@ namespace TLabs.ExchangeSdk.Users
         /// <summary>Device verification: checks trusted devices stored in UserProfiles.</summary>
         public async Task<bool> IsDeviceTrusted(string userId, string deviceId)
         {
-            var dto = await $"userprofiles/users/device-verification/is-trusted"
+            return await $"userprofiles/users/device-verification/is-trusted"
                 .InternalApi()
-                .PostJsonAsync(new { userId, deviceId })
-                .ReceiveJson<DeviceTrustedResponse>();
-            return dto?.Trusted ?? false;
+                .SetQueryParam("userId", userId)
+                .SetQueryParam("deviceId", deviceId)
+                .GetJsonAsync<bool>();
         }
 
         /// <summary>
@@ -415,9 +415,5 @@ namespace TLabs.ExchangeSdk.Users
             return result;
         }
 
-        private sealed class DeviceTrustedResponse
-        {
-            public bool Trusted { get; set; }
-        }
     }
 }
