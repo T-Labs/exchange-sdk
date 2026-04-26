@@ -1,9 +1,5 @@
 using Microsoft.AspNetCore.Identity;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TLabs.DotnetHelpers;
 
 namespace TLabs.ExchangeSdk.Users
@@ -27,8 +23,8 @@ namespace TLabs.ExchangeSdk.Users
         /// <summary>User Nickname, will be used in chat</summary>
         public string Nickname { get; set; }
 
-        /// <summary>Referral code from n10</summary>
-        public string ReferralCode { get; set; }
+        /// <summary>Parent referral code from n10</summary>
+        public string ParentReferralCode { get; set; }
 
         /// <summary>Id of main user (used in S7 exchange)</summary>
         public string MerchantId { get; set; }
