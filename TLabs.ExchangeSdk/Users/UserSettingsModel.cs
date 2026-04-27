@@ -10,6 +10,7 @@ namespace TLabs.ExchangeSdk.Users
         public bool NoTradeCommissions { get; set; }
         public bool BanOnP2P { get; set; }
         public bool AllowExternalPayments { get; set; }
+        public bool Ambassador { get; set; }
 
         /// <summary>Access to all farming Admin panels</summary>
         public bool FarmingSuperAdmin { get; set; }

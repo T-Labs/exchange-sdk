@@ -13,6 +13,7 @@ namespace TLabs.ExchangeSdk.Users
 
         public const string NoTradeCommissions = nameof(NoTradeCommissions);
         public const string AllowExternalPayments = nameof(AllowExternalPayments);
+        public const string Ambassador = nameof(Ambassador);
 
         public const string PolicyBanOnP2P = "PolicyBanOnP2P";
         public const string BanOnP2P = "BanOnP2P";
