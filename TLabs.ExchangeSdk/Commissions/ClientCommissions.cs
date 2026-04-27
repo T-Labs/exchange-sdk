@@ -18,7 +18,7 @@ namespace TLabs.ExchangeSdk.Commissions
             if (type.HasValue())
                 request = request.SetQueryParam(nameof(type), type);
             if (currencies != null && currencies.Count > 0)
-                request = request.SetQueryParam(nameof(currencies), string.Join(",", currencies));
+                request = request.SetQueryParam(nameof(currencies), currencies);
 
             var result = await request.GetJsonAsync<List<Commission>>().GetQueryResult();
             return result.Succeeded ? result.Data : new List<Commission>();
