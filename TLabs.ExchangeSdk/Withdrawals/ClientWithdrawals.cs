@@ -69,5 +69,13 @@ namespace TLabs.ExchangeSdk.Withdrawals
 
             return result.Succeeded ? result.Data : new PagedList<Withdrawal>();
         }
+
+        public virtual async Task<List<WithdrawalLimit>> GetLimits()
+        {
+            var result = await "withdrawals/withdrawal/limits".InternalApi()
+                .GetJsonAsync<List<WithdrawalLimit>>().GetQueryResult();
+
+            return result.Succeeded ? result.Data : new List<WithdrawalLimit>();
+        }
     }
 }

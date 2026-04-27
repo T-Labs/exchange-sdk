@@ -1,7 +1,7 @@
-using Flurl.Http;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Threading.Tasks;
+using Flurl.Http;
 using TLabs.DotnetHelpers;
 
 namespace TLabs.ExchangeSdk.Commissions
@@ -10,6 +10,18 @@ namespace TLabs.ExchangeSdk.Commissions
     {
         public ClientCommissions()
         {
+        }
+
+        public virtual async Task<List<Commission>> GetAll(string type = null, List<string> currencies = null)
+        {
+            var request = $"commissions/commission/".InternalApi();
+            if (type.HasValue())
+                request = request.SetQueryParam(nameof(type), type);
+            if (currencies != null && currencies.Count > 0)
+                request = request.SetQueryParam(nameof(currencies), string.Join(",", currencies));
+
+            var result = await request.GetJsonAsync<List<Commission>>().GetQueryResult();
+            return result.Succeeded ? result.Data : new List<Commission>();
         }
 
         public async Task<List<Commission>> GetCommissions()
