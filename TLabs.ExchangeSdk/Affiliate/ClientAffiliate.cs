@@ -62,6 +62,12 @@ namespace TLabs.ExchangeSdk.Affiliate
                 .PostJsonAsync<AmbassadorReferralLinkDto>(dto);
         }
 
+        public async Task<decimal> GetCommissionDiscountPercent(string userId)
+        {
+            return await $"affiliate/commission-discount/{userId}".InternalApi()
+                .GetJsonAsync<decimal>();
+        }
+
         public async Task<List<Profit>> GetProfits(List<Guid> ids)
         {
             var result = await $"affiliate/profits".InternalApi()
