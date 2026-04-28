@@ -12,17 +12,11 @@ namespace TLabs.ExchangeSdk.Affiliate.StakingAffiliate
         /// <summary>Own active stakes: USDT equivalent at the rate last written into affiliate metrics (level thresholds / display; not the historical open price).</summary>
         public decimal PersonalStakingUsdt { get; set; }
 
-        /// <summary>Own active stakes: sum of USDT principal at each stake creation (SingleAccrualAmountUsdt / SingleAccrualRate); used as the base for percentage accrual.</summary>
-        public decimal PersonalStakingUsdtAtStakeCreation { get; set; }
-
         /// <summary>Entire referral tree: total BINI in active stakes (aggregated in affiliate metrics).</summary>
         public decimal ReferralsStakingTokens { get; set; }
 
         /// <summary>Entire referral tree: USDT equivalent of team BINI at current pricing when populated; may be 0 until filled by API/gateway/UI.</summary>
         public decimal ReferralsStakingUsdt { get; set; }
-
-        /// <summary>Entire referral tree: sum of USDT-at-stake-creation across descendants&apos; active stakes (same formula as personal).</summary>
-        public decimal ReferralsStakingUsdtAtStakeCreation { get; set; }
 
         public decimal MissingReferralsStakingTokens { get; set; }
         public int DirectReferralsCount { get; set; }
