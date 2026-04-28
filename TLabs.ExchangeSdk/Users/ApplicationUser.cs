@@ -32,6 +32,9 @@ namespace TLabs.ExchangeSdk.Users
         /// <summary>If true then other users can specify this user's id in MerchantId</summary>
         public bool IsMerchant { get; set; }
 
+        /// <summary>Ambassador flag stored in UserProfiles ApplicationUser.</summary>
+        public bool Ambassador { get; set; }
+
         public string PublicId { get; set; }
 
         public string PrivateId { get; set; }

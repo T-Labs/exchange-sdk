@@ -20,5 +20,17 @@ namespace TLabs.ExchangeSdk.Affiliate
 
         /// <summary>Code this user can use to invite other people</summary>
         public string UserInviteCode { get; set; }
+
+        /// <summary>Ambassador flag configured from admin</summary>
+        public bool IsAmbassador { get; set; }
+
+        /// <summary>Ambassador level 2 percentage in decimal form (e.g. 0.2 = 20%)</summary>
+        public decimal AmbassadorSecondLevelPercent { get; set; }
+
+        /// <summary>
+        /// Trading fee discount in decimal form (e.g. 0.4 = 40%) applied to this user
+        /// when registered via ambassador link.
+        /// </summary>
+        public decimal CommissionDiscountPercent { get; set; }
     }
 }

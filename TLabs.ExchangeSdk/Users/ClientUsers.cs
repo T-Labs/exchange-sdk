@@ -276,6 +276,19 @@ namespace TLabs.ExchangeSdk.Users
             return result;
         }
 
+        public async Task<bool> GetAmbassadorFlag(string userId)
+        {
+            return await $"userprofiles/users/ambassador/{userId}".InternalApi()
+                .GetJsonAsync<bool>();
+        }
+
+        public async Task<IFlurlResponse> SetAmbassadorFlag(string userId, bool isActive)
+        {
+            return await $"userprofiles/users/ambassador/{userId}".InternalApi()
+                .SetQueryParam(nameof(isActive), isActive)
+                .PostJsonAsync(null);
+        }
+
         public async Task<string> GetStringClaimValue(string userId, string claimType)
         {
             var result = await $"userprofiles/users/claims/string/{claimType}".InternalApi()
