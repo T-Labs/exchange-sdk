@@ -12,23 +12,15 @@ namespace TLabs.ExchangeSdk.Commissions
         {
         }
 
-        public virtual async Task<List<Commission>> GetAll(string type = null, List<string> currencies = null)
+        public virtual async Task<List<Commission>> GetCommissions(string type = null, List<string> currencies = null)
         {
-            var request = $"commissions/commission/".InternalApi();
+            var request = $"commissions/commission".InternalApi();
             if (type.HasValue())
                 request = request.SetQueryParam(nameof(type), type);
             if (currencies != null && currencies.Count > 0)
                 request = request.SetQueryParam(nameof(currencies), currencies);
 
-            var result = await request.GetJsonAsync<List<Commission>>().GetQueryResult();
-            return result.Succeeded ? result.Data : new List<Commission>();
-        }
-
-        public async Task<List<Commission>> GetCommissions()
-        {
-            var result = await $"commissions/commission".InternalApi()
-                .GetJsonAsync<List<Commission>>();
-            return result;
+            return await request.GetJsonAsync<List<Commission>>();
         }
 
         public async Task<IFlurlResponse> UpdateCommission(Commission commission)
