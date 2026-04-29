@@ -33,6 +33,21 @@ namespace TLabs.ExchangeSdk.Users
                 .GetJsonAsync<ApplicationUser>();
         }
 
+        public async Task<AccountDeletionStateDto> GetAccountDeletionState(string userId)
+        {
+            if (userId.NotHasValue())
+                return null;
+
+            return await $"userprofiles/users/{userId}/deletion-state".InternalApi()
+                .GetJsonAsync<AccountDeletionStateDto>();
+        }
+
+        public async Task DeleteAccount(string userId)
+        {
+            await $"userprofiles/users/{userId}/delete-account".InternalApi()
+                .PostJsonAsync(null);
+        }
+
         /// <summary>Only works with paginated requests</summary>
         /// <param name="page">Starts from 1</param>
         public async Task<PagedList<ApplicationUser>> GetUsers(DateTimeOffset? minRegisterDate = null,
