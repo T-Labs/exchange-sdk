@@ -49,6 +49,7 @@ namespace TLabs.ExchangeSdk
             services.AddTransient<P2P.ClientP2P>();
             services.AddTransient<WebApp.ClientWebapp>();
             services.AddTransient<News.ClientNews>();
+            services.AddTransient<Notificator.ClientNotificator>();
 
             services.AddTransient<Farming.ClientFarming>();
             services.AddTransient<Farming.ClientFarmingAdmin>();
