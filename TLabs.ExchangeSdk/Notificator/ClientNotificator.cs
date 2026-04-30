@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Flurl.Http;
 using TLabs.DotnetHelpers;
+using TLabs.ExchangeSdk.RabbitMq;
 
 namespace TLabs.ExchangeSdk.Notificator
 {
@@ -18,7 +19,7 @@ namespace TLabs.ExchangeSdk.Notificator
             Dictionary<string, string> arguments = null,
             string locale = null)
         {
-            return await SendTemplateEmail(new SendTemplateEmailRequest
+            return await SendTemplateEmail(new NotificationEmailTemplate
             {
                 To = to,
                 TemplateName = templateName,
@@ -28,9 +29,10 @@ namespace TLabs.ExchangeSdk.Notificator
         }
 
         /// <summary>
-        /// Sends a template email through Notificator WebAPI.
+        /// Sends a template email through Notificator WebAPI. The payload matches <see cref="NotificationEmailTemplate"/>
+        /// used for RabbitMQ notifications; extra message fields are ignored by the HTTP API.
         /// </summary>
-        public async Task<EmailDispatchResponse> SendTemplateEmail(SendTemplateEmailRequest request)
+        public async Task<EmailDispatchResponse> SendTemplateEmail(NotificationEmailTemplate request)
         {
             return await "notificator/emails/template"
                 .InternalApi()
@@ -45,7 +47,8 @@ namespace TLabs.ExchangeSdk.Notificator
         {
             return await $"notificator/emails/{id}/retry"
                 .InternalApi()
-                .PostJsonAsync(new RetryEmailRequest { ProcessImmediately = processImmediately })
+                .SetQueryParam("processImmediately", processImmediately)
+                .PostAsync()
                 .ReceiveJson<EmailDispatchResponse>();
         }
     }
