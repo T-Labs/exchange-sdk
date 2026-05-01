@@ -10,8 +10,8 @@ namespace TLabs.ExchangeSdk.Notificator
     public class ClientNotificator
     {
         /// <summary>
-        /// Sends a template email through Notificator WebAPI.
-        /// The request is persisted in Notificator outbox before delivery.
+        /// Enqueues a template email in Notificator (outbox). Returns when the row is persisted; HTTP status may be 202 Accepted.
+        /// Poll or use a status endpoint if you need to confirm delivery — <see cref="EmailDispatchResponse.Status"/> may be <c>Pending</c> until the worker sends.
         /// </summary>
         public async Task<EmailDispatchResponse> SendTemplateEmail(
             string to,
@@ -29,8 +29,7 @@ namespace TLabs.ExchangeSdk.Notificator
         }
 
         /// <summary>
-        /// Sends a template email through Notificator WebAPI. The payload matches <see cref="NotificationEmailTemplate"/>
-        /// used for RabbitMQ notifications; extra message fields are ignored by the HTTP API.
+        /// Enqueues via Notificator HTTP API (same payload shape as Rabbit). Delivery is asynchronous — response often has <c>Status = "Pending"</c> (HTTP 202).
         /// </summary>
         public async Task<EmailDispatchResponse> SendTemplateEmail(NotificationEmailTemplate request)
         {
@@ -41,13 +40,18 @@ namespace TLabs.ExchangeSdk.Notificator
         }
 
         /// <summary>
-        /// Retries an existing email dispatch request.
+        /// Re-queues a dispatch for the background worker. SMTP is not run in-band on the API.
         /// </summary>
+        [Obsolete("processImmediately is ignored by the server; use RetryTemplateEmail(id)")]
         public async Task<EmailDispatchResponse> RetryTemplateEmail(Guid id, bool processImmediately = true)
+        {
+            return await RetryTemplateEmail(id);
+        }
+
+        public async Task<EmailDispatchResponse> RetryTemplateEmail(Guid id)
         {
             return await $"notificator/emails/{id}/retry"
                 .InternalApi()
-                .SetQueryParam("processImmediately", processImmediately)
                 .PostAsync()
                 .ReceiveJson<EmailDispatchResponse>();
         }
