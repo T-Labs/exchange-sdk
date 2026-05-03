@@ -1,5 +1,6 @@
 using Microsoft.Extensions.DependencyInjection;
 using TLabs.ExchangeSdk.TradingInnerBot;
+using TLabs.ExchangeSdk.TradingRobots;
 
 namespace TLabs.ExchangeSdk
 {
@@ -59,6 +60,7 @@ namespace TLabs.ExchangeSdk
             services.AddSingleton<Farming.TenantsCache>();
 
             services.AddTransient<ClientTradingInnerBot>();
+            services.AddTransient<ClientTradingRobots>();
 
             services.AddTransient<Questionnaires.ClientQuestionnaires>();
         }
