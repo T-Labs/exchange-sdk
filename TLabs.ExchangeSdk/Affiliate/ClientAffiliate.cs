@@ -40,31 +40,31 @@ namespace TLabs.ExchangeSdk.Affiliate
 
         public async Task<AmbassadorSettingsDto> GetAmbassadorSettings(string userId)
         {
-            return await $"affiliate/ambassador/{userId}".InternalApi()
+            return await $"affiliate/ambassadors/{userId}".InternalApi()
                 .GetJsonAsync<AmbassadorSettingsDto>();
         }
 
         public async Task SetAmbassadorSettings(string userId, AmbassadorSettingsDto dto)
         {
-            await $"affiliate/ambassador/{userId}".InternalApi()
+            await $"affiliate/ambassadors/{userId}".InternalApi()
                 .PutJsonAsync(dto);
         }
 
         public async Task<List<AmbassadorReferralLinkDto>> GetAmbassadorLinks(string userId)
         {
-            return await $"affiliate/ambassador/{userId}/links".InternalApi()
+            return await $"affiliate/ambassadors/{userId}/links".InternalApi()
                 .GetJsonAsync<List<AmbassadorReferralLinkDto>>();
         }
 
         public async Task<AmbassadorReferralLinkDto> CreateAmbassadorLink(string userId, CreateAmbassadorReferralLinkRequest dto)
         {
-            return await $"affiliate/ambassador/{userId}/links".InternalApi()
+            return await $"affiliate/ambassadors/{userId}/links".InternalApi()
                 .PostJsonAsync<AmbassadorReferralLinkDto>(dto);
         }
 
         public async Task<decimal> GetCommissionDiscountPercent(string userId)
         {
-            return await $"affiliate/commission-discount/{userId}".InternalApi()
+            return await $"affiliate/ambassadors/{userId}/commission-discounts".InternalApi()
                 .GetJsonAsync<decimal>();
         }
 
