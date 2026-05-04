@@ -53,5 +53,27 @@ namespace TLabs.ExchangeSdk.Commissions
 
         public async Task<string> Healthcheck() =>
             await $"commissions/healthcheck".InternalApi().GetStringAsync();
+
+        public virtual async Task UpsertCommissionUserDiscount(CommissionDiscountUpsertDto dto)
+        {
+            await $"commissions/commission-discounts".InternalApi()
+                .PutJsonAsync(dto);
+        }
+
+        public virtual async Task UpsertTradingCommissionDiscounts(string userId, decimal percentage)
+        {
+            await $"commissions/commission-discounts/trading".InternalApi()
+                .PutJsonAsync(new TradingCommissionDiscountUpsertDto
+                {
+                    UserId = userId,
+                    Percentage = percentage,
+                });
+        }
+
+        public virtual async Task<decimal> GetCommissionUserDiscountFraction(string userId, string commissionTypeCode)
+        {
+            return await $"commissions/commission-discounts/{userId}/{commissionTypeCode}".InternalApi()
+                .GetJsonAsync<decimal>();
+        }
     }
 }
