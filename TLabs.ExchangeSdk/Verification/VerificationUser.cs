@@ -51,6 +51,16 @@ namespace TLabs.ExchangeSdk.Verification
         public DateTimeOffset? DateCreate { get; set; }
         public DateTimeOffset? DateVerification { get; set; }
         public DateTimeOffset? DateFilled { get; set; }
+
+        public string SumsubApplicantId { get; set; }
+
+        public DateTimeOffset? SumsubLastSyncedAt { get; set; }
+
+        public string SumsubInspectionId { get; set; }
+
+        public string SumsubReviewAnswer { get; set; }
+
+        public string SumsubLastCorrelationId { get; set; }
     }
 
     public enum StatusVerificationUser
