@@ -50,6 +50,7 @@ namespace TLabs.ExchangeSdk
             services.AddTransient<WebApp.ClientWebapp>();
             services.AddTransient<News.ClientNews>();
             services.AddTransient<Notificator.ClientNotificator>();
+            services.AddTransient<MobileApps.ClientMobileApps>();
 
             services.AddTransient<Farming.ClientFarming>();
             services.AddTransient<Farming.ClientFarmingAdmin>();
