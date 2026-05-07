@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Flurl.Http;
 using Microsoft.Extensions.Logging;
@@ -77,7 +78,8 @@ namespace TLabs.ExchangeSdk.Affiliate
         }
 
         public async Task<PagedList<AccrualDto>> GetAccruals(string userId, int pageNumber = 1, int pageSize = 20,
-            string currencyCode = null, ProfitType? profitType = null)
+            string currencyCode = null, ProfitType? profitType = null,
+            IReadOnlyList<ProfitType> profitTypes = null)
         {
             var request = $"affiliate/accruals".InternalApi()
                 .SetQueryParam(nameof(userId), userId)
@@ -86,7 +88,11 @@ namespace TLabs.ExchangeSdk.Affiliate
 
             if (currencyCode != null)
                 request = request.SetQueryParam(nameof(currencyCode), currencyCode);
-            if (profitType != null)
+
+            // profitTypes (multi) overrides single profitType when non-empty — matches affiliate Api GetAccruals.
+            if (profitTypes != null && profitTypes.Count > 0)
+                request = request.SetQueryParam(nameof(profitTypes), profitTypes.Select(p => (int)p).ToList());
+            else if (profitType != null)
                 request = request.SetQueryParam(nameof(profitType), profitType);
 
             var result = await request.GetJsonAsync<PagedList<AccrualDto>>();
