@@ -4,6 +4,7 @@ using Flurl.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using TLabs.DotnetHelpers;
 using TLabs.ExchangeSdk.News.Dtos;
@@ -181,6 +182,28 @@ public class ClientNews
 
             default:
                 return new FileContentResult(data, "image/jpeg");
+        }
+    }
+
+    /// <summary>
+    /// Returns the raw response (binary + content-type) for a currency icon stored in the News service.
+    /// Returns null on 404.
+    /// </summary>
+    public async Task<FileContentResult?> GetCurrencyIconFileContentResult(string code)
+    {
+        try
+        {
+            var response = await $"{BaseUrl}/currencies/icons/{code}".InternalApi().GetAsync();
+            var data = await response.GetBytesAsync();
+            if (data == null || data.Length == 0)
+                return null;
+
+            var contentType = response.Headers.FirstOrDefault("Content-Type") ?? "image/png";
+            return new FileContentResult(data, contentType);
+        }
+        catch (FlurlHttpException ex) when (ex.StatusCode == 404)
+        {
+            return null;
         }
     }
 

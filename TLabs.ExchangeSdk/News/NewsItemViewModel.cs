@@ -9,6 +9,9 @@ namespace TLabs.ExchangeSdk.News
 
         public Language Language { get; set; }
 
+        /// <summary> Optional. Currency this news item is related to (used to show currency icon on the front). </summary>
+        public string CurrencyListingCode { get; set; }
+
         public string Title { get; set; }
 
         public string Body { get; set; }
@@ -39,6 +42,7 @@ namespace TLabs.ExchangeSdk.News
 
             Id = news.Id;
             Language = news.Language;
+            CurrencyListingCode = news.CurrencyListingCode;
             Title = lastVersion.Title;
             Body = lastVersion.Body;
             Preview = lastVersion.Preview;
