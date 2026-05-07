@@ -36,6 +36,8 @@ namespace TLabs.ExchangeSdk.Staking
 
         Task<List<UserStake>> GetAllUserStakes(UserStakingStatus? status = null);
 
+        Task<QueryResult> AdminCancelUserStake(Guid userStakeId);
+
         Task<StakingStatisticsDto> GetStakingStatistics(IReadOnlyCollection<string> userIds = null);
 
         Task<int> GetStakesCountForPeriod(DateTimeOffset fromDate, DateTimeOffset toDate,
@@ -149,6 +151,15 @@ namespace TLabs.ExchangeSdk.Staking
                 .SetQueryParam(nameof(status), status?.ToString())
                 .GetJsonAsync<List<UserStake>>().GetQueryResult();
             return result.Succeeded ? result.Data : null;
+        }
+
+        public async Task<QueryResult> AdminCancelUserStake(Guid userStakeId)
+        {
+            var result = await $"brokerage/api/staking/admin/user-stakes/{userStakeId}/admin-cancel"
+                .InternalApi().PostJsonAsync(null).GetQueryResult();
+            if (!result.Succeeded)
+                _logger.LogError($"AdminCancelUserStake failed for {userStakeId}: {result.ErrorsString}");
+            return result;
         }
 
         public virtual async Task<StakingStatisticsDto> GetStakingStatistics(IReadOnlyCollection<string> userIds = null)
