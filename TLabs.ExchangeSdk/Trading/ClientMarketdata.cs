@@ -200,5 +200,14 @@ namespace TLabs.ExchangeSdk.Trading
 
             return response.Succeeded ? response.Data : new Dictionary<string, DateTimeOffset>();
         }
+
+        public virtual async Task<Dictionary<string, decimal>> GetOrderbookVolumes(List<string> currencyPairCodes)
+        {
+            var result = await "marketdata/orderbooks/volume".InternalApi()
+                .SetQueryParam(nameof(currencyPairCodes), currencyPairCodes)
+                .GetJsonAsync<Dictionary<string, decimal>>();
+
+            return result;
+        }
     }
 }

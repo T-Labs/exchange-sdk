@@ -16,7 +16,7 @@ public class PassiveLiquidityAlgorithmSettings
 
     public decimal SpreadBetweenOrdersTo { get; set; }
 
-    public bool IsAutoRecreatingEnabled { get; set; }
-
     public decimal PriceOffset { get; set; }
+
+    public decimal RequiredVolume { get; set; }
 }
