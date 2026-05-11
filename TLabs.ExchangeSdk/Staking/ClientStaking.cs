@@ -155,7 +155,7 @@ namespace TLabs.ExchangeSdk.Staking
 
         public async Task<QueryResult> AdminCancelUserStake(Guid userStakeId)
         {
-            var result = await $"brokerage/api/staking/admin/user-stakes/{userStakeId}/admin-cancel"
+            var result = await $"brokerage/staking/admin/user-stakes/{userStakeId}/admin-cancel"
                 .InternalApi().PostJsonAsync(null).GetQueryResult();
             if (!result.Succeeded)
                 _logger.LogError($"AdminCancelUserStake failed for {userStakeId}: {result.ErrorsString}");
