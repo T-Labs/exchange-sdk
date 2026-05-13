@@ -33,7 +33,7 @@ namespace TLabs.ExchangeSdk.Notificator
         /// </summary>
         public async Task<EmailDispatchResponse> SendTemplateEmail(NotificationEmailTemplate request)
         {
-            return await "notificator/emails/template"
+            return await "notificator/emails/templates"
                 .InternalApi()
                 .PostJsonAsync(request)
                 .ReceiveJson<EmailDispatchResponse>();
