@@ -40,6 +40,18 @@ namespace TLabs.ExchangeSdk.Users
 
         public string TelegramLogin { get; set; }
 
+        /// <summary>True if user currently has VIP status (balance condition met or grace active)</summary>
+        public bool IsVip { get; set; }
+
+        /// <summary>When VIP status was first activated</summary>
+        public DateTimeOffset? VipActivatedAt { get; set; }
+
+        /// <summary>If user dropped below VIP balance threshold, deadline to restore. Null otherwise.</summary>
+        public DateTimeOffset? VipGracePeriodEndsAt { get; set; }
+
+        /// <summary>True if user explicitly chose the VIP avatar. Status badge shows regardless.</summary>
+        public bool IsVipAvatarSelected { get; set; }
+
         public bool TwoFactorEmail {
             get => FlagsHelper.IsSet(TwoFactorMethods, TwoFactorMethods.Email);
             set => TwoFactorMethods =

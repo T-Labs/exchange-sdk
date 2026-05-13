@@ -165,6 +165,36 @@ namespace TLabs.ExchangeSdk.Users
             await $"userprofiles/users/{userId}/avatar-id".InternalApi().PostJsonAsync(avatarId);
         }
 
+        public async Task<VipStatusDto> GetVipStatus(string userId)
+        {
+            if (userId.NotHasValue())
+                return null;
+            return await $"userprofiles/users/{userId}/vip-status".InternalApi()
+                .GetJsonAsync<VipStatusDto>();
+        }
+
+        public async Task<QueryResult> SetVipStatus(string userId, SetVipStatusDto dto)
+        {
+            return await $"userprofiles/users/{userId}/vip-status".InternalApi()
+                .PostJsonAsync(dto)
+                .GetQueryResult();
+        }
+
+        public async Task<VipAssistantDto> GetVipAssistant(string userId)
+        {
+            if (userId.NotHasValue())
+                return null;
+            try
+            {
+                return await $"userprofiles/users/{userId}/vip-assistant".InternalApi()
+                    .GetJsonAsync<VipAssistantDto>();
+            }
+            catch (FlurlHttpException ex) when (ex.Call.HttpResponseMessage?.StatusCode == HttpStatusCode.NotFound)
+            {
+                return null;
+            }
+        }
+
         public async Task<bool> IsGoogleAuthenticatorActive(string userId)
         {
             return await $"userprofiles/users/login-ga-required/{userId}".InternalApi()
