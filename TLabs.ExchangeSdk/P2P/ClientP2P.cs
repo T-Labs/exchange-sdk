@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using TLabs.DotnetHelpers;
 using TLabs.ExchangeSdk.P2P.Chats;
 using TLabs.ExchangeSdk.P2P.Deals;
+using TLabs.ExchangeSdk.P2P.Merchants;
 using TLabs.ExchangeSdk.P2P.Users;
 
 namespace TLabs.ExchangeSdk.P2P;
@@ -384,6 +385,43 @@ public class ClientP2P
         return await $"p2p/deals/{dealId}/cancel-dispute".InternalApi()
             .SetQueryParam(nameof(userId), userId)
             .GetJsonAsync<DealCancelDispute>();
+    }
+
+    public async Task<MerchantApplicationEligibilityDto> GetMerchantApplicationEligibility(string userId)
+    {
+        return await $"p2p/users/{userId}/merchant-application/eligibility".InternalApi()
+            .GetJsonAsync<MerchantApplicationEligibilityDto>();
+    }
+
+    public async Task<MerchantApplicationSubmitResultDto> SubmitMerchantApplication(string userId)
+    {
+        return await $"p2p/users/{userId}/merchant-application".InternalApi()
+            .PostJsonAsync<MerchantApplicationSubmitResultDto>(null);
+    }
+
+    public async Task<bool> IsUserP2PMerchant(string userId)
+    {
+        return await $"p2p/internal/merchants/users/{userId}/is-user-merchant".InternalApi()
+            .GetJsonAsync<bool>();
+    }
+
+    public async Task<List<MerchantApplicationAdminDto>> GetMerchantApplications(string status = null)
+    {
+        return await $"p2p/merchant-applications".InternalApi()
+            .SetQueryParam(nameof(status), status)
+            .GetJsonAsync<List<MerchantApplicationAdminDto>>();
+    }
+
+    public async Task ApproveMerchantApplication(Guid id, MerchantApplicationReviewDto dto)
+    {
+        await $"p2p/merchant-applications/{id}/approve".InternalApi()
+            .PostJsonAsync(dto ?? new MerchantApplicationReviewDto());
+    }
+
+    public async Task RejectMerchantApplication(Guid id, MerchantApplicationReviewDto dto)
+    {
+        await $"p2p/merchant-applications/{id}/reject".InternalApi()
+            .PostJsonAsync(dto ?? new MerchantApplicationReviewDto());
     }
 
     public async Task<List<DealCancelDispute>> GetDealCancelDisputes(string creatorUserId = null,

@@ -26,4 +26,6 @@ public class UserInfoDto
     public int DaysSinceFirstDeal { get; set; }
     public decimal RecentTradingVolume { get; set; }
     public decimal TotalTradingVolume { get; set; }
+
+    public bool IsMerchant { get; set; }
 }

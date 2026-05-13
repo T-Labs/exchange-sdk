@@ -71,6 +71,8 @@ public class Order
     [NotMapped]
     public string UserNickname { get; set; }
 
+    public bool OrderOwnerIsMerchant { get; set; }
+
     [NotMapped]
     public OrderUserInfo UserInfo { get; set; }
 
