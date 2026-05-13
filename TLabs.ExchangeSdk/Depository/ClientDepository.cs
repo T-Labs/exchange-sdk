@@ -254,7 +254,7 @@ namespace TLabs.ExchangeSdk.Depository
         }
 
         public virtual async Task<Dictionary<string, decimal>> GetDepositsVolume(DateTimeOffset from, DateTimeOffset to,
-            List<string> userIds = null)
+            IReadOnlyCollection<string> userIds = null)
         {
             var result = await "depository/deposits/volume".InternalApi()
                 .SetQueryParam("from", from.ToString("o"))
