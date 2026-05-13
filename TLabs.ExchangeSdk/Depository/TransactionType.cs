@@ -149,6 +149,15 @@ namespace TLabs.ExchangeSdk.Depository
         public static readonly TransactionType P2pTransferFromDealEnd = new TransactionType("774", "P2P перевод средств из сделки конец", nameof(P2pTransferFromDealEnd));
         public static readonly TransactionType P2pDealFee = new TransactionType("777", "P2P комиссия после завершения сделки", nameof(P2pDealFee));
 
+        public static readonly TransactionType P2pMerchantCollateralBlockBegin = new TransactionType("782",
+            "P2P блокировка залога мерчанта начало", nameof(P2pMerchantCollateralBlockBegin));
+        public static readonly TransactionType P2pMerchantCollateralBlockEnd = new TransactionType("783",
+            "P2P блокировка залога мерчанта конец", nameof(P2pMerchantCollateralBlockEnd));
+        public static readonly TransactionType P2pMerchantCollateralUnblockBegin = new TransactionType("784",
+            "P2P разблокировка залога мерчанта начало", nameof(P2pMerchantCollateralUnblockBegin));
+        public static readonly TransactionType P2pMerchantCollateralUnblockEnd = new TransactionType("785",
+            "P2P разблокировка залога мерчанта конец", nameof(P2pMerchantCollateralUnblockEnd));
+
         public static readonly TransactionType P2pExternalFiatTransfer = new TransactionType("7501", "P2P перевод фиата вне биржи", nameof(P2pExternalFiatTransfer));
 
         public static readonly List<TransactionType> TradingTypes = new List<TransactionType>
@@ -219,6 +228,8 @@ namespace TLabs.ExchangeSdk.Depository
             P2pDealBlockCancelBegin, P2pDealBlockCancelEnd,
             P2pTransferFromOrderBegin, P2pTransferFromOrderEnd, P2pTransferFromDealBegin, P2pTransferFromDealEnd,
             P2pDealFee,
+            P2pMerchantCollateralBlockBegin, P2pMerchantCollateralBlockEnd,
+            P2pMerchantCollateralUnblockBegin, P2pMerchantCollateralUnblockEnd,
             P2pExternalFiatTransfer,
         };
 

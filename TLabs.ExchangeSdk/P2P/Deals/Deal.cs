@@ -53,6 +53,8 @@ public class Deal
     [NotMapped]
     public string UserNickname { get; set; }
 
+    public bool DealUserIsMerchant { get; set; }
+
     public override string ToString() =>
         $"{nameof(Deal)}(OrderId:{OrderId}, Crypto:{ExchangeAmount} {Order?.ExchangeCurrencyCode}, " +
         $"Fiat:{PaymentAmount} {Order?.PaymentCurrencyCode}, DealUserId:{DealUserId}, DealStatus:{Status})";
