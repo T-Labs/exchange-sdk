@@ -252,5 +252,17 @@ namespace TLabs.ExchangeSdk.Depository
 
             return response.Succeeded ? response.Data : new Dictionary<string, DateTimeOffset>();
         }
+
+        public virtual async Task<Dictionary<string, decimal>> GetDepositsVolume(DateTimeOffset from, DateTimeOffset to,
+            List<string> userIds = null)
+        {
+            var result = await "depository/deposits/volume".InternalApi()
+                .SetQueryParam("from", from.ToString("o"))
+                .SetQueryParam("to", to.ToString("o"))
+                .PostJsonAsync(userIds)
+                .ReceiveJson<Dictionary<string, decimal>>();
+
+            return result;
+        }
     }
 }
