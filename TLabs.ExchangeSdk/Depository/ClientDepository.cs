@@ -99,6 +99,18 @@ namespace TLabs.ExchangeSdk.Depository
             return result;
         }
 
+        /// <summary>
+        /// Distinct userIds (sender or recipient) of all transactions within the last <paramref name="hours"/> hours.
+        /// Lets a caller scope expensive per-user work to recently-active users.
+        /// </summary>
+        public virtual async Task<List<string>> GetUserIdsWithRecentTransactions(int hours = 24)
+        {
+            var result = await "depository/transaction/recent-tx-user-ids".InternalApi()
+                .SetQueryParam(nameof(hours), hours)
+                .GetJsonAsync<List<string>>();
+            return result ?? new List<string>();
+        }
+
         #region Balances
 
         public async Task<List<AccountBalance>> GetAccountsBalances(string userId = null, string currencyCode = null,

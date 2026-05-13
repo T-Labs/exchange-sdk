@@ -169,13 +169,13 @@ namespace TLabs.ExchangeSdk.Users
         {
             if (userId.NotHasValue())
                 return null;
-            return await $"userprofiles/users/{userId}/vip-status".InternalApi()
+            return await $"userprofiles/users/{userId}/vip/statuses".InternalApi()
                 .GetJsonAsync<VipStatusDto>();
         }
 
         public async Task<QueryResult> SetVipStatus(string userId, SetVipStatusDto dto)
         {
-            return await $"userprofiles/users/{userId}/vip-status".InternalApi()
+            return await $"userprofiles/users/{userId}/vip/statuses".InternalApi()
                 .PostJsonAsync(dto)
                 .GetQueryResult();
         }
@@ -186,7 +186,7 @@ namespace TLabs.ExchangeSdk.Users
                 return null;
             try
             {
-                return await $"userprofiles/users/{userId}/vip-assistant".InternalApi()
+                return await $"userprofiles/users/{userId}/vip/assistants".InternalApi()
                     .GetJsonAsync<VipAssistantDto>();
             }
             catch (FlurlHttpException ex) when (ex.Call.HttpResponseMessage?.StatusCode == HttpStatusCode.NotFound)

@@ -49,9 +49,6 @@ namespace TLabs.ExchangeSdk.Users
         /// <summary>If user dropped below VIP balance threshold, deadline to restore. Null otherwise.</summary>
         public DateTimeOffset? VipGracePeriodEndsAt { get; set; }
 
-        /// <summary>True if user explicitly chose the VIP avatar. Status badge shows regardless.</summary>
-        public bool IsVipAvatarSelected { get; set; }
-
         public bool TwoFactorEmail {
             get => FlagsHelper.IsSet(TwoFactorMethods, TwoFactorMethods.Email);
             set => TwoFactorMethods =

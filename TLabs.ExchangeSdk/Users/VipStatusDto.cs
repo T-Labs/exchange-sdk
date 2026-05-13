@@ -7,7 +7,6 @@ namespace TLabs.ExchangeSdk.Users
         public bool IsVip { get; set; }
         public DateTimeOffset? VipActivatedAt { get; set; }
         public DateTimeOffset? VipGracePeriodEndsAt { get; set; }
-        public bool IsVipAvatarSelected { get; set; }
     }
 
     public class SetVipStatusDto
