@@ -389,13 +389,13 @@ public class ClientP2P
 
     public async Task<MerchantApplicationEligibilityDto> GetMerchantApplicationEligibility(string userId)
     {
-        return await $"p2p/users/{userId}/merchant-application/eligibility".InternalApi()
+        return await $"p2p/users/{userId}/merchant-applications/eligibility".InternalApi()
             .GetJsonAsync<MerchantApplicationEligibilityDto>();
     }
 
     public async Task<MerchantApplicationSubmitResultDto> SubmitMerchantApplication(string userId)
     {
-        return await $"p2p/users/{userId}/merchant-application".InternalApi()
+        return await $"p2p/users/{userId}/merchant-applications".InternalApi()
             .PostJsonAsync<MerchantApplicationSubmitResultDto>(null);
     }
 
