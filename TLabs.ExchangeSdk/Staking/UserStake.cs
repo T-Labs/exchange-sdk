@@ -30,6 +30,9 @@ namespace TLabs.ExchangeSdk.Staking
 
         public decimal SingleAccrualAmount { get; set; }
 
+        /// <summary>Snapshot of <see cref="StakingSetting.AccrualSchedule"/> at stake creation.</summary>
+        public StakingAccrualSchedule AccrualSchedule { get; set; } = StakingAccrualSchedule.Daily;
+
         /// <summary>Daily accrual in USDT (fixed at stake open).</summary>
         public decimal? SingleAccrualAmountUsdt { get; set; }
 

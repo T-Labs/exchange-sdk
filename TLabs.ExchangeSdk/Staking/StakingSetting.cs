@@ -26,6 +26,9 @@ namespace TLabs.ExchangeSdk.Staking
 
         public int LockPeriodDays { get; set; }
 
+        /// <summary>Daily accrual slots vs single payout at maturity.</summary>
+        public StakingAccrualSchedule AccrualSchedule { get; set; } = StakingAccrualSchedule.Daily;
+
         public bool NotificationNeeded { get; set; }
 
         /// <summary>How much will go to AccountChart UserBonuses</summary>
