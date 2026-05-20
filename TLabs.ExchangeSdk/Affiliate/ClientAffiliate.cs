@@ -197,7 +197,7 @@ namespace TLabs.ExchangeSdk.Affiliate
 
         public virtual async Task<List<ReferralUserFlatTreeItem>> GetReferralUserFlatTree(string userId, int? depth = null)
         {
-            var result = await $"affiliate/referrals-full-tree/{userId}/flat".InternalApi()
+            var result = await $"affiliate/referrals/{userId}/tree/flat".InternalApi()
                 .SetQueryParam(nameof(depth), depth)
                 .GetJsonAsync<List<ReferralUserFlatTreeItem>>()
                 .GetQueryResult();
