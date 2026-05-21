@@ -204,5 +204,14 @@ namespace TLabs.ExchangeSdk.Affiliate
 
             return result.Succeeded ? result.Data : new List<ReferralUserFlatTreeItem>();
         }
+
+        public virtual async Task<List<ReferralUserFlatTreeItem>> GetAllReferralsFlatTrees(int? depth = null)
+        {
+            var result = await $"affiliate/referrals/trees/flat".InternalApi()
+                .SetQueryParam(nameof(depth), depth)
+                .GetJsonAsync<List<ReferralUserFlatTreeItem>>();
+
+            return result;
+        }
     }
 }
