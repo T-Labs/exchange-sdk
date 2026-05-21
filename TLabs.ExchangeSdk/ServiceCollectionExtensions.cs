@@ -21,6 +21,7 @@ namespace TLabs.ExchangeSdk
             services.AddTransient<CryptoAdapters.Tron.ClientCryptoAdapterTron>();
             services.AddTransient<CryptoAdapters.NownodesApi.ClientCryptoNownodes>();
             services.AddTransient<CryptoAdapters.Tron.ClientCryptoAdapterOrgon>();
+            services.AddTransient<Features.Profeex.ClientCryptoAdapterProfeex>();
 
             services.AddTransient<Depository.ClientDepository>();
             services.AddTransient<Deposits.ClientDeposits>();
