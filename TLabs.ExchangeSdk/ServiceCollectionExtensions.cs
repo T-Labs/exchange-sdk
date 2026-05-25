@@ -9,6 +9,7 @@ namespace TLabs.ExchangeSdk
         {
             services.AddTransient<Affiliate.ClientAffiliate>();
             services.AddTransient<Affiliate.StakingAffiliate.ClientStakingAffiliate>();
+            services.AddTransient<Brokerage.ClientBrokerage>();
             services.AddTransient<BinanceHandling.ClientBinanceHandling>();
             services.AddTransient<CashDeposits.ClientCashDeposits>();
             services.AddTransient<Commissions.ClientCommissions>();
