@@ -266,11 +266,12 @@ namespace TLabs.ExchangeSdk.Depository
         }
 
         public virtual async Task<Dictionary<string, Dictionary<string, decimal>>> GetDepositsVolumeByUser(DateTimeOffset? from,
-            DateTimeOffset? to, IReadOnlyCollection<string> userIds = null)
+            DateTimeOffset? to, IReadOnlyCollection<string> userIds = null, IReadOnlyCollection<string> currencyCodes = null)
         {
-            var result = await "depository/deposits/volume".InternalApi()
+            var result = await "depository/deposits/volume-by-user".InternalApi()
                 .SetQueryParam(nameof(from), from?.ToString("o"))
                 .SetQueryParam(nameof(to), to?.ToString("o"))
+                .SetQueryParam(nameof(currencyCodes), currencyCodes)
                 .PostJsonAsync(userIds)
                 .ReceiveJson<Dictionary<string, Dictionary<string, decimal>>>();
 
