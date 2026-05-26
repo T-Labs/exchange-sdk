@@ -195,14 +195,15 @@ namespace TLabs.ExchangeSdk.Affiliate
             return affiliateResponse.Succeeded ? affiliateResponse.Data : new PagedList<ReferralUser>();
         }
 
-        public virtual async Task<List<ReferralUserFlatTreeItem>> GetReferralUserFlatTree(string userId, int? depth = null)
+        public virtual async Task<List<ReferralUserFlatTreeItem>> GetReferralUserFlatTree(
+            string userId, int? depth = null, ReferralTreeLoadDirection direction = ReferralTreeLoadDirection.Both)
         {
             var result = await $"affiliate/referrals/{userId}/tree/flat".InternalApi()
                 .SetQueryParam(nameof(depth), depth)
-                .GetJsonAsync<List<ReferralUserFlatTreeItem>>()
-                .GetQueryResult();
+                .SetQueryParam(nameof(direction), direction.ToString())
+                .GetJsonAsync<List<ReferralUserFlatTreeItem>>();
 
-            return result.Succeeded ? result.Data : new List<ReferralUserFlatTreeItem>();
+            return result;
         }
 
         public virtual async Task<List<ReferralUserFlatTreeItem>> GetAllReferralsFlatTrees(int? depth = null)
