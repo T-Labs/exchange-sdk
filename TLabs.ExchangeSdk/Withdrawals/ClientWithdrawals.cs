@@ -38,6 +38,12 @@ namespace TLabs.ExchangeSdk.Withdrawals
             return result;
         }
 
+        public async Task<List<Withdrawal>> GetWithdrawalsByTransactionIds(List<Guid> transactionIds)
+        {
+            return await $"{baseUrl}/by-transaction-ids".InternalApi()
+                .PostJsonAsync<List<Withdrawal>>(transactionIds);
+        }
+
         public async Task<IFlurlResponse> ApproveWithdrawal(Guid id, bool allowErrorStatus = false)
         {
             var result = await $"{baseUrl}/approve/{id}/{allowErrorStatus}".InternalApi()
