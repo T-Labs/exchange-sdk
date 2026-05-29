@@ -32,6 +32,13 @@ namespace TLabs.ExchangeSdk.Affiliate.StakingAffiliate
             return result;
         }
 
+        public virtual async Task<Dictionary<string, StakingAffiliateExplorerMetricsDto>> GetExplorerMetrics(
+            IReadOnlyCollection<string> userIds)
+        {
+            return await $"{BaseUrl}/metrics".InternalApi()
+                .PostJsonAsync<Dictionary<string, StakingAffiliateExplorerMetricsDto>>(userIds);
+        }
+
         public async Task<List<string>> GetDescendantUserIds(string userId)
         {
             var result = await $"{BaseUrl}/descendants/{userId}".InternalApi()
