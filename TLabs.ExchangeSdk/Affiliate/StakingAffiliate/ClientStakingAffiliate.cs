@@ -32,10 +32,10 @@ namespace TLabs.ExchangeSdk.Affiliate.StakingAffiliate
             return result;
         }
 
-        public virtual async Task<Dictionary<string, StakingAffiliateExplorerMetricsDto>> GetExplorerMetrics(
+        public virtual async Task<Dictionary<string, StakingAffiliateExplorerMetricsDto>> GetStakingTokens(
             IReadOnlyCollection<string> userIds)
         {
-            return await $"{BaseUrl}/metrics".InternalApi()
+            return await $"{BaseUrl}/staking-tokens".InternalApi()
                 .PostJsonAsync<Dictionary<string, StakingAffiliateExplorerMetricsDto>>(userIds);
         }
 
