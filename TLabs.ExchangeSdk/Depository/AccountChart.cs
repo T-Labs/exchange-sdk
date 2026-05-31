@@ -43,6 +43,7 @@ namespace TLabs.ExchangeSdk.Depository
         public static readonly AccountChart DepositStaking = new AccountChart("54", "Введеные средства стейкингом", nameof(DepositStaking));
         public static readonly AccountChart DepositStakingAffiliate = new AccountChart("55", "Введеные средства партнерке по стейкингу", nameof(DepositStakingAffiliate));
         public static readonly AccountChart DepositToFunds = new AccountChart("56", "Введеные средства на фонды", nameof(DepositToFunds));
+        public static readonly AccountChart DepositUserToUser = new AccountChart("57", "Введеные средства переводом от юзера", nameof(DepositUserToUser));
         public static readonly AccountChart DepositReplacement = new AccountChart("58", "Введеные средства взамен удаленной валюты", nameof(DepositReplacement));
         public static readonly AccountChart DepositCorrection = new AccountChart("59", "Корректировочное пополнение баланса", nameof(DepositCorrection));
 
@@ -125,7 +126,7 @@ namespace TLabs.ExchangeSdk.Depository
             Nullification,
 
             Deposit, DepositAdmin, DepositCash, DepositStaking, DepositStakingAffiliate, DepositAirdrop, DepositToFunds,
-            DepositReplacement, DepositCorrection,
+            DepositUserToUser, DepositReplacement, DepositCorrection,
 
             Withdrawn,
             ColdWallets,
@@ -136,7 +137,7 @@ namespace TLabs.ExchangeSdk.Depository
         public static readonly List<AccountChart> DepositCharts = new List<AccountChart>
         {
             Deposit, DepositAdmin, DepositCash, DepositStaking, DepositAirdrop, DepositToFunds,
-            DepositReplacement, DepositCorrection,
+            DepositUserToUser, DepositReplacement, DepositCorrection,
         };
 
         public static readonly List<AccountChart> ChartsWithAdapterCode = new List<AccountChart>

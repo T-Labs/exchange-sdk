@@ -77,5 +77,19 @@ namespace TLabs.ExchangeSdk.Withdrawals
 
             return result;
         }
+
+        public virtual async Task<Dictionary<string, Dictionary<string, decimal>>> GetVolumeByUser(
+            IReadOnlyCollection<string> userIds, DateTimeOffset? from = null, DateTimeOffset? to = null,
+            IReadOnlyCollection<string> currencyCodes = null)
+        {
+            var result = await "withdrawals/withdrawal/volume-by-user".InternalApi()
+                .SetQueryParam(nameof(from), from?.ToString("o"))
+                .SetQueryParam(nameof(to), to?.ToString("o"))
+                .SetQueryParam(nameof(currencyCodes), currencyCodes)
+                .PostJsonAsync(userIds)
+                .ReceiveJson<Dictionary<string, Dictionary<string, decimal>>>();
+
+            return result;
+        }
     }
 }

@@ -8,9 +8,7 @@ public class MerchantApplicationEligibilityDto
 
     public bool MeetsVerificationRequirement { get; set; }
 
-    public bool MeetsCompletedDealsRequirement { get; set; }
-
-    public int CompletedTakerDealsCount { get; set; }
+    public bool VerificationRequiredByPlatform { get; set; }
 
     public bool IsAlreadyMerchant { get; set; }
 
@@ -21,6 +19,4 @@ public class MerchantApplicationEligibilityDto
     public string CollateralCurrencyCode { get; set; }
 
     public decimal AvailableBalance { get; set; }
-
-    public int MinCompletedTakerDealsRequired { get; set; }
 }
