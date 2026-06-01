@@ -435,6 +435,14 @@ namespace TLabs.ExchangeSdk.Users
                 .PostJsonAsync(new { userId, email, isResend });
         }
 
+        /// <summary>Removes all trusted devices for user in UserProfiles.</summary>
+        public async Task InvalidateTrustedDevices(string userId)
+        {
+            await $"userprofiles/users/device-verification/invalidate-trusted-devices"
+                .InternalApi()
+                .PostJsonAsync(new { userId });
+        }
+
         /// <summary>Proxied from Identity <c>api/account/verify-device</c>.</summary>
         public async Task VerifyDevice(string email, string code, string deviceId, string userAgent)
         {
