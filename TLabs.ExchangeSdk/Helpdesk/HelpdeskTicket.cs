@@ -51,5 +51,15 @@ namespace TLabs.ExchangeSdk.Helpdesk
         /// History
         /// </summary>
         public List<HelpdeskTicketMessage> History { get; set; }
+
+        /// <summary>
+        /// Ticket escalated to developers by support
+        /// </summary>
+        public bool IsEscalatedToDevelopers { get; set; }
+
+        /// <summary>
+        /// Date ticket escalated to developers
+        /// </summary>
+        public DateTimeOffset? EscalatedAt { get; set; }
     }
 }

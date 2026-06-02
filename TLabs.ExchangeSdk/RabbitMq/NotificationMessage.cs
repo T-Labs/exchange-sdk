@@ -14,7 +14,7 @@ namespace TLabs.ExchangeSdk.RabbitMq
 
     public enum NotificationMessageType { EMail = 1, SMS = 2, EMailTemplate = 3, Telegram = 4 }
 
-    public enum UserGroup { SingleUser = 1, Admins = 2 }
+    public enum UserGroup { SingleUser = 1, Admins = 2, Developers = 3 }
 
     public class NotificationSMS : NotificationMessage
     {
