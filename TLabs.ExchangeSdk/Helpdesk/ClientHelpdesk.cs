@@ -29,10 +29,11 @@ namespace TLabs.ExchangeSdk.Helpdesk
             return fileId;
         }
 
-        public async Task<List<HelpdeskTicket>> GetTickets(string userId = null)
+        public async Task<List<HelpdeskTicket>> GetTickets(string userId = null, bool? escalatedToDevelopers = null)
         {
             var result = await $"helpdesk/helpdesk".InternalApi()
                 .SetQueryParam(nameof(userId), userId)
+                .SetQueryParam(nameof(escalatedToDevelopers), escalatedToDevelopers)
                 .GetJsonAsync<List<HelpdeskTicket>>();
             return result;
         }
@@ -62,6 +63,11 @@ namespace TLabs.ExchangeSdk.Helpdesk
                 .SetQueryParam(nameof(status), (int)status)
                 .PostJsonAsync(null);
         }
+
+        public async Task<QueryResult> EscalateToDevelopers(Guid ticketId) =>
+            await $"helpdesk/helpdesk/{ticketId}/escalate".InternalApi()
+                .PostJsonAsync(null)
+                .GetQueryResult();
 
         public async Task<string> Healthcheck() =>
             await $"helpdesk/healthcheck".InternalApi().GetStringAsync();
