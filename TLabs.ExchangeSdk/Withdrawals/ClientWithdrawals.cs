@@ -59,6 +59,15 @@ namespace TLabs.ExchangeSdk.Withdrawals
             return result;
         }
 
+        /// <summary>System-initiated on-chain send back to the depositor's address after an AML hold.</summary>
+        public virtual async Task<AmlReturnResponse> ExecuteAmlReturn(WithdrawalRequest request)
+        {
+            var result = await $"{baseUrl}/aml-return".InternalApi()
+                .PostJsonAsync(request)
+                .ReceiveJson<AmlReturnResponse>();
+            return result;
+        }
+
         public virtual async Task<PagedList<Withdrawal>> GetPagedList(int page, int pageSize)
         {
             var result = await $"withdrawals/withdrawal/paginated-list".InternalApi()
