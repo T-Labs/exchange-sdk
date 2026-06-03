@@ -64,6 +64,18 @@ namespace TLabs.ExchangeSdk.Affiliate.StakingAffiliate
             return result;
         }
 
+        /// <summary>Referral network tree for the diagram. With <see cref="ReferralTreeLoadDirection.Both"/>
+        /// returns the user's surroundings: own subtree, upline chain and neighbouring (foreign) branches.</summary>
+        public async Task<ReferralNetworkTreeResponse> GetNetworkTree(string userId,
+            ReferralTreeLoadDirection direction = ReferralTreeLoadDirection.Both, int? depth = null)
+        {
+            var request = $"{BaseUrl}/network-tree/{userId}".InternalApi()
+                .SetQueryParam(nameof(direction), direction.ToString());
+            if (depth.HasValue)
+                request = request.SetQueryParam(nameof(depth), depth.Value);
+            return await request.GetJsonAsync<ReferralNetworkTreeResponse>();
+        }
+
         public async Task<PagedList<StakingAffiliateAccrualDto>> GetAccruals(string userId,
             int pageNumber = 1, int pageSize = 20)
         {
