@@ -209,5 +209,14 @@ namespace TLabs.ExchangeSdk.Trading
 
             return result;
         }
+
+        public virtual async Task<OrderbookBounds> GetOrderbookBounds(string currencyPairCode)
+        {
+            var result = await "marketdata/orderbooks/bounds".InternalApi()
+                .SetQueryParam(nameof(currencyPairCode), currencyPairCode)
+                .GetJsonAsync<OrderbookBounds>();
+
+            return result;
+        }
     }
 }
