@@ -49,6 +49,15 @@ namespace TLabs.ExchangeSdk.Users
         /// <summary>If user dropped below VIP balance threshold, deadline to restore. Null otherwise.</summary>
         public DateTimeOffset? VipGracePeriodEndsAt { get; set; }
 
+        /// <summary>Free-form note left by admins about the user</summary>
+        public string AdminComment { get; set; }
+
+        /// <summary>Identity of the admin who last edited <see cref="AdminComment"/></summary>
+        public string AdminCommentUpdatedBy { get; set; }
+
+        /// <summary>When <see cref="AdminComment"/> was last edited</summary>
+        public DateTimeOffset? AdminCommentUpdatedAt { get; set; }
+
         public bool TwoFactorEmail {
             get => FlagsHelper.IsSet(TwoFactorMethods, TwoFactorMethods.Email);
             set => TwoFactorMethods =
