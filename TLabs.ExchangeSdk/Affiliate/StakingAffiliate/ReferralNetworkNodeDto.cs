@@ -1,7 +1,7 @@
 namespace TLabs.ExchangeSdk.Affiliate.StakingAffiliate
 {
-    /// <summary>One node in the referral network diagram (current user's surroundings:
-    /// own subtree, upline chain, and neighbouring "foreign" branches).</summary>
+    /// <summary>One node in the referral network diagram: the current user's own subtree
+    /// plus their single direct parent (identity-only upline node).</summary>
     public class ReferralNetworkNodeDto
     {
         public string UserId { get; set; }
@@ -12,6 +12,10 @@ namespace TLabs.ExchangeSdk.Affiliate.StakingAffiliate
         /// <summary>True when the node belongs to a branch outside the current user's own subtree/upline.
         /// Foreign nodes are shown without details (privacy) — only "foreign branch".</summary>
         public bool IsForeignBranch { get; set; }
+
+        /// <summary>True for the current user's single direct parent (inviter). Identity-only node:
+        /// no staking metrics or invite code — only <see cref="Nickname"/> + <see cref="PublicId"/> are filled.</summary>
+        public bool IsUpline { get; set; }
 
         /// <summary>Human-facing UID (PublicId from userprofiles); filled by BFF enrichment, only for non-foreign nodes.</summary>
         public string PublicId { get; set; }
