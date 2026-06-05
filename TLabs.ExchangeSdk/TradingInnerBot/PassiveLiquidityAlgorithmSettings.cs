@@ -19,4 +19,10 @@ public class PassiveLiquidityAlgorithmSettings
     public decimal PriceOffset { get; set; }
 
     public decimal RequiredVolume { get; set; }
+
+    /// <summary>Minimum number of live bot orders to maintain per pair (both sides), to guarantee orderbook depth (e.g. for CoinGecko)</summary>
+    public int MinLiveOrdersCount { get; set; } = 12;
+
+    /// <summary>If true, already standing real orders (User/LiquidityImport) are counted towards target depth so the bot doesn't create redundant orders on top of them</summary>
+    public bool CountForeignLiveOrders { get; set; }
 }
