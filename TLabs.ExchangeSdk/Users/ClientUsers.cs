@@ -160,6 +160,14 @@ namespace TLabs.ExchangeSdk.Users
                 .GetQueryResult();
         }
 
+        public async Task<QueryResult> SetAdminComment(string userId, AdminCommentDto dto)
+        {
+            return await $"userprofiles/users/{userId}/admin-comment"
+                .InternalApi()
+                .PostJsonAsync(dto)
+                .GetQueryResult();
+        }
+
         public async Task SetAvatarId(string userId, string avatarId)
         {
             await $"userprofiles/users/{userId}/avatar-id".InternalApi().PostJsonAsync(avatarId);
