@@ -183,6 +183,13 @@ namespace TLabs.ExchangeSdk.Affiliate
                 .GetQueryResult();
         }
 
+        public virtual async Task<QueryResult> ClearChildrenParents(string parentUserId)
+        {
+            return await $"affiliate/rebinding/{parentUserId}/children-parents".InternalApi()
+                .DeleteAsync()
+                .GetQueryResult();
+        }
+
         public virtual async Task<PagedList<ReferralUser>> GetReferralUsers(string search, int page = 1, int pageSize = 20)
         {
             var affiliateResponse = await "affiliate/users".InternalApi()

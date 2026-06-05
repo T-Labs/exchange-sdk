@@ -214,11 +214,13 @@ namespace TLabs.ExchangeSdk.Trading
             return result;
         }
 
-        public virtual async Task<OrderbookBounds> GetOrderbookBounds(string currencyPairCode)
+        public virtual async Task<Dictionary<string, OrderbookBounds>> GetOrderbookBounds(
+            IReadOnlyCollection<string> currencyPairCodes
+        )
         {
             var result = await "marketdata/orderbooks/bounds".InternalApi()
-                .SetQueryParam(nameof(currencyPairCode), currencyPairCode)
-                .GetJsonAsync<OrderbookBounds>();
+                .SetQueryParam(nameof(currencyPairCodes), currencyPairCodes)
+                .GetJsonAsync<Dictionary<string, OrderbookBounds>>();
 
             return result;
         }
