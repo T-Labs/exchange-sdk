@@ -6,6 +6,11 @@ namespace TLabs.ExchangeSdk.Users
 {
     public class ApplicationUser : IdentityUser
     {
+        /// <summary>When the account was soft-deleted, null if active</summary>
+        public DateTimeOffset? DeletedAt { get; set; }
+
+        public bool IsDeleted => DeletedAt.HasValue;
+
         public DateTimeOffset RegistrationDate { get; set; }
 
         /// <summary>Google Authenticator key</summary>
