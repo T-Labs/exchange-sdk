@@ -50,7 +50,7 @@ namespace TLabs.ExchangeSdk.Trading
 
         Task<Dictionary<string, decimal>> GetOrderbookVolumes(List<string> currencyPairCodes);
 
-        //Task<OrderbookBounds> GetOrderbookBounds(string currencyPairCode);
+        Task<Dictionary<string, OrderbookBounds>> GetOrderbookBounds(IReadOnlyCollection<string> currencyPairCodes);
     }
 
     public class ClientMarketdata : IClientMarketdata
