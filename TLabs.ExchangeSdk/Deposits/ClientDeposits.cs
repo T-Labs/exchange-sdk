@@ -8,12 +8,12 @@ using Flurl.Http;
 
 namespace TLabs.ExchangeSdk.Deposits
 {
-    /// <summary>Client for module Brokerage.Refill</summary>
+    /// <summary>Client for deposits module (hosted in stock-withdrawals)</summary>
     public class ClientDeposits
     {
         public async Task<IFlurlResponse> Deposit(DepositDto deposit)
         {
-            var result = await $"cashrefill/crypto/refill".InternalApi()
+            var result = await $"withdrawals/deposits".InternalApi()
                 .PostJsonAsync(deposit);
             return result;
         }
@@ -30,8 +30,5 @@ namespace TLabs.ExchangeSdk.Deposits
             });
             return result;
         }
-
-        public async Task<string> Healthcheck() =>
-            await $"cashrefill/healthcheck".InternalApi().GetStringAsync();
     }
 }
