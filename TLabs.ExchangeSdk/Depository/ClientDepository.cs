@@ -52,7 +52,7 @@ namespace TLabs.ExchangeSdk.Depository
             return result;
         }
 
-        public async Task<PagedList<TransactionDto>> GetTransactions(string userId = null, string currencyCode = null,
+        public virtual async Task<PagedList<TransactionDto>> GetTransactions(string userId = null, string currencyCode = null,
             DateTimeOffset? from = null, DateTimeOffset? to = null,
             List<string> transactionTypes = null, int page = 1, int pageSize = 50000,
             bool includeRollbacks = false, string actionIdContains = null)
