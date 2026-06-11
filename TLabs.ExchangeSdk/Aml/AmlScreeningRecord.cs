@@ -17,7 +17,7 @@ namespace TLabs.ExchangeSdk.Aml
         #region Subject of the screening
 
         /// <summary>MistTrack coin code actually sent to the provider (e.g. BTC, USDT-TRC20).</summary>
-        public string CoinCode { get; set; }
+        public string MistTrackCoinCode { get; set; }
 
         public string CurrencyCode { get; set; }
         public string AdapterCode { get; set; }
@@ -59,7 +59,7 @@ namespace TLabs.ExchangeSdk.Aml
         public Guid? PendingDepositId { get; set; }
 
         public override string ToString() =>
-            $"{nameof(AmlScreeningRecord)}({Source}, {CoinCode}, score:{RiskScore}, level:{RiskLevel}, " +
+            $"{nameof(AmlScreeningRecord)}({Source}, {MistTrackCoinCode}, score:{RiskScore}, level:{RiskLevel}, " +
             $"tx:{TxId}, addr:{Address})";
     }
 }
