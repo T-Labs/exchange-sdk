@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using Flurl.Http;
 using TLabs.DotnetHelpers;
@@ -12,6 +13,7 @@ public class ClientTradingInnerBot
     private const string BASE_URL = "tradinginnerbot";
     private const string SETTINGS_URL = $"{BASE_URL}/algorithms-settings";
     private const string EVENTS_URL = $"{BASE_URL}/external-events";
+    private const string PASSIVE_LIQUIDITY_URL = $"{BASE_URL}/passive-liquidity";
     private const string ALGORITHM_LIMITS_URL = $"{BASE_URL}/algorithm-loss-limits";
 
     public async Task<List<CurrencyPair>> GetCurrencyPairAsync()
@@ -69,6 +71,14 @@ public class ClientTradingInnerBot
     public async Task SendDealEventAsync(MatchingDeal deal)
     {
         await $"{EVENTS_URL}/deal".InternalApi().PostJsonAsync(deal);
+    }
+
+    public async Task<List<Order>> GetPassiveLiquidityActiveOrdersAsync(
+        CancellationToken cancellationToken = default)
+    {
+        return await $"{PASSIVE_LIQUIDITY_URL}/active-orders"
+            .InternalApi()
+            .GetJsonAsync<List<Order>>(cancellationToken: cancellationToken);
     }
 
     public async Task<AlgorithmLossLimit> GetAlgorithmLossLimitAsync(string currencyPair)

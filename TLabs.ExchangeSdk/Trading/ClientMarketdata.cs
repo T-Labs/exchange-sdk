@@ -51,6 +51,8 @@ namespace TLabs.ExchangeSdk.Trading
         Task<Dictionary<string, decimal>> GetOrderbookVolumes(List<string> currencyPairCodes);
 
         Task<Dictionary<string, OrderbookBounds>> GetOrderbookBounds(IReadOnlyCollection<string> currencyPairCodes);
+
+        Task<DeleteFakeOrdersResult> DeleteFakeOrders(DeleteFakeOrdersRequest request);
     }
 
     public class ClientMarketdata : IClientMarketdata
@@ -223,6 +225,12 @@ namespace TLabs.ExchangeSdk.Trading
                 .GetJsonAsync<Dictionary<string, OrderbookBounds>>();
 
             return result;
+        }
+
+        public async Task<DeleteFakeOrdersResult> DeleteFakeOrders(DeleteFakeOrdersRequest request)
+        {
+            return await $"marketdata/orders/fake-orders".InternalApi()
+                .DeleteJsonAsync<DeleteFakeOrdersResult>(request);
         }
     }
 }
