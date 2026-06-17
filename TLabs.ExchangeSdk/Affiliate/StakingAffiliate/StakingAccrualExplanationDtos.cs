@@ -28,11 +28,11 @@ namespace TLabs.ExchangeSdk.Affiliate.StakingAffiliate
     /// <summary>Kind of concrete reason for a period-over-period change of the staking referral bonus.</summary>
     public enum StakingAccrualChangeReasonType
     {
-        ReferralStopped = 0,
-        ReferralReduced = 1,
-        ReferralIncreased = 2,
-        ReferralAdded = 3,
-        LevelChanged = 4,
+        ReferralStopped = 10,
+        ReferralReduced = 20,
+        ReferralIncreased = 30,
+        ReferralAdded = 40,
+        LevelChanged = 50,
     }
 
     /// <summary>One concrete reason behind the change of the staking referral bonus.</summary>
