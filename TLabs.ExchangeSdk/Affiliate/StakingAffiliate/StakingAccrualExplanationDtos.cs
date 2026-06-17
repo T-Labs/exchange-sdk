@@ -7,7 +7,7 @@ namespace TLabs.ExchangeSdk.Affiliate.StakingAffiliate
     public class StakingAccrualBreakdownItemDto
     {
         public string FromUserId { get; set; }
-        public string FromUserName { get; set; }
+        public string FromUserNickname { get; set; }
         public string CurrencyCode { get; set; }
         public decimal Amount { get; set; }
         public decimal SourceStakeAmount { get; set; }
@@ -40,7 +40,7 @@ namespace TLabs.ExchangeSdk.Affiliate.StakingAffiliate
     {
         public StakingAccrualChangeReasonType Type { get; set; }
         public string FromUserId { get; set; }
-        public string FromUserName { get; set; }
+        public string FromUserNickname { get; set; }
         public string CurrencyCode { get; set; }
         public decimal AmountDelta { get; set; }
         public string OldLevel { get; set; }
