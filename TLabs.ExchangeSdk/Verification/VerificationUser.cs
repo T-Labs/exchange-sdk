@@ -48,7 +48,7 @@ namespace TLabs.ExchangeSdk.Verification
         /// <returns> if true - it means from the exchanger, by default false means the exchange </returns>
         public bool ApplicationFromExchanger { get; set; }
 
-        public DateTimeOffset? DateCreate { get; set; }
+        public DateTimeOffset? DateRegister { get; set; }
         public DateTimeOffset? DateVerification { get; set; }
         public DateTimeOffset? DateFilled { get; set; }
 
