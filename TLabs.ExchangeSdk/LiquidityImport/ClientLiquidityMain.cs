@@ -1,7 +1,7 @@
-using Flurl.Http;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Flurl.Http;
 using TLabs.DotnetHelpers;
 
 namespace TLabs.ExchangeSdk.LiquidityImport
@@ -21,6 +21,13 @@ namespace TLabs.ExchangeSdk.LiquidityImport
             var result = await $"liquiditymain/parameters/is-active/{currencyPairCode}".InternalApi()
                 .GetJsonAsync<string>();
             return bool.Parse(result);
+        }
+
+        public virtual async Task<List<OrderbookOrder>> GetOkxOrderbookAsync(string currencyPairCode)
+        {
+            return await $"liquiditymain/orderbook/okex/{currencyPairCode}"
+                .InternalApi()
+                .GetJsonAsync<List<OrderbookOrder>>();
         }
     }
 }
