@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Flurl.Http;
@@ -91,6 +92,30 @@ namespace TLabs.ExchangeSdk.Affiliate.StakingAffiliate
             var result = await $"{BaseUrl}/accruals-total/{userId}".InternalApi()
                 .GetJsonAsync<List<StakingAffiliateAccrualsTotalDto>>();
             return result;
+        }
+
+        /// <summary>"What the sum is made of": per-referral breakdown of staking referral bonus for a period.</summary>
+        public async Task<StakingAccrualBreakdownDto> GetAccrualsBreakdown(string userId,
+            DateTimeOffset from, DateTimeOffset to, string currencyCode = null)
+        {
+            var request = $"{BaseUrl}/accruals/{userId}/breakdown".InternalApi()
+                .SetQueryParam("from", from.ToString("o"))
+                .SetQueryParam("to", to.ToString("o"));
+            if (!string.IsNullOrWhiteSpace(currencyCode))
+                request = request.SetQueryParam(nameof(currencyCode), currencyCode);
+            return await request.GetJsonAsync<StakingAccrualBreakdownDto>();
+        }
+
+        /// <summary>"Why the sum changed": concrete reasons versus the immediately preceding equal-length period.</summary>
+        public async Task<StakingAccrualExplanationDto> ExplainAccrualsChange(string userId,
+            DateTimeOffset from, DateTimeOffset to, string currencyCode = null)
+        {
+            var request = $"{BaseUrl}/accruals/{userId}/explain".InternalApi()
+                .SetQueryParam("from", from.ToString("o"))
+                .SetQueryParam("to", to.ToString("o"));
+            if (!string.IsNullOrWhiteSpace(currencyCode))
+                request = request.SetQueryParam(nameof(currencyCode), currencyCode);
+            return await request.GetJsonAsync<StakingAccrualExplanationDto>();
         }
 
         /// <summary>Paged users with staking affiliate metrics (admin).</summary>
