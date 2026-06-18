@@ -23,9 +23,9 @@ namespace TLabs.ExchangeSdk.LiquidityImport
             return bool.Parse(result);
         }
 
-        public virtual async Task<List<OrderbookOrder>> GetOkxOrderbookAsync(string currencyPairCode)
+        public virtual async Task<List<OrderbookOrder>> GetOrderbookAsync(Exchange exchange, string currencyPairCode)
         {
-            return await $"liquiditymain/orderbook/okex/{currencyPairCode}"
+            return await $"liquiditymain/orderbook/{(int)exchange}/{currencyPairCode}"
                 .InternalApi()
                 .GetJsonAsync<List<OrderbookOrder>>();
         }
