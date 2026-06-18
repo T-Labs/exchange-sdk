@@ -9,8 +9,13 @@ namespace TLabs.ExchangeSdk.Affiliate.StakingAffiliate
         public string FromUserId { get; set; }
         public string FromUserNickname { get; set; }
         public string CurrencyCode { get; set; }
+
+        /// <summary>Total accrual received from this referral in the period (bonus + non-bonus parts).</summary>
         public decimal Amount { get; set; }
-        public decimal SourceStakeProfitAmount { get; set; }
+
+        /// <summary>Accrual received from this referral in the period (only non-bonus part).</summary>
+        public decimal AmountToMainAccount { get; set; }
+
         public string ReceiverLevel { get; set; }
         public decimal? AppliedPercentage { get; set; }
     }
