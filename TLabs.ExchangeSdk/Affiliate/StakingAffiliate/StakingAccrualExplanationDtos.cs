@@ -7,7 +7,10 @@ namespace TLabs.ExchangeSdk.Affiliate.StakingAffiliate
     public class StakingAccrualBreakdownItemDto
     {
         public string FromUserId { get; set; }
+
+        /// <summary>Referral nickname. Not set by affiliate — filled at the webapp level.</summary>
         public string FromUserNickname { get; set; }
+
         public string CurrencyCode { get; set; }
 
         /// <summary>Total accrual received from this referral in the period (bonus + non-bonus parts).</summary>
@@ -16,7 +19,13 @@ namespace TLabs.ExchangeSdk.Affiliate.StakingAffiliate
         /// <summary>Accrual received from this referral in the period (only non-bonus part).</summary>
         public decimal AmountToMainAccount { get; set; }
 
+        /// <summary>Sum of the referral's own staking accruals that produced this bonus (the source amount).</summary>
+        public decimal SourceStakeProfitAmount { get; set; }
+
+        /// <summary>Receiver's staking level applied to the latest accrual from this referral in the period.</summary>
         public string ReceiverLevel { get; set; }
+
+        /// <summary>Residual reward fraction applied to the latest accrual from this referral in the period.</summary>
         public decimal? AppliedPercentage { get; set; }
     }
 
