@@ -26,7 +26,7 @@ namespace TLabs.ExchangeSdk.Currencies
         public static Adapter AdapterBsc = new() { Code = "bsc", Name = "Binance Smart Chain", MainCurrencyCode = "BNB", };
         public static Adapter AdapterTrx = new() { Code = "trx", Name = "Tron", MainCurrencyCode = "TRX", };
         public static Adapter AdapterOrgon = new() { Code = "orgon", Name = "Orgon", MainCurrencyCode = "ORGON", };
-        public static Adapter AdapterTon = new() { Code = "ton", Name = "TON", MainCurrencyCode = "TON", };
+        public static Adapter AdapterTon = new() { Code = "ton", Name = "TON", MainCurrencyCode = "GRAM", };
         public static Adapter AdapterDel = new() { Code = "del", Name = "Decimal", MainCurrencyCode = "DEL", };
         public static Adapter AdapterPzm = new() { Code = "pzm", Name = "Prizm", MainCurrencyCode = "PZM", };
         public static Adapter AdapterUmi = new() { Code = "umi", Name = "Umi", MainCurrencyCode = "UMI", };
