@@ -9,7 +9,7 @@ namespace TLabs.ExchangeSdk.Aml
     /// <summary>Client for AML-pending-deposits endpoints exposed by stock-withdrawals.</summary>
     public class ClientAml
     {
-        private const string baseUrl = "withdrawals/aml";
+        private const string baseUrl = "withdrawals/aml/deposits";
 
         /// <summary>Pending (and optionally resolved) deposits flagged by AML.</summary>
         public async Task<List<AmlPendingDeposit>> GetPendingDeposits(AmlPendingDepositStatus? status = null)
