@@ -3,7 +3,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using Flurl.Http;
 using TLabs.DotnetHelpers;
-using TLabs.ExchangeSdk.Currencies;
 using TLabs.ExchangeSdk.Trading;
 
 namespace TLabs.ExchangeSdk.TradingInnerBot;
@@ -15,13 +14,6 @@ public class ClientTradingInnerBot
     private const string EVENTS_URL = $"{BASE_URL}/external-events";
     private const string PASSIVE_LIQUIDITY_URL = $"{BASE_URL}/passive-liquidity";
     private const string ALGORITHM_LIMITS_URL = $"{BASE_URL}/algorithm-loss-limits";
-
-    public async Task<List<CurrencyPair>> GetCurrencyPairAsync()
-    {
-        return await $"{BASE_URL}/currencies/pairs"
-            .InternalApi()
-            .GetJsonAsync<List<CurrencyPair>>();
-    }
 
     public async Task<TradingAlgorithmSettings> GetTradingAlgorithmSettingsAsync(
         string currencyPairCode
