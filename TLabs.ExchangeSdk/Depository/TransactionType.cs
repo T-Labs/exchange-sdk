@@ -39,6 +39,7 @@ namespace TLabs.ExchangeSdk.Depository
 
         public static readonly TransactionType Nullification = new TransactionType("121", "Обнуление баланса", nameof(Nullification));
         public static readonly TransactionType Confiscation = new TransactionType("125", "Конфискация баланса", nameof(Confiscation));
+        public static readonly TransactionType AmlDepositReturn = new TransactionType("126", "Возврат депозита по AML", nameof(AmlDepositReturn));
 
         public static readonly TransactionType WithdrawalBlockBegin = new TransactionType("06", "Блокировка для вывода начало", nameof(WithdrawalBlockBegin));
         public static readonly TransactionType WithdrawalBlockEnd = new TransactionType("0610", "Блокировка для вывода конец", nameof(WithdrawalBlockEnd));
@@ -179,7 +180,7 @@ namespace TLabs.ExchangeSdk.Depository
             Deposit, DepositAdmin, DepositStaking, DepositStakingToBonuses, DepositAirdrop, DepositCash, DepositToFunds,
             DepositUserToUser, DepositReplacement, DepositCorrection,
 
-            Nullification, Confiscation,
+            Nullification, Confiscation, AmlDepositReturn,
 
             WithdrawalBlockBegin, WithdrawalBlockEnd,
             WithdrawalStockCommissionBlockBegin, WithdrawalStockCommissionBlockEnd,
