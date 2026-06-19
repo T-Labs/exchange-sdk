@@ -26,6 +26,9 @@ namespace TLabs.ExchangeSdk.Withdrawals
 
         public bool IsToColdWallet { get; set; }
 
+        /// <summary>True when this is a system-initiated return of an AML-held deposit (WithdrawalType stays Crypto).</summary>
+        public bool IsAmlDepositReturn { get; set; }
+
         [Required]
         public decimal Amount { get; set; }
 
