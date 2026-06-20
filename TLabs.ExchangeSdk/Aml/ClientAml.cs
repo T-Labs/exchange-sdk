@@ -27,6 +27,14 @@ namespace TLabs.ExchangeSdk.Aml
             return result;
         }
 
+        /// <summary>TxIds of deposits not yet AML-confirmed (anything not Approved) for an adapter — their address must not be consolidated.</summary>
+        public async Task<List<string>> GetUnconfirmedTxIds(string adapterCode)
+        {
+            return await $"{baseUrl}/unconfirmed-txids".InternalApi()
+                .SetQueryParam(nameof(adapterCode), adapterCode)
+                .GetJsonAsync<List<string>>();
+        }
+
         /// <summary>Accept the deposit and process it as a normal refill.</summary>
         public async Task<QueryResult> Approve(Guid id, string adminUserId)
         {
