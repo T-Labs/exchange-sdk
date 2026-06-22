@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 namespace TLabs.ExchangeSdk.Aml
@@ -14,6 +15,9 @@ namespace TLabs.ExchangeSdk.Aml
 
         /// <summary>Optional context — amount credited at the time.</summary>
         public decimal? Amount { get; set; }
+
+        /// <summary>Original on-chain deposit time; stored as the screening record's ReceivedAt (MinValue if unknown).</summary>
+        public DateTimeOffset DepositedAt { get; set; }
     }
 
     /// <summary>Batch of historical deposits to screen and persist into the AML log.</summary>

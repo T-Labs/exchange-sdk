@@ -12,6 +12,10 @@ namespace TLabs.ExchangeSdk.Aml
 
         public DateTimeOffset ScreenedAt { get; set; }
 
+        /// <summary>When the deposit was received: the on-chain deposit time for backfill, or when it reached AML for live deposits.
+        /// MinValue for rows created before this field existed.</summary>
+        public DateTimeOffset ReceivedAt { get; set; }
+
         public AmlScreeningSource Source { get; set; }
 
         #region Subject of the screening
