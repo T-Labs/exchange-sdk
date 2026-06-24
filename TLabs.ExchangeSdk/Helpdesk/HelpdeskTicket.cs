@@ -42,6 +42,15 @@ namespace TLabs.ExchangeSdk.Helpdesk
         /// </summary>
         public string UserId { get; set; }
 
+        /// <summary>Bot-side stable request id (unique when set)</summary>
+        public string ExternalRequestId { get; set; }
+
+        /// <summary>Telegram user id for bot-originated tickets</summary>
+        public long? TelegramUserId { get; set; }
+
+        /// <summary>Ticket source, e.g. telegram</summary>
+        public string Source { get; set; }
+
         /// <summary>
         /// Last Message
         /// </summary>

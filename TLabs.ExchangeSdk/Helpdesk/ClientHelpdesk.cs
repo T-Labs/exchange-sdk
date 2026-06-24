@@ -63,6 +63,24 @@ namespace TLabs.ExchangeSdk.Helpdesk
                 .PostJsonAsync(null);
         }
 
+        public async Task<HelpdeskTicket> GetTicketByExternalRequestId(string externalRequestId)
+        {
+            return await $"helpdesk/helpdesk/by-external/{externalRequestId}".InternalApi()
+                .GetJsonAsync<HelpdeskTicket>();
+        }
+
+        public async Task<TelegramTicketResponseDto> CreateTelegramTicket(TelegramTicketCreateDto model)
+        {
+            return await $"helpdesk/helpdesk/telegram/tickets".InternalApi()
+                .PostJsonAsync<TelegramTicketResponseDto>(model);
+        }
+
+        public async Task<TelegramTicketResponseDto> AddTelegramMessage(string externalRequestId, TelegramTicketMessageCreateDto model)
+        {
+            return await $"helpdesk/helpdesk/telegram/tickets/{externalRequestId}/messages".InternalApi()
+                .PostJsonAsync<TelegramTicketResponseDto>(model);
+        }
+
         public async Task<string> Healthcheck() =>
             await $"helpdesk/healthcheck".InternalApi().GetStringAsync();
     }
