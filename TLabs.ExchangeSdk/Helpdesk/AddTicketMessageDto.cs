@@ -9,5 +9,6 @@ namespace TLabs.ExchangeSdk.Helpdesk
         public bool isAdminReply { get; set; }
         public string Message { get; set; }
         public List<Guid> FileIds { get; set; }
+        public List<TelegramAttachmentDto> TelegramAttachments { get; set; } = new List<TelegramAttachmentDto>();
     }
 }
