@@ -53,19 +53,20 @@ namespace TLabs.ExchangeSdk.Aml
                 .GetQueryResult();
         }
 
-        /// <summary>Append-only log of every AML screening (live deposits + backfill + manual).</summary>
-        public async Task<List<AmlScreeningRecord>> GetScreeningRecords(
+        /// <summary>Append-only log of every AML screening (live deposits + backfill + manual), paged.</summary>
+        public async Task<PagedList<AmlScreeningRecord>> GetScreeningRecords(
             DateTimeOffset? from = null, DateTimeOffset? to = null,
             AmlRiskLevel? minRiskLevel = null, AmlScreeningSource? source = null,
-            int take = 500)
+            int page = 1, int pageSize = 100)
         {
             var result = await $"{baseUrl}/records".InternalApi()
                 .SetQueryParam(nameof(from), from?.ToString("o"))
                 .SetQueryParam(nameof(to), to?.ToString("o"))
                 .SetQueryParam(nameof(minRiskLevel), minRiskLevel)
                 .SetQueryParam(nameof(source), source)
-                .SetQueryParam(nameof(take), take)
-                .GetJsonAsync<List<AmlScreeningRecord>>();
+                .SetQueryParam(nameof(page), page)
+                .SetQueryParam(nameof(pageSize), pageSize)
+                .GetJsonAsync<PagedList<AmlScreeningRecord>>();
             return result;
         }
 
