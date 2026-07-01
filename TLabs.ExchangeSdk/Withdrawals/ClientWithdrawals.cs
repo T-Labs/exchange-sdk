@@ -74,11 +74,12 @@ namespace TLabs.ExchangeSdk.Withdrawals
             return result;
         }
 
-        public virtual async Task<PagedList<Withdrawal>> GetPagedList(int page, int pageSize)
+        public virtual async Task<PagedList<Withdrawal>> GetPagedList(int page, int pageSize, string search = null)
         {
             var result = await $"withdrawals/withdrawal/paginated-list".InternalApi()
                 .SetQueryParam(nameof(page), page)
                 .SetQueryParam(nameof(pageSize), pageSize)
+                .SetQueryParam(nameof(search), search?.Trim().NullIfEmpty())
                 .GetJsonAsync<PagedList<Withdrawal>>()
                 .GetQueryResult();
 
