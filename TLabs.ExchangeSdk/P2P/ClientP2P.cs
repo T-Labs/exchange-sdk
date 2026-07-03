@@ -424,6 +424,13 @@ public class ClientP2P
             .PostJsonAsync(dto ?? new MerchantApplicationReviewDto());
     }
 
+    /// <summary>Finishes merchant tenure and unblocks the collateral</summary>
+    public async Task RevokeMerchant(string userId, MerchantApplicationReviewDto dto)
+    {
+        await $"p2p/merchants/users/{userId}/revoke".InternalApi()
+            .PostJsonAsync(dto ?? new MerchantApplicationReviewDto());
+    }
+
     public async Task<List<DealCancelDispute>> GetDealCancelDisputes(string creatorUserId = null,
         string respondentUserId = null, DealCancelDisputeStatus? dealCancelDisputeStatus = null)
     {
