@@ -131,6 +131,16 @@ namespace TLabs.ExchangeSdk.Depository
         public static readonly TransactionType CurrencyOfferingCommission = new TransactionType("917", "Комиссия покупки CurrencyOffering", nameof(CurrencyOfferingCommission));
         public static readonly TransactionType CurrencyOfferingTransfer = new TransactionType("919", "Разблокировка после покупки CurrencyOffering", nameof(CurrencyOfferingTransfer));
 
+        // Payment cards (tx codes 921–927, 929–930; 915–916, 918, 920 reserved)
+        public static readonly TransactionType PaymentCardTopUpBegin = new TransactionType("921", "Пополнение карты с биржи — блокировка", nameof(PaymentCardTopUpBegin));
+        public static readonly TransactionType PaymentCardTopUpEnd = new TransactionType("922", "Пополнение карты с биржи — зачисление", nameof(PaymentCardTopUpEnd));
+        public static readonly TransactionType PaymentCardTopUpCancelBegin = new TransactionType("923", "Отмена пополнения карты — начало возврата", nameof(PaymentCardTopUpCancelBegin));
+        public static readonly TransactionType PaymentCardTopUpCancelEnd = new TransactionType("924", "Отмена пополнения карты — возврат на биржу", nameof(PaymentCardTopUpCancelEnd));
+        public static readonly TransactionType PaymentCardWithdrawBegin = new TransactionType("925", "Вывод с карты на биржу — блокировка", nameof(PaymentCardWithdrawBegin));
+        public static readonly TransactionType PaymentCardWithdrawEnd = new TransactionType("926", "Вывод с карты на биржу — зачисление", nameof(PaymentCardWithdrawEnd));
+        public static readonly TransactionType PaymentCardProviderFundDeposit = new TransactionType("927", "Пополнение фонда Bananatech (админ)", nameof(PaymentCardProviderFundDeposit));
+        public static readonly TransactionType PaymentCardPurchase = new TransactionType("929", "Покупка по платёжной карте", nameof(PaymentCardPurchase));
+        public static readonly TransactionType PaymentCardPurchaseRefund = new TransactionType("930", "Возврат покупки по карте", nameof(PaymentCardPurchaseRefund));
 
         // Block can happen on order creation or on deal creation, depending on buying or selling crypto
         public static readonly TransactionType P2pOrderBlockBegin = new TransactionType("751", "P2P блокировка для ордера начало", nameof(P2pOrderBlockBegin));
@@ -223,6 +233,10 @@ namespace TLabs.ExchangeSdk.Depository
 
             CurrencyOfferingBuyBegin, CurrencyOfferingBuyEnd, CurrencyOfferingSellBegin, CurrencyOfferingSellEnd,
             CurrencyOfferingCommission, CurrencyOfferingTransfer,
+
+            PaymentCardTopUpBegin, PaymentCardTopUpEnd, PaymentCardTopUpCancelBegin, PaymentCardTopUpCancelEnd,
+            PaymentCardWithdrawBegin, PaymentCardWithdrawEnd, PaymentCardProviderFundDeposit,
+            PaymentCardPurchase, PaymentCardPurchaseRefund,
 
             P2pOrderBlockBegin, P2pOrderBlockEnd,
             P2pOrderBlockCancelBegin, P2pOrderBlockCancelEnd, P2pOrderRemainingBlockCancelBegin, P2pOrderRemainingBlockCancelEnd,

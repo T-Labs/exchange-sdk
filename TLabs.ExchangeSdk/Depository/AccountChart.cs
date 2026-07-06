@@ -73,6 +73,13 @@ namespace TLabs.ExchangeSdk.Depository
         public static readonly AccountChart CurrencyOfferingsBlocked = new AccountChart("901", "Этап блокировки на CurrencyOffering", nameof(CurrencyOfferingsBlocked));
         public static readonly AccountChart CurrencyOfferingsVesting = new AccountChart("903", "Вестинг на CurrencyOffering", nameof(CurrencyOfferingsVesting));
 
+        // Payment cards (chart codes 921–923, 927–928; 920, 924–926 reserved)
+        public static readonly AccountChart PaymentCardBalance = new AccountChart("921", "Средства на платёжной карте", nameof(PaymentCardBalance));
+        public static readonly AccountChart PaymentCardTopUpBlocked = new AccountChart("922", "Блокировка при пополнении карты с биржи", nameof(PaymentCardTopUpBlocked));
+        public static readonly AccountChart PaymentCardPayoutBlocked = new AccountChart("923", "Блокировка при выводе с карты на биржу", nameof(PaymentCardPayoutBlocked));
+        public static readonly AccountChart PaymentCardProviderFund = new AccountChart("927", "Фонд Bananatech у провайдера", nameof(PaymentCardProviderFund));
+        public static readonly AccountChart PaymentCardPurchases = new AccountChart("928", "Покупки по платёжным картам", nameof(PaymentCardPurchases));
+
         // Block can happen on order creation or on deal creation, depending on buying or selling crypto
         public static readonly AccountChart P2pOrderBlockedTemp = new AccountChart("751", "P2P блокировка для ордера временная", nameof(P2pOrderBlockedTemp));
         public static readonly AccountChart P2pOrderBlocked = new AccountChart("752", "P2P блокировка для ордера", nameof(P2pOrderBlocked));
@@ -106,6 +113,7 @@ namespace TLabs.ExchangeSdk.Depository
             StakingLocked, StakingLockedTemp, StakingUnlockedTemp,
             CurrencyListingPaymentBlocked,
             CurrencyOfferingsBlocked, CurrencyOfferingsVesting,
+            PaymentCardBalance, PaymentCardTopUpBlocked, PaymentCardPayoutBlocked,
 
             FundTradingBot,FundLiquidityBot,
 
@@ -127,6 +135,7 @@ namespace TLabs.ExchangeSdk.Depository
 
             Deposit, DepositAdmin, DepositCash, DepositStaking, DepositStakingAffiliate, DepositAirdrop, DepositToFunds,
             DepositUserToUser, DepositReplacement, DepositCorrection,
+            PaymentCardPurchases, PaymentCardProviderFund,
 
             Withdrawn,
             ColdWallets,

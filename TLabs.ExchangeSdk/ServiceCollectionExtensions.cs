@@ -37,6 +37,9 @@ namespace TLabs.ExchangeSdk
             services.AddTransient<Staking.ClientStaking>();
             services.AddTransient<Staking.IClientStaking, Staking.ClientStaking>();
 
+            services.AddTransient<PaymentCards.IClientPaymentCards, PaymentCards.ClientPaymentCards>();
+            services.AddTransient<PaymentCards.IClientPaymentCardsAdmin, PaymentCards.ClientPaymentCardsAdmin>();
+
             services.AddTransient<Trading.ClientMarketdata>();
             services.AddTransient<Trading.IClientMarketdata, Trading.ClientMarketdata>();
             services.AddTransient<Trading.ClientMatchingEngine>();
