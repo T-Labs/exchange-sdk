@@ -2,6 +2,6 @@ namespace TLabs.ExchangeSdk.PaymentCards.Enums;
 
 public enum PaymentCardTransferDirection
 {
-    PaymentCardTopUp = 10,
-    PaymentCardWithdraw = 20,
+    TopUp = 10,
+    Withdraw = 20,
 }
