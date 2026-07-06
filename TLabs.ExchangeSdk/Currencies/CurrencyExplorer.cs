@@ -21,7 +21,7 @@ public class CurrencyExplorer
         AddressUrl = addressUrl;
     }
 
-    // BTC and clones
+    // btc-like
     static readonly CurrencyExplorer BTC = new CurrencyExplorer("btc", "https://www.blockchain.com/btc/tx/", "https://www.blockchain.com/btc/address/");
     static readonly CurrencyExplorer LTC = new CurrencyExplorer("ltc", "https://blockchair.com/litecoin/transaction/", "https://blockchair.com/litecoin/address/");
     static readonly CurrencyExplorer DASH = new CurrencyExplorer("dash", "https://explorer.dash.org/insight/tx/", "https://explorer.dash.org/insight/address/");
@@ -30,17 +30,22 @@ public class CurrencyExplorer
     static readonly CurrencyExplorer SIN = new CurrencyExplorer("sin", "https://explorer.sinovate.io/tx/", "https://explorer.sinovate.io/address/");
     static readonly CurrencyExplorer PZM = new CurrencyExplorer("pzm", "https://prizmexplorer.com/tx/", "https://prizmexplorer.com/address/");
 
+    // eth-like
     static readonly CurrencyExplorer ETH = new CurrencyExplorer("eth", "https://etherscan.io/tx/", "https://etherscan.io/address/");
     static readonly CurrencyExplorer BNB = new CurrencyExplorer("bsc", "https://bscscan.com/tx/", "https://bscscan.com/address/");
+    static readonly CurrencyExplorer BINI = new CurrencyExplorer("bini", "https://scan.binibit.com/transaction/", "https://scan.binibit.com/address/");
 
+    // tron-like
     static readonly CurrencyExplorer TRX = new CurrencyExplorer("trx", "https://tronscan.org/#/transaction/", "https://tronscan.org/#/address/");
     static readonly CurrencyExplorer ORGON = new CurrencyExplorer("orgon", "https://orgonscan.org/transaction/", "https://orgonscan.org/address/");
+
+    // other
     static readonly CurrencyExplorer DEL = new CurrencyExplorer("del", "https://explorer.decimalchain.com/transactions/", "https://explorer.decimalchain.com/address/");
     static readonly CurrencyExplorer UMI = new CurrencyExplorer("umi", "https://blockchain.umi.top/transaction/", "https://blockchain.umi.top/address/");
     static readonly CurrencyExplorer TON = new CurrencyExplorer("ton", "https://tonscan.org/tx/", "https://tonscan.org/address/");
 
     public static readonly List<CurrencyExplorer> CurrencyExplorers = new List<CurrencyExplorer>()
-            { BTC, LTC, DASH, DOGE, COLX, SIN, PZM, ETH, BNB, TRX, DEL, UMI, ORGON, TON };
+            { BTC, LTC, DASH, DOGE, COLX, SIN, PZM, ETH, BNB, BINI, TRX, DEL, UMI, ORGON, TON };
 
     public static string GetTxUrl(string adapterCode, string txId)
     {
