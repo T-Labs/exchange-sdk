@@ -10,7 +10,6 @@ public class PaymentCardDto
     public PaymentCardStatus Status { get; set; }
     public string CurrencyCode { get; set; }
     public string MaskedPan { get; set; }
-    public string CardLabel { get; set; }
     public DateTimeOffset DateCreated { get; set; }
 
     public override string ToString() =>
