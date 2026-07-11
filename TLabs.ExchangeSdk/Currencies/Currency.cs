@@ -80,7 +80,7 @@ namespace TLabs.ExchangeSdk.Currencies
 
         public string NetworkConfirmations { get; set; }
 
-        [System.Obsolete("Deprecated, currency logos are not used")]
+        [System.Obsolete("Deprecated, currency logos are in news module")]
         public byte[] LogoImage { get; set; }
         public bool AllowDeposits { get; set; } = true;
         public bool AllowWithdrawals { get; set; } = true;
