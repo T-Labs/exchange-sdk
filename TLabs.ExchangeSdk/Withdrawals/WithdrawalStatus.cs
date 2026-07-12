@@ -41,6 +41,9 @@ namespace TLabs.ExchangeSdk.Withdrawals
         /// <summary>delay to prevent same txHash error; will be sent soon</summary>
         public static readonly WithdrawalStatus Postponed = new WithdrawalStatus(10, "Отложено", nameof(Postponed));
 
+        /// <summary>approved, sending to adapter is in progress; stuck in this status = outcome unknown, check adapter manually</summary>
+        public static readonly WithdrawalStatus SendingStarted = new WithdrawalStatus(20, "Отправляется", nameof(SendingStarted));
+
         /// <summary>sent to blockchain but not confirmed yet</summary>
         public static readonly WithdrawalStatus Sent = new WithdrawalStatus(3, "Отправлено", "Sent");
 
@@ -55,7 +58,7 @@ namespace TLabs.ExchangeSdk.Withdrawals
 
         public static readonly List<WithdrawalStatus> All = new List<WithdrawalStatus>
         {
-            Created, AwaitsApproval, Postponed, Sent, Error, Confirmed, Declined
+            Created, AwaitsApproval, Postponed, SendingStarted, Sent, Error, Confirmed, Declined,
         };
 
         public static WithdrawalStatus GetWithdrawalStatusByCode(int code)
