@@ -45,6 +45,9 @@ namespace TLabs.ExchangeSdk.Users
 
         public string TelegramLogin { get; set; }
 
+        /// <summary>Telegram numeric user id, bound via Telegram Mini App initData validation. Distinct from <see cref="TelegramLogin"/> (username).</summary>
+        public long? TelegramId { get; set; }
+
         /// <summary>True if user currently has VIP status (balance condition met or grace active)</summary>
         public bool IsVip { get; set; }
 

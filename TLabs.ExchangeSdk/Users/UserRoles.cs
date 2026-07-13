@@ -11,6 +11,7 @@ namespace TLabs.ExchangeSdk.Users
         public const string SupportFull = "Support Full";
         public const string KYC = "KYC";
         public const string ColdWallets = "Cold Wallets";
+        public const string MultisigWallets = "MultisigWallets";
         public const string CashOperations = "Cash operations";
         public const string TokensAndCommissions = "Setting tokens and commissions";
 
@@ -32,7 +33,7 @@ namespace TLabs.ExchangeSdk.Users
 
         public static List<string> AllRoles = new List<string>
         {
-            Admin, Manager, SupportFull, KYC, ColdWallets, CashOperations, TokensAndCommissions,
+            Admin, Manager, SupportFull, KYC, ColdWallets, MultisigWallets, CashOperations, TokensAndCommissions,
             FinancialReports, ContentMaker, ApitradeReadonly, ApitradeAdmin, CommonQuestions, P2PWatch, P2PAppealManager,
             CurrencyListing, Cashier, CashAdmin, Empty, CashExchangeClients, AffiliateStatistics
         };
