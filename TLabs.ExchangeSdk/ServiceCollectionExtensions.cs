@@ -39,6 +39,8 @@ namespace TLabs.ExchangeSdk
 
             services.AddTransient<PaymentCards.ClientPaymentCards>();
             services.AddTransient<PaymentCards.IClientPaymentCards, PaymentCards.ClientPaymentCards>();
+            services.AddTransient<PaymentCards.ClientPaymentCardsAdmin>();
+            services.AddTransient<PaymentCards.IClientPaymentCardsAdmin, PaymentCards.ClientPaymentCardsAdmin>();
 
             services.AddTransient<Trading.ClientMarketdata>();
             services.AddTransient<Trading.IClientMarketdata, Trading.ClientMarketdata>();

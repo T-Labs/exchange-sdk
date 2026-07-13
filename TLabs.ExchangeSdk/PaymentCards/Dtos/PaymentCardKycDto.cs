@@ -6,8 +6,6 @@ public class PaymentCardKycDto
     public string LastName { get; set; }
     public string Gender { get; set; }
     public string DateOfBirth { get; set; }
-
-    /// <summary>Additional KYC fields required by Bananatech (country_code, identification_type, etc.).</summary>
     public PaymentCardKycDataDto KycData { get; set; }
 
     public override string ToString() =>
@@ -23,4 +21,5 @@ public class PaymentCardKycDataDto
     public string City { get; set; }
     public string Postcode { get; set; }
     public string AddressLine { get; set; }
+    public string FrontImgBase64 { get; set; }
 }
