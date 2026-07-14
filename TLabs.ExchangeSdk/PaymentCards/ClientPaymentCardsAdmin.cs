@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Flurl.Http;
@@ -8,31 +9,61 @@ namespace TLabs.ExchangeSdk.PaymentCards;
 
 public interface IClientPaymentCardsAdmin
 {
-    Task<PaymentCardProviderFundBalanceDto> GetProviderFundBalance(string adminUserId, string currencyCode = null);
+    Task<PaymentCardPagedResult<PaymentCardDto>> GetCards(int skip = 0, int take = 50, string userId = null);
 
-    Task<PaymentCardProviderFundDepositDto> RecordProviderFundDeposit(CreatePaymentCardProviderFundDepositDto dto);
+    Task<PaymentCardPagedResult<PaymentCardCallbackDto>> GetCallbacks(int skip = 0, int take = 50, Guid? cardId = null);
 
-    Task<List<PaymentCardProviderFundDepositDto>> GetProviderFundDeposits(string adminUserId);
+    Task<PaymentCardDto> BlockCard(Guid cardId, BlockPaymentCardDto dto);
+
+    Task<List<PaymentCardProductDto>> GetProducts(bool? enabled = null);
+
+    Task<PaymentCardProductSyncResultDto> SyncProducts();
+
+    Task<PaymentCardProductDto> SetProductEnabled(Guid productId, UpdatePaymentCardProductEnabledDto dto);
 }
 
 public class ClientPaymentCardsAdmin : IClientPaymentCardsAdmin
 {
-    private const string BaseUrl = "brokerage/payment-cards/admin";
+    private const string BaseUrl = "brokerage/payment-cards";
 
-    public Task<PaymentCardProviderFundBalanceDto> GetProviderFundBalance(string adminUserId, string currencyCode = null)
+    public Task<PaymentCardPagedResult<PaymentCardDto>> GetCards(int skip = 0, int take = 50, string userId = null)
     {
-        var req = $"{BaseUrl}/provider-fund/balance".InternalApi()
-            .SetQueryParam(nameof(adminUserId), adminUserId);
-        if (currencyCode != null)
-            req = req.SetQueryParam(nameof(currencyCode), currencyCode);
-        return req.GetJsonAsync<PaymentCardProviderFundBalanceDto>();
+        var req = $"{BaseUrl}/admin/cards".InternalApi()
+            .SetQueryParam(nameof(skip), skip)
+            .SetQueryParam(nameof(take), take);
+        if (userId.HasValue())
+            req = req.SetQueryParam(nameof(userId), userId);
+        return req.GetJsonAsync<PaymentCardPagedResult<PaymentCardDto>>();
     }
 
-    public Task<PaymentCardProviderFundDepositDto> RecordProviderFundDeposit(CreatePaymentCardProviderFundDepositDto dto) =>
-        $"{BaseUrl}/provider-fund/deposits".InternalApi().PostJsonAsync(dto).ReceiveJson<PaymentCardProviderFundDepositDto>();
+    public Task<PaymentCardPagedResult<PaymentCardCallbackDto>> GetCallbacks(int skip = 0, int take = 50, Guid? cardId = null)
+    {
+        var req = $"{BaseUrl}/admin/callbacks".InternalApi()
+            .SetQueryParam(nameof(skip), skip)
+            .SetQueryParam(nameof(take), take);
+        if (cardId.HasValue)
+            req = req.SetQueryParam(nameof(cardId), cardId.Value);
+        return req.GetJsonAsync<PaymentCardPagedResult<PaymentCardCallbackDto>>();
+    }
 
-    public Task<List<PaymentCardProviderFundDepositDto>> GetProviderFundDeposits(string adminUserId) =>
-        $"{BaseUrl}/provider-fund/deposits".InternalApi()
-            .SetQueryParam(nameof(adminUserId), adminUserId)
-            .GetJsonAsync<List<PaymentCardProviderFundDepositDto>>();
+    public Task<PaymentCardDto> BlockCard(Guid cardId, BlockPaymentCardDto dto) =>
+        $"{BaseUrl}/admin/{cardId}/block".InternalApi()
+            .PostJsonAsync(dto)
+            .ReceiveJson<PaymentCardDto>();
+
+    public Task<List<PaymentCardProductDto>> GetProducts(bool? enabled = null)
+    {
+        var req = $"{BaseUrl}/products".InternalApi();
+        if (enabled.HasValue)
+            req = req.SetQueryParam(nameof(enabled), enabled.Value);
+        return req.GetJsonAsync<List<PaymentCardProductDto>>();
+    }
+
+    public Task<PaymentCardProductSyncResultDto> SyncProducts() =>
+        $"{BaseUrl}/products/sync".InternalApi().PostAsync().ReceiveJson<PaymentCardProductSyncResultDto>();
+
+    public Task<PaymentCardProductDto> SetProductEnabled(Guid productId, UpdatePaymentCardProductEnabledDto dto) =>
+        $"{BaseUrl}/products/{productId}/enabled".InternalApi()
+            .PatchJsonAsync(dto)
+            .ReceiveJson<PaymentCardProductDto>();
 }

@@ -10,9 +10,10 @@ public class PaymentCardDto
     public PaymentCardStatus Status { get; set; }
     public string CurrencyCode { get; set; }
     public string MaskedPan { get; set; }
-    public string CardLabel { get; set; }
     public DateTimeOffset DateCreated { get; set; }
+    public int TemplateId { get; set; }
+    public string Type { get; set; }
 
     public override string ToString() =>
-        $"{nameof(PaymentCardDto)}(id:{Id}, userId:{UserId}, status:{Status}, currency:{CurrencyCode})";
+        $"{nameof(PaymentCardDto)}(id:{Id}, userId:{UserId}, status:{Status}, currency:{CurrencyCode}, template:{TemplateId}, type:{Type})";
 }

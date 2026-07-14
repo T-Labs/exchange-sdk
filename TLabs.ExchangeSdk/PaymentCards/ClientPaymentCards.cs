@@ -23,6 +23,10 @@ public interface IClientPaymentCards
     Task<List<PaymentCardCallbackDto>> GetCallbacks(Guid cardId, string userId, int take = 100);
 
     Task<List<PaymentCardTransferDto>> GetTransfers(string userId, Guid? cardId = null);
+
+    Task<List<PaymentCardProductDto>> GetProducts(bool? enabled = null);
+
+    Task<List<PaymentCardProductDto>> GetAvailableProducts(string userId);
 }
 
 public class ClientPaymentCards : IClientPaymentCards
@@ -68,4 +72,17 @@ public class ClientPaymentCards : IClientPaymentCards
             : $"{BaseUrl}/transfers".InternalApi().SetQueryParam(nameof(userId), userId);
         return req.GetJsonAsync<List<PaymentCardTransferDto>>();
     }
+
+    public Task<List<PaymentCardProductDto>> GetProducts(bool? enabled = null)
+    {
+        var req = $"{BaseUrl}/products".InternalApi();
+        if (enabled.HasValue)
+            req = req.SetQueryParam(nameof(enabled), enabled.Value);
+        return req.GetJsonAsync<List<PaymentCardProductDto>>();
+    }
+
+    public Task<List<PaymentCardProductDto>> GetAvailableProducts(string userId) =>
+        $"{BaseUrl}/available-products".InternalApi()
+            .SetQueryParam(nameof(userId), userId)
+            .GetJsonAsync<List<PaymentCardProductDto>>();
 }
