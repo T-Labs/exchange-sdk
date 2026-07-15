@@ -73,10 +73,16 @@ namespace TLabs.ExchangeSdk.Depository
         public static readonly AccountChart CurrencyOfferingsBlocked = new AccountChart("901", "Этап блокировки на CurrencyOffering", nameof(CurrencyOfferingsBlocked));
         public static readonly AccountChart CurrencyOfferingsVesting = new AccountChart("903", "Вестинг на CurrencyOffering", nameof(CurrencyOfferingsVesting));
 
-        // Payment cards (921 balance, 922 top-up blocked, 928 purchases; 923–927 reserved)
+        // Payment cards (921 balance, 922 blocked, 923–927 temps, 928 purchases, 934 refund temp)
         public static readonly AccountChart PaymentCardBalance = new AccountChart("921", "Средства на платёжной карте", nameof(PaymentCardBalance));
         public static readonly AccountChart PaymentCardTopUpBlocked = new AccountChart("922", "Блокировка при пополнении карты с биржи", nameof(PaymentCardTopUpBlocked));
+        public static readonly AccountChart PaymentCardTopUpBlockedTemp = new AccountChart("923", "Пополнение карты — временная блокировка", nameof(PaymentCardTopUpBlockedTemp));
+        public static readonly AccountChart PaymentCardTopUpCancelTemp = new AccountChart("924", "Отмена пополнения карты временная", nameof(PaymentCardTopUpCancelTemp));
+        public static readonly AccountChart PaymentCardTopUpSettleTemp = new AccountChart("925", "Зачисление на карту временное", nameof(PaymentCardTopUpSettleTemp));
+        public static readonly AccountChart PaymentCardWithdrawTemp = new AccountChart("926", "Вывод с карты на биржу временный", nameof(PaymentCardWithdrawTemp));
+        public static readonly AccountChart PaymentCardPurchaseTemp = new AccountChart("927", "Покупка по карте временная", nameof(PaymentCardPurchaseTemp));
         public static readonly AccountChart PaymentCardPurchases = new AccountChart("928", "Покупки по платёжным картам", nameof(PaymentCardPurchases));
+        public static readonly AccountChart PaymentCardPurchaseRefundTemp = new AccountChart("934", "Возврат покупки по карте временный", nameof(PaymentCardPurchaseRefundTemp));
 
         // Block can happen on order creation or on deal creation, depending on buying or selling crypto
         public static readonly AccountChart P2pOrderBlockedTemp = new AccountChart("751", "P2P блокировка для ордера временная", nameof(P2pOrderBlockedTemp));
@@ -112,6 +118,8 @@ namespace TLabs.ExchangeSdk.Depository
             CurrencyListingPaymentBlocked,
             CurrencyOfferingsBlocked, CurrencyOfferingsVesting,
             PaymentCardBalance, PaymentCardTopUpBlocked,
+            PaymentCardTopUpBlockedTemp, PaymentCardTopUpCancelTemp, PaymentCardTopUpSettleTemp,
+            PaymentCardWithdrawTemp, PaymentCardPurchaseTemp, PaymentCardPurchaseRefundTemp,
 
             FundTradingBot,FundLiquidityBot,
 
