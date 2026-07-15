@@ -57,6 +57,9 @@ namespace TLabs.ExchangeSdk.Users
         /// <summary>If user dropped below VIP balance threshold, deadline to restore. Null otherwise.</summary>
         public DateTimeOffset? VipGracePeriodEndsAt { get; set; }
 
+        /// <summary>Comma-separated list of user's previous emails</summary>
+        public string OldEmails { get; set; }
+
         /// <summary>Free-form note left by admins about the user</summary>
         public string AdminComment { get; set; }
 
