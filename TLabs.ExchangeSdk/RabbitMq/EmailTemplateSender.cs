@@ -122,16 +122,6 @@ namespace TLabs.ExchangeSdk.RabbitMq
             }, language);
         }
 
-        public QueryResult SendLoginNotification(string email, string language, string userIP, string device, string loginTime)
-        {
-            return _sender.SendEmailTemplate(email, "LoginNotification", new Dictionary<string, string>
-            {
-                { nameof(userIP), userIP },
-                { nameof(device), device },
-                { nameof(loginTime), loginTime },
-            }, language);
-        }
-
         public QueryResult SendGoogle2FAEmailCode(string email, string language, string code, int codeLifetime)
         {
             return _sender.SendEmailTemplate(email, "Google2FAEmailCode", new Dictionary<string, string>
