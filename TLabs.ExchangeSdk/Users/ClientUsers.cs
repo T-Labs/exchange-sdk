@@ -160,6 +160,15 @@ namespace TLabs.ExchangeSdk.Users
                 .GetQueryResult();
         }
 
+        /// <summary>Change user's email (also updates UserName and normalized versions)</summary>
+        public async Task<QueryResult> ChangeEmail(string userId, ChangeEmailDto dto)
+        {
+            return await $"userprofiles/users/{userId}/change-email"
+                .InternalApi()
+                .PostJsonAsync(dto)
+                .GetQueryResult();
+        }
+
         public async Task<QueryResult> SetAdminComment(string userId, AdminCommentDto dto)
         {
             return await $"userprofiles/users/{userId}/admin-comment"
