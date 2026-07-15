@@ -131,13 +131,19 @@ namespace TLabs.ExchangeSdk.Depository
         public static readonly TransactionType CurrencyOfferingCommission = new TransactionType("917", "Комиссия покупки CurrencyOffering", nameof(CurrencyOfferingCommission));
         public static readonly TransactionType CurrencyOfferingTransfer = new TransactionType("919", "Разблокировка после покупки CurrencyOffering", nameof(CurrencyOfferingTransfer));
 
-        // Payment cards (921–922 top-up pair, 924 cancel, 925 withdraw, 929–930 purchases; 923, 926–927 reserved)
-        public static readonly TransactionType PaymentCardTopUpBegin = new TransactionType("921", "Пополнение карты с биржи — блокировка", nameof(PaymentCardTopUpBegin));
-        public static readonly TransactionType PaymentCardTopUpEnd = new TransactionType("922", "Пополнение карты с биржи — зачисление", nameof(PaymentCardTopUpEnd));
-        public static readonly TransactionType PaymentCardTopUpCancel = new TransactionType("924", "Отмена пополнения карты — возврат на биржу", nameof(PaymentCardTopUpCancel));
-        public static readonly TransactionType PaymentCardWithdraw = new TransactionType("925", "Вывод с карты на биржу", nameof(PaymentCardWithdraw));
-        public static readonly TransactionType PaymentCardPurchase = new TransactionType("929", "Покупка по платёжной карте", nameof(PaymentCardPurchase));
-        public static readonly TransactionType PaymentCardPurchaseRefund = new TransactionType("930", "Возврат покупки по карте", nameof(PaymentCardPurchaseRefund));
+        // Payment cards — atomic Begin/End pairs (use2StepTransfer: true) via temps
+        public static readonly TransactionType PaymentCardTopUpBegin = new TransactionType("921", "Пополнение карты — блокировка начало", nameof(PaymentCardTopUpBegin));
+        public static readonly TransactionType PaymentCardTopUpEnd = new TransactionType("922", "Пополнение карты — блокировка конец", nameof(PaymentCardTopUpEnd));
+        public static readonly TransactionType PaymentCardTopUpCancelBegin = new TransactionType("923", "Отмена пополнения карты начало", nameof(PaymentCardTopUpCancelBegin));
+        public static readonly TransactionType PaymentCardTopUpCancelEnd = new TransactionType("924", "Отмена пополнения карты конец", nameof(PaymentCardTopUpCancelEnd));
+        public static readonly TransactionType PaymentCardTopUpSettleBegin = new TransactionType("925", "Зачисление на карту после пополнения начало", nameof(PaymentCardTopUpSettleBegin));
+        public static readonly TransactionType PaymentCardTopUpSettleEnd = new TransactionType("926", "Зачисление на карту после пополнения конец", nameof(PaymentCardTopUpSettleEnd));
+        public static readonly TransactionType PaymentCardWithdrawBegin = new TransactionType("927", "Вывод с карты на биржу начало", nameof(PaymentCardWithdrawBegin));
+        public static readonly TransactionType PaymentCardWithdrawEnd = new TransactionType("928", "Вывод с карты на биржу конец", nameof(PaymentCardWithdrawEnd));
+        public static readonly TransactionType PaymentCardPurchaseBegin = new TransactionType("929", "Покупка по платёжной карте начало", nameof(PaymentCardPurchaseBegin));
+        public static readonly TransactionType PaymentCardPurchaseEnd = new TransactionType("930", "Покупка по платёжной карте конец", nameof(PaymentCardPurchaseEnd));
+        public static readonly TransactionType PaymentCardPurchaseRefundBegin = new TransactionType("931", "Возврат покупки по карте начало", nameof(PaymentCardPurchaseRefundBegin));
+        public static readonly TransactionType PaymentCardPurchaseRefundEnd = new TransactionType("932", "Возврат покупки по карте конец", nameof(PaymentCardPurchaseRefundEnd));
 
         // Block can happen on order creation or on deal creation, depending on buying or selling crypto
         public static readonly TransactionType P2pOrderBlockBegin = new TransactionType("751", "P2P блокировка для ордера начало", nameof(P2pOrderBlockBegin));
@@ -231,8 +237,12 @@ namespace TLabs.ExchangeSdk.Depository
             CurrencyOfferingBuyBegin, CurrencyOfferingBuyEnd, CurrencyOfferingSellBegin, CurrencyOfferingSellEnd,
             CurrencyOfferingCommission, CurrencyOfferingTransfer,
 
-            PaymentCardTopUpBegin, PaymentCardTopUpEnd, PaymentCardTopUpCancel, PaymentCardWithdraw,
-            PaymentCardPurchase, PaymentCardPurchaseRefund,
+            PaymentCardTopUpBegin, PaymentCardTopUpEnd,
+            PaymentCardTopUpCancelBegin, PaymentCardTopUpCancelEnd,
+            PaymentCardTopUpSettleBegin, PaymentCardTopUpSettleEnd,
+            PaymentCardWithdrawBegin, PaymentCardWithdrawEnd,
+            PaymentCardPurchaseBegin, PaymentCardPurchaseEnd,
+            PaymentCardPurchaseRefundBegin, PaymentCardPurchaseRefundEnd,
 
             P2pOrderBlockBegin, P2pOrderBlockEnd,
             P2pOrderBlockCancelBegin, P2pOrderBlockCancelEnd, P2pOrderRemainingBlockCancelBegin, P2pOrderRemainingBlockCancelEnd,
