@@ -10,6 +10,8 @@ namespace TLabs.ExchangeSdk.Users
     public interface IIPService
     {
         string GetRequestIP(bool tryUseXForwardHeader = true);
+
+        string GetRequestUserAgent();
     }
 
     public class IPService : IIPService
@@ -59,6 +61,11 @@ namespace TLabs.ExchangeSdk.Users
             }
 
             return ip;
+        }
+
+        public string GetRequestUserAgent()
+        {
+            return GetHeaderValueAs<string>("User-Agent");
         }
 
         private T GetHeaderValueAs<T>(string headerName)

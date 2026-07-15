@@ -2,11 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
-<<<<<<< Updated upstream
-    <Version>1.0.860</Version>
-=======
     <Version>1.0.862</Version>
->>>>>>> Stashed changes
   </PropertyGroup>
 
   <PropertyGroup>
