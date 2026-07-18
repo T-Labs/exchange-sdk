@@ -34,6 +34,9 @@ namespace TLabs.ExchangeSdk.Staking
 
         Task<Dictionary<string, decimal>> GetUsersStakesTotal(GetUserStakesTotalRequest request);
 
+        Task<Dictionary<string, UserStakesTotalsByLockDto>> GetUsersStakesTotalsByLock(
+            GetUserStakesTotalsByLockRequest request);
+
         Task<List<UserStake>> GetAllUserStakes(UserStakingStatus? status = null);
 
         Task<QueryResult> AdminCancelUserStake(Guid userStakeId);
@@ -145,6 +148,16 @@ namespace TLabs.ExchangeSdk.Staking
             var result = await $"brokerage/staking/user-stakes/total".InternalApi()
                 .PostJsonAsync<Dictionary<string, decimal>>(request).GetQueryResult();
             return result.Succeeded ? result.Data : new Dictionary<string, decimal>();
+        }
+
+        public virtual async Task<Dictionary<string, UserStakesTotalsByLockDto>> GetUsersStakesTotalsByLock(
+            GetUserStakesTotalsByLockRequest request)
+        {
+            var result = await $"brokerage/staking/admin/user-stakes/totals-by-lock".InternalApi()
+                .PostJsonAsync<Dictionary<string, UserStakesTotalsByLockDto>>(request).GetQueryResult();
+            return result.Succeeded
+                ? result.Data
+                : new Dictionary<string, UserStakesTotalsByLockDto>();
         }
 
         public async Task<List<UserStake>> GetAllUserStakes(UserStakingStatus? status = null)

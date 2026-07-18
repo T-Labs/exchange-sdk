@@ -21,9 +21,9 @@ public class BiniTransferRecipientRowDto
     public decimal ActiveAnnualStakedAmount { get; set; }
     public decimal AnnualStakeShortfall { get; set; }
 
-    public SoldSpotDto SpotSell { get; set; } = new();
-    public SoldExternalDto ExternalWithdrawal { get; set; } = new();
-    public SoldInternalDto OnwardInternalTransfer { get; set; } = new();
+    public SoldChannelDto SpotSell { get; set; } = new();
+    public SoldChannelDto ExternalWithdrawal { get; set; } = new();
+    public SoldChannelDto OnwardInternalTransfer { get; set; } = new();
     public SoldBalanceDto BalanceHeuristic { get; set; } = new();
 }
 
@@ -34,21 +34,7 @@ public class SoldCounterpartyDto
     public decimal Amount { get; set; }
 }
 
-public class SoldSpotDto
-{
-    public bool Flag { get; set; }
-    public decimal AmountSold { get; set; }
-    public List<SoldCounterpartyDto> Counterparties { get; set; } = new();
-}
-
-public class SoldExternalDto
-{
-    public bool Flag { get; set; }
-    public decimal Amount { get; set; }
-    public List<SoldCounterpartyDto> Counterparties { get; set; } = new();
-}
-
-public class SoldInternalDto
+public class SoldChannelDto
 {
     public bool Flag { get; set; }
     public decimal Amount { get; set; }
