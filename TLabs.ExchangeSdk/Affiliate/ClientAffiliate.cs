@@ -221,5 +221,15 @@ namespace TLabs.ExchangeSdk.Affiliate
 
             return result;
         }
+
+        public virtual async Task<BiniTransferRecipientsReportDto> GetBiniTransferRecipientsReport(
+            string senderUserId, bool onlyWithoutYearlyStaking = false)
+        {
+            return await $"brokerage/affiliate/admin/bini-transfer-recipients/{senderUserId}/report"
+                .InternalApi()
+                .WithTimeout(TimeSpan.FromMinutes(10))
+                .SetQueryParam(nameof(onlyWithoutYearlyStaking), onlyWithoutYearlyStaking)
+                .GetJsonAsync<BiniTransferRecipientsReportDto>();
+        }
     }
 }
