@@ -49,12 +49,13 @@ namespace TLabs.ExchangeSdk.Users
                 .ReceiveJson<TelegramLinkTokenDto>();
         }
 
-        /// <summary>Consumes a link token created above and binds telegramId to the user that created it.</summary>
-        public virtual async Task<QueryResult> ConsumeTelegramLinkToken(string token, long telegramId)
+        /// <summary>Consumes a link token created above and binds telegramId to the user that created it.
+        /// Throws FlurlHttpException on failure so callers can pass the status through
+        /// (404 token not found, 409 already used/taken, 410 expired).</summary>
+        public virtual async Task ConsumeTelegramLinkToken(string token, long telegramId)
         {
-            return await $"userprofiles/users/telegram-link-token/{token}/consume".InternalApi()
-                .PostJsonAsync(new { telegramId })
-                .GetQueryResult();
+            await $"userprofiles/users/telegram-link-token/{token}/consume".InternalApi()
+                .PostJsonAsync(new { telegramId });
         }
     }
 }
