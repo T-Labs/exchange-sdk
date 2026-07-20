@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace TLabs.ExchangeSdk.Staking;
+namespace TLabs.ExchangeSdk.Affiliate;
 
 public class BiniTransferRecipientsReportDto
 {
@@ -16,7 +16,8 @@ public class BiniTransferRecipientRowDto
     public string Email { get; set; }
     public decimal ReceivedAmount { get; set; }
     public DateTimeOffset? FirstReceivedAt { get; set; }
-
+    public decimal UsdtDepositedAmount { get; set; }
+    public decimal UsdtWithdrawnAmount { get; set; }
     public bool NoYearlyStaking { get; set; }
     public decimal ActiveAnnualStakedAmount { get; set; }
     public decimal AnnualStakeShortfall { get; set; }

@@ -38,8 +38,6 @@ namespace TLabs.ExchangeSdk.Staking
 
         Task<QueryResult> AdminCancelUserStake(Guid userStakeId);
 
-        Task<BiniTransferRecipientsReportDto> GetBiniTransferRecipientsReport(string senderUserId);
-
         Task<StakingStatisticsDto> GetStakingStatistics(IReadOnlyCollection<string> userIds = null);
 
         Task<int> GetStakesCountForPeriod(DateTimeOffset fromDate, DateTimeOffset toDate,
@@ -162,14 +160,6 @@ namespace TLabs.ExchangeSdk.Staking
             if (!result.Succeeded)
                 _logger.LogError($"AdminCancelUserStake failed for {userStakeId}: {result.ErrorsString}");
             return result;
-        }
-
-        public async Task<BiniTransferRecipientsReportDto> GetBiniTransferRecipientsReport(string senderUserId)
-        {
-            return await $"brokerage/staking/admin/bini-transfer-recipients/{senderUserId}/report"
-                .InternalApi()
-                .WithTimeout(TimeSpan.FromMinutes(10))
-                .GetJsonAsync<BiniTransferRecipientsReportDto>();
         }
 
         public virtual async Task<StakingStatisticsDto> GetStakingStatistics(IReadOnlyCollection<string> userIds = null)
