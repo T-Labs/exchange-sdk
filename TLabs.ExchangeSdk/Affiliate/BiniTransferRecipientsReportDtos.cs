@@ -14,6 +14,10 @@ public class BiniTransferRecipientRowDto
 {
     public string UserId { get; set; }
     public string Email { get; set; }
+
+    /// <summary>Human-facing UID (PublicId from userprofiles)</summary>
+    public string PublicId { get; set; }
+
     public decimal ReceivedAmount { get; set; }
     public DateTimeOffset? FirstReceivedAt { get; set; }
     public decimal UsdtDepositedAmount { get; set; }
