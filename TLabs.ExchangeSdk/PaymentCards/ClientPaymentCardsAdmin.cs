@@ -15,6 +15,8 @@ public interface IClientPaymentCardsAdmin
 
     Task<PaymentCardDto> BlockCard(Guid cardId, BlockPaymentCardDto dto);
 
+    Task<PaymentCardDto> UnblockCard(Guid cardId, BlockPaymentCardDto dto);
+
     Task<List<PaymentCardProductDto>> GetProducts(bool? enabled = null);
 
     Task<PaymentCardProductSyncResultDto> SyncProducts();
@@ -48,6 +50,11 @@ public class ClientPaymentCardsAdmin : IClientPaymentCardsAdmin
 
     public Task<PaymentCardDto> BlockCard(Guid cardId, BlockPaymentCardDto dto) =>
         $"{BaseUrl}/admin/{cardId}/block".InternalApi()
+            .PostJsonAsync(dto)
+            .ReceiveJson<PaymentCardDto>();
+
+    public Task<PaymentCardDto> UnblockCard(Guid cardId, BlockPaymentCardDto dto) =>
+        $"{BaseUrl}/admin/{cardId}/unblock".InternalApi()
             .PostJsonAsync(dto)
             .ReceiveJson<PaymentCardDto>();
 

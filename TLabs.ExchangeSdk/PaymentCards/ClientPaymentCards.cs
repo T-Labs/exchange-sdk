@@ -20,6 +20,8 @@ public interface IClientPaymentCards
 
     Task<PaymentCardBalanceDto> GetBalance(Guid cardId, string userId);
 
+    Task<PaymentCardSensitiveDetailsDto> GetSensitiveDetails(Guid cardId, string userId);
+
     Task<List<PaymentCardCallbackDto>> GetCallbacks(Guid cardId, string userId, int take = 100);
 
     Task<List<PaymentCardTransferDto>> GetTransfers(string userId, Guid? cardId = null);
@@ -58,6 +60,11 @@ public class ClientPaymentCards : IClientPaymentCards
         $"{BaseUrl}/{cardId}/balance".InternalApi()
             .SetQueryParam(nameof(userId), userId)
             .GetJsonAsync<PaymentCardBalanceDto>();
+
+    public Task<PaymentCardSensitiveDetailsDto> GetSensitiveDetails(Guid cardId, string userId) =>
+        $"{BaseUrl}/{cardId}/sensitive-details".InternalApi()
+            .SetQueryParam(nameof(userId), userId)
+            .GetJsonAsync<PaymentCardSensitiveDetailsDto>();
 
     public Task<List<PaymentCardCallbackDto>> GetCallbacks(Guid cardId, string userId, int take = 100) =>
         $"{BaseUrl}/{cardId}/callbacks".InternalApi()
