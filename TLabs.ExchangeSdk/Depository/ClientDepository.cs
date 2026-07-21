@@ -28,9 +28,7 @@ namespace TLabs.ExchangeSdk.Depository
             return result;
         }
 
-        public record TwoStepTxCommandsRequest(
-            List<TxCommandDto> twoStepTxCommands,
-            List<TxCommandDto> oneStepTxCommands);
+        public record TwoStepTxCommandsRequest(List<TxCommandDto> twoStepTxCommands, List<TxCommandDto> oneStepTxCommands);
 
         /// <summary>Create and save transactions in 2 steps, checking balance between steps</summary>
         /// <param name="twoStepTxCommands">tx commands that turn in 2 transactions and executed in 2 steps</param>
@@ -56,9 +54,12 @@ namespace TLabs.ExchangeSdk.Depository
             string actionIdContains = null)
         {
             var request = "depository/transaction".InternalApi().WithTimeout(TimeSpan.FromMinutes(10))
-                .SetQueryParam(nameof(userId), userId).SetQueryParam(nameof(currencyCode), currencyCode)
-                .SetQueryParam(nameof(from), from?.ToString("o")).SetQueryParam(nameof(to), to?.ToString("o"))
-                .SetQueryParam(nameof(transactionTypes), transactionTypes).SetQueryParam(nameof(page), page)
+                .SetQueryParam(nameof(userId), userId)
+                .SetQueryParam(nameof(currencyCode), currencyCode)
+                .SetQueryParam(nameof(from), from?.ToString("o"))
+                .SetQueryParam(nameof(to), to?.ToString("o"))
+                .SetQueryParam(nameof(transactionTypes), transactionTypes)
+                .SetQueryParam(nameof(page), page)
                 .SetQueryParam(nameof(pageSize), pageSize)
                 .SetQueryParam(nameof(includeRollbacks), includeRollbacks.ToString())
                 .SetQueryParam(nameof(actionIdContains), actionIdContains);
@@ -121,7 +122,8 @@ namespace TLabs.ExchangeSdk.Depository
             List<string> accountChartCodes = null, DateTimeOffset? toDate = null)
         {
             var request = $"depository/balances".InternalApi().WithTimeout(TimeSpan.FromMinutes(10))
-                .SetQueryParam(nameof(userId), userId).SetQueryParam(nameof(currencyCode), currencyCode)
+                .SetQueryParam(nameof(userId), userId)
+                .SetQueryParam(nameof(currencyCode), currencyCode)
                 .SetQueryParam(nameof(accountChartCodes), accountChartCodes)
                 .SetQueryParam(nameof(toDate), toDate?.ToString("o"));
             var result = await request.GetJsonAsync<List<AccountBalance>>();
@@ -162,8 +164,10 @@ namespace TLabs.ExchangeSdk.Depository
 
         public async Task<List<TurnoversDto>> GetTurnoversDtos(string userId = null, DateTimeOffset? toDate = null)
         {
-            var result = await $"depository/turnovers".InternalApi().SetQueryParam(nameof(userId), userId)
-                .SetQueryParam(nameof(toDate), toDate?.ToString("o")).GetJsonAsync<List<TurnoversDto>>();
+            var result = await $"depository/turnovers".InternalApi()
+                .SetQueryParam(nameof(userId), userId)
+                .SetQueryParam(nameof(toDate), toDate?.ToString("o"))
+                .GetJsonAsync<List<TurnoversDto>>();
             return result;
         }
 
@@ -263,7 +267,8 @@ namespace TLabs.ExchangeSdk.Depository
         public virtual async Task<Dictionary<string, decimal>> GetWithdrawalsVolume(DateTimeOffset from,
             DateTimeOffset to, IReadOnlyCollection<string> userIds = null)
         {
-            var result = await "depository/withdrawals/volume".InternalApi().SetQueryParam("from", from.ToString("o"))
+            var result = await "depository/withdrawals/volume".InternalApi()
+                .SetQueryParam("from", from.ToString("o"))
                 .SetQueryParam("to", to.ToString("o")).PostJsonAsync(userIds)
                 .ReceiveJson<Dictionary<string, decimal>>();
 
@@ -275,7 +280,8 @@ namespace TLabs.ExchangeSdk.Depository
             IReadOnlyCollection<string> currencyCodes = null)
         {
             var result = await "depository/deposits/volume-by-user".InternalApi()
-                .SetQueryParam(nameof(from), from?.ToString("o")).SetQueryParam(nameof(to), to?.ToString("o"))
+                .SetQueryParam(nameof(from), from?.ToString("o"))
+                .SetQueryParam(nameof(to), to?.ToString("o"))
                 .SetQueryParam(nameof(currencyCodes), currencyCodes).PostJsonAsync(userIds)
                 .ReceiveJson<Dictionary<string, Dictionary<string, decimal>>>();
 
