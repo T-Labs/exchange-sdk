@@ -22,15 +22,14 @@ namespace TLabs.ExchangeSdk.Depository
         {
             foreach (var command in txCommands)
                 command.Clean();
-            var result = await $"depository/transaction/commands".InternalApi()
-                .WithTimeout(TimeSpan.FromMinutes(10))
+            var result = await $"depository/transaction/commands".InternalApi().WithTimeout(TimeSpan.FromMinutes(10))
                 .SetQueryParam(nameof(checkBalances), checkBalances)
-                .SetQueryParam(nameof(use2StepTransfer), use2StepTransfer)
-                .PostJsonAsync(txCommands).GetQueryResult();
+                .SetQueryParam(nameof(use2StepTransfer), use2StepTransfer).PostJsonAsync(txCommands).GetQueryResult();
             return result;
         }
 
-        public record TwoStepTxCommandsRequest(List<TxCommandDto> twoStepTxCommands,
+        public record TwoStepTxCommandsRequest(
+            List<TxCommandDto> twoStepTxCommands,
             List<TxCommandDto> oneStepTxCommands);
 
         /// <summary>Create and save transactions in 2 steps, checking balance between steps</summary>
@@ -47,24 +46,19 @@ namespace TLabs.ExchangeSdk.Depository
 
             var model = new TwoStepTxCommandsRequest(twoStepTxCommands, oneStepTxCommands);
             var result = await $"depository/transaction/two-step-commands".InternalApi()
-                .WithTimeout(TimeSpan.FromMinutes(10))
-                .PostJsonAsync<List<TransactionDto>>(model);
+                .WithTimeout(TimeSpan.FromMinutes(10)).PostJsonAsync<List<TransactionDto>>(model);
             return result;
         }
 
-        public virtual async Task<PagedList<TransactionDto>> GetTransactions(string userId = null, string currencyCode = null,
-            DateTimeOffset? from = null, DateTimeOffset? to = null,
-            List<string> transactionTypes = null, int page = 1, int pageSize = 50000,
-            bool includeRollbacks = false, string actionIdContains = null)
+        public virtual async Task<PagedList<TransactionDto>> GetTransactions(string userId = null,
+            string currencyCode = null, DateTimeOffset? from = null, DateTimeOffset? to = null,
+            List<string> transactionTypes = null, int page = 1, int pageSize = 50000, bool includeRollbacks = false,
+            string actionIdContains = null)
         {
-            var request = "depository/transaction".InternalApi()
-                .WithTimeout(TimeSpan.FromMinutes(10))
-                .SetQueryParam(nameof(userId), userId)
-                .SetQueryParam(nameof(currencyCode), currencyCode)
-                .SetQueryParam(nameof(from), from?.ToString("o"))
-                .SetQueryParam(nameof(to), to?.ToString("o"))
-                .SetQueryParam(nameof(transactionTypes), transactionTypes)
-                .SetQueryParam(nameof(page), page)
+            var request = "depository/transaction".InternalApi().WithTimeout(TimeSpan.FromMinutes(10))
+                .SetQueryParam(nameof(userId), userId).SetQueryParam(nameof(currencyCode), currencyCode)
+                .SetQueryParam(nameof(from), from?.ToString("o")).SetQueryParam(nameof(to), to?.ToString("o"))
+                .SetQueryParam(nameof(transactionTypes), transactionTypes).SetQueryParam(nameof(page), page)
                 .SetQueryParam(nameof(pageSize), pageSize)
                 .SetQueryParam(nameof(includeRollbacks), includeRollbacks.ToString())
                 .SetQueryParam(nameof(actionIdContains), actionIdContains);
@@ -75,8 +69,7 @@ namespace TLabs.ExchangeSdk.Depository
         public async Task<List<TransactionDto>> GetTransactionsByActionIds(List<string> actionIds)
         {
             var result = await $"depository/transaction/actionid-transactions".InternalApi()
-                .WithTimeout(TimeSpan.FromMinutes(10))
-                .PostJsonAsync<List<TransactionDto>>(actionIds);
+                .WithTimeout(TimeSpan.FromMinutes(10)).PostJsonAsync<List<TransactionDto>>(actionIds);
             return result;
         }
 
@@ -99,9 +92,12 @@ namespace TLabs.ExchangeSdk.Depository
             return result;
         }
 
-        public virtual async Task<PagedList<TransactionDto>> GetTransactionsByAccountIdPaged(Guid accountId, int page = 1, int pageSize = 50)
+        public virtual async Task<PagedList<TransactionDto>> GetTransactionsByAccountIdPaged(Guid accountId,
+            int page = 1, int pageSize = 50)
         {
-            var request = "depository/transaction/by-account/paged".InternalApi().SetQueryParam(nameof(accountId), accountId).SetQueryParam(nameof(page), page)
+            var request = "depository/transaction/by-account/paged".InternalApi()
+                .SetQueryParam(nameof(accountId), accountId)
+                .SetQueryParam(nameof(page), page)
                 .SetQueryParam(nameof(pageSize), pageSize);
 
             return await request.GetJsonAsync<PagedList<TransactionDto>>();
@@ -115,8 +111,7 @@ namespace TLabs.ExchangeSdk.Depository
         public virtual async Task<List<string>> GetUserIdsWithRecentTransactions(int hours = 24)
         {
             var result = await "depository/transaction/recent-tx-user-ids".InternalApi()
-                .SetQueryParam(nameof(hours), hours)
-                .GetJsonAsync<List<string>>();
+                .SetQueryParam(nameof(hours), hours).GetJsonAsync<List<string>>();
             return result ?? new List<string>();
         }
 
@@ -125,10 +120,8 @@ namespace TLabs.ExchangeSdk.Depository
         public async Task<List<AccountBalance>> GetAccountsBalances(string userId = null, string currencyCode = null,
             List<string> accountChartCodes = null, DateTimeOffset? toDate = null)
         {
-            var request = $"depository/balances".InternalApi()
-                .WithTimeout(TimeSpan.FromMinutes(10))
-                .SetQueryParam(nameof(userId), userId)
-                .SetQueryParam(nameof(currencyCode), currencyCode)
+            var request = $"depository/balances".InternalApi().WithTimeout(TimeSpan.FromMinutes(10))
+                .SetQueryParam(nameof(userId), userId).SetQueryParam(nameof(currencyCode), currencyCode)
                 .SetQueryParam(nameof(accountChartCodes), accountChartCodes)
                 .SetQueryParam(nameof(toDate), toDate?.ToString("o"));
             var result = await request.GetJsonAsync<List<AccountBalance>>();
@@ -138,13 +131,14 @@ namespace TLabs.ExchangeSdk.Depository
         public virtual async Task<decimal> GetBalanceByAccountIdAtDate(Guid accountId, DateTimeOffset toDate)
         {
             return await $"depository/account/{accountId}/balances-new".InternalApi()
-                .SetQueryParam(nameof(toDate), toDate.ToString("o")).GetJsonAsync<decimal>();
+                .SetQueryParam(nameof(toDate), toDate.ToString("o"))
+                .GetJsonAsync<decimal>();
         }
-        public async Task<UserBalancesDto> GetUserBalances(string userId,
-            IEnumerable<string> currencyCodes = null, DateTimeOffset? toDate = null)
+
+        public async Task<UserBalancesDto> GetUserBalances(string userId, IEnumerable<string> currencyCodes = null,
+            DateTimeOffset? toDate = null)
         {
-            var request = $"depository/user/{userId}/balances".InternalApi()
-                .WithTimeout(TimeSpan.FromMinutes(10))
+            var request = $"depository/user/{userId}/balances".InternalApi().WithTimeout(TimeSpan.FromMinutes(10))
                 .SetQueryParam(nameof(toDate), toDate?.ToString("o"))
                 .SetQueryParam(nameof(currencyCodes), currencyCodes);
             var result = await request.GetJsonAsync<UserBalancesDto>();
@@ -154,15 +148,13 @@ namespace TLabs.ExchangeSdk.Depository
         /// <summary>Get balance of Users account of the user</summary>
         public async Task<decimal> GetUserAvailableBalance(string userId, string currencyCode)
         {
-            var result = await $"depository/balance/{userId}/{currencyCode}".InternalApi()
-                .GetJsonAsync<decimal>();
+            var result = await $"depository/balance/{userId}/{currencyCode}".InternalApi().GetJsonAsync<decimal>();
             return result;
         }
 
         public async Task<decimal> GetBalanceByAccountId(Guid accountId)
         {
-            var result = await $"depository/account/{accountId}/balances".InternalApi()
-                .GetJsonAsync<decimal>();
+            var result = await $"depository/account/{accountId}/balances".InternalApi().GetJsonAsync<decimal>();
             return result;
         }
 
@@ -170,10 +162,8 @@ namespace TLabs.ExchangeSdk.Depository
 
         public async Task<List<TurnoversDto>> GetTurnoversDtos(string userId = null, DateTimeOffset? toDate = null)
         {
-            var result = await $"depository/turnovers".InternalApi()
-                .SetQueryParam(nameof(userId), userId)
-                .SetQueryParam(nameof(toDate), toDate?.ToString("o"))
-                .GetJsonAsync<List<TurnoversDto>>();
+            var result = await $"depository/turnovers".InternalApi().SetQueryParam(nameof(userId), userId)
+                .SetQueryParam(nameof(toDate), toDate?.ToString("o")).GetJsonAsync<List<TurnoversDto>>();
             return result;
         }
 
@@ -189,8 +179,7 @@ namespace TLabs.ExchangeSdk.Depository
                 Amount = amount,
                 CurrencyCode = currencyCode
             };
-            var responseMessage = await $"depository/deal/reserve".InternalApi()
-                .PostJsonAsync<string>(dto);
+            var responseMessage = await $"depository/deal/reserve".InternalApi().PostJsonAsync<string>(dto);
             return responseMessage;
         }
 
@@ -198,10 +187,8 @@ namespace TLabs.ExchangeSdk.Depository
         {
             if (userId.NotHasValue())
                 throw new ArgumentNullException(nameof(userId));
-            var result = await $"depository/nullification".InternalApi()
-                .WithTimeout(TimeSpan.FromMinutes(10))
-                .SetQueryParam(nameof(userId), userId)
-                .PostJsonAsync(null);
+            var result = await $"depository/nullification".InternalApi().WithTimeout(TimeSpan.FromMinutes(10))
+                .SetQueryParam(nameof(userId), userId).PostJsonAsync(null);
             return result;
         }
 
@@ -219,29 +206,26 @@ namespace TLabs.ExchangeSdk.Depository
 
         public async Task<Currency> CreateCurrency(Currency currency)
         {
-            var result = await $"depository/currencies".InternalApi()
-                .PostJsonAsync<Currency>(currency);
+            var result = await $"depository/currencies".InternalApi().PostJsonAsync<Currency>(currency);
             return result;
         }
 
         public async Task<List<CurrencyPair>> GetCurrencyPairs()
         {
-            var result = await $"depository/currency-pairs".InternalApi()
-                .GetJsonAsync<List<CurrencyPair>>().GetQueryResult();
+            var result = await $"depository/currency-pairs".InternalApi().GetJsonAsync<List<CurrencyPair>>()
+                .GetQueryResult();
             return result.Succeeded ? result.Data : new List<CurrencyPair>();
         }
 
         public async Task<CurrencyPair> CreateCurrencyPair(CurrencyPair pair)
         {
-            var result = await $"depository/currency-pairs".InternalApi()
-                .PostJsonAsync<CurrencyPair>(pair);
+            var result = await $"depository/currency-pairs".InternalApi().PostJsonAsync<CurrencyPair>(pair);
             return result;
         }
 
         public async Task CreateOrUpdateCurrencyAdapter(CurrencyAdapter currencyAdapter)
         {
-            await $"depository/currency-adapters".InternalApi()
-                .PostJsonAsync<CurrencyPair>(currencyAdapter);
+            await $"depository/currency-adapters".InternalApi().PostJsonAsync<CurrencyPair>(currencyAdapter);
         }
 
         /// <summary>
@@ -250,8 +234,7 @@ namespace TLabs.ExchangeSdk.Depository
         /// </summary>
         public async Task<IFlurlResponse> DeleteTestCurrenciesPairsTransactions()
         {
-            var result = await $"depository/currencies/test".InternalApi()
-                .DeleteAsync();
+            var result = await $"depository/currencies/test".InternalApi().DeleteAsync();
             return result;
         }
 
@@ -261,8 +244,8 @@ namespace TLabs.ExchangeSdk.Depository
 
         public virtual async Task<Dictionary<string, DateTimeOffset>> GetFirstDepositDates()
         {
-            var response = await "depository/deposits/first-dates"
-                .InternalApi().GetJsonAsync<Dictionary<string, DateTimeOffset>>().GetQueryResult();
+            var response = await "depository/deposits/first-dates".InternalApi()
+                .GetJsonAsync<Dictionary<string, DateTimeOffset>>().GetQueryResult();
 
             return response.Succeeded ? response.Data : new Dictionary<string, DateTimeOffset>();
         }
@@ -270,35 +253,30 @@ namespace TLabs.ExchangeSdk.Depository
         public virtual async Task<Dictionary<string, decimal>> GetDepositsVolume(DateTimeOffset from, DateTimeOffset to,
             IReadOnlyCollection<string> userIds = null)
         {
-            var result = await "depository/deposits/volume".InternalApi()
-                .SetQueryParam("from", from.ToString("o"))
-                .SetQueryParam("to", to.ToString("o"))
-                .PostJsonAsync(userIds)
+            var result = await "depository/deposits/volume".InternalApi().SetQueryParam("from", from.ToString("o"))
+                .SetQueryParam("to", to.ToString("o")).PostJsonAsync(userIds)
                 .ReceiveJson<Dictionary<string, decimal>>();
 
             return result;
         }
 
-        public virtual async Task<Dictionary<string, decimal>> GetWithdrawalsVolume(DateTimeOffset from, DateTimeOffset to,
-            IReadOnlyCollection<string> userIds = null)
+        public virtual async Task<Dictionary<string, decimal>> GetWithdrawalsVolume(DateTimeOffset from,
+            DateTimeOffset to, IReadOnlyCollection<string> userIds = null)
         {
-            var result = await "depository/withdrawals/volume".InternalApi()
-                .SetQueryParam("from", from.ToString("o"))
-                .SetQueryParam("to", to.ToString("o"))
-                .PostJsonAsync(userIds)
+            var result = await "depository/withdrawals/volume".InternalApi().SetQueryParam("from", from.ToString("o"))
+                .SetQueryParam("to", to.ToString("o")).PostJsonAsync(userIds)
                 .ReceiveJson<Dictionary<string, decimal>>();
 
             return result;
         }
 
-        public virtual async Task<Dictionary<string, Dictionary<string, decimal>>> GetDepositsVolumeByUser(DateTimeOffset? from,
-            DateTimeOffset? to, IReadOnlyCollection<string> userIds = null, IReadOnlyCollection<string> currencyCodes = null)
+        public virtual async Task<Dictionary<string, Dictionary<string, decimal>>> GetDepositsVolumeByUser(
+            DateTimeOffset? from, DateTimeOffset? to, IReadOnlyCollection<string> userIds = null,
+            IReadOnlyCollection<string> currencyCodes = null)
         {
             var result = await "depository/deposits/volume-by-user".InternalApi()
-                .SetQueryParam(nameof(from), from?.ToString("o"))
-                .SetQueryParam(nameof(to), to?.ToString("o"))
-                .SetQueryParam(nameof(currencyCodes), currencyCodes)
-                .PostJsonAsync(userIds)
+                .SetQueryParam(nameof(from), from?.ToString("o")).SetQueryParam(nameof(to), to?.ToString("o"))
+                .SetQueryParam(nameof(currencyCodes), currencyCodes).PostJsonAsync(userIds)
                 .ReceiveJson<Dictionary<string, Dictionary<string, decimal>>>();
 
             return result;
