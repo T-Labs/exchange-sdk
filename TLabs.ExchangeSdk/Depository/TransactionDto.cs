@@ -37,11 +37,5 @@ namespace TLabs.ExchangeSdk.Depository
 
         /// <summary>Sender</summary>
         public AccountDto SenderAccount { get; set; }
-
-        /// <summary>
-        /// Account balance immediately after this transaction.
-        /// Available for paged account transaction requests.
-        /// </summary>
-        public decimal? BalanceAfter { get; set; }
     }
 }
