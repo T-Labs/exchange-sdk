@@ -71,7 +71,22 @@ namespace TLabs.ExchangeSdk.Depository
             var result = await request.GetJsonAsync<PagedList<TransactionDto>>();
             return result;
         }
+        public virtual async Task<PagedList<TransactionDto>> GetTransactionsByAccountIdPaged(Guid accountId,
+            int page = 1, int pageSize = 50)
+        {
+            var request = "depository/transaction/by-account/paged".InternalApi()
+                .SetQueryParam(nameof(accountId), accountId)
+                .SetQueryParam(nameof(page), page)
+                .SetQueryParam(nameof(pageSize), pageSize);
 
+            return await request.GetJsonAsync<PagedList<TransactionDto>>();
+        }
+        public virtual async Task<decimal> GetBalanceByAccountIdAtDate(Guid accountId, DateTimeOffset toDate)
+        {
+            return await $"depository/account/{accountId}/balances-new".InternalApi()
+                .SetQueryParam(nameof(toDate), toDate.ToString("o"))
+                .GetJsonAsync<decimal>();
+        }
         public async Task<List<TransactionDto>> GetTransactionsByActionIds(List<string> actionIds)
         {
             var result = await $"depository/transaction/actionid-transactions".InternalApi()
