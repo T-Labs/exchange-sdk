@@ -134,16 +134,11 @@ namespace TLabs.ExchangeSdk.Depository
             var result = await request.GetJsonAsync<List<AccountBalance>>();
             return result;
         }
-        public virtual async Task<decimal> GetBalanceByAccountIdAtDate(
-            Guid accountId,
-            DateTimeOffset toDate)
+
+        public virtual async Task<decimal> GetBalanceByAccountIdAtDate(Guid accountId, DateTimeOffset toDate)
         {
-            return await $"depository/account/{accountId}/balances-new"
-                .InternalApi()
-                .SetQueryParam(
-                    nameof(toDate),
-                    toDate.ToString("o"))
-                .GetJsonAsync<decimal>();
+            return await $"depository/account/{accountId}/balances-new".InternalApi()
+                .SetQueryParam(nameof(toDate), toDate.ToString("o")).GetJsonAsync<decimal>();
         }
         public async Task<UserBalancesDto> GetUserBalances(string userId,
             IEnumerable<string> currencyCodes = null, DateTimeOffset? toDate = null)
