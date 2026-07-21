@@ -99,32 +99,12 @@ namespace TLabs.ExchangeSdk.Depository
             return result;
         }
 
-        public virtual async Task<PagedList<TransactionDto>>
-            GetTransactionsByAccountIdPaged(
-                Guid accountId,
-                DateTimeOffset? from = null,
-                DateTimeOffset? to = null,
-                List<string> transactionTypes = null,
-                int page = 1,
-                int pageSize = 50)
+        public virtual async Task<PagedList<TransactionDto>> GetTransactionsByAccountIdPaged(Guid accountId, int page = 1, int pageSize = 50)
         {
-            var request = "depository/transaction/by-account/paged"
-                .InternalApi()
-                .SetQueryParam(nameof(accountId), accountId)
-                .SetQueryParam(
-                    nameof(from),
-                    from?.RemoveTimePart().ToString("o"))
-                .SetQueryParam(
-                    nameof(to),
-                    to?.RemoveTimePart().ToString("o"))
-                .SetQueryParam(
-                    nameof(transactionTypes),
-                    transactionTypes)
-                .SetQueryParam(nameof(page), page)
+            var request = "depository/transaction/by-account/paged".InternalApi().SetQueryParam(nameof(accountId), accountId).SetQueryParam(nameof(page), page)
                 .SetQueryParam(nameof(pageSize), pageSize);
 
-            return await request
-                .GetJsonAsync<PagedList<TransactionDto>>();
+            return await request.GetJsonAsync<PagedList<TransactionDto>>();
         }
 
 
