@@ -162,10 +162,10 @@ namespace TLabs.ExchangeSdk.Depository
             return result;
         }
 
-        public async Task<decimal> GetBalanceByAccountId(Guid accountId, DateTimeOffset toDate)
+        public async Task<decimal> GetBalanceByAccountId(Guid accountId, DateTimeOffset? toDate)
         {
             return await $"depository/account/{accountId}/balances-new".InternalApi()
-                .SetQueryParam(nameof(toDate), toDate.ToString("o")).GetJsonAsync<decimal>();
+                .SetQueryParam(nameof(toDate), toDate?.ToString("o")).GetJsonAsync<decimal>();
         }
         #endregion Balances
 
