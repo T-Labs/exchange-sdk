@@ -44,7 +44,7 @@ namespace TLabs.ExchangeSdk.Audit
         }
     }
 
-    internal static class ClientAuditEx
+    internal static class ClientAuditExtensions
     {
         public static IFlurlRequest SetAuditQueryOptions(this IFlurlRequest request, AuditQueryOptions filter)
         {
