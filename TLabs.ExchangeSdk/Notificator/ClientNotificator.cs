@@ -55,5 +55,14 @@ namespace TLabs.ExchangeSdk.Notificator
                 .PostAsync()
                 .ReceiveJson<EmailDispatchResponse>();
         }
+
+        public async Task<VerificationReminderDispatchResponse> SendVerificationReminderToUnverifiedUsers(
+            SendVerificationReminderRequest request = null)
+        {
+            return await "notificator/emails/verification-reminders/unverified"
+                .InternalApi()
+                .PostJsonAsync(request ?? new SendVerificationReminderRequest())
+                .ReceiveJson<VerificationReminderDispatchResponse>();
+        }
     }
 }
