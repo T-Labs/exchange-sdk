@@ -12,6 +12,7 @@ public class PaymentCardCallbackDto
     public string CurrencyCode { get; set; }
     public string MerchantName { get; set; }
     public string OtpCode { get; set; }
+    public string ChallengeUrl { get; set; }
     public string AuthMethod { get; set; }
     public string ProviderChallengeId { get; set; }
     public bool RequiresConfirm { get; set; }
