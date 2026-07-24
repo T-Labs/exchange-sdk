@@ -24,6 +24,10 @@ public interface IClientPaymentCards
 
     Task<List<PaymentCardCallbackDto>> GetCallbacks(Guid cardId, string userId, int take = 100);
 
+    Task<List<PaymentCardCallbackDto>> GetVerificationCodes(Guid cardId, string userId, int take = 50);
+
+    Task Confirm3Ds(Guid cardId, string userId, ConfirmPaymentCard3DsDto dto);
+
     Task<List<PaymentCardTransferDto>> GetTransfers(string userId, Guid? cardId = null);
 
     Task<List<PaymentCardProductDto>> GetProducts(bool? enabled = null);
@@ -71,6 +75,17 @@ public class ClientPaymentCards : IClientPaymentCards
             .SetQueryParam(nameof(userId), userId)
             .SetQueryParam(nameof(take), take)
             .GetJsonAsync<List<PaymentCardCallbackDto>>();
+
+    public Task<List<PaymentCardCallbackDto>> GetVerificationCodes(Guid cardId, string userId, int take = 50) =>
+        $"{BaseUrl}/{cardId}/verification-codes".InternalApi()
+            .SetQueryParam(nameof(userId), userId)
+            .SetQueryParam(nameof(take), take)
+            .GetJsonAsync<List<PaymentCardCallbackDto>>();
+
+    public Task Confirm3Ds(Guid cardId, string userId, ConfirmPaymentCard3DsDto dto) =>
+        $"{BaseUrl}/{cardId}/3ds/confirm".InternalApi()
+            .SetQueryParam(nameof(userId), userId)
+            .PostJsonAsync(dto);
 
     public Task<List<PaymentCardTransferDto>> GetTransfers(string userId, Guid? cardId = null)
     {
