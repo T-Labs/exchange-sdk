@@ -9,5 +9,9 @@ namespace TLabs.ExchangeSdk.Notificator
         public DateTimeOffset? ExpiresAt { get; set; }
 
         public int? MaxAttempts { get; set; }
+        
+        public int Occurrences { get; set; } = 3;
+
+        public int IntervalDays { get; set; } = 7;
     }
 }
