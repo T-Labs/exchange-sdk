@@ -22,6 +22,8 @@ public interface IClientPaymentCardsAdmin
     Task<PaymentCardProductSyncResultDto> SyncProducts();
 
     Task<PaymentCardProductDto> SetProductEnabled(Guid productId, UpdatePaymentCardProductEnabledDto dto);
+
+    Task<PaymentCardProductDto> UpdateProductFees(Guid productId, UpdatePaymentCardProductFeesDto dto);
 }
 
 public class ClientPaymentCardsAdmin : IClientPaymentCardsAdmin
@@ -71,6 +73,11 @@ public class ClientPaymentCardsAdmin : IClientPaymentCardsAdmin
 
     public Task<PaymentCardProductDto> SetProductEnabled(Guid productId, UpdatePaymentCardProductEnabledDto dto) =>
         $"{BaseUrl}/products/{productId}/enabled".InternalApi()
+            .PatchJsonAsync(dto)
+            .ReceiveJson<PaymentCardProductDto>();
+
+    public Task<PaymentCardProductDto> UpdateProductFees(Guid productId, UpdatePaymentCardProductFeesDto dto) =>
+        $"{BaseUrl}/admin/products/{productId}/fees".InternalApi()
             .PatchJsonAsync(dto)
             .ReceiveJson<PaymentCardProductDto>();
 }
