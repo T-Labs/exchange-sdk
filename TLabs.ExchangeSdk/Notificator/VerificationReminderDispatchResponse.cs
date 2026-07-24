@@ -7,9 +7,13 @@ namespace TLabs.ExchangeSdk.Notificator
     {
         public int UnverifiedUsersCount { get; set; }
 
+        public int TargetUsersCount { get; set; }
+
         public int EligibleUsersCount { get; set; }
 
         public int EnqueuedCount { get; set; }
+
+        public int ScheduledCount { get; set; }
 
         public int SkippedWithoutEmailCount { get; set; }
 
