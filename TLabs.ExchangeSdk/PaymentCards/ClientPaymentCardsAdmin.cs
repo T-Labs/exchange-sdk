@@ -24,6 +24,8 @@ public interface IClientPaymentCardsAdmin
     Task<PaymentCardProductDto> SetProductEnabled(Guid productId, UpdatePaymentCardProductEnabledDto dto);
 
     Task<PaymentCardProductDto> UpdateProduct(Guid productId, UpdatePaymentCardProductDto dto);
+
+    Task<List<PaymentCardSupportedDialCodeDto>> GetSupportedDialCodes();
 }
 
 public class ClientPaymentCardsAdmin : IClientPaymentCardsAdmin
@@ -80,4 +82,8 @@ public class ClientPaymentCardsAdmin : IClientPaymentCardsAdmin
         $"{BaseUrl}/products/{productId}".InternalApi()
             .PatchJsonAsync(dto)
             .ReceiveJson<PaymentCardProductDto>();
+
+    public Task<List<PaymentCardSupportedDialCodeDto>> GetSupportedDialCodes() =>
+        $"{BaseUrl}/supported-dial-codes".InternalApi()
+            .GetJsonAsync<List<PaymentCardSupportedDialCodeDto>>();
 }

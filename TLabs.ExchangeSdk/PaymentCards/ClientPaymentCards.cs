@@ -33,6 +33,8 @@ public interface IClientPaymentCards
     Task<List<PaymentCardProductDto>> GetProducts(bool? enabled = null);
 
     Task<List<PaymentCardProductDto>> GetAvailableProducts(string userId);
+
+    Task<List<PaymentCardSupportedDialCodeDto>> GetSupportedDialCodes();
 }
 
 public class ClientPaymentCards : IClientPaymentCards
@@ -107,4 +109,8 @@ public class ClientPaymentCards : IClientPaymentCards
         $"{BaseUrl}/available-products".InternalApi()
             .SetQueryParam(nameof(userId), userId)
             .GetJsonAsync<List<PaymentCardProductDto>>();
+
+    public Task<List<PaymentCardSupportedDialCodeDto>> GetSupportedDialCodes() =>
+        $"{BaseUrl}/supported-dial-codes".InternalApi()
+            .GetJsonAsync<List<PaymentCardSupportedDialCodeDto>>();
 }
