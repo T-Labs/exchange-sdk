@@ -35,6 +35,9 @@ public interface IClientPaymentCards
     Task<List<PaymentCardProductDto>> GetAvailableProducts(string userId);
 
     Task<List<PaymentCardSupportedDialCodeDto>> GetSupportedDialCodes();
+
+    // Admin endpoint
+    Task<PaymentCardDto> SetCardStatus(Guid cardId, SetCardStatusDto dto);
 }
 
 public class ClientPaymentCards : IClientPaymentCards
@@ -113,4 +116,9 @@ public class ClientPaymentCards : IClientPaymentCards
     public Task<List<PaymentCardSupportedDialCodeDto>> GetSupportedDialCodes() =>
         $"{BaseUrl}/supported-dial-codes".InternalApi()
             .GetJsonAsync<List<PaymentCardSupportedDialCodeDto>>();
+
+    public Task<PaymentCardDto> SetCardStatus(Guid cardId, SetCardStatusDto dto) =>
+        $"{BaseUrl}/{cardId}/set-status".InternalApi()
+            .PostJsonAsync(dto)
+            .ReceiveJson<PaymentCardDto>();
 }
