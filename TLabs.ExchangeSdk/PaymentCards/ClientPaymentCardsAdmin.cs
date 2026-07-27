@@ -26,6 +26,8 @@ public interface IClientPaymentCardsAdmin
     Task<PaymentCardProductDto> UpdateProduct(Guid productId, UpdatePaymentCardProductDto dto);
 
     Task<List<PaymentCardSupportedDialCodeDto>> GetSupportedDialCodes();
+
+    Task<string> SyncDialCodes();
 }
 
 public class ClientPaymentCardsAdmin : IClientPaymentCardsAdmin
@@ -86,4 +88,9 @@ public class ClientPaymentCardsAdmin : IClientPaymentCardsAdmin
     public Task<List<PaymentCardSupportedDialCodeDto>> GetSupportedDialCodes() =>
         $"{BaseUrl}/supported-dial-codes".InternalApi()
             .GetJsonAsync<List<PaymentCardSupportedDialCodeDto>>();
+
+    public Task<string> SyncDialCodes() =>
+        $"{BaseUrl}/admin/dial-codes/sync".InternalApi()
+            .PostAsync()
+            .ReceiveString();
 }
