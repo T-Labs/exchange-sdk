@@ -28,6 +28,8 @@ public interface IClientPaymentCards
 
     Task Confirm3Ds(Guid cardId, string userId, ConfirmPaymentCard3DsDto dto);
 
+    Task SetPin(Guid cardId, string userId, SetPaymentCardPinDto dto);
+
     Task<List<PaymentCardTransferDto>> GetTransfers(string userId, Guid? cardId = null);
 
     Task<List<PaymentCardProductDto>> GetProducts(bool? enabled = null);
@@ -89,6 +91,11 @@ public class ClientPaymentCards : IClientPaymentCards
 
     public Task Confirm3Ds(Guid cardId, string userId, ConfirmPaymentCard3DsDto dto) =>
         $"{BaseUrl}/{cardId}/3ds/confirm".InternalApi()
+            .SetQueryParam(nameof(userId), userId)
+            .PostJsonAsync(dto);
+
+    public Task SetPin(Guid cardId, string userId, SetPaymentCardPinDto dto) =>
+        $"{BaseUrl}/{cardId}/set-pin".InternalApi()
             .SetQueryParam(nameof(userId), userId)
             .PostJsonAsync(dto);
 
