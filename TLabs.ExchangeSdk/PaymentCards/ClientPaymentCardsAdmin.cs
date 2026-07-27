@@ -13,9 +13,7 @@ public interface IClientPaymentCardsAdmin
 
     Task<PaymentCardPagedResult<PaymentCardCallbackDto>> GetCallbacks(int skip = 0, int take = 50, Guid? cardId = null);
 
-    Task<PaymentCardDto> BlockCard(Guid cardId, BlockPaymentCardDto dto);
-
-    Task<PaymentCardDto> UnblockCard(Guid cardId, BlockPaymentCardDto dto);
+    Task<PaymentCardDto> SetCardStatus(Guid cardId, SetCardStatusDto dto);
 
     Task<List<PaymentCardProductDto>> GetProducts(bool? enabled = null);
 
@@ -54,13 +52,8 @@ public class ClientPaymentCardsAdmin : IClientPaymentCardsAdmin
         return req.GetJsonAsync<PaymentCardPagedResult<PaymentCardCallbackDto>>();
     }
 
-    public Task<PaymentCardDto> BlockCard(Guid cardId, BlockPaymentCardDto dto) =>
-        $"{BaseUrl}/admin/{cardId}/block".InternalApi()
-            .PostJsonAsync(dto)
-            .ReceiveJson<PaymentCardDto>();
-
-    public Task<PaymentCardDto> UnblockCard(Guid cardId, BlockPaymentCardDto dto) =>
-        $"{BaseUrl}/admin/{cardId}/unblock".InternalApi()
+    public Task<PaymentCardDto> SetCardStatus(Guid cardId, SetCardStatusDto dto) =>
+        $"{BaseUrl}/admin/{cardId}/set-status".InternalApi()
             .PostJsonAsync(dto)
             .ReceiveJson<PaymentCardDto>();
 
@@ -81,7 +74,7 @@ public class ClientPaymentCardsAdmin : IClientPaymentCardsAdmin
             .ReceiveJson<PaymentCardProductDto>();
 
     public Task<PaymentCardProductDto> UpdateProduct(Guid productId, UpdatePaymentCardProductDto dto) =>
-        $"{BaseUrl}/products/{productId}".InternalApi()
+        $"{BaseUrl}/admin/products/{productId}".InternalApi()
             .PatchJsonAsync(dto)
             .ReceiveJson<PaymentCardProductDto>();
 
