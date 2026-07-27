@@ -28,11 +28,18 @@ public interface IClientPaymentCards
 
     Task Confirm3Ds(Guid cardId, string userId, ConfirmPaymentCard3DsDto dto);
 
+    Task SetPin(Guid cardId, string userId, SetPaymentCardPinDto dto);
+
     Task<List<PaymentCardTransferDto>> GetTransfers(string userId, Guid? cardId = null);
 
     Task<List<PaymentCardProductDto>> GetProducts(bool? enabled = null);
 
     Task<List<PaymentCardProductDto>> GetAvailableProducts(string userId);
+
+    Task<List<PaymentCardSupportedDialCodeDto>> GetSupportedDialCodes();
+
+    // Admin endpoint
+    Task<PaymentCardDto> SetCardStatus(Guid cardId, SetCardStatusDto dto);
 }
 
 public class ClientPaymentCards : IClientPaymentCards
@@ -87,6 +94,11 @@ public class ClientPaymentCards : IClientPaymentCards
             .SetQueryParam(nameof(userId), userId)
             .PostJsonAsync(dto);
 
+    public Task SetPin(Guid cardId, string userId, SetPaymentCardPinDto dto) =>
+        $"{BaseUrl}/{cardId}/set-pin".InternalApi()
+            .SetQueryParam(nameof(userId), userId)
+            .PostJsonAsync(dto);
+
     public Task<List<PaymentCardTransferDto>> GetTransfers(string userId, Guid? cardId = null)
     {
         var req = cardId.HasValue
@@ -107,4 +119,13 @@ public class ClientPaymentCards : IClientPaymentCards
         $"{BaseUrl}/available-products".InternalApi()
             .SetQueryParam(nameof(userId), userId)
             .GetJsonAsync<List<PaymentCardProductDto>>();
+
+    public Task<List<PaymentCardSupportedDialCodeDto>> GetSupportedDialCodes() =>
+        $"{BaseUrl}/supported-dial-codes".InternalApi()
+            .GetJsonAsync<List<PaymentCardSupportedDialCodeDto>>();
+
+    public Task<PaymentCardDto> SetCardStatus(Guid cardId, SetCardStatusDto dto) =>
+        $"{BaseUrl}/{cardId}/set-status".InternalApi()
+            .PostJsonAsync(dto)
+            .ReceiveJson<PaymentCardDto>();
 }
