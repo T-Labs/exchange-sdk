@@ -38,8 +38,9 @@ public interface IClientPaymentCards
 
     Task<List<PaymentCardSupportedDialCodeDto>> GetSupportedDialCodes();
 
-    // Admin endpoint
-    Task<PaymentCardDto> SetCardStatus(Guid cardId, SetCardStatusDto dto);
+    Task<PaymentCardDto> SetCardStatus(Guid cardId, string userId, SetCardStatusDto dto);
+
+    Task<PaymentCardTransactionsResultDto> GetTransactions(Guid cardId, string userId, int skip = 0, int take = 20);
 }
 
 public class ClientPaymentCards : IClientPaymentCards
@@ -124,8 +125,16 @@ public class ClientPaymentCards : IClientPaymentCards
         $"{BaseUrl}/supported-dial-codes".InternalApi()
             .GetJsonAsync<List<PaymentCardSupportedDialCodeDto>>();
 
-    public Task<PaymentCardDto> SetCardStatus(Guid cardId, SetCardStatusDto dto) =>
+    public Task<PaymentCardDto> SetCardStatus(Guid cardId, string userId, SetCardStatusDto dto) =>
         $"{BaseUrl}/{cardId}/set-status".InternalApi()
+            .SetQueryParam(nameof(userId), userId)
             .PostJsonAsync(dto)
             .ReceiveJson<PaymentCardDto>();
+
+    public Task<PaymentCardTransactionsResultDto> GetTransactions(Guid cardId, string userId, int skip = 0, int take = 20) =>
+        $"{BaseUrl}/{cardId}/transactions".InternalApi()
+            .SetQueryParam(nameof(userId), userId)
+            .SetQueryParam(nameof(skip), skip)
+            .SetQueryParam(nameof(take), take)
+            .GetJsonAsync<PaymentCardTransactionsResultDto>();
 }
