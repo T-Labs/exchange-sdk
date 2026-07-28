@@ -18,9 +18,14 @@ namespace TLabs.ExchangeSdk.CryptoAdapters
 
         public string NetworkCommissionCurrencyCode { get; set; }
 
-        public int StatusId { get; set; }
+        /// <summary>
+        /// Transaction failed in blockchain, withdrawal should be moved to Error status
+        /// </summary>
+        public bool IsFailed { get; set; }
+
+        public string ErrorText { get; set; }
 
         public override string ToString() => $"{nameof(WithdrawalAdapterConfirmation)}(DepositoryTransactionId:{TransactionId}, IsToColdWallet:{IsToColdWallet}, " +
-            $"NetworkCommission:{NetworkCommission} {NetworkCommissionCurrencyCode})";
+            $"NetworkCommission:{NetworkCommission} {NetworkCommissionCurrencyCode}, IsFailed:{IsFailed}, ErrorText:{ErrorText})";
     }
 }
