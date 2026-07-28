@@ -25,6 +25,7 @@ namespace TLabs.ExchangeSdk
             services.AddTransient<CryptoAdapters.Tron.ClientCryptoAdapterOrgon>();
 
             services.AddTransient<Depository.ClientDepository>();
+            services.AddTransient<Depository.Futures.ClientFuturesDepository>();
             services.AddTransient<Deposits.ClientDeposits>();
             services.AddTransient<ExternalPayments.ClientExternalPayments>();
             services.AddTransient<Exchanges.ClientExchanges>();
