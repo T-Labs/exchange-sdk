@@ -15,7 +15,7 @@ namespace TLabs.ExchangeSdk.Depository.Futures
             FuturesLedgerEnsureAccountRequest request,
             CancellationToken cancellationToken = default)
         {
-            return await $"{BaseUrl}/account".InternalApi()
+            return await $"{BaseUrl}/accounts".InternalApi()
                 .WithTimeout(RequestTimeout)
                 .PostJsonAsync(request, cancellationToken)
                 .ReceiveJson<FuturesLedgerAccountSnapshot>();
@@ -27,7 +27,7 @@ namespace TLabs.ExchangeSdk.Depository.Futures
             string currencyCode,
             CancellationToken cancellationToken = default)
         {
-            return await $"{BaseUrl}/account/{futuresAccountId}".InternalApi()
+            return await $"{BaseUrl}/accounts/{futuresAccountId}".InternalApi()
                 .WithTimeout(RequestTimeout)
                 .SetQueryParam(nameof(userId), userId)
                 .SetQueryParam(nameof(currencyCode), currencyCode)
@@ -38,7 +38,7 @@ namespace TLabs.ExchangeSdk.Depository.Futures
             FuturesLedgerOperationRequest request,
             CancellationToken cancellationToken = default)
         {
-            return await $"{BaseUrl}/operation".InternalApi()
+            return await $"{BaseUrl}/operations".InternalApi()
                 .WithTimeout(RequestTimeout)
                 .PostJsonAsync(request, cancellationToken)
                 .ReceiveJson<FuturesLedgerOperationResult>();
