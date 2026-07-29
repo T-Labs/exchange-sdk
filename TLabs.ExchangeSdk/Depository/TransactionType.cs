@@ -144,6 +144,13 @@ namespace TLabs.ExchangeSdk.Depository
         public static readonly TransactionType PaymentCardPurchaseEnd = new TransactionType("930", "Покупка по платёжной карте конец", nameof(PaymentCardPurchaseEnd));
         public static readonly TransactionType PaymentCardPurchaseRefundBegin = new TransactionType("931", "Возврат покупки по карте начало", nameof(PaymentCardPurchaseRefundBegin));
         public static readonly TransactionType PaymentCardPurchaseRefundEnd = new TransactionType("932", "Возврат покупки по карте конец", nameof(PaymentCardPurchaseRefundEnd));
+        // Our fees (two-step: Users -> Temp -> Funds)
+        public static readonly TransactionType PaymentCardIssuanceFeeBegin = new TransactionType("933", "Комиссия за выпуск карты (наша) начало", nameof(PaymentCardIssuanceFeeBegin));
+        public static readonly TransactionType PaymentCardIssuanceFeeEnd = new TransactionType("934", "Комиссия за выпуск карты (наша) конец", nameof(PaymentCardIssuanceFeeEnd));
+        public static readonly TransactionType PaymentCardRechargeFeeBegin = new TransactionType("935", "Комиссия за пополнение карты (наша) начало", nameof(PaymentCardRechargeFeeBegin));
+        public static readonly TransactionType PaymentCardRechargeFeeEnd = new TransactionType("936", "Комиссия за пополнение карты (наша) конец", nameof(PaymentCardRechargeFeeEnd));
+        public static readonly TransactionType PaymentCardRefundFeeBegin = new TransactionType("937", "Комиссия за возврат по карте (наша) начало", nameof(PaymentCardRefundFeeBegin));
+        public static readonly TransactionType PaymentCardRefundFeeEnd = new TransactionType("938", "Комиссия за возврат по карте (наша) конец", nameof(PaymentCardRefundFeeEnd));
 
         // Block can happen on order creation or on deal creation, depending on buying or selling crypto
         public static readonly TransactionType P2pOrderBlockBegin = new TransactionType("751", "P2P блокировка для ордера начало", nameof(P2pOrderBlockBegin));
@@ -243,6 +250,9 @@ namespace TLabs.ExchangeSdk.Depository
             PaymentCardWithdrawBegin, PaymentCardWithdrawEnd,
             PaymentCardPurchaseBegin, PaymentCardPurchaseEnd,
             PaymentCardPurchaseRefundBegin, PaymentCardPurchaseRefundEnd,
+            PaymentCardIssuanceFeeBegin, PaymentCardIssuanceFeeEnd,
+            PaymentCardRechargeFeeBegin, PaymentCardRechargeFeeEnd,
+            PaymentCardRefundFeeBegin, PaymentCardRefundFeeEnd,
 
             P2pOrderBlockBegin, P2pOrderBlockEnd,
             P2pOrderBlockCancelBegin, P2pOrderBlockCancelEnd, P2pOrderRemainingBlockCancelBegin, P2pOrderRemainingBlockCancelEnd,
