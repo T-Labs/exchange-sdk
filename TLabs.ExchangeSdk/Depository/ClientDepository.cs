@@ -104,13 +104,11 @@ namespace TLabs.ExchangeSdk.Depository
             int page = 1, int pageSize = 50, CancellationToken cancellationToken = default)
         {
             var request = "depository/transaction/by-account/paged".InternalApi()
-                .SetQueryParam(nameof(accountId), accountId)
-                .SetQueryParam(nameof(page), page)
+                .SetQueryParam(nameof(accountId), accountId).SetQueryParam(nameof(page), page)
                 .SetQueryParam(nameof(pageSize), pageSize);
 
             return await request.GetJsonAsync<PagedList<TransactionDto>>(cancellationToken);
         }
-
 
         /// <summary>
         /// Distinct userIds (sender or recipient) of all transactions within the last <paramref name="hours"/> hours.
