@@ -1,6 +1,8 @@
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Flurl.Http;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using TLabs.DotnetHelpers;
 
@@ -9,38 +11,97 @@ namespace TLabs.ExchangeSdk.Audit
     public class ClientAudit : IClientAudit
     {
         private const string EventsBase = "audit/events";
+        private readonly ILogger _logger;
+
+        public ClientAudit(ILogger<ClientAudit> logger)
+        {
+            _logger = logger;
+        }
 
         public async Task<string> InjectAsync(string eventType, object auditEvent)
         {
             var payload = auditEvent is string json
                 ? json
                 : JsonConvert.SerializeObject(auditEvent);
-            return await $"{EventsBase}/{eventType}".InternalApi()
-                .WithTimeout(20)
-                .AllowAnyHttpStatus()
-                .PostJsonAsync(payload)
-                .ReceiveString()
-                .ContinueWith(task => task.IsFaulted ? string.Empty : task.Result);
+
+            try
+            {
+                var response = await $"{EventsBase}/{eventType}".InternalApi()
+                    .WithTimeout(20)
+                    .AllowAnyHttpStatus()
+                    .PostJsonAsync(payload);
+
+                if (!response.ResponseMessage.IsSuccessStatusCode)
+                {
+                    _logger.LogWarning(
+                        "Audit inject failed for {EventType}: HTTP {StatusCode}",
+                        eventType,
+                        (int)response.ResponseMessage.StatusCode);
+                    return string.Empty;
+                }
+
+                return await response.GetStringAsync();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogWarning(ex, "Audit inject failed for {EventType}", eventType);
+                return string.Empty;
+            }
         }
 
         public async Task<List<AuditEventDto>> GetAllAsync(AuditQueryOptions filter = null)
         {
-            var result = await EventsBase.InternalApi()
-                .WithTimeout(20)
-                .AllowAnyHttpStatus()
-                .SetAuditQueryOptions(filter)
-                .GetJsonAsync<List<AuditEventDto>>();
-            return result;
+            try
+            {
+                var response = await EventsBase.InternalApi()
+                    .WithTimeout(20)
+                    .AllowAnyHttpStatus()
+                    .SetAuditQueryOptions(filter)
+                    .GetAsync();
+
+                if (!response.ResponseMessage.IsSuccessStatusCode)
+                {
+                    _logger.LogWarning(
+                        "Audit get-all failed: HTTP {StatusCode}",
+                        (int)response.ResponseMessage.StatusCode);
+                    return new List<AuditEventDto>();
+                }
+
+                return await response.GetJsonAsync<List<AuditEventDto>>() ?? new List<AuditEventDto>();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogWarning(ex, "Audit get-all failed");
+                return new List<AuditEventDto>();
+            }
         }
 
         public async Task<List<AuditEventDto>> GetByUserIdAsync(string userId, AuditQueryOptions filter = null)
         {
-            var result = await $"{EventsBase}/by-user/{userId}".InternalApi()
-                .WithTimeout(20)
-                .AllowAnyHttpStatus()
-                .SetAuditQueryOptions(filter)
-                .GetJsonAsync<List<AuditEventDto>>();
-            return result ?? new List<AuditEventDto>();
+            try
+            {
+                var response = await $"{EventsBase}/by-user/{userId}".InternalApi()
+                    .WithTimeout(20)
+                    .AllowAnyHttpStatus()
+                    .SetAuditQueryOptions(filter)
+                    .GetAsync();
+
+                if (!response.ResponseMessage.IsSuccessStatusCode)
+                {
+                    _logger.LogWarning(
+                        "Audit get-by-user failed for {UserId}: HTTP {StatusCode}",
+                        userId,
+                        (int)response.ResponseMessage.StatusCode);
+                    return new List<AuditEventDto>();
+                }
+
+                return await response.GetJsonAsync<List<AuditEventDto>>() ?? new List<AuditEventDto>();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogWarning(ex, "Audit get-by-user failed for {UserId}", userId);
+                return new List<AuditEventDto>();
+            }
         }
     }
 
