@@ -30,7 +30,7 @@ namespace TLabs.ExchangeSdk.Audit
                 .AllowAnyHttpStatus()
                 .SetAuditQueryOptions(filter)
                 .GetJsonAsync<List<AuditEventDto>>();
-            return result ?? new List<AuditEventDto>();
+            return result;
         }
 
         public async Task<List<AuditEventDto>> GetByUserIdAsync(string userId, AuditQueryOptions filter = null)
