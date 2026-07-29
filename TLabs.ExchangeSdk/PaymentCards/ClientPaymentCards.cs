@@ -20,13 +20,27 @@ public interface IClientPaymentCards
 
     Task<PaymentCardBalanceDto> GetBalance(Guid cardId, string userId);
 
+    Task<PaymentCardSensitiveDetailsDto> GetSensitiveDetails(Guid cardId, string userId);
+
     Task<List<PaymentCardCallbackDto>> GetCallbacks(Guid cardId, string userId, int take = 100);
+
+    Task<List<PaymentCardCallbackDto>> GetVerificationCodes(Guid cardId, string userId, int take = 50);
+
+    Task Confirm3Ds(Guid cardId, string userId, ConfirmPaymentCard3DsDto dto);
+
+    Task SetPin(Guid cardId, string userId, SetPaymentCardPinDto dto);
 
     Task<List<PaymentCardTransferDto>> GetTransfers(string userId, Guid? cardId = null);
 
     Task<List<PaymentCardProductDto>> GetProducts(bool? enabled = null);
 
     Task<List<PaymentCardProductDto>> GetAvailableProducts(string userId);
+
+    Task<List<PaymentCardSupportedDialCodeDto>> GetSupportedDialCodes();
+
+    Task<PaymentCardDto> SetCardStatus(Guid cardId, string userId, SetCardStatusDto dto);
+
+    Task<PaymentCardTransactionsResultDto> GetTransactions(Guid cardId, string userId, int skip = 0, int take = 20);
 }
 
 public class ClientPaymentCards : IClientPaymentCards
@@ -59,11 +73,32 @@ public class ClientPaymentCards : IClientPaymentCards
             .SetQueryParam(nameof(userId), userId)
             .GetJsonAsync<PaymentCardBalanceDto>();
 
+    public Task<PaymentCardSensitiveDetailsDto> GetSensitiveDetails(Guid cardId, string userId) =>
+        $"{BaseUrl}/{cardId}/sensitive-details".InternalApi()
+            .SetQueryParam(nameof(userId), userId)
+            .GetJsonAsync<PaymentCardSensitiveDetailsDto>();
+
     public Task<List<PaymentCardCallbackDto>> GetCallbacks(Guid cardId, string userId, int take = 100) =>
         $"{BaseUrl}/{cardId}/callbacks".InternalApi()
             .SetQueryParam(nameof(userId), userId)
             .SetQueryParam(nameof(take), take)
             .GetJsonAsync<List<PaymentCardCallbackDto>>();
+
+    public Task<List<PaymentCardCallbackDto>> GetVerificationCodes(Guid cardId, string userId, int take = 50) =>
+        $"{BaseUrl}/{cardId}/verification-codes".InternalApi()
+            .SetQueryParam(nameof(userId), userId)
+            .SetQueryParam(nameof(take), take)
+            .GetJsonAsync<List<PaymentCardCallbackDto>>();
+
+    public Task Confirm3Ds(Guid cardId, string userId, ConfirmPaymentCard3DsDto dto) =>
+        $"{BaseUrl}/{cardId}/3ds/confirm".InternalApi()
+            .SetQueryParam(nameof(userId), userId)
+            .PostJsonAsync(dto);
+
+    public Task SetPin(Guid cardId, string userId, SetPaymentCardPinDto dto) =>
+        $"{BaseUrl}/{cardId}/set-pin".InternalApi()
+            .SetQueryParam(nameof(userId), userId)
+            .PostJsonAsync(dto);
 
     public Task<List<PaymentCardTransferDto>> GetTransfers(string userId, Guid? cardId = null)
     {
@@ -85,4 +120,21 @@ public class ClientPaymentCards : IClientPaymentCards
         $"{BaseUrl}/available-products".InternalApi()
             .SetQueryParam(nameof(userId), userId)
             .GetJsonAsync<List<PaymentCardProductDto>>();
+
+    public Task<List<PaymentCardSupportedDialCodeDto>> GetSupportedDialCodes() =>
+        $"{BaseUrl}/supported-dial-codes".InternalApi()
+            .GetJsonAsync<List<PaymentCardSupportedDialCodeDto>>();
+
+    public Task<PaymentCardDto> SetCardStatus(Guid cardId, string userId, SetCardStatusDto dto) =>
+        $"{BaseUrl}/{cardId}/set-status".InternalApi()
+            .SetQueryParam(nameof(userId), userId)
+            .PostJsonAsync(dto)
+            .ReceiveJson<PaymentCardDto>();
+
+    public Task<PaymentCardTransactionsResultDto> GetTransactions(Guid cardId, string userId, int skip = 0, int take = 20) =>
+        $"{BaseUrl}/{cardId}/transactions".InternalApi()
+            .SetQueryParam(nameof(userId), userId)
+            .SetQueryParam(nameof(skip), skip)
+            .SetQueryParam(nameof(take), take)
+            .GetJsonAsync<PaymentCardTransactionsResultDto>();
 }
