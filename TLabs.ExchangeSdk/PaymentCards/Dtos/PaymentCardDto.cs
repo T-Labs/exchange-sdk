@@ -13,6 +13,7 @@ public class PaymentCardDto
     public DateTimeOffset DateCreated { get; set; }
     public int TemplateId { get; set; }
     public string Type { get; set; }
+    public string PaymentSystem { get; set; }
 
     public decimal? RechargeFee { get; set; }
     public decimal? RechargeMinLimit { get; set; }
