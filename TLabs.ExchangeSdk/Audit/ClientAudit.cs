@@ -12,6 +12,8 @@ namespace TLabs.ExchangeSdk.Audit
     public class ClientAudit : IClientAudit
     {
         private const string EventsBase = "audit/events";
+        private const int InjectTimeoutSeconds = 5;
+        private const int ReadTimeoutSeconds = 20;
         private readonly ILogger _logger;
 
         public ClientAudit(ILogger<ClientAudit> logger)
@@ -31,7 +33,7 @@ namespace TLabs.ExchangeSdk.Audit
             try
             {
                 var response = await $"{EventsBase}/{eventType}".InternalApi()
-                    .WithTimeout(20)
+                    .WithTimeout(InjectTimeoutSeconds)
                     .AllowAnyHttpStatus()
                     .PostJsonAsync(payload, cancellationToken);
 
@@ -60,7 +62,7 @@ namespace TLabs.ExchangeSdk.Audit
             try
             {
                 var response = await EventsBase.InternalApi()
-                    .WithTimeout(20)
+                    .WithTimeout(ReadTimeoutSeconds)
                     .AllowAnyHttpStatus()
                     .SetAuditQueryOptions(filter)
                     .GetAsync(cancellationToken: cancellationToken);
@@ -73,7 +75,8 @@ namespace TLabs.ExchangeSdk.Audit
                     return new List<AuditEventDto>();
                 }
 
-                return await response.GetJsonAsync<List<AuditEventDto>>() ?? new List<AuditEventDto>();
+                return JsonConvert.DeserializeObject<List<AuditEventDto>>(await response.GetStringAsync())
+                    ?? new List<AuditEventDto>();
             }
             catch (Exception ex)
             {
@@ -90,7 +93,7 @@ namespace TLabs.ExchangeSdk.Audit
             try
             {
                 var response = await $"{EventsBase}/by-user/{userId}".InternalApi()
-                    .WithTimeout(20)
+                    .WithTimeout(ReadTimeoutSeconds)
                     .AllowAnyHttpStatus()
                     .SetAuditQueryOptions(filter)
                     .GetAsync(cancellationToken: cancellationToken);
@@ -104,7 +107,8 @@ namespace TLabs.ExchangeSdk.Audit
                     return new List<AuditEventDto>();
                 }
 
-                return await response.GetJsonAsync<List<AuditEventDto>>() ?? new List<AuditEventDto>();
+                return JsonConvert.DeserializeObject<List<AuditEventDto>>(await response.GetStringAsync())
+                    ?? new List<AuditEventDto>();
             }
             catch (Exception ex)
             {
@@ -121,10 +125,16 @@ namespace TLabs.ExchangeSdk.Audit
             if (filter is null)
                 return request;
 
-            return request.SetQueryParam(nameof(filter.Sorts), filter.Sorts)
-                .SetQueryParam(nameof(filter.Filters), filter.Filters)
-                .SetQueryParam(nameof(filter.Page), filter.Page)
-                .SetQueryParam(nameof(filter.PageSize), filter.PageSize);
+            if (filter.Sorts != null)
+                request = request.SetQueryParam(nameof(filter.Sorts), filter.Sorts);
+            if (filter.Filters != null)
+                request = request.SetQueryParam(nameof(filter.Filters), filter.Filters);
+            if (filter.Page.HasValue)
+                request = request.SetQueryParam(nameof(filter.Page), filter.Page.Value);
+            if (filter.PageSize.HasValue)
+                request = request.SetQueryParam(nameof(filter.PageSize), filter.PageSize.Value);
+
+            return request;
         }
     }
 }
