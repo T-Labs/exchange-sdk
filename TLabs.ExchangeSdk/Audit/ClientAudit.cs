@@ -55,7 +55,7 @@ namespace TLabs.ExchangeSdk.Audit
             }
         }
 
-        public async Task<List<AuditEventDto>> GetAllAsync(
+        public async Task<AuditEventsPageDto> GetAllAsync(
             AuditQueryOptions filter = null,
             CancellationToken cancellationToken = default)
         {
@@ -72,16 +72,16 @@ namespace TLabs.ExchangeSdk.Audit
                     _logger.LogWarning(
                         "Audit get-all failed: HTTP {StatusCode}",
                         (int)response.ResponseMessage.StatusCode);
-                    return new List<AuditEventDto>();
+                    return new AuditEventsPageDto();
                 }
 
-                return JsonConvert.DeserializeObject<List<AuditEventDto>>(await response.GetStringAsync())
-                    ?? new List<AuditEventDto>();
+                return JsonConvert.DeserializeObject<AuditEventsPageDto>(await response.GetStringAsync())
+                    ?? new AuditEventsPageDto();
             }
             catch (Exception ex)
             {
                 _logger.LogWarning(ex, "Audit get-all failed");
-                return new List<AuditEventDto>();
+                return new AuditEventsPageDto();
             }
         }
 
@@ -107,8 +107,9 @@ namespace TLabs.ExchangeSdk.Audit
                     return new List<AuditEventDto>();
                 }
 
-                return JsonConvert.DeserializeObject<List<AuditEventDto>>(await response.GetStringAsync())
-                    ?? new List<AuditEventDto>();
+                var page = JsonConvert.DeserializeObject<AuditEventsPageDto>(await response.GetStringAsync())
+                    ?? new AuditEventsPageDto();
+                return page.Items ?? new List<AuditEventDto>();
             }
             catch (Exception ex)
             {
@@ -129,6 +130,8 @@ namespace TLabs.ExchangeSdk.Audit
                 request = request.SetQueryParam(nameof(filter.Sorts), filter.Sorts);
             if (filter.Filters != null)
                 request = request.SetQueryParam(nameof(filter.Filters), filter.Filters);
+            if (!string.IsNullOrWhiteSpace(filter.UserId))
+                request = request.SetQueryParam("userId", filter.UserId.Trim());
             if (filter.Page.HasValue)
                 request = request.SetQueryParam(nameof(filter.Page), filter.Page.Value);
             if (filter.PageSize.HasValue)

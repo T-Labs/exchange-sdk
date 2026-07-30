@@ -19,15 +19,19 @@ namespace TLabs.ExchangeSdk.Audit
         public DateTimeOffset StartDate { get; set; }
         public DateTimeOffset? EndDate { get; set; }
         public int Duration { get; set; }
+
+        public string EventData { get; set; }
+
         public AuditEventTargetDto Target { get; set; }
     }
 
+    [JsonConverter(typeof(AuditEventTargetDtoConverter))]
     public class AuditEventTargetDto
     {
         [JsonProperty("New")]
-        public object SerializedNew { get; set; }
+        public string SerializedNew { get; set; }
 
         [JsonProperty("Old")]
-        public object SerializedOld { get; set; }
+        public string SerializedOld { get; set; }
     }
 }
