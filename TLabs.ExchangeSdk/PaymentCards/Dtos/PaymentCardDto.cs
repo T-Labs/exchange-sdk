@@ -14,6 +14,10 @@ public class PaymentCardDto
     public int TemplateId { get; set; }
     public string Type { get; set; }
 
+    public decimal? RechargeFee { get; set; }
+    public decimal? RechargeMinLimit { get; set; }
+    public decimal? RechargeMaxLimit { get; set; }
+
     public override string ToString() =>
         $"{nameof(PaymentCardDto)}(id:{Id}, userId:{UserId}, status:{Status}, currency:{CurrencyCode}, template:{TemplateId}, type:{Type})";
 }

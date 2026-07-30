@@ -13,6 +13,8 @@ public class PaymentCardTransferDto
     public PaymentCardTransferFailureReason FailureReason { get; set; }
     public string CurrencyCode { get; set; }
     public decimal Amount { get; set; }
+    public decimal FeeAmount { get; set; }
+    public decimal NetAmount { get; set; }
     public string ErrorMessage { get; set; }
     public DateTimeOffset DateCreated { get; set; }
     public DateTimeOffset? DateCompleted { get; set; }
