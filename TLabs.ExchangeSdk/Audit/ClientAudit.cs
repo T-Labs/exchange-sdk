@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using Flurl.Http;
 using Microsoft.Extensions.Logging;
@@ -18,7 +19,10 @@ namespace TLabs.ExchangeSdk.Audit
             _logger = logger;
         }
 
-        public async Task<string> InjectAsync(string eventType, object auditEvent)
+        public async Task<string> InjectAsync(
+            string eventType,
+            object auditEvent,
+            CancellationToken cancellationToken = default)
         {
             var payload = auditEvent is string json
                 ? json
@@ -29,7 +33,7 @@ namespace TLabs.ExchangeSdk.Audit
                 var response = await $"{EventsBase}/{eventType}".InternalApi()
                     .WithTimeout(20)
                     .AllowAnyHttpStatus()
-                    .PostJsonAsync(payload);
+                    .PostJsonAsync(payload, cancellationToken);
 
                 if (!response.ResponseMessage.IsSuccessStatusCode)
                 {
@@ -49,7 +53,9 @@ namespace TLabs.ExchangeSdk.Audit
             }
         }
 
-        public async Task<List<AuditEventDto>> GetAllAsync(AuditQueryOptions filter = null)
+        public async Task<List<AuditEventDto>> GetAllAsync(
+            AuditQueryOptions filter = null,
+            CancellationToken cancellationToken = default)
         {
             try
             {
@@ -57,7 +63,7 @@ namespace TLabs.ExchangeSdk.Audit
                     .WithTimeout(20)
                     .AllowAnyHttpStatus()
                     .SetAuditQueryOptions(filter)
-                    .GetAsync();
+                    .GetAsync(cancellationToken: cancellationToken);
 
                 if (!response.ResponseMessage.IsSuccessStatusCode)
                 {
@@ -76,7 +82,10 @@ namespace TLabs.ExchangeSdk.Audit
             }
         }
 
-        public async Task<List<AuditEventDto>> GetByUserIdAsync(string userId, AuditQueryOptions filter = null)
+        public async Task<List<AuditEventDto>> GetByUserIdAsync(
+            string userId,
+            AuditQueryOptions filter = null,
+            CancellationToken cancellationToken = default)
         {
             try
             {
@@ -84,7 +93,7 @@ namespace TLabs.ExchangeSdk.Audit
                     .WithTimeout(20)
                     .AllowAnyHttpStatus()
                     .SetAuditQueryOptions(filter)
-                    .GetAsync();
+                    .GetAsync(cancellationToken: cancellationToken);
 
                 if (!response.ResponseMessage.IsSuccessStatusCode)
                 {

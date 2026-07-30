@@ -16,15 +16,18 @@ namespace TLabs.ExchangeSdk.Audit
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
         public string UserAgent { get; set; }
 
-        public DateTime StartDate { get; set; }
-        public DateTime? EndDate { get; set; }
+        public DateTimeOffset StartDate { get; set; }
+        public DateTimeOffset? EndDate { get; set; }
         public int Duration { get; set; }
         public AuditEventTargetDto Target { get; set; }
     }
 
     public class AuditEventTargetDto
     {
+        [JsonProperty("New")]
         public object SerializedNew { get; set; }
+
+        [JsonProperty("Old")]
         public object SerializedOld { get; set; }
     }
 }
