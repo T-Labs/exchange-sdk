@@ -15,6 +15,10 @@ public class PaymentCardProductDto
     public decimal? ApplyFee { get; set; }
     public decimal? RechargeFee { get; set; }
     public decimal? RefundFee { get; set; }
+
+    public decimal? BananatechApplyFee { get; set; }
+    public decimal? BananatechRechargeFee { get; set; }
+    public decimal? BananatechRefundFee { get; set; }
     public decimal? ActivateMinLimit { get; set; }
     public decimal? RechargeMinLimit { get; set; }
     public decimal? RechargeMaxLimit { get; set; }
