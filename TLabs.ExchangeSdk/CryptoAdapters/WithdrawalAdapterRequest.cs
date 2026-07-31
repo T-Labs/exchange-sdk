@@ -31,6 +31,13 @@ namespace TLabs.ExchangeSdk.CryptoAdapters
         /// <summary>Transaction number in depository</summary>
         public Guid TransactionId { get; set; }
 
+        /// <summary>
+        /// Blockchain tx the coins must be taken from, "hash_vout" in UTXO networks. Used by AML deposit returns
+        /// to send back the very coins that were held, instead of whatever the node would pick on its own.
+        /// Ignored by adapters of account-based networks.
+        /// </summary>
+        public string SourceTxId { get; set; }
+
         /// <summary>true if it's admin withdrawal to cold wallet</summary>
         public bool IsToColdWallet { get; set; }
 
