@@ -25,6 +25,12 @@ public class PaymentCardPhysicalOrderDto
 
     public bool HasActivationPin { get; set; }
 
+    public string RegisterEmail { get; set; }
+
+    public string RegisterDialCode { get; set; }
+
+    public string RegisterPhoneNumber { get; set; }
+
     public string TrackingNumber { get; set; }
 
     public string RecipientName { get; set; }
