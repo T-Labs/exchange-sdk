@@ -7,4 +7,5 @@ public enum PaymentCardStatus
     Blocked = 30,
     Closed = 40,
     Failed = 50,
+    AwaitingShipment = 60,
 }

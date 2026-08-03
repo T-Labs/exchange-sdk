@@ -11,6 +11,12 @@ public class IssuePaymentCardDto
     public decimal DepositAmount { get; set; } = 0;
     public string PrintedCardNumber { get; set; }
     public string Pin { get; set; }
+    public string RecipientName { get; set; }
+    public string CountryCode { get; set; }
+    public string Region { get; set; }
+    public string City { get; set; }
+    public string Postcode { get; set; }
+    public string AddressLine { get; set; }
     public PaymentCardKycDto Kyc { get; set; }
 
     public override string ToString() =>
