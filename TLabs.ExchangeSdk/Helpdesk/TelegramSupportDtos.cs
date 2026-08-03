@@ -33,6 +33,7 @@ public class TelegramTicketResponseDto
     public long TelegramUserId { get; set; }
     public string ExternalRequestId { get; set; }
     public bool Created { get; set; }
+    public bool IsVip { get; set; }
 }
 
 public class SupportBotReplyDto
