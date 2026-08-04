@@ -39,7 +39,7 @@ public static class AuditEventMapper
         };
     }
 
-    internal static string ExtractTargetFromRaw(string rawData, string field)
+    public static string ExtractTargetFromRaw(string rawData, string field)
     {
         if (string.IsNullOrWhiteSpace(rawData))
             return null;
