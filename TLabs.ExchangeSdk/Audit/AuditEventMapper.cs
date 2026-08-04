@@ -1,5 +1,4 @@
 using System;
-using System.Text.Json;
 using Audit.Core;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -15,9 +14,9 @@ public static class AuditEventMapper
             return null;
 
         var targetNew = ExtractTargetFromRaw(rawData, "New")
-            ?? SerializeTargetValue(auditEvent.Target?.New);
+            ?? AuditTargetJson.SerializeTargetValue(auditEvent.Target?.New);
         var targetOld = ExtractTargetFromRaw(rawData, "Old")
-            ?? SerializeTargetValue(auditEvent.Target?.Old);
+            ?? AuditTargetJson.SerializeTargetValue(auditEvent.Target?.Old);
 
         return new AuditEventDto
         {
@@ -63,27 +62,10 @@ public static class AuditEventMapper
         }
     }
 
-    private static string SerializeTargetValue(object value)
-    {
-        if (value is null)
-            return null;
-
-        if (value is string s)
-            return s;
-
-        if (value is JToken token)
-            return token.ToString(Formatting.None);
-
-        if (value is JsonElement element)
-        {
-            if (element.ValueKind is JsonValueKind.Null or JsonValueKind.Undefined)
-                return null;
-
-            return element.GetRawText();
-        }
-
-        return JsonConvert.SerializeObject(value, Formatting.None);
-    }
+    public static string SerializeTargetNew(AuditEvent auditEvent) =>
+        auditEvent is ExchangeAuditEvent exchangeAuditEvent
+            ? AuditTargetJson.SerializeTargetValue(exchangeAuditEvent.Target?.New)
+            : null;
 
     private static DateTimeOffset ToOffset(DateTime value)
     {

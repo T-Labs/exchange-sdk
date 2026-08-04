@@ -38,7 +38,7 @@ public class ExchangeAuditProvider : AuditDataProvider
     private void Enqueue(AuditEvent auditEvent)
     {
         var eventType = auditEvent.EventType;
-        var payload = JsonConvert.SerializeObject(auditEvent);
+        var payload = AuditTargetJson.SerializeAuditEvent(auditEvent);
         if (_queue.TryEnqueue(eventType, payload))
             return;
 
@@ -51,7 +51,7 @@ public class ExchangeAuditProvider : AuditDataProvider
     private async Task EnqueueAsync(AuditEvent auditEvent, CancellationToken cancellationToken)
     {
         var eventType = auditEvent.EventType;
-        var payload = JsonConvert.SerializeObject(auditEvent);
+        var payload = AuditTargetJson.SerializeAuditEvent(auditEvent);
         if (await _queue.EnqueueAsync(eventType, payload, cancellationToken))
             return;
 
