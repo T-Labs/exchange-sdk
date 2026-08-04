@@ -7,7 +7,7 @@ using Microsoft.Extensions.Logging;
 
 namespace TLabs.ExchangeSdk.Audit;
 
-internal sealed class AuditInjectBackgroundService : BackgroundService
+public sealed class AuditInjectBackgroundService : BackgroundService
 {
     private const int MaxInjectAttempts = 3;
     private readonly AuditInjectQueue _queue;
