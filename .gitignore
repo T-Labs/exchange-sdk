@@ -282,3 +282,4 @@ __pycache__/
 MvcClient/
 
 scripts/custom_runner\.sh
+.omo/
