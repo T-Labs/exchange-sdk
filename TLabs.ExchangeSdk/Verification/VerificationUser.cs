@@ -61,6 +61,8 @@ namespace TLabs.ExchangeSdk.Verification
         public string SumsubReviewAnswer { get; set; }
 
         public string SumsubLastCorrelationId { get; set; }
+
+        public VerificationDataSource DataSource { get; set; }
     }
 
     public enum StatusVerificationUser
