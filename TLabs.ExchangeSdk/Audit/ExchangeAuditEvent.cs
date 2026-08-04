@@ -28,6 +28,8 @@ public class ExchangeAuditEvent : AuditEvent
         if (value is null)
             return Array.Empty<string>();
 
+        value = AuditTargetJson.NormalizeTargetValue(value);
+
         var valueType = value.GetType();
         if (valueType.IsValueType && valueType.FullName?.Contains("ValueTuple", StringComparison.Ordinal) == true)
         {
