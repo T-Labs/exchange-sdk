@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Flurl.Http;
@@ -7,137 +6,142 @@ using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using TLabs.DotnetHelpers;
 
-namespace TLabs.ExchangeSdk.Audit
+namespace TLabs.ExchangeSdk.Audit;
+
+public class ClientAudit : IClientAudit
 {
-    public class ClientAudit : IClientAudit
+    private const string EventsBase = "audit/events";
+    private const int InjectTimeoutSeconds = 5;
+    private const int ReadTimeoutSeconds = 20;
+    private readonly ILogger _logger;
+
+    public ClientAudit(ILogger<ClientAudit> logger)
     {
-        private const string EventsBase = "audit/events";
-        private const int InjectTimeoutSeconds = 5;
-        private const int ReadTimeoutSeconds = 20;
-        private readonly ILogger _logger;
+        _logger = logger;
+    }
 
-        public ClientAudit(ILogger<ClientAudit> logger)
+    public async Task<string> InjectAsync(
+        string eventType,
+        object auditEvent,
+        CancellationToken cancellationToken = default)
+    {
+        var payload = auditEvent is string json
+            ? JsonConvert.DeserializeObject(json) ?? json
+            : auditEvent;
+
+        try
         {
-            _logger = logger;
-        }
+            var response = await $"{EventsBase}/{eventType}".InternalApi()
+                .WithTimeout(InjectTimeoutSeconds)
+                .AllowAnyHttpStatus()
+                .PostJsonAsync(payload, cancellationToken: cancellationToken);
 
-        public async Task<string> InjectAsync(
-            string eventType,
-            object auditEvent,
-            CancellationToken cancellationToken = default)
-        {
-            var payload = auditEvent is string json
-                ? json
-                : JsonConvert.SerializeObject(auditEvent);
-
-            try
+            if (!response.ResponseMessage.IsSuccessStatusCode)
             {
-                var response = await $"{EventsBase}/{eventType}".InternalApi()
-                    .WithTimeout(InjectTimeoutSeconds)
-                    .AllowAnyHttpStatus()
-                    .PostJsonAsync(payload, cancellationToken);
-
-                if (!response.ResponseMessage.IsSuccessStatusCode)
-                {
-                    _logger.LogWarning(
-                        "Audit inject failed for {EventType}: HTTP {StatusCode}",
-                        eventType,
-                        (int)response.ResponseMessage.StatusCode);
-                    return string.Empty;
-                }
-
-                return await response.GetStringAsync();
-            }
-            catch (Exception ex)
-            {
-                _logger.LogWarning(ex, "Audit inject failed for {EventType}", eventType);
+                _logger.LogWarning(
+                    "Audit inject failed for {EventType}: HTTP {StatusCode}",
+                    eventType,
+                    (int)response.ResponseMessage.StatusCode);
                 return string.Empty;
             }
+
+            return await response.GetStringAsync();
         }
-
-        public async Task<AuditEventsPageDto> GetAllAsync(
-            AuditQueryOptions filter = null,
-            CancellationToken cancellationToken = default)
+        catch (Exception ex)
         {
-            try
-            {
-                var response = await EventsBase.InternalApi()
-                    .WithTimeout(ReadTimeoutSeconds)
-                    .AllowAnyHttpStatus()
-                    .SetAuditQueryOptions(filter)
-                    .GetAsync(cancellationToken: cancellationToken);
-
-                if (!response.ResponseMessage.IsSuccessStatusCode)
-                {
-                    _logger.LogWarning(
-                        "Audit get-all failed: HTTP {StatusCode}",
-                        (int)response.ResponseMessage.StatusCode);
-                    return new AuditEventsPageDto();
-                }
-
-                return JsonConvert.DeserializeObject<AuditEventsPageDto>(await response.GetStringAsync())
-                    ?? new AuditEventsPageDto();
-            }
-            catch (Exception ex)
-            {
-                _logger.LogWarning(ex, "Audit get-all failed");
-                return new AuditEventsPageDto();
-            }
-        }
-
-        public async Task<List<AuditEventDto>> GetByUserIdAsync(
-            string userId,
-            AuditQueryOptions filter = null,
-            CancellationToken cancellationToken = default)
-        {
-            try
-            {
-                var response = await $"{EventsBase}/by-user/{userId}".InternalApi()
-                    .WithTimeout(ReadTimeoutSeconds)
-                    .AllowAnyHttpStatus()
-                    .SetAuditQueryOptions(filter)
-                    .GetAsync(cancellationToken: cancellationToken);
-
-                if (!response.ResponseMessage.IsSuccessStatusCode)
-                {
-                    _logger.LogWarning(
-                        "Audit get-by-user failed for {UserId}: HTTP {StatusCode}",
-                        userId,
-                        (int)response.ResponseMessage.StatusCode);
-                    return new List<AuditEventDto>();
-                }
-
-                var page = JsonConvert.DeserializeObject<AuditEventsPageDto>(await response.GetStringAsync())
-                    ?? new AuditEventsPageDto();
-                return page.Items ?? new List<AuditEventDto>();
-            }
-            catch (Exception ex)
-            {
-                _logger.LogWarning(ex, "Audit get-by-user failed for {UserId}", userId);
-                return new List<AuditEventDto>();
-            }
+            _logger.LogWarning(ex, "Audit inject failed for {EventType}", eventType);
+            return string.Empty;
         }
     }
 
-    internal static class ClientAuditExtensions
+    public async Task<AuditEventsPageDto> GetAllAsync(
+        AuditQueryOptions filter = null,
+        CancellationToken cancellationToken = default)
     {
-        public static IFlurlRequest SetAuditQueryOptions(this IFlurlRequest request, AuditQueryOptions filter)
+        try
         {
-            if (filter is null)
-                return request;
+            var response = await EventsBase.InternalApi()
+                .WithTimeout(ReadTimeoutSeconds)
+                .AllowAnyHttpStatus()
+                .SetAuditQueryOptions(filter)
+                .GetAsync(cancellationToken: cancellationToken);
 
-            if (filter.Sorts != null)
-                request = request.SetQueryParam(nameof(filter.Sorts), filter.Sorts);
-            if (filter.Filters != null)
-                request = request.SetQueryParam(nameof(filter.Filters), filter.Filters);
-            if (!string.IsNullOrWhiteSpace(filter.UserId))
-                request = request.SetQueryParam("userId", filter.UserId.Trim());
-            if (filter.Page.HasValue)
-                request = request.SetQueryParam(nameof(filter.Page), filter.Page.Value);
-            if (filter.PageSize.HasValue)
-                request = request.SetQueryParam(nameof(filter.PageSize), filter.PageSize.Value);
+            if (!response.ResponseMessage.IsSuccessStatusCode)
+            {
+                var statusCode = (int)response.ResponseMessage.StatusCode;
+                _logger.LogWarning("Audit get-all failed: HTTP {StatusCode}", statusCode);
+                return FailedPage($"Audit service returned HTTP {statusCode}.");
+            }
 
-            return request;
+            return JsonConvert.DeserializeObject<AuditEventsPageDto>(await response.GetStringAsync())
+                ?? FailedPage("Audit service returned an empty response.");
         }
+        catch (Exception ex)
+        {
+            _logger.LogWarning(ex, "Audit get-all failed");
+            return FailedPage("Failed to load audit events from the audit service.");
+        }
+    }
+
+    public async Task<AuditEventsPageDto> GetByUserIdAsync(
+        string userId,
+        AuditQueryOptions filter = null,
+        CancellationToken cancellationToken = default)
+    {
+        try
+        {
+            var response = await $"{EventsBase}/by-user/{userId}".InternalApi()
+                .WithTimeout(ReadTimeoutSeconds)
+                .AllowAnyHttpStatus()
+                .SetAuditQueryOptions(filter)
+                .GetAsync(cancellationToken: cancellationToken);
+
+            if (!response.ResponseMessage.IsSuccessStatusCode)
+            {
+                var statusCode = (int)response.ResponseMessage.StatusCode;
+                _logger.LogWarning(
+                    "Audit get-by-user failed for {UserId}: HTTP {StatusCode}",
+                    userId,
+                    statusCode);
+                return FailedPage($"Audit service returned HTTP {statusCode}.");
+            }
+
+            return JsonConvert.DeserializeObject<AuditEventsPageDto>(await response.GetStringAsync())
+                ?? FailedPage("Audit service returned an empty response.");
+        }
+        catch (Exception ex)
+        {
+            _logger.LogWarning(ex, "Audit get-by-user failed for {UserId}", userId);
+            return FailedPage("Failed to load audit events from the audit service.");
+        }
+    }
+
+    private static AuditEventsPageDto FailedPage(string message) =>
+        new()
+        {
+            Success = false,
+            ErrorMessage = message,
+        };
+}
+
+internal static class ClientAuditExtensions
+{
+    public static IFlurlRequest SetAuditQueryOptions(this IFlurlRequest request, AuditQueryOptions filter)
+    {
+        if (filter is null)
+            return request;
+
+        if (filter.Sorts.HasValue())
+            request = request.SetQueryParam(nameof(filter.Sorts), filter.Sorts);
+        if (filter.Filters.HasValue())
+            request = request.SetQueryParam(nameof(filter.Filters), filter.Filters);
+        if (filter.UserId.HasValue())
+            request = request.SetQueryParam("userId", filter.UserId.Trim());
+        if (filter.Page.HasValue)
+            request = request.SetQueryParam(nameof(filter.Page), filter.Page.Value);
+        if (filter.PageSize.HasValue)
+            request = request.SetQueryParam(nameof(filter.PageSize), filter.PageSize.Value);
+
+        return request;
     }
 }

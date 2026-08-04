@@ -1,11 +1,10 @@
-namespace TLabs.ExchangeSdk.Audit
+namespace TLabs.ExchangeSdk.Audit;
+
+public class AuditQueryOptions
 {
-    public class AuditQueryOptions
-    {
-        public string Filters { get; set; }
-        public string Sorts { get; set; }
-        public string UserId { get; set; }
-        public int? Page { get; set; }
-        public int? PageSize { get; set; }
-    }
+    public string Filters { get; set; }
+    public string Sorts { get; set; }
+    public string UserId { get; set; }
+    public int? Page { get; set; }
+    public int? PageSize { get; set; }
 }
