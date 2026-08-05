@@ -7,5 +7,5 @@ public class ActivatePhysicalPaymentCardDto
     public string Pin { get; set; }
 
     public override string ToString() =>
-        $"{nameof(ActivatePhysicalPaymentCardDto)}(userId:{UserId}, printedCardNumber:***)";
+        $"{nameof(ActivatePhysicalPaymentCardDto)}(userId:{UserId}, printedCardNumber:***, pin:***)";
 }
