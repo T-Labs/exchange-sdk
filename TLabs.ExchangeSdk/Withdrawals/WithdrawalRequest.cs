@@ -1,6 +1,4 @@
-using System;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
 
 namespace TLabs.ExchangeSdk.Withdrawals
 {
@@ -44,7 +42,8 @@ namespace TLabs.ExchangeSdk.Withdrawals
         /// <summary>Only used in cash withdrawals</summary>
         public string PublicId { get; set; } = null;
 
+        // OTP fields (EmailAuthCode, AuthCode) must never appear in ToString — they are logged via {request}.
         public override string ToString() => $"{nameof(WithdrawalRequest)}({UserId}, {Amount} {CurrencyCode}, " +
-            $"to {Address}, emailAuthCode:{EmailAuthCode}, gAuth:{AuthCode} {(BankCard == null ? "" : $", {BankCard}")})";
+            $"to {Address}{(BankCard == null ? "" : $", {BankCard}")})";
     }
 }
