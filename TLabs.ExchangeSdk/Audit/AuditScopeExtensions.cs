@@ -10,8 +10,14 @@ public static class AuditScopeExtensions
 {
     public static AuditScope WithUserID(this AuditScope scope, [CanBeNull] string userID)
     {
-        if (userID is null)
+        if (scope is null || userID is null)
             return scope;
+        if (scope.Event is ExchangeAuditEvent auditEvent)
+        {
+            auditEvent.UserId = userID;
+            return scope;
+        }
+
         scope.SetCustomField(nameof(userID), userID, true);
         return scope;
     }
