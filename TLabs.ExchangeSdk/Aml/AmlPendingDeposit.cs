@@ -44,6 +44,9 @@ namespace TLabs.ExchangeSdk.Aml
         /// <summary>Raw provider response for the admin audit trail.</summary>
         public string ScreeningRaw { get; set; }
 
+        /// <summary>MistTrack risk report URL when the provider returned one.</summary>
+        public string RiskReportUrl { get; set; }
+
         public DateTimeOffset ScreenedAt { get; set; }
 
         /// <summary>When the deposit was received: the on-chain deposit time for backfill, or when it reached AML for live deposits.
