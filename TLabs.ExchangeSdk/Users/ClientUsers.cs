@@ -2,15 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
-using System.Security.Claims;
 using System.Threading.Tasks;
 using Flurl.Http;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
 using TLabs.DotnetHelpers;
-using TLabs.ExchangeSdk.Farming;
 
 namespace TLabs.ExchangeSdk.Users
 {
@@ -73,6 +68,13 @@ namespace TLabs.ExchangeSdk.Users
                 .SetQueryParam(nameof(minRegisterDate), minRegisterDate?.ToString("o"));
             var appUsers = await url.PostJsonAsync<List<ApplicationUser>>(userIds);
             return appUsers;
+        }
+
+        public async Task<List<ApplicationUser>> GetUsersExcludingIds(List<string> excludedUserIds = null)
+        {
+            return await "userprofiles/users/excluding-ids".InternalApi()
+                .WithTimeout(TimeSpan.FromMinutes(10))
+                .PostJsonAsync<List<ApplicationUser>>(excludedUserIds ?? new List<string>());
         }
 
         public async Task<List<ApplicationUser>> GetUsersByEmail(string email)
