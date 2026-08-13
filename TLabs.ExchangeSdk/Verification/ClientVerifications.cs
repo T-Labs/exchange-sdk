@@ -56,6 +56,27 @@ namespace TLabs.ExchangeSdk.Verification
             return result;
         }
 
+        public async Task<List<string>> GetVerificationUserIds()
+        {
+            return await "verification/verifications/ids".InternalApi()
+                .WithTimeout(TimeSpan.FromMinutes(10))
+                .GetJsonAsync<List<string>>();
+        }
+
+        public async Task<List<string>> GetLegacyVerifiedOutsideSumsubUserIds()
+        {
+            return await "verification/verifications/legacy-outside-sumsub".InternalApi()
+                .WithTimeout(TimeSpan.FromMinutes(10))
+                .GetJsonAsync<List<string>>();
+        }
+
+        public async Task<List<string>> GetNeverVerifiedUserIds()
+        {
+            return await "verification/verifications/never-verified-user-ids".InternalApi()
+                .WithTimeout(TimeSpan.FromMinutes(10))
+                .GetJsonAsync<List<string>>();
+        }
+
         public async Task<bool> IsVerified(string userId)
         {
             var result = await $"verification/verifications/{userId}/verified".InternalApi()

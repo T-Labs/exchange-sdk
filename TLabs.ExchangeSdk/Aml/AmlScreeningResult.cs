@@ -16,6 +16,9 @@ namespace TLabs.ExchangeSdk.Aml
         /// <summary>Raw provider response kept for the admin audit trail.</summary>
         public string RawResponse { get; set; }
 
+        /// <summary>MistTrack risk report URL when the provider returned one.</summary>
+        public string RiskReportUrl { get; set; }
+
         /// <summary>True when the screening could not be performed (no key, network error, unsupported network).</summary>
         public bool IsInconclusive { get; set; }
 

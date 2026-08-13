@@ -15,15 +15,7 @@ namespace TLabs.ExchangeSdk.Staking
 
         public decimal Amount { get; set; }
 
-        /// <summary>
-        /// Idempotency key: caller keeps it unchanged while retrying the same operation
-        /// (lost response, timeout) and generates a new one for a different operation.
-        /// Brokerage uses it as the ledger ActionId and rejects a repeated request.
-        /// </summary>
-        public Guid RequestId { get; set; }
-
         public override string ToString() => $"{nameof(CreateUserStakeByAdminDto)}({Amount}, " +
-            $"admin:{AdminUserId} -> user:{UserId}, settingId:{StakingSettingId}, " +
-            $"requestId:{RequestId})";
+            $"admin:{AdminUserId} -> user:{UserId}, settingId:{StakingSettingId})";
     }
 }
