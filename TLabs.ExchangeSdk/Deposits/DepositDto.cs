@@ -27,6 +27,9 @@ namespace TLabs.ExchangeSdk.Deposits
         /// <summary>Blockchain address the funds came from. Filled by crypto adapters, used for AML screening and returns.</summary>
         public string FromAddress { get; set; }
 
+        /// <summary>Deposit address assigned to the client that received the funds.</summary>
+        public string DepositAddress { get; set; }
+
         /// <summary>Only for Staking, other types always notify</summary>
         public bool NotificationNeeded { get; set; }
 

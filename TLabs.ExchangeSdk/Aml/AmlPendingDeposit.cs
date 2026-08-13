@@ -31,6 +31,9 @@ namespace TLabs.ExchangeSdk.Aml
         /// <summary>Sender (source) blockchain address. Default return destination.</summary>
         public string FromAddress { get; set; }
 
+        /// <summary>Client deposit address that received the funds and must be compromised after a successful refund.</summary>
+        public string DepositAddress { get; set; }
+
         #endregion Original deposit data
 
         #region AML screening result
@@ -64,8 +67,23 @@ namespace TLabs.ExchangeSdk.Aml
         /// <summary>Percent withheld on return (e.g. 10 = keep 10%, send back 90%). Null until returned.</summary>
         public decimal? HoldPercent { get; set; }
 
+        /// <summary>Manual destination address chosen by the admin for the refund.</summary>
+        public string ReturnAddress { get; set; }
+
+        /// <summary>Actual amount sent back to the client.</summary>
+        public decimal? ReturnAmount { get; set; }
+
+        /// <summary>When the admin launched the refund workflow.</summary>
+        public DateTimeOffset? ReturnStartedAt { get; set; }
+
+        /// <summary>When the refund finished successfully on our side.</summary>
+        public DateTimeOffset? ReturnCompletedAt { get; set; }
+
         /// <summary>Blockchain tx hash of the return send, when returned.</summary>
         public string ReturnTxId { get; set; }
+
+        /// <summary>Error of the refund workflow, including on-chain send or post-send address handling failures.</summary>
+        public string ReturnError { get; set; }
 
         public string Comment { get; set; }
 

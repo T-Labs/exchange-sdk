@@ -38,6 +38,11 @@ namespace TLabs.ExchangeSdk.CryptoAdapters
         /// </summary>
         public string SourceTxId { get; set; }
 
+        /// <summary>
+        /// For AML deposit returns the network fee must be taken from a dedicated fee source, not from the main hot wallet.
+        /// </summary>
+        public bool UseDedicatedFeeWallet { get; set; }
+
         /// <summary>true if it's admin withdrawal to cold wallet</summary>
         public bool IsToColdWallet { get; set; }
 
