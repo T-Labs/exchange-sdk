@@ -50,7 +50,11 @@ public class AuditScopeLight
             return null;
 
         var resolvedType = string.IsNullOrWhiteSpace(eventType)
-            ? ResolveEventType(callerName, callerFilePath, trackDepth)
+        var resolvedType = !string.IsNullOrWhiteSpace(eventType)
+            ? eventType
+            : trackDepth == 1
+                ? ResolveEventType(callerName, callerFilePath, trackDepth)
+                : ResolveEventType(callerName: null, callerFilePath: null, trackDepth);
             : eventType;
         var scope = AuditScope.Create(new AuditScopeOptions
         {
