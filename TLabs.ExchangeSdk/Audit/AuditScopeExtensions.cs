@@ -89,7 +89,17 @@ public static class AuditScopeExtensions
         if (ctx is null)
             return null;
 
+        var forwarded = FirstForwardedIp(ctx.Request.Headers, "X-Forwarded-For")
+            ?? FirstForwardedIp(ctx.Request.Headers, "X-Real-IP");
+        if (forwarded is not null)
+            return forwarded;
+
         var ip = ctx.Connection.RemoteIpAddress;
+        if (ip is null)
+            return null;
+        if (ip.IsIPv4MappedToIPv6)
+            ip = ip.MapToIPv4();
+        return ip.ToString();
         if (ip is not null)
         {
             if (ip.IsIPv4MappedToIPv6)
