@@ -75,6 +75,13 @@ namespace TLabs.ExchangeSdk.CryptoAdapters
             return result;
         }
 
+        public virtual async Task<QueryResult> MarkAddressAsCompromised(string address, string adapterCode)
+        {
+            return await $"{adapterCode}/address/{address}/compromise".InternalApi()
+                .PostAsync()
+                .GetQueryResult();
+        }
+
         public async Task<decimal> GetDepositMinAmount(string currencyCode, string adapterCode)
         {
             if (adapterCode == null)
