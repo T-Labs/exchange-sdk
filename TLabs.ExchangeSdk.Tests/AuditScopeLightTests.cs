@@ -68,6 +68,19 @@ namespace TLabs.ExchangeSdk.Tests
         }
 
         [Test]
+        public void WithHttpContext_PrefersXForwardedFor_WhenRemoteIpPresent()
+        {
+            var ctx = new DefaultHttpContext();
+            ctx.Connection.RemoteIpAddress = IPAddress.Parse("10.0.0.1");
+            ctx.Request.Headers["X-Forwarded-For"] = "189.74.123.236, 10.0.0.1";
+
+            using var scope = AuditScopeLight.Track(ctx, "deposits:admin-deposit", () => new { Amount = 1m });
+            var auditEvent = (ExchangeAuditEvent)scope.Event;
+
+            Assert.AreEqual("189.74.123.236", auditEvent.IP);
+        }
+
+        [Test]
         public void WithUserIP_SetsExchangeAuditEventIp()
         {
             using var scope = AuditScopeLight.Track(null, "staking:create-stake-by-admin", () => new { Amount = 2m })

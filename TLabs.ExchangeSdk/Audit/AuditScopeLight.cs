@@ -49,13 +49,11 @@ public class AuditScopeLight
         if (!IsAuditActive)
             return null;
 
-        var resolvedType = string.IsNullOrWhiteSpace(eventType)
         var resolvedType = !string.IsNullOrWhiteSpace(eventType)
             ? eventType
             : trackDepth == 1
                 ? ResolveEventType(callerName, callerFilePath, trackDepth)
                 : ResolveEventType(callerName: null, callerFilePath: null, trackDepth);
-            : eventType;
         var scope = AuditScope.Create(new AuditScopeOptions
         {
             EventType = resolvedType,
@@ -75,8 +73,6 @@ public class AuditScopeLight
             var className = Path.GetFileNameWithoutExtension(callerFilePath);
             if (className.EndsWith(".razor", StringComparison.OrdinalIgnoreCase))
                 className = className[..^".razor".Length];
-            if (!string.IsNullOrWhiteSpace(className))
-                return MakeEventType(callerName, className);
             if (!string.IsNullOrWhiteSpace(className))
                 return MakeEventType(callerName, className);
         }

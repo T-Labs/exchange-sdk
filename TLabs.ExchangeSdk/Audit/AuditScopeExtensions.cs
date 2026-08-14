@@ -100,15 +100,6 @@ public static class AuditScopeExtensions
         if (ip.IsIPv4MappedToIPv6)
             ip = ip.MapToIPv4();
         return ip.ToString();
-        if (ip is not null)
-        {
-            if (ip.IsIPv4MappedToIPv6)
-                ip = ip.MapToIPv4();
-            return ip.ToString();
-        }
-
-        return FirstForwardedIp(ctx.Request.Headers, "X-Forwarded-For")
-            ?? FirstForwardedIp(ctx.Request.Headers, "X-Real-IP");
     }
 
     public static string GetUserAgent([CanBeNull] HttpContext ctx)
