@@ -73,6 +73,10 @@ public class AuditScopeLight
         if (!string.IsNullOrWhiteSpace(callerName) && !string.IsNullOrWhiteSpace(callerFilePath))
         {
             var className = Path.GetFileNameWithoutExtension(callerFilePath);
+            if (className.EndsWith(".razor", StringComparison.OrdinalIgnoreCase))
+                className = className[..^".razor".Length];
+            if (!string.IsNullOrWhiteSpace(className))
+                return MakeEventType(callerName, className);
             if (!string.IsNullOrWhiteSpace(className))
                 return MakeEventType(callerName, className);
         }
