@@ -85,21 +85,32 @@ public class AuditScopeLight
 
     internal static StackFrame WalkFrames(StackTrace stackTrace, int depth = 1)
     {
-        if (depth >= stackTrace.FrameCount)
+        if (depth < 1)
             throw new InvalidOperationException();
 
-        var frame = stackTrace.GetFrame(depth);
-        var method = frame.GetMethod();
-        var declaringType = method.DeclaringType;
-        if (declaringType is null)
-            return WalkFrames(stackTrace, ++depth);
-        if (IsSkippedInfrastructure(declaringType))
-            return WalkFrames(stackTrace, ++depth);
-        if (string.Equals(method.Name, "MoveNext", StringComparison.OrdinalIgnoreCase)
-            && TryUnwrapAsyncStateMachine(declaringType) is null)
-            return WalkFrames(stackTrace, ++depth);
+        var found = 0;
+        for (var i = 0; i < stackTrace.FrameCount; i++)
+        {
+            var frame = stackTrace.GetFrame(i);
+            var method = frame?.GetMethod();
+            if (method is null)
+                continue;
 
-        return frame;
+            var declaringType = method.DeclaringType;
+            if (declaringType is null)
+                continue;
+            if (IsSkippedInfrastructure(declaringType))
+                continue;
+            if (string.Equals(method.Name, "MoveNext", StringComparison.OrdinalIgnoreCase)
+                && TryUnwrapAsyncStateMachine(declaringType) is null)
+                continue;
+
+            found++;
+            if (found == depth)
+                return frame;
+        }
+
+        throw new InvalidOperationException();
     }
 
     private static bool IsSkippedInfrastructure(Type declaringType)
@@ -113,7 +124,8 @@ public class AuditScopeLight
             || typeName.Contains("IActionResultExecutor", StringComparison.Ordinal)
             || typeName.Contains("ActionMethodExecutor", StringComparison.Ordinal)
             || typeName.Contains("ControllerActionInvoker", StringComparison.Ordinal)
-            || ns.StartsWith("Microsoft.AspNetCore.Mvc", StringComparison.Ordinal);
+            || ns.StartsWith("Microsoft.AspNetCore.Mvc", StringComparison.Ordinal)
+            || ns.Equals("TLabs.ExchangeSdk.Audit", StringComparison.Ordinal);
     }
 
     internal static (string methodName, Type clazz) Deconstruct(StackFrame frame)

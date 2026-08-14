@@ -68,7 +68,7 @@ namespace TLabs.ExchangeSdk.Tests
         }
 
         [Test]
-        public void WithHttpContext_PrefersXForwardedFor_WhenRemoteIpPresent()
+        public void WithHttpContext_PrefersRemoteIp_WhenXForwardedForPresent()
         {
             var ctx = new DefaultHttpContext();
             ctx.Connection.RemoteIpAddress = IPAddress.Parse("10.0.0.1");
@@ -77,7 +77,17 @@ namespace TLabs.ExchangeSdk.Tests
             using var scope = AuditScopeLight.Track(ctx, "deposits:admin-deposit", () => new { Amount = 1m });
             var auditEvent = (ExchangeAuditEvent)scope.Event;
 
-            Assert.AreEqual("189.74.123.236", auditEvent.IP);
+            Assert.AreEqual("10.0.0.1", auditEvent.IP);
+        }
+
+        [Test]
+        public void Track_DepthTwo_UsesOuterCaller()
+        {
+            var eventType = InnerTrackHelper();
+
+            Assert.That(eventType, Does.Contain("uses:outer:caller"));
+            Assert.That(eventType, Does.Not.Contain("inner:track:helper"));
+            Assert.That(eventType, Does.Not.Contain("audit:scope:light:track"));
         }
 
         [Test]
@@ -98,6 +108,12 @@ namespace TLabs.ExchangeSdk.Tests
         {
             await Task.Yield();
             using var scope = AuditScopeLight.Track(null);
+            return scope.EventType;
+        }
+
+        private string InnerTrackHelper()
+        {
+            using var scope = AuditScopeLight.Track(null, trackDepth: 2);
             return scope.EventType;
         }
     }
