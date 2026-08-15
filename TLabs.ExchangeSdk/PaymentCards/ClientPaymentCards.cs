@@ -108,18 +108,18 @@ public class ClientPaymentCards : IClientPaymentCards
 
     public Task<List<PaymentCardTransferDto>> GetTransfers(string userId, Guid? cardId = null)
     {
-        var req = cardId.HasValue
+        var request = cardId.HasValue
             ? $"{BaseUrl}/{cardId}/transfers".InternalApi().SetQueryParam(nameof(userId), userId)
             : $"{BaseUrl}/transfers".InternalApi().SetQueryParam(nameof(userId), userId);
-        return req.GetJsonAsync<List<PaymentCardTransferDto>>();
+        return request.GetJsonAsync<List<PaymentCardTransferDto>>();
     }
 
     public Task<List<PaymentCardProductDto>> GetProducts(bool? enabled = null)
     {
-        var req = $"{BaseUrl}/products".InternalApi();
+        var request = $"{BaseUrl}/products".InternalApi();
         if (enabled.HasValue)
-            req = req.SetQueryParam(nameof(enabled), enabled.Value);
-        return req.GetJsonAsync<List<PaymentCardProductDto>>();
+            request = request.SetQueryParam(nameof(enabled), enabled.Value);
+        return request.GetJsonAsync<List<PaymentCardProductDto>>();
     }
 
     public Task<List<PaymentCardProductDto>> GetAvailableProducts(string userId) =>
