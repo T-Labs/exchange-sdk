@@ -3,14 +3,15 @@ using TLabs.ExchangeSdk.PaymentCards.Enums;
 
 namespace TLabs.ExchangeSdk.PaymentCards.Dtos;
 
-public class PaymentCardPhysicalOrderDto
+public class PaymentCardAdminDto
 {
     public Guid Id { get; set; }
-    public Guid UserPaymentCardId { get; set; }
     public string UserId { get; set; }
     public int TemplateId { get; set; }
     public Guid? PaymentCardProductId { get; set; }
     public PaymentCardStatus Status { get; set; }
+    public string Type { get; set; }
+    public string CurrencyCode { get; set; }
     public string MaskedPan { get; set; }
     public bool HasPrintedCardNumber { get; set; }
     public bool HasActivationPin { get; set; }

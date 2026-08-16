@@ -1,6 +1,6 @@
 namespace TLabs.ExchangeSdk.PaymentCards.Dtos;
 
-public class UpdatePaymentCardPhysicalOrderDto
+public class UpdatePaymentCardShippingDto
 {
     public bool Cancel { get; set; }
     public string TrackingNumber { get; set; }
