@@ -9,8 +9,6 @@ public class IssuePaymentCardDto
     public string DialCode { get; set; }
     public string PhoneNumber { get; set; }
     public decimal DepositAmount { get; set; } = 0;
-    public string PrintedCardNumber { get; set; }
-    public string Pin { get; set; }
     public string RecipientName { get; set; }
     public string CountryCode { get; set; }
     public string Region { get; set; }

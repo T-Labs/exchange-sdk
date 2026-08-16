@@ -1,4 +1,5 @@
 using System;
+using Newtonsoft.Json;
 
 namespace TLabs.ExchangeSdk.PaymentCards.Dtos;
 
@@ -15,8 +16,13 @@ public class PaymentCardProductDto
     public decimal? ApplyFee { get; set; }
     public decimal? RechargeFee { get; set; }
     public decimal? RefundFee { get; set; }
+    [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
     public decimal? BananatechApplyFee { get; set; }
+
+    [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
     public decimal? BananatechRechargeFee { get; set; }
+
+    [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
     public decimal? BananatechRefundFee { get; set; }
     public decimal? ActivateMinLimit { get; set; }
     public decimal? RechargeMinLimit { get; set; }

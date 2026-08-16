@@ -1,10 +1,8 @@
-using TLabs.ExchangeSdk.PaymentCards.Enums;
-
 namespace TLabs.ExchangeSdk.PaymentCards.Dtos;
 
 public class UpdatePaymentCardPhysicalOrderDto
 {
-    public PaymentCardPhysicalOrderStatus? Status { get; set; }
+    public bool Cancel { get; set; }
     public string TrackingNumber { get; set; }
     public string RecipientName { get; set; }
     public string CountryCode { get; set; }

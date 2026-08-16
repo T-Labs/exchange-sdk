@@ -10,8 +10,7 @@ public class PaymentCardPhysicalOrderDto
     public string UserId { get; set; }
     public int TemplateId { get; set; }
     public Guid? PaymentCardProductId { get; set; }
-    public PaymentCardPhysicalOrderStatus Status { get; set; }
-    public PaymentCardStatus? CardStatus { get; set; }
+    public PaymentCardStatus Status { get; set; }
     public string MaskedPan { get; set; }
     public bool HasPrintedCardNumber { get; set; }
     public bool HasActivationPin { get; set; }
