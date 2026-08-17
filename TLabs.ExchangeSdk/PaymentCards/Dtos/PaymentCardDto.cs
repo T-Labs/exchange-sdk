@@ -19,15 +19,7 @@ public class PaymentCardDto
     public decimal? RechargeMinLimit { get; set; }
     public decimal? RechargeMaxLimit { get; set; }
 
-    public string TrackingNumber { get; set; }
-    public bool CanActivate { get; set; }
-    public string RecipientName { get; set; }
-    public string CountryCode { get; set; }
-    public string Region { get; set; }
-    public string City { get; set; }
-    public string Postcode { get; set; }
-    public string AddressLine { get; set; }
-    public DateTimeOffset? DateShipped { get; set; }
+    public ShippingInfo Shipping { get; set; }
 
     public override string ToString() =>
         $"{nameof(PaymentCardDto)}(id:{Id}, userId:{UserId}, status:{Status}, currency:{CurrencyCode}, template:{TemplateId}, type:{Type})";
