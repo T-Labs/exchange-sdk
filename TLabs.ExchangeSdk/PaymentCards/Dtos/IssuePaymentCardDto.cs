@@ -4,7 +4,6 @@ public class IssuePaymentCardDto
 {
     public string UserId { get; set; }
     public string Email { get; set; }
-    public string CurrencyCode { get; set; }
     public int TemplateId { get; set; }
     public string DialCode { get; set; }
     public string PhoneNumber { get; set; }
@@ -18,5 +17,5 @@ public class IssuePaymentCardDto
     public PaymentCardKycDto Kyc { get; set; }
 
     public override string ToString() =>
-        $"{nameof(IssuePaymentCardDto)}(userId:{UserId}, currency:{CurrencyCode}, email:{Email}, template:{TemplateId}, deposit:{DepositAmount})";
+        $"{nameof(IssuePaymentCardDto)}(userId:{UserId}, email:{Email}, template:{TemplateId}, deposit:{DepositAmount})";
 }
