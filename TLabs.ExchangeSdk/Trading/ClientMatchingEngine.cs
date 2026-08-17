@@ -52,6 +52,15 @@ namespace TLabs.ExchangeSdk.Trading
             return result;
         }
 
+        /// <summary>Цена последней сделки пары в движке; null — сделок ещё не было</summary>
+        public async Task<decimal?> GetLastDealPrice(string currencyPairCode)
+        {
+            var priceStr = await $"trading/order/last-price/{currencyPairCode}".InternalApi()
+                .GetStringAsync();
+            return string.IsNullOrEmpty(priceStr) ? null
+                : decimal.Parse(priceStr, System.Globalization.CultureInfo.InvariantCulture);
+        }
+
         public async Task<string> Healthcheck() =>
             await $"trading/healthcheck".InternalApi().GetStringAsync();
     }

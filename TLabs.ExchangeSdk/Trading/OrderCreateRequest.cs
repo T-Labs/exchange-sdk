@@ -12,6 +12,9 @@ namespace TLabs.ExchangeSdk.Trading
         public string CurrencyPairCode { get; set; }
         public decimal Amount { get; set; }
         public decimal Price { get; set; }
+
+        /// <summary>Цена триггера stop-limit ордера; null — обычный ордер. Только с IsMarket=false</summary>
+        public decimal? StopPrice { get; set; }
         public DateTimeOffset DateCreated { get; set; }
         public ClientType ClientType { get; set; }
         public string UserId { get; set; }
@@ -30,6 +33,7 @@ namespace TLabs.ExchangeSdk.Trading
                 IsMarket = IsMarket,
                 IsBid = IsBid,
                 Price = Price,
+                StopPrice = StopPrice,
                 Amount = Amount,
                 CurrencyPairCode = CurrencyPairCode,
                 DateCreated = DateCreated,

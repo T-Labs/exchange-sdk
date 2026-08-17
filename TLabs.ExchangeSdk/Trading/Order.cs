@@ -19,6 +19,13 @@ namespace TLabs.ExchangeSdk.Trading
 
         public Guid Id { get; set; }
         public bool IsMarket { get; set; }
+
+        /// <summary>Цена триггера stop-limit ордера; null — обычный ордер</summary>
+        public decimal? StopPrice { get; set; }
+
+        /// <summary>Триггер stop-limit сработал, ордер дальше живёт как обычная лимитка</summary>
+        public bool IsTriggered { get; set; }
+
         public ClientType ClientType { get; set; }
 
         [Required]
@@ -53,6 +60,9 @@ namespace TLabs.ExchangeSdk.Trading
         public bool IsLocal => Exchange == Exchange.Local;
 
         public bool IsMarketBid => IsMarket && IsBid;
+
+        /// <summary>Stop-limit до срабатывания триггера: не участвует в матчинге и стакане</summary>
+        public bool IsUntriggeredStop => StopPrice.HasValue && !IsTriggered;
 
         public string Status => (Fulfilled == 0 && !IsCanceled) ? "Created"
             : (Fulfilled == Amount) ? "Completed"
