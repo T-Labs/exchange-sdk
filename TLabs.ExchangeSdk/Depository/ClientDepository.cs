@@ -100,11 +100,16 @@ namespace TLabs.ExchangeSdk.Depository
             return result;
         }
 
+        public virtual Task<PagedList<TransactionDto>> GetTransactionsByAccountIdPaged(Guid accountId,
+            int page = 1, int pageSize = 50) =>
+            GetTransactionsByAccountIdPaged(accountId, page, pageSize, null, default);
+
         public virtual async Task<PagedList<TransactionDto>> GetTransactionsByAccountIdPaged(Guid accountId,
             int page = 1, int pageSize = 50, string search = null, CancellationToken cancellationToken = default)
         {
             var request = "depository/transaction/by-account/paged".InternalApi()
-                .SetQueryParam(nameof(accountId), accountId).SetQueryParam(nameof(page), page)
+                .SetQueryParam(nameof(accountId), accountId)
+                .SetQueryParam(nameof(page), page)
                 .SetQueryParam(nameof(pageSize), pageSize)
                 .SetQueryParam(nameof(search), search);
 

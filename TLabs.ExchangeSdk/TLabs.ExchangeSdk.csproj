@@ -15,9 +15,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-    <PackageReference Include="RabbitMQ.Client" Version="5.1.0" />
-    <PackageReference Include="TLabs.DotnetHelpers" Version="1.0.70" />
     <FrameworkReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Audit.NET" Version="32.2.0" />
     <PackageReference Include="JetBrains.Annotations" Version="2024.3.0" />
