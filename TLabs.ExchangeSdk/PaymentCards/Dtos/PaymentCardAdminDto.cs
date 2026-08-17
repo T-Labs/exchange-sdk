@@ -26,6 +26,7 @@ public class PaymentCardAdminDto
     public string RegisterEmail { get; set; }
     public string RegisterDialCode { get; set; }
     public string RegisterPhoneNumber { get; set; }
+    public bool CanActivate { get; set; }
     public ShippingInfo Shipping { get; set; }
     public string AdminNotes { get; set; }
     public DateTimeOffset DateCreated { get; set; }

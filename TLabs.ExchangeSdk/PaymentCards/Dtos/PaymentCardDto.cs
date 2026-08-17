@@ -19,6 +19,7 @@ public class PaymentCardDto
     public decimal? RechargeMinLimit { get; set; }
     public decimal? RechargeMaxLimit { get; set; }
 
+    public bool CanActivate { get; set; }
     public ShippingInfo Shipping { get; set; }
 
     public override string ToString() =>

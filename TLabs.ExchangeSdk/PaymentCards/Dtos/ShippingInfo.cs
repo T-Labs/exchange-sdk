@@ -5,7 +5,6 @@ namespace TLabs.ExchangeSdk.PaymentCards.Dtos;
 public class ShippingInfo
 {
     public string TrackingNumber { get; set; }
-    public bool CanActivate { get; set; }
     public string RecipientName { get; set; }
     public string CountryCode { get; set; }
     public string Region { get; set; }
