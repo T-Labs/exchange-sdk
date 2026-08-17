@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using Flurl.Http;
 using TLabs.DotnetHelpers;
@@ -100,13 +101,15 @@ namespace TLabs.ExchangeSdk.Depository
         }
 
         public virtual async Task<PagedList<TransactionDto>> GetTransactionsByAccountIdPaged(Guid accountId,
-            int page = 1, int pageSize = 50)
+            int page = 1, int pageSize = 50, string search = null, CancellationToken cancellationToken = default)
         {
             var request = "depository/transaction/by-account/paged".InternalApi()
-                .SetQueryParam(nameof(accountId), accountId).SetQueryParam(nameof(page), page)
-                .SetQueryParam(nameof(pageSize), pageSize);
+                .SetQueryParam(nameof(accountId), accountId)
+                .SetQueryParam(nameof(page), page)
+                .SetQueryParam(nameof(pageSize), pageSize)
+                .SetQueryParam(nameof(search), search);
 
-            return await request.GetJsonAsync<PagedList<TransactionDto>>();
+            return await request.GetJsonAsync<PagedList<TransactionDto>>(cancellationToken);
         }
 
         /// <summary>
@@ -322,4 +325,3 @@ namespace TLabs.ExchangeSdk.Depository
                 .ReceiveJson<CryptoDepositsSummaryDto>();
     }
 }
-
