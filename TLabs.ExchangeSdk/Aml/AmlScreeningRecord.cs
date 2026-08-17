@@ -54,6 +54,9 @@ namespace TLabs.ExchangeSdk.Aml
         /// <summary>Raw provider JSON response (for the audit trail / admin drill-down).</summary>
         public string RawResponse { get; set; }
 
+        /// <summary>MistTrack risk report URL when the provider returned one.</summary>
+        public string RiskReportUrl { get; set; }
+
         /// <summary>True if the screening could not be performed (no key, network error, unsupported coin).</summary>
         public bool IsInconclusive { get; set; }
 

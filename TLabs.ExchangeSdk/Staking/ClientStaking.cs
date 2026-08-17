@@ -38,6 +38,8 @@ namespace TLabs.ExchangeSdk.Staking
 
         Task<QueryResult> AdminCancelUserStake(Guid userStakeId);
 
+        Task<QueryResult<string>> CreateUserStakeByAdmin(CreateUserStakeByAdminDto dto);
+
         Task<StakingStatisticsDto> GetStakingStatistics(IReadOnlyCollection<string> userIds = null);
 
         Task<int> GetStakesCountForPeriod(DateTimeOffset fromDate, DateTimeOffset toDate,
@@ -159,6 +161,16 @@ namespace TLabs.ExchangeSdk.Staking
                 .InternalApi().PostJsonAsync(null).GetQueryResult();
             if (!result.Succeeded)
                 _logger.LogError($"AdminCancelUserStake failed for {userStakeId}: {result.ErrorsString}");
+            return result;
+        }
+
+        /// <summary>Create stake for user, funded by internal transfer from admin's balance</summary>
+        public virtual async Task<QueryResult<string>> CreateUserStakeByAdmin(CreateUserStakeByAdminDto dto)
+        {
+            var result = await $"brokerage/staking/admin/user-stakes/create-by-admin"
+                .InternalApi().PostJsonAsync<string>(dto).GetQueryResult();
+            if (!result.Succeeded)
+                _logger.LogError($"CreateUserStakeByAdmin failed: {result.ErrorsString} for {dto}");
             return result;
         }
 

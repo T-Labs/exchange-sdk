@@ -65,10 +65,15 @@ namespace TLabs.ExchangeSdk.Withdrawals
             return result;
         }
 
-        /// <summary>System-initiated on-chain send back to the depositor's address after an AML hold.</summary>
-        public virtual async Task<AmlReturnResponse> ExecuteAmlReturn(WithdrawalRequest request)
+        /// <summary>
+        /// System-initiated on-chain send back to the depositor's address after an AML hold.
+        /// <paramref name="sourceTxId"/> is the held deposit tx, so the adapter returns those very coins
+        /// instead of whatever the node would pick, see <see cref="CryptoAdapters.WithdrawalAdapterRequest.SourceTxId"/>.
+        /// </summary>
+        public virtual async Task<AmlReturnResponse> ExecuteAmlReturn(WithdrawalRequest request, string sourceTxId = null)
         {
             var result = await $"{baseUrl}/aml-return".InternalApi()
+                .SetQueryParam(nameof(sourceTxId), sourceTxId)
                 .PostJsonAsync(request)
                 .ReceiveJson<AmlReturnResponse>();
             return result;

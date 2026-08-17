@@ -26,6 +26,7 @@ public class PaymentCardProductDto
     public bool? RequiresPhoneOnly { get; set; }
     public bool? NeedsActivation { get; set; }
     public bool? RequiresInitialDeposit { get; set; }
+    public bool InitialDepositRequirementKnown { get; set; }
     public string AllowedPinLengths { get; set; }
 
     public bool Enabled { get; set; }

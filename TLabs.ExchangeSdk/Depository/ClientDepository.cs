@@ -305,5 +305,22 @@ namespace TLabs.ExchangeSdk.Depository
 
             return result;
         }
+
+        // Flurl WithTimeout = 60s (backstop). Admin page CTS = 45s (user-facing budget).
+        public virtual Task<PagedList<CryptoDepositListItemDto>> GetCryptoDeposits(
+            CryptoDepositsFilterDto filter, int page = 1, int pageSize = 25) =>
+            "depository/deposits/crypto/list".InternalApi()
+                .WithTimeout(TimeSpan.FromSeconds(60))
+                .SetQueryParam(nameof(page), page)
+                .SetQueryParam(nameof(pageSize), pageSize)
+                .PostJsonAsync(filter)
+                .ReceiveJson<PagedList<CryptoDepositListItemDto>>();
+
+        public virtual Task<CryptoDepositsSummaryDto> GetCryptoDepositsSummary(CryptoDepositsFilterDto filter) =>
+            "depository/deposits/crypto/summary".InternalApi()
+                .WithTimeout(TimeSpan.FromSeconds(60))
+                .PostJsonAsync(filter)
+                .ReceiveJson<CryptoDepositsSummaryDto>();
     }
 }
+
