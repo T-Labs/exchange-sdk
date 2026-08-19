@@ -41,6 +41,8 @@ public interface IClientPaymentCards
     Task<PaymentCardDto> SetCardStatus(Guid cardId, string userId, SetCardStatusDto dto);
 
     Task<PaymentCardTransactionsResultDto> GetTransactions(Guid cardId, string userId, int skip = 0, int take = 20);
+
+    Task<PaymentCardDto> ActivatePhysical(Guid cardId, ActivatePhysicalPaymentCardDto dto);
 }
 
 public class ClientPaymentCards : IClientPaymentCards
@@ -137,4 +139,9 @@ public class ClientPaymentCards : IClientPaymentCards
             .SetQueryParam(nameof(skip), skip)
             .SetQueryParam(nameof(take), take)
             .GetJsonAsync<PaymentCardTransactionsResultDto>();
+
+    public Task<PaymentCardDto> ActivatePhysical(Guid cardId, ActivatePhysicalPaymentCardDto dto) =>
+        $"{BaseUrl}/{cardId}/activate-physical".InternalApi()
+            .PostJsonAsync(dto)
+            .ReceiveJson<PaymentCardDto>();
 }
