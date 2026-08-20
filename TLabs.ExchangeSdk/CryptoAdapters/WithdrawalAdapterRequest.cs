@@ -34,7 +34,7 @@ namespace TLabs.ExchangeSdk.CryptoAdapters
         /// <summary>
         /// Blockchain tx the coins must be taken from, "hash_vout" in UTXO networks. Used by AML deposit returns
         /// to send back the very coins that were held, instead of whatever the node would pick on its own.
-        /// Ignored by adapters of account-based networks.
+        /// Account-based adapters use it to resolve the held deposit address.
         /// </summary>
         public string SourceTxId { get; set; }
 
