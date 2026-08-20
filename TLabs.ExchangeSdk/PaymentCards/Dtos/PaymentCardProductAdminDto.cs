@@ -1,7 +1,10 @@
+using System;
+
 namespace TLabs.ExchangeSdk.PaymentCards.Dtos;
 
-public class PaymentCardProductDto
+public class PaymentCardProductAdminDto
 {
+    public Guid Id { get; set; }
     public int ExternalTemplateId { get; set; }
     public string Title { get; set; }
     public string Description { get; set; }
@@ -12,6 +15,9 @@ public class PaymentCardProductDto
     public decimal ApplyFee { get; set; }
     public decimal RechargeFee { get; set; }
     public decimal RefundFee { get; set; }
+    public decimal BananatechApplyFee { get; set; }
+    public decimal BananatechRechargeFee { get; set; }
+    public decimal BananatechRefundFee { get; set; }
     public decimal? ActivateMinLimit { get; set; }
     public decimal? RechargeMinLimit { get; set; }
     public decimal? RechargeMaxLimit { get; set; }
@@ -26,7 +32,8 @@ public class PaymentCardProductDto
     public bool InitialDepositRequirementKnown { get; set; }
     public string AllowedPinLengths { get; set; }
     public bool Enabled { get; set; }
+    public DateTimeOffset DateSynced { get; set; }
 
     public override string ToString() =>
-        $"{nameof(PaymentCardProductDto)}({ExternalTemplateId}, {Title}, Enabled:{Enabled})";
+        $"{nameof(PaymentCardProductAdminDto)}({Id}, {ExternalTemplateId}, {Title}, Enabled:{Enabled})";
 }
