@@ -11,6 +11,6 @@ namespace TLabs.ExchangeSdk
         TradingBot = 60, // Creates market orders to build trading chart
         LiquidityBot = 70, // Creates orderbooks
         PassiveLiquidityBot = 80, // Creates orders far from spread
-        GasStation = 90, // Dedicated system wallet that funds gas/fees for deposit-address operations
+        AmlFee = 90, // Manually funded system wallet used only to pay network fees for AML deposit returns
     }
 }
