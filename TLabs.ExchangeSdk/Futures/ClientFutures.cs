@@ -1,3 +1,4 @@
+using System;
 using System.Net;
 using System.Threading.Tasks;
 using Flurl.Http;
@@ -27,6 +28,10 @@ public class ClientFutures
     public Task<IFlurlResponse> GetPriceAndVolume(string query) =>
         Get($"futures/trade/price-and-volume{query}");
 
+    /// <summary>Сделки пользователя. userId обязателен в query</summary>
+    public Task<IFlurlResponse> GetUserTrades(string query) =>
+        Get($"futures/trade/user-internal{query}");
+
     /// <summary>Счета пользователя. ensure=true заводит счёт по умолчанию, если счетов нет</summary>
     public Task<IFlurlResponse> GetUserFuturesAccounts(string userId) =>
         Get($"futures/account/user-futures-accounts/{WebUtility.UrlEncode(userId)}?ensure=true");
@@ -41,6 +46,14 @@ public class ClientFutures
     /// <summary>Перевод фьючерсы→спот. Ключ идемпотентности Stock.Futures читает из заголовка</summary>
     public Task<IFlurlResponse> TransferToSpot(JObject body, string idempotencyKey) =>
         Post("futures/account/internal/transfer-to-spot", body, idempotencyKey);
+
+    /// <summary>Статус перевода: state перечитывается до Completed/Failed. userId обязателен в query</summary>
+    public Task<IFlurlResponse> GetTransferStatus(Guid transferId, string query) =>
+        Get($"futures/account/internal/futures-transfers/{transferId}{query}");
+
+    /// <summary>История переводов между спотом и фьючерсными счетами. userId обязателен в query</summary>
+    public Task<IFlurlResponse> GetTransactionHistory(string query) =>
+        Get($"futures/transaction-history/internal{query}");
 
     public Task<IFlurlResponse> CreateOrder(JObject body) =>
         "futures/order/create-internal".InternalApi().AllowAnyHttpStatus().PostJsonAsync(body);
