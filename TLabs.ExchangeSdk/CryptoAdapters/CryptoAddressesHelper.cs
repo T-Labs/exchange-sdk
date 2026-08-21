@@ -23,11 +23,25 @@ namespace TLabs.ExchangeSdk.CryptoAdapters
 
             // other
             "ton" => new Regex("^[A-Za-z0-9\\-_]{48}$").IsMatch(adapterAddress),
+            "near" => IsValidNearAddress(adapterAddress),
             "del" => new Regex("^dx1[ac-hj-np-z0-9]{38}$").IsMatch(adapterAddress),
             "pzm" => new Regex("^PRIZM-[A-Z2-9]{4}-[A-Z2-9]{4}-[A-Z2-9]{4}-[A-Z2-9]{5}$").IsMatch(adapterAddress),
             "umi" => new Regex("^umi1[ac-np-z0-9]{58}$").IsMatch(adapterAddress),
             "tstc" => true,
             _ => false
         };
+
+        public static bool IsValidNearAddress(string adapterAddress)
+        {
+            if (string.IsNullOrWhiteSpace(adapterAddress))
+                return false;
+            var address = adapterAddress.Trim();
+            if (address.Length < 2 || address.Length > 64)
+                return false;
+            if (new Regex("^[0-9a-f]{64}$").IsMatch(address))
+                return true;
+            return new Regex("^[a-z0-9]([a-z0-9\\-_]*[a-z0-9])?(\\.[a-z0-9]([a-z0-9\\-_]*[a-z0-9])?)*$")
+                .IsMatch(address);
+        }
     }
 }

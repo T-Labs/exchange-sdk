@@ -43,9 +43,10 @@ public class CurrencyExplorer
     static readonly CurrencyExplorer DEL = new CurrencyExplorer("del", "https://explorer.decimalchain.com/transactions/", "https://explorer.decimalchain.com/address/");
     static readonly CurrencyExplorer UMI = new CurrencyExplorer("umi", "https://blockchain.umi.top/transaction/", "https://blockchain.umi.top/address/");
     static readonly CurrencyExplorer TON = new CurrencyExplorer("ton", "https://tonscan.org/tx/", "https://tonscan.org/address/");
+    static readonly CurrencyExplorer NEAR = new CurrencyExplorer("near", "https://nearblocks.io/txns/", "https://nearblocks.io/address/");
 
     public static readonly List<CurrencyExplorer> CurrencyExplorers = new List<CurrencyExplorer>()
-            { BTC, LTC, DASH, DOGE, COLX, SIN, PZM, ETH, BNB, BINI, TRX, DEL, UMI, ORGON, TON };
+            { BTC, LTC, DASH, DOGE, COLX, SIN, PZM, ETH, BNB, BINI, TRX, DEL, UMI, ORGON, TON, NEAR };
 
     public static string GetTxUrl(string adapterCode, string txId)
     {
