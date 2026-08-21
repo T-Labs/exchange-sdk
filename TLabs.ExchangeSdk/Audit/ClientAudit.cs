@@ -45,7 +45,8 @@ public class ClientAudit : IClientAudit
                 return string.Empty;
             }
 
-            return await response.GetStringAsync();
+            var eventId = await response.GetStringAsync();
+            return string.IsNullOrWhiteSpace(eventId) ? "ok" : eventId;
         }
         catch (Exception ex)
         {

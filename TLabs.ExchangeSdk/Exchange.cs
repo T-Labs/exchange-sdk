@@ -8,7 +8,7 @@ namespace TLabs.ExchangeSdk
 {
     public enum Exchange
     {
-        Local = 0, Binance = 1, Okex = 2, Kraken = 3
+        Local = 0, Binance = 1, Okex = 2, Kraken = 3, Bybit = 4
     }
 
     public static class ExchangeHelper

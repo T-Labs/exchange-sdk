@@ -30,6 +30,7 @@ namespace TLabs.ExchangeSdk
             services.AddTransient<Deposits.ClientDeposits>();
             services.AddTransient<ExternalPayments.ClientExternalPayments>();
             services.AddTransient<Exchanges.ClientExchanges>();
+            services.AddTransient<Futures.ClientFutures>();
             services.AddTransient<Helpdesk.ClientHelpdesk>();
             services.AddTransient<LiquidityImport.ClientLiquidityConnectors>();
             services.AddTransient<LiquidityImport.ClientLiquidityMain>();
