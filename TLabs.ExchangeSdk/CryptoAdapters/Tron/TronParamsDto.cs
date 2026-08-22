@@ -10,6 +10,7 @@ namespace TLabs.ExchangeSdk.CryptoAdapters.Tron
         public decimal GlobalBalanceDelegatedToConsolidation { get; set; }
         /// <summary> Admin panel allows to delegate energy to any address</summary>
         public decimal GlobalBalanceDelegatedToExternal { get; set; }
+
         public decimal FrozenTrxPer1Tx { get; set; }
 
         // configurable parameters
