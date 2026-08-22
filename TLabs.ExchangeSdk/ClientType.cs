@@ -10,7 +10,6 @@ namespace TLabs.ExchangeSdk
         CurrencyListingFairLaunchBot = 50, // LiquidityPool (FairLaunch) creates orderbook for new tokens
         TradingBot = 60, // Creates market orders to build trading chart
         LiquidityBot = 70, // Creates orderbooks
-        PassiveLiquidityBot = 80, // Creates orders far from spread
-        AmlFee = 90, // Manually funded system wallet used only to pay network fees for AML deposit returns
+        PassiveLiquidityBot = 80 // Creates orders far from spread
     }
 }

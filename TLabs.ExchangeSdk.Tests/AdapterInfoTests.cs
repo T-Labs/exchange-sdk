@@ -1,22 +1,14 @@
-using NUnit.Framework;
 using Newtonsoft.Json;
+using NUnit.Framework;
 using TLabs.ExchangeSdk.CryptoAdapters;
 
 namespace TLabs.ExchangeSdk.Tests;
 
 [TestFixture]
-public class ClientTypeTests
+public class AdapterInfoTests
 {
     [Test]
-    public void AmlFee_HasStableNameAndValue()
-    {
-        Assert.AreEqual(90, (int)ClientType.AmlFee);
-        Assert.AreEqual("AmlFee", ClientType.AmlFee.ToString());
-        Assert.AreEqual(ClientType.AmlFee, System.Enum.Parse<ClientType>("AmlFee"));
-    }
-
-    [Test]
-    public void AmlFee_AdapterContract_RoundTrips()
+    public void AmlFeeAddress_RoundTrips()
     {
         var adapterInfo = JsonConvert.DeserializeObject<AdapterInfo>(JsonConvert.SerializeObject(new AdapterInfo
         {
