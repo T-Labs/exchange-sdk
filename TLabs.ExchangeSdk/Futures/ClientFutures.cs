@@ -28,6 +28,18 @@ public class ClientFutures
     public Task<IFlurlResponse> GetPriceAndVolume(string query) =>
         Get($"futures/trade/price-and-volume{query}");
 
+    /// <summary>Стакан пары — публичная маркет-дата</summary>
+    public Task<IFlurlResponse> GetOrderBook(string currencyPairCode) =>
+        Get($"futures/order/orderBook/{WebUtility.UrlEncode(currencyPairCode)}");
+
+    /// <summary>Глобальные настройки фьючерсов (плечо, лимиты счетов) — публичная</summary>
+    public Task<IFlurlResponse> GetGlobalSettings() =>
+        Get("futures/settings/global");
+
+    /// <summary>Публичная лента сделок. query проксируется как есть</summary>
+    public Task<IFlurlResponse> GetPublicTrades(string query) =>
+        Get($"futures/trade{query}");
+
     /// <summary>Сделки пользователя. userId обязателен в query</summary>
     public Task<IFlurlResponse> GetUserTrades(string query) =>
         Get($"futures/trade/user-internal{query}");
@@ -60,6 +72,20 @@ public class ClientFutures
 
     public Task<IFlurlResponse> CloseOrder(JObject body) =>
         "futures/order/close-internal".InternalApi().AllowAnyHttpStatus().PutJsonAsync(body);
+
+    /// <summary>Закрыть все позиции и снять все ордера счёта</summary>
+    public Task<IFlurlResponse> CloseAllOrders(JObject body) =>
+        "futures/order/close-all-internal".InternalApi().AllowAnyHttpStatus().PostJsonAsync(body);
+
+    public Task<IFlurlResponse> UpdateStopLoss(JObject body) =>
+        "futures/order/update-stop-loss-internal".InternalApi().AllowAnyHttpStatus().PutJsonAsync(body);
+
+    public Task<IFlurlResponse> UpdateTakeProfit(JObject body) =>
+        "futures/order/update-take-profit-internal".InternalApi().AllowAnyHttpStatus().PutJsonAsync(body);
+
+    /// <summary>Создать фьючерсный счёт. Бэк принимает только USDT</summary>
+    public Task<IFlurlResponse> CreateFuturesAccount(JObject body) =>
+        "futures/account/internal/create-futures-account".InternalApi().AllowAnyHttpStatus().PostJsonAsync(body);
 
     public Task<IFlurlResponse> GetPositions(string query) =>
         Get($"futures/order/positions-internal{query}");
