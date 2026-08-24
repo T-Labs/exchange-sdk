@@ -44,12 +44,19 @@ public class CurrencyExplorer
     static readonly CurrencyExplorer UMI = new CurrencyExplorer("umi", "https://blockchain.umi.top/transaction/", "https://blockchain.umi.top/address/");
     static readonly CurrencyExplorer TON = new CurrencyExplorer("ton", "https://tonscan.org/tx/", "https://tonscan.org/address/");
     static readonly CurrencyExplorer NEAR = new CurrencyExplorer("near", "https://nearblocks.io/txns/", "https://nearblocks.io/address/");
+    static readonly CurrencyExplorer SOL = new CurrencyExplorer("sol", "https://solscan.io/tx/", "https://solscan.io/account/");
 
     public static readonly List<CurrencyExplorer> CurrencyExplorers = new List<CurrencyExplorer>()
-            { BTC, LTC, DASH, DOGE, COLX, SIN, PZM, ETH, BNB, BINI, TRX, DEL, UMI, ORGON, TON, NEAR };
+            { BTC, LTC, DASH, DOGE, COLX, SIN, PZM, ETH, BNB, BINI, TRX, DEL, UMI, ORGON, TON, NEAR, SOL };
 
     public static string GetTxUrl(string adapterCode, string txId)
     {
+        if (adapterCode == "sol" && txId != null)
+        {
+            int colon = txId.LastIndexOf(':');
+            if (colon >= 0)
+                txId = txId.Substring(0, colon);
+        }
         CurrencyExplorer explorer = CurrencyExplorers.FirstOrDefault(c => c.AdapterCode == adapterCode);
         string result = explorer != null ? $"{explorer.TransactionUrl}{txId}" : null;
         return result;
