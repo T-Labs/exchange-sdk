@@ -35,13 +35,12 @@ namespace TLabs.ExchangeSdk.CryptoAdapters
         {
             if (string.IsNullOrWhiteSpace(adapterAddress))
                 return false;
-            var address = adapterAddress.Trim();
-            if (address.Length < 2 || address.Length > 64)
+            if (adapterAddress.Length < 2 || adapterAddress.Length > 64)
                 return false;
-            if (new Regex("^[0-9a-f]{64}$").IsMatch(address))
+            if (new Regex("^[0-9a-f]{64}$").IsMatch(adapterAddress))
                 return true;
-            return new Regex("^[a-z0-9]([a-z0-9\\-_]*[a-z0-9])?(\\.[a-z0-9]([a-z0-9\\-_]*[a-z0-9])?)*$")
-                .IsMatch(address);
+            return new Regex("^(([a-z0-9]+[\\-_])*[a-z0-9]+\\.)*([a-z0-9]+[\\-_])*[a-z0-9]+$")
+                .IsMatch(adapterAddress);
         }
     }
 }
