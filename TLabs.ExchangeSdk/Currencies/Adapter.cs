@@ -35,6 +35,7 @@ namespace TLabs.ExchangeSdk.Currencies
 
         // other
         public static Adapter AdapterTon = new() { Code = "ton", Name = "TON", MainCurrencyCode = "GRAM", };
+        public static Adapter AdapterNear = new() { Code = "near", Name = "NEAR", MainCurrencyCode = "NEAR", };
         public static Adapter AdapterSol = new() { Code = "sol", Name = "Solana", MainCurrencyCode = "SOL", };
         public static Adapter AdapterDel = new() { Code = "del", Name = "Decimal", MainCurrencyCode = "DEL", };
         public static Adapter AdapterPzm = new() { Code = "pzm", Name = "Prizm", MainCurrencyCode = "PZM", };
@@ -44,7 +45,7 @@ namespace TLabs.ExchangeSdk.Currencies
         public static List<Adapter> DefaultAdapters = new()
         {
             AdapterBtc, AdapterDash, AdapterDoge, AdapterLtc,
-            AdapterEth, AdapterBsc, AdapterBini, AdapterTrx, AdapterOrgon, AdapterTon, AdapterSol, AdapterDel, AdapterPzm, AdapterUmi, AdapterAdvcash,
+            AdapterEth, AdapterBsc, AdapterBini, AdapterTrx, AdapterOrgon, AdapterTon, AdapterNear, AdapterSol, AdapterDel, AdapterPzm, AdapterUmi, AdapterAdvcash,
         };
 
         public override string ToString() =>
