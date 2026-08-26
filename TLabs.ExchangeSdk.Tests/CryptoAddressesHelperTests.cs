@@ -26,7 +26,24 @@ namespace TLabs.ExchangeSdk.Tests;
         [Test]
         public void Sol_PubkeyStartingWith1_IsValid()
         {
+            // Solnet PublicKey.IsOnCurve is true for 32 zero bytes (system program).
             Assert.That(CryptoAddressesHelper.IsValidAddress("sol", SystemProgram), Is.True);
+        }
+
+        [Test]
+        public void Sol_TypicalWallets_AreOnCurve()
+        {
+            Assert.That(CryptoAddressesHelper.IsValidAddress("sol", TypicalWalletA), Is.True);
+            Assert.That(CryptoAddressesHelper.IsValidAddress("sol", TypicalWalletB), Is.True);
+        }
+
+        [Test]
+        public void Sol_TypicalWalletA_DevnetUsdcAta_IsInvalid()
+        {
+            // ATA of TypicalWalletA + Circle devnet USDC. TypicalWalletA itself is a wallet, not this string.
+            const string ata = "HwpBSwuyVKJi7d9kqqNexc54MS9i4BEDKDVDLeUVjZm8";
+            Assert.That(ata, Is.Not.EqualTo(TypicalWalletA));
+            Assert.That(CryptoAddressesHelper.IsValidAddress("sol", ata), Is.False);
         }
 
         [TestCase(MainnetUsdc)]
