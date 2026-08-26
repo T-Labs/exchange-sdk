@@ -2,8 +2,8 @@ using NUnit.Framework;
 using TLabs.ExchangeSdk.CryptoAdapters;
 using TLabs.ExchangeSdk.Currencies;
 
-namespace TLabs.ExchangeSdk.Tests
-{
+namespace TLabs.ExchangeSdk.Tests;
+
     public class CryptoAddressesHelperTests
     {
         // 32 zero bytes — Bitcoin/Solana Base58 leading '1' is a 0x00 pad.
@@ -114,5 +114,28 @@ namespace TLabs.ExchangeSdk.Tests
             Assert.That(Adapter.AdapterSol.MainCurrencyCode, Is.EqualTo("SOL"));
             Assert.That(Adapter.DefaultAdapters, Does.Contain(Adapter.AdapterSol));
         }
+
+    [TestCase("0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef")]
+    [TestCase("alice.near")]
+    [TestCase("usdt.tether-token.near")]
+    [TestCase("binibit-usdt.roundarena5463.testnet")]
+    public void IsValidNearAddress_accepts_implicit_and_named(string address)
+        {
+        Assert.That(CryptoAddressesHelper.IsValidNearAddress(address), Is.True);
+        Assert.That(CryptoAddressesHelper.IsValidAddress("near", address), Is.True);
+        }
+
+    [TestCase(" alice.near")]
+    [TestCase("alice.near ")]
+    [TestCase(" alice.near ")]
+    [TestCase("foo--bar.near")]
+    [TestCase("foo__bar.near")]
+    [TestCase("-alice.near")]
+    [TestCase("alice.near.")]
+    [TestCase("A.NEAR")]
+    public void IsValidNearAddress_rejects_whitespace_and_invalid_named_ids(string address)
+        {
+        Assert.That(CryptoAddressesHelper.IsValidNearAddress(address), Is.False);
+        Assert.That(CryptoAddressesHelper.IsValidAddress("near", address), Is.False);
     }
 }

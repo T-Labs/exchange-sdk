@@ -22,4 +22,6 @@ public class PaymentCardKycDataDto
     public string Postcode { get; set; }
     public string AddressLine { get; set; }
     public string FrontImgBase64 { get; set; }
+    public string BackImgBase64 { get; set; }
+    public string HandheldImgBase64 { get; set; }
 }

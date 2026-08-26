@@ -28,6 +28,7 @@ namespace TLabs.ExchangeSdk.CryptoAdapters
 
             // other
             "ton" => new Regex("^[A-Za-z0-9\\-_]{48}$").IsMatch(adapterAddress),
+            "near" => IsValidNearAddress(adapterAddress),
             "sol" => IsValidSolanaAddress(adapterAddress),
             "del" => new Regex("^dx1[ac-hj-np-z0-9]{38}$").IsMatch(adapterAddress),
             "pzm" => new Regex("^PRIZM-[A-Z2-9]{4}-[A-Z2-9]{4}-[A-Z2-9]{4}-[A-Z2-9]{5}$").IsMatch(adapterAddress),
@@ -35,6 +36,18 @@ namespace TLabs.ExchangeSdk.CryptoAdapters
             "tstc" => true,
             _ => false
         };
+
+        public static bool IsValidNearAddress(string adapterAddress)
+        {
+            if (string.IsNullOrWhiteSpace(adapterAddress))
+                return false;
+            if (adapterAddress.Length < 2 || adapterAddress.Length > 64)
+                return false;
+            if (new Regex("^[0-9a-f]{64}$").IsMatch(adapterAddress))
+                return true;
+            return new Regex("^(([a-z0-9]+[\\-_])*[a-z0-9]+\\.)*([a-z0-9]+[\\-_])*[a-z0-9]+$")
+                .IsMatch(adapterAddress);
+        }
 
         /// <summary>
         /// Solana addresses are 32-byte Ed25519 public keys encoded with Bitcoin/Solana Base58
