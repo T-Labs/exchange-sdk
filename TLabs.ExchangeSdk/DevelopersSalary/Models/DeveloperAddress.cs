@@ -1,7 +1,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace TLabs.ExchangeSdk.DevelopersSalary
+namespace TLabs.ExchangeSdk.DevelopersSalary.Models
 {
     /// <summary>External crypto address of a developer for a currency.</summary>
     public class DeveloperAddress

@@ -1,6 +1,6 @@
 using System;
 
-namespace TLabs.ExchangeSdk.DevelopersSalary
+namespace TLabs.ExchangeSdk.DevelopersSalary.Dtos
 {
     public class CreateDeveloperPayoutRequest
     {

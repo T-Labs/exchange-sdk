@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace TLabs.ExchangeSdk.DevelopersSalary
+namespace TLabs.ExchangeSdk.DevelopersSalary.Models
 {
     /// <summary>Developer receiving payouts from the developers salary wallet to external crypto addresses.</summary>
     public class Developer

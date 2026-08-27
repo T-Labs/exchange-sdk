@@ -4,6 +4,10 @@ using System.Threading.Tasks;
 using Flurl.Http;
 using TLabs.DotnetHelpers;
 
+using TLabs.ExchangeSdk.DevelopersSalary.Dtos;
+using TLabs.ExchangeSdk.DevelopersSalary.Enums;
+using TLabs.ExchangeSdk.DevelopersSalary.Models;
+
 namespace TLabs.ExchangeSdk.DevelopersSalary
 {
     /// <summary>Client for developers salary wallet endpoints exposed by stock-withdrawals.</summary>

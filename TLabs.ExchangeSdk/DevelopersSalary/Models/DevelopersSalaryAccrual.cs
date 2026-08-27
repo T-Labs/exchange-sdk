@@ -1,7 +1,9 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace TLabs.ExchangeSdk.DevelopersSalary
+using TLabs.ExchangeSdk.DevelopersSalary.Enums;
+
+namespace TLabs.ExchangeSdk.DevelopersSalary.Models
 {
     /// <summary>
     /// Accrual of a percent of a large user crypto deposit to the developers salary wallet.
@@ -48,10 +50,4 @@ namespace TLabs.ExchangeSdk.DevelopersSalary
             $"user:{UserId}, txId:{DepositTxId})";
     }
 
-    public enum DevelopersSalaryAccrualStatus
-    {
-        Created = 10,
-        Completed = 20,
-        Error = 30,
-    }
 }

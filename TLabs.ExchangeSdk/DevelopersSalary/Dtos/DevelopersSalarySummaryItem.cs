@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace TLabs.ExchangeSdk.DevelopersSalary
+namespace TLabs.ExchangeSdk.DevelopersSalary.Dtos
 {
     /// <summary>Per-currency summary of the developers salary wallet.</summary>
     public class DevelopersSalarySummaryItem

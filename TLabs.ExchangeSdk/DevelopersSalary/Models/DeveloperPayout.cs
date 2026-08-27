@@ -1,7 +1,9 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace TLabs.ExchangeSdk.DevelopersSalary
+using TLabs.ExchangeSdk.DevelopersSalary.Enums;
+
+namespace TLabs.ExchangeSdk.DevelopersSalary.Models
 {
     /// <summary>
     /// On-chain payout from the developers salary wallet to a developer address.
@@ -50,11 +52,4 @@ namespace TLabs.ExchangeSdk.DevelopersSalary
             $"developer:{DeveloperId}, {Address}, txId:{TxId})";
     }
 
-    public enum DeveloperPayoutStatus
-    {
-        Created = 10,
-        Sent = 20,
-        Confirmed = 30,
-        Error = 40,
-    }
 }

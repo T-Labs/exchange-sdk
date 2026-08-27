@@ -1,4 +1,4 @@
-namespace TLabs.ExchangeSdk.DevelopersSalary
+namespace TLabs.ExchangeSdk.DevelopersSalary.Models
 {
     /// <summary>Settings of accruals to the developers salary wallet. Single row, stored in stock-withdrawals.</summary>
     public class DevelopersSalarySettings
