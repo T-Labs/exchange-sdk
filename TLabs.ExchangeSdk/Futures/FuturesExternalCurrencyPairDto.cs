@@ -6,7 +6,7 @@ using System;
 public class FuturesExternalCurrencyPairDto
 {
     public int Id { get; set; }
-    public string Symbol { get; set; }
+    public string Symbol { get; set; } = null!;
     public bool IsActive { get; set; }
     public decimal MinOrderSize { get; set; }
     public int BasePricePrecision { get; set; }

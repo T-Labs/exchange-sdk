@@ -19,5 +19,5 @@ public static class CandleOhlcExtensions
     };
 
     public static List<ResponseOHLC> ToResponseOhlc(this IEnumerable<CandleDto> candles) =>
-        candles.Select(c => c.ToResponseOhlc()).ToList();
+        candles.Select(ToResponseOhlc).ToList();
 }

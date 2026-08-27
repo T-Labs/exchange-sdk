@@ -7,7 +7,7 @@ public class PositionsSummaryDto
 {
     public long FuturesAccountId { get; set; }
     public decimal Balance { get; set; }
-    public string BalanceCurrency { get; set; }
+    public string BalanceCurrency { get; set; } = null!;
     public decimal Equity => Math.Round(Balance + UnrealizedPnl, FuturesCurrencyConst.USDT_DECIMALS);
     public decimal UsedMargin { get; set; }
     public decimal UnrealizedPnl { get; set; }

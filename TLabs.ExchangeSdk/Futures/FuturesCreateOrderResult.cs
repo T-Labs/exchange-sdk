@@ -18,8 +18,8 @@ public class FuturesCreateOrderResult
         Success = isSuccess;
     }
 
-    public string Id { get; set; }
+    public string Id { get; set; } = null!;
     public bool Success { get; set; }
-    public string Message { get; set; }
+    public string Message { get; set; } = null!;
     public string? ClientOrderId { get; set; }
 }

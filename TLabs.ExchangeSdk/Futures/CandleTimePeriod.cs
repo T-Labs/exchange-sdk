@@ -1,5 +1,6 @@
 namespace TLabs.ExchangeSdk.Futures;
 
+// Значения — период в секундах: wire-контракт Stock.Futures
 public enum CandleTimePeriod
 {
     OneMinute = 60,

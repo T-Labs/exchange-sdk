@@ -3,7 +3,7 @@ namespace TLabs.ExchangeSdk.Futures;
 
 public class FuturesAccountCreateRequest
 {
-    public string? UserId { get; set; }
+    public string UserId { get; set; } = null!;
     public string CurrencyCode { get; set; } = null!;
     public int Leverage { get; set; }
     public string Name { get; set; } = null!;

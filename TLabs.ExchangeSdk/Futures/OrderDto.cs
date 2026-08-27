@@ -5,13 +5,13 @@ using System;
 
 public class OrderDto
 {
-    public string Id { get; set; }
+    public string Id { get; set; } = null!;
     public DateTime CreateTimestamp { get; set; }
     public DateTime UpdateTimestamp { get; set; }
     public decimal? Price { get; set; }
     public decimal? AvgClosePrice { get; set; }
     public decimal Amount { get; set; }
-    public string CurrencyPairCode { get; set; }
+    public string CurrencyPairCode { get; set; } = null!;
     public decimal? TakeProfit { get; set; }
     public decimal? StopLoss { get; set; }
 
@@ -31,7 +31,7 @@ public class OrderDto
     public string? FeeAsset { get; set; }
     public decimal AmountInPosition { get; set; }
     public FuturesOrderStatus FuturesOrderStatus { get; set; }
-    public string UserId { get; set; }
+    public string UserId { get; set; } = null!;
     public string? ClientOrderId { get; set; }
     public decimal FundingFee { get; set; }
     public decimal InitialMargin { get; set; }

@@ -8,11 +8,7 @@ using System.Threading.Tasks;
 using Flurl.Http;
 using TLabs.DotnetHelpers;
 
-/// <summary>
-/// Ручки Stock.Futures через гейтвей — все роуты фьючерсов собраны здесь.
-/// Типизированный клиент: успех — DTO, не-2xx — <see cref="FlurlHttpException"/>
-/// (фасад достаёт статус и тело бэка из исключения и отдаёт как есть).
-/// </summary>
+/// <summary>Ручки Stock.Futures через гейтвей — все роуты фьючерсов собраны здесь</summary>
 public class ClientFutures
 {
     public const string IdempotencyKeyHeader = "Idempotency-Key";
@@ -41,12 +37,13 @@ public class ClientFutures
     public Task<GlobalSettingDto> GetGlobalSettings() =>
         "futures/settings/global".InternalApi().GetJsonAsync<GlobalSettingDto>();
 
-    /// <summary>Публичная лента сделок; UserId в запросе обязан быть null — его срезает фасад</summary>
-    public Task<PagedResult<TradeDto>> GetPublicTrades(FuturesTradesRequest request) =>
-        TradesQuery("futures/trade", request).GetJsonAsync<PagedResult<TradeDto>>();
+    /// <summary>Публичная лента сделок; UserId на этот роут не уходит — бэк биндит его и на анонимном роуте</summary>
+    public Task<FuturesPagedResult<TradeDto>> GetPublicTrades(FuturesTradesRequest request) =>
+        TradesQuery("futures/trade", request).RemoveQueryParam(nameof(request.UserId))
+            .GetJsonAsync<FuturesPagedResult<TradeDto>>();
 
-    public Task<PagedResult<TradeDto>> GetUserTrades(FuturesTradesRequest request) =>
-        TradesQuery("futures/trade/user-internal", request).GetJsonAsync<PagedResult<TradeDto>>();
+    public Task<FuturesPagedResult<TradeDto>> GetUserTrades(FuturesTradesRequest request) =>
+        TradesQuery("futures/trade/user-internal", request).GetJsonAsync<FuturesPagedResult<TradeDto>>();
 
     /// <param name="ensure">создать дефолтный счёт при отсутствии; false — только чтение (хабы)</param>
     public Task<List<FuturesAccountDto>> GetUserFuturesAccounts(string userId, bool ensure = true) =>
@@ -74,7 +71,7 @@ public class ClientFutures
             .SetQueryParam("userId", userId)
             .GetJsonAsync<FuturesTransferStatusDto>();
 
-    public Task<PagedResult<TransactionHistoryDto>> GetTransactionHistory(FuturesTransactionHistoryRequest request) =>
+    public Task<FuturesPagedResult<TransactionHistoryDto>> GetTransactionHistory(FuturesTransactionHistoryRequest request) =>
         "futures/transaction-history/internal".InternalApi()
             .SetQueryParam(nameof(request.UserId), request.UserId)
             .SetQueryParam(nameof(request.FuturesAccountId), request.FuturesAccountId)
@@ -83,7 +80,7 @@ public class ClientFutures
             .SetQueryParam(nameof(request.DateFrom), request.DateFrom?.ToString("o"))
             .SetQueryParam(nameof(request.DateTo), request.DateTo?.ToString("o"))
             .SetQueryParam(nameof(request.Type), request.Type)
-            .GetJsonAsync<PagedResult<TransactionHistoryDto>>();
+            .GetJsonAsync<FuturesPagedResult<TransactionHistoryDto>>();
 
     public Task<FuturesCreateOrderResult> CreateOrder(FuturesOrderCreateRequest request) =>
         "futures/order/create-internal".InternalApi()
@@ -106,7 +103,7 @@ public class ClientFutures
         "futures/account/internal/create-futures-account".InternalApi()
             .PostJsonAsync(request).ReceiveJson<FuturesAccountDto>();
 
-    public Task<PagedResult<PositionDto>> GetPositions(FuturesPositionsRequest request) =>
+    public Task<FuturesPagedResult<PositionDto>> GetPositions(FuturesPositionsRequest request) =>
         "futures/order/positions-internal".InternalApi()
             .SetQueryParam(nameof(request.UserId), request.UserId)
             .SetQueryParam(nameof(request.CurrencyPair), request.CurrencyPair)
@@ -116,7 +113,7 @@ public class ClientFutures
             .SetQueryParam(nameof(request.DateTo), request.DateTo?.ToString("o"))
             .SetQueryParam(nameof(request.FuturesAccountId), request.FuturesAccountId)
             .SetQueryParam(nameof(request.IsActive), request.IsActive)
-            .GetJsonAsync<PagedResult<PositionDto>>();
+            .GetJsonAsync<FuturesPagedResult<PositionDto>>();
 
     public Task<PositionsSummaryDto> GetPositionSummary(FuturesPositionSummaryRequest request) =>
         "futures/order/position-summary-internal".InternalApi()
@@ -126,14 +123,14 @@ public class ClientFutures
 
     // ответ internal-ручки десериализуется в базовый OrderDto: служебные поля
     // (isMirror) до фасада не доезжают — выравнивание с публичным контрактом
-    public Task<PagedResult<OrderDto>> GetOrdersHistory(FuturesOrdersHistoryRequest request) =>
+    public Task<FuturesPagedResult<OrderDto>> GetOrdersHistory(FuturesOrdersHistoryRequest request) =>
         "futures/order/orders-history-internal".InternalApi()
-            .PostJsonAsync(request).ReceiveJson<PagedResult<OrderDto>>();
+            .PostJsonAsync(request).ReceiveJson<FuturesPagedResult<OrderDto>>();
 
     /// <summary>Полный internal-ответ с служебными полями (isMirror) — для админки, не для фасада</summary>
-    public Task<PagedResult<OrderInternalDto>> GetOrdersHistoryInternal(FuturesOrdersHistoryRequest request) =>
+    public Task<FuturesPagedResult<OrderInternalDto>> GetOrdersHistoryInternal(FuturesOrdersHistoryRequest request) =>
         "futures/order/orders-history-internal".InternalApi()
-            .PostJsonAsync(request).ReceiveJson<PagedResult<OrderInternalDto>>();
+            .PostJsonAsync(request).ReceiveJson<FuturesPagedResult<OrderInternalDto>>();
 
     private static IFlurlRequest TradesQuery(string url, FuturesTradesRequest request) =>
         url.InternalApi()

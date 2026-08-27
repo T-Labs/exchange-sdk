@@ -19,7 +19,7 @@ public class FuturesOrderCreateRequest
     public decimal? StopPrice { get; set; }
     public decimal Amount { get; set; }
     public string CurrencyPairCode { get; set; } = null!;
-    public string? UserId { get; set; }
+    public string UserId { get; set; } = null!;
     public OrderAmountType OrderAmountType { get; set; } = OrderAmountType.Crypto;
     public long FuturesAccountId { get; set; }
 

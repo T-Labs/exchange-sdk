@@ -11,5 +11,5 @@ public class CurrencyPriceAndVolumeDto
     public decimal? Volume24h { get; set; }
     public decimal? Low24h { get; set; }
     public decimal? High24h { get; set; }
-    public string CurrencyPairCode { get; set; }
+    public string CurrencyPairCode { get; set; } = null!;
 }

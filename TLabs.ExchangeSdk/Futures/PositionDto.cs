@@ -5,12 +5,12 @@ using System;
 
 public class PositionDto
 {
-    public string Id { get; set; }
+    public string Id { get; set; } = null!;
     public DateTime CreateTimestamp { get; set; }
     public DateTime UpdateTimestamp { get; set; }
     public decimal? Price { get; set; }
     public decimal Amount { get; set; }
-    public string CurrencyPairCode { get; set; }
+    public string CurrencyPairCode { get; set; } = null!;
     public decimal? TakeProfit { get; set; }
     public decimal? StopLoss { get; set; }
 
@@ -36,7 +36,7 @@ public class PositionDto
     public FuturesOrderStatus FuturesOrderStatus { get; set; }
     public OrderAmountType OrderAmountType { get; set; }
     public decimal UsdtSize => Price.HasValue ? Amount * Price.Value : 0;
-    public string UserId { get; set; }
+    public string UserId { get; set; } = null!;
     public decimal InitialMargin { get; set; }
     public decimal CurrentMargin { get; set; }
     public decimal UnRealizedPnl { get; set; }

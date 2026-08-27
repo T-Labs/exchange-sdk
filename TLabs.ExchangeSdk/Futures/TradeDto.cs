@@ -11,9 +11,9 @@ public class TradeDto
     public DateTime Timestamp { get; set; }
     public decimal Price { get; set; }
     public decimal Amount { get; set; }
-    public string CurrencyPairCode { get; set; }
+    public string CurrencyPairCode { get; set; } = null!;
     public bool IsLong { get; set; }
-    public string UserId { get; set; }
+    public string UserId { get; set; } = null!;
 
     [JsonIgnore]
     public bool IsFakeDealsBot { get; set; }
@@ -25,23 +25,17 @@ public class TradeDto
 
     public TradeType TradeType { get; set; }
 
-    // public decimal TradeResult { get; set; }
-    //public TradeType TradeType { get; set; }
-    public string OrderId { get; set; }
+    public string OrderId { get; set; } = null!;
     public long FuturesAccountId { get; set; }
     public OrderSide OrderSide { get; set; }
 
-    /// <summary>Leverage of the source order (copied from Order.Leverage at query time).</summary>
+    /// <summary>Плечо исходного ордера на момент запроса</summary>
     public decimal Leverage { get; set; }
 
-    /// <summary>
-    /// Snapshot of the source order's CopyOrder.CopySlaveFuturesAccountId
-    /// stamped at trade-enqueue time so <see cref="Workers.Notifications.DealNotificationWorker"/> doesn't
-    /// race against <c>OrdersCache.RemovePositionOrder</c> on close-side trades.
-    /// </summary>
+    /// <summary>Снимок copy-slave счёта исходного ордера на момент постановки сделки в очередь</summary>
     public long? CopySlaveFuturesAccountId { get; set; }
 
-    /// <summary>Companion to <see cref="CopySlaveFuturesAccountId"/> — the master side of the copy pair.</summary>
+    /// <summary>Мастер-сторона копи-пары, снимается вместе с <see cref="CopySlaveFuturesAccountId"/></summary>
     public long? CopyMasterFuturesAccountId { get; set; }
 
     public TradeDto RemoveUserId()
@@ -50,9 +44,6 @@ public class TradeDto
         return this;
     }
 
-    /// <summary>
-    /// То же для читателей, которым отдают объект из TradesCache: там DTO общий,
-    /// вычищать userId на месте нельзя — сломается фильтр владельческой ленты (D37).
-    /// </summary>
+    /// <summary>Копия без userId — для общих DTO из кэша, которые нельзя чистить на месте</summary>
     public TradeDto WithoutUserId() => ((TradeDto)MemberwiseClone()).RemoveUserId();
 }
