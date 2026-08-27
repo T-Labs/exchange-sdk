@@ -24,14 +24,8 @@ namespace TLabs.ExchangeSdk.DevelopersSalary
 
         public string AdapterCode { get; set; }
 
-        /// <summary>Full deposit amount in deposit currency.</summary>
+        /// <summary>Full deposit amount in deposit currency (compared to the threshold directly, no conversions).</summary>
         public decimal DepositAmount { get; set; }
-
-        /// <summary>UsdtRate quote at the moment of the deposit.</summary>
-        public decimal UsdtRate { get; set; }
-
-        /// <summary>Estimated deposit value in USDT.</summary>
-        public decimal UsdValue { get; set; }
 
         /// <summary>Snapshot of settings applied to this accrual.</summary>
         public decimal UsdThresholdApplied { get; set; }
@@ -50,8 +44,8 @@ namespace TLabs.ExchangeSdk.DevelopersSalary
         public DateTimeOffset? CompletedAt { get; set; }
 
         public override string ToString() =>
-            $"{nameof(DevelopersSalaryAccrual)}(Id:{Id}, {Status}, {Amount} {CurrencyCode} from deposit {DepositAmount} " +
-            $"(~{UsdValue}$), user:{UserId}, txId:{DepositTxId})";
+            $"{nameof(DevelopersSalaryAccrual)}(Id:{Id}, {Status}, {Amount} {CurrencyCode} from deposit {DepositAmount}, " +
+            $"user:{UserId}, txId:{DepositTxId})";
     }
 
     public enum DevelopersSalaryAccrualStatus

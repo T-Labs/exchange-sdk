@@ -8,13 +8,20 @@ namespace TLabs.ExchangeSdk.DevelopersSalary
         /// <summary>Accruals are disabled until an admin turns them on (after all modules are deployed).</summary>
         public bool Enabled { get; set; }
 
-        /// <summary>Deposits with USD(T) value above this threshold trigger an accrual.</summary>
+        /// <summary>The only currency the wallet works with (accruals and payouts). No rate conversions.</summary>
+        public string CurrencyCode { get; set; } = "USDT";
+
+        /// <summary>Allowed network adapter codes, comma-separated (e.g. "trx,bsc").</summary>
+        public string AdapterCodes { get; set; } = "trx,bsc";
+
+        /// <summary>Deposits (in <see cref="CurrencyCode"/>) above this threshold trigger an accrual.</summary>
         public decimal UsdThreshold { get; set; } = 1000;
 
         /// <summary>Percent of the full deposit amount sent to the wallet.</summary>
         public decimal PercentToSend { get; set; } = 10;
 
         public override string ToString() =>
-            $"{nameof(DevelopersSalarySettings)}(Enabled:{Enabled}, Threshold:{UsdThreshold}$, Percent:{PercentToSend})";
+            $"{nameof(DevelopersSalarySettings)}(Enabled:{Enabled}, {CurrencyCode} via [{AdapterCodes}], " +
+            $"Threshold:{UsdThreshold}$, Percent:{PercentToSend})";
     }
 }
