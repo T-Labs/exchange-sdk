@@ -89,6 +89,11 @@ namespace TLabs.ExchangeSdk.Depository
         public static readonly TransactionType BotTransferFromUser = new TransactionType("311", "Перевод юзера к боту", nameof(BotTransferFromUser));
         public static readonly TransactionType BotTransferToUser = new TransactionType("312", "Перевод бота к юзеру", nameof(BotTransferToUser));
 
+        public static readonly TransactionType FundsToDevelopersSalary = new TransactionType("391",
+            "Отчисление с фондов на кошелек разработчиков", nameof(FundsToDevelopersSalary));
+        public static readonly TransactionType DevelopersSalaryPayout = new TransactionType("392",
+            "Выплата с кошелька разработчиков", nameof(DevelopersSalaryPayout));
+
         public static readonly TransactionType InternalTransfer = new TransactionType("401", "Внутренний перевод", nameof(InternalTransfer));
         public static readonly TransactionType InternalTransferFromBonuses = new TransactionType("402", "Внутренний перевод с бонусного счета", nameof(InternalTransferFromBonuses));
 
@@ -213,6 +218,7 @@ namespace TLabs.ExchangeSdk.Depository
             WithdrawalBlockRollback, WithdrawalStockCommissionBlockRollback,
 
             TransferToColdWallet,
+            FundsToDevelopersSalary, DevelopersSalaryPayout,
 
             OrderingBegin, OrderingEnd,
             OrderCancellingBegin, OrderCancellingEnd,

@@ -29,6 +29,9 @@ namespace TLabs.ExchangeSdk.Withdrawals
         /// <summary>True when this is a system-initiated return of an AML-held deposit (WithdrawalType stays Crypto).</summary>
         public bool IsAmlDepositReturn { get; set; }
 
+        /// <summary>True when this is a payout from the developers salary wallet (WithdrawalType stays Crypto).</summary>
+        public bool IsDevelopersSalary { get; set; }
+
         [Required]
         public decimal Amount { get; set; }
 

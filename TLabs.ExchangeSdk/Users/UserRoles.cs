@@ -27,6 +27,7 @@ namespace TLabs.ExchangeSdk.Users
         public const string Empty = "Empty";
         public const string CashExchangeClients = "Cash exchange clients";
         public const string AffiliateStatistics = "Affiliate statistics";
+        public const string DevelopersSalary = "DevelopersSalary";
 
         /// <summary>Unused</summary>
         public const string CommonQuestions = "Common questions";
@@ -35,7 +36,8 @@ namespace TLabs.ExchangeSdk.Users
         {
             Admin, Manager, SupportFull, KYC, ColdWallets, MultisigWallets, CashOperations, TokensAndCommissions,
             FinancialReports, ContentMaker, ApitradeReadonly, ApitradeAdmin, CommonQuestions, P2PWatch, P2PAppealManager,
-            CurrencyListing, Cashier, CashAdmin, Empty, CashExchangeClients, AffiliateStatistics
+            CurrencyListing, Cashier, CashAdmin, Empty, CashExchangeClients, AffiliateStatistics,
+            DevelopersSalary,
         };
     }
 }
