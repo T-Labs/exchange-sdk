@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace TLabs.ExchangeSdk.DevelopersSalary
 {
     /// <summary>Per-currency summary of the developers salary wallet.</summary>
@@ -11,5 +13,9 @@ namespace TLabs.ExchangeSdk.DevelopersSalary
         public decimal TotalAccrued { get; set; }
 
         public decimal TotalPaidOut { get; set; }
+
+        /// <summary>On-chain balance of each network's hot wallet (adapterCode -> amount) —
+        /// the real limit for a payout through that network right now.</summary>
+        public Dictionary<string, decimal> HotWalletBalances { get; set; } = new();
     }
 }
