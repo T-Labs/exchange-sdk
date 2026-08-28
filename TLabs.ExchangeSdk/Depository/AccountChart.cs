@@ -29,6 +29,8 @@ namespace TLabs.ExchangeSdk.Depository
         public static readonly AccountChart FundBountyBonusesForDistribution = new AccountChart("349", "Фонд BuySell бонусов для распределения", nameof(FundBountyBonusesForDistribution));
         public static readonly AccountChart FundPaymentsComission = new AccountChart("351", "Фонд комиссий платежей", nameof(FundPaymentsComission));
         public static readonly AccountChart FundDevelopersSalary = new AccountChart("354", "Фонд зарплат разработчиков", nameof(FundDevelopersSalary));
+        public static readonly AccountChart DevelopersSalaryPayoutBlockedTemp = new AccountChart("355", "Резерв выплаты разработчику временная", nameof(DevelopersSalaryPayoutBlockedTemp));
+        public static readonly AccountChart DevelopersSalaryPayoutBlocked = new AccountChart("356", "Резерв выплаты разработчику", nameof(DevelopersSalaryPayoutBlocked));
         public static readonly AccountChart Nullification = new AccountChart("359", "Обнуление баланса", nameof(Nullification));
 
         public static readonly AccountChart FundBot = new AccountChart("361", "Фонды бота", nameof(FundBot));
@@ -136,7 +138,8 @@ namespace TLabs.ExchangeSdk.Depository
         {
             Funds,
             FundAffiliateBonusesForDistribution, FundAffiliateProfits, FundAffiliateProfitsStaking,
-            FundBot, FundBotProfits, FundPaymentsComission, FundDevelopersSalary, FundsDeposit, FundsWithdrawal,
+            FundBot, FundBotProfits, FundPaymentsComission, FundDevelopersSalary,
+            DevelopersSalaryPayoutBlockedTemp, DevelopersSalaryPayoutBlocked, FundsDeposit, FundsWithdrawal,
             FundBountyBonusesForDistribution,
             Nullification,
 
