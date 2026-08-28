@@ -1,29 +1,26 @@
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 
 using TLabs.ExchangeSdk.DevelopersSalary.Enums;
 
-namespace TLabs.ExchangeSdk.DevelopersSalary.Models
+namespace TLabs.ExchangeSdk.DevelopersSalary.Dtos
 {
     /// <summary>Developer receiving payouts from the developers salary wallet to external crypto addresses.</summary>
-    public class Developer
+    public class DeveloperDto
     {
-        [Key]
         public Guid Id { get; set; }
 
-        [Required]
         public string Name { get; set; }
 
         public string Comment { get; set; }
 
-        public DeveloperStatus Status { get; set; } = DeveloperStatus.Active;
+        public DeveloperStatus Status { get; set; }
 
         public DateTimeOffset CreatedAt { get; set; }
 
-        public List<DeveloperAddress> Addresses { get; set; }
+        public List<DeveloperAddressDto> Addresses { get; set; }
 
         public override string ToString() =>
-            $"{nameof(Developer)}(Id:{Id}, {Name}, {Status})";
+            $"{nameof(DeveloperDto)}(Id:{Id}, {Name}, {Status})";
     }
 }

@@ -1,53 +1,42 @@
 using System;
-using System.ComponentModel.DataAnnotations;
 
 using TLabs.ExchangeSdk.DevelopersSalary.Enums;
 
-namespace TLabs.ExchangeSdk.DevelopersSalary.Models
+namespace TLabs.ExchangeSdk.DevelopersSalary.Dtos
 {
     /// <summary>
     /// Accrual of a percent of a large user crypto deposit to the developers salary wallet.
     /// Paid by the exchange (Funds -> FundDevelopersSalary), the user keeps the full deposit.
-    /// Id is used as ActionId of the depository transaction.
     /// </summary>
-    public class DevelopersSalaryAccrual
+    public class DevelopersSalaryAccrualDto
     {
-        [Key]
         public Guid Id { get; set; }
 
-        /// <summary>Blockchain tx hash of the source deposit. Unique with UserId+CurrencyCode to prevent double accrual.</summary>
-        [Required]
+        /// <summary>Blockchain tx hash of the source deposit.</summary>
         public string DepositTxId { get; set; }
 
         public string UserId { get; set; }
 
-        [Required]
         public string CurrencyCode { get; set; }
 
         public string AdapterCode { get; set; }
 
-        /// <summary>Full deposit amount in deposit currency (compared to the threshold directly, no conversions).</summary>
+        /// <summary>Full deposit amount in deposit currency.</summary>
         public decimal DepositAmount { get; set; }
-
-        /// <summary>Snapshot of settings applied to this accrual.</summary>
-        public decimal UsdThresholdApplied { get; set; }
 
         public decimal PercentApplied { get; set; }
 
         /// <summary>Accrued amount in deposit currency.</summary>
         public decimal Amount { get; set; }
 
-        public DevelopersSalaryAccrualStatus Status { get; set; } = DevelopersSalaryAccrualStatus.Created;
+        public DevelopersSalaryAccrualStatus Status { get; set; }
 
         public string ErrorText { get; set; }
 
         public DateTimeOffset CreatedAt { get; set; }
 
-        public DateTimeOffset? CompletedAt { get; set; }
-
         public override string ToString() =>
-            $"{nameof(DevelopersSalaryAccrual)}(Id:{Id}, {Status}, {Amount} {CurrencyCode} from deposit {DepositAmount}, " +
+            $"{nameof(DevelopersSalaryAccrualDto)}(Id:{Id}, {Status}, {Amount} {CurrencyCode} from deposit {DepositAmount}, " +
             $"user:{UserId}, txId:{DepositTxId})";
     }
-
 }

@@ -6,7 +6,6 @@ using TLabs.DotnetHelpers;
 
 using TLabs.ExchangeSdk.DevelopersSalary.Dtos;
 using TLabs.ExchangeSdk.DevelopersSalary.Enums;
-using TLabs.ExchangeSdk.DevelopersSalary.Models;
 
 namespace TLabs.ExchangeSdk.DevelopersSalary
 {
@@ -15,13 +14,13 @@ namespace TLabs.ExchangeSdk.DevelopersSalary
     {
         private const string baseUrl = "withdrawals/developers-salary";
 
-        public async Task<DevelopersSalarySettings> GetSettings()
+        public async Task<DevelopersSalarySettingsDto> GetSettings()
         {
             return await $"{baseUrl}/settings".InternalApi()
-                .GetJsonAsync<DevelopersSalarySettings>();
+                .GetJsonAsync<DevelopersSalarySettingsDto>();
         }
 
-        public async Task<QueryResult> SaveSettings(DevelopersSalarySettings settings)
+        public async Task<QueryResult> SaveSettings(DevelopersSalarySettingsDto settings)
         {
             return await $"{baseUrl}/settings".InternalApi()
                 .PostJsonAsync(settings)
@@ -35,7 +34,7 @@ namespace TLabs.ExchangeSdk.DevelopersSalary
                 .GetJsonAsync<List<DevelopersSalarySummaryItem>>();
         }
 
-        public async Task<PagedList<DevelopersSalaryAccrual>> GetAccruals(
+        public async Task<PagedList<DevelopersSalaryAccrualDto>> GetAccruals(
             string currencyCode = null, DevelopersSalaryAccrualStatus? status = null,
             int page = 1, int pageSize = 25)
         {
@@ -44,18 +43,18 @@ namespace TLabs.ExchangeSdk.DevelopersSalary
                 .SetQueryParam(nameof(status), status)
                 .SetQueryParam(nameof(page), page)
                 .SetQueryParam(nameof(pageSize), pageSize)
-                .GetJsonAsync<PagedList<DevelopersSalaryAccrual>>();
+                .GetJsonAsync<PagedList<DevelopersSalaryAccrualDto>>();
         }
 
-        public async Task<List<Developer>> GetDevelopers(bool includeArchived = false)
+        public async Task<List<DeveloperDto>> GetDevelopers(bool includeArchived = false)
         {
             return await $"{baseUrl}/developers".InternalApi()
                 .SetQueryParam(nameof(includeArchived), includeArchived)
-                .GetJsonAsync<List<Developer>>();
+                .GetJsonAsync<List<DeveloperDto>>();
         }
 
         /// <summary>Create or update a developer (addresses are managed separately).</summary>
-        public async Task<QueryResult> SaveDeveloper(Developer developer)
+        public async Task<QueryResult> SaveDeveloper(SaveDeveloperDto developer)
         {
             return await $"{baseUrl}/developers".InternalApi()
                 .PostJsonAsync(developer)
@@ -70,7 +69,7 @@ namespace TLabs.ExchangeSdk.DevelopersSalary
                 .GetQueryResult();
         }
 
-        public async Task<QueryResult> AddDeveloperAddress(Guid developerId, DeveloperAddress address)
+        public async Task<QueryResult> AddDeveloperAddress(Guid developerId, AddDeveloperAddressDto address)
         {
             return await $"{baseUrl}/developers/{developerId}/addresses".InternalApi()
                 .PostJsonAsync(address)
@@ -92,14 +91,14 @@ namespace TLabs.ExchangeSdk.DevelopersSalary
                 .GetQueryResult();
         }
 
-        public async Task<PagedList<DeveloperPayout>> GetPayouts(
+        public async Task<PagedList<DeveloperPayoutDto>> GetPayouts(
             Guid? developerId = null, int page = 1, int pageSize = 25)
         {
             return await $"{baseUrl}/payouts".InternalApi()
                 .SetQueryParam(nameof(developerId), developerId)
                 .SetQueryParam(nameof(page), page)
                 .SetQueryParam(nameof(pageSize), pageSize)
-                .GetJsonAsync<PagedList<DeveloperPayout>>();
+                .GetJsonAsync<PagedList<DeveloperPayoutDto>>();
         }
     }
 }
