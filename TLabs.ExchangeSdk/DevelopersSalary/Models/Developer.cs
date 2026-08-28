@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
+using TLabs.ExchangeSdk.DevelopersSalary.Enums;
+
 namespace TLabs.ExchangeSdk.DevelopersSalary.Models
 {
     /// <summary>Developer receiving payouts from the developers salary wallet to external crypto addresses.</summary>
@@ -15,13 +17,13 @@ namespace TLabs.ExchangeSdk.DevelopersSalary.Models
 
         public string Comment { get; set; }
 
-        public bool IsArchived { get; set; }
+        public DeveloperStatus Status { get; set; } = DeveloperStatus.Active;
 
         public DateTimeOffset CreatedAt { get; set; }
 
         public List<DeveloperAddress> Addresses { get; set; }
 
         public override string ToString() =>
-            $"{nameof(Developer)}(Id:{Id}, {Name}, archived:{IsArchived})";
+            $"{nameof(Developer)}(Id:{Id}, {Name}, {Status})";
     }
 }

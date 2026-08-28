@@ -62,10 +62,10 @@ namespace TLabs.ExchangeSdk.DevelopersSalary
                 .GetQueryResult();
         }
 
-        public async Task<QueryResult> SetDeveloperArchived(Guid developerId, bool isArchived)
+        public async Task<QueryResult> SetDeveloperStatus(Guid developerId, DeveloperStatus status)
         {
-            return await $"{baseUrl}/developers/{developerId}/archive".InternalApi()
-                .SetQueryParam(nameof(isArchived), isArchived)
+            return await $"{baseUrl}/developers/{developerId}/status".InternalApi()
+                .SetQueryParam(nameof(status), status)
                 .PostAsync()
                 .GetQueryResult();
         }
