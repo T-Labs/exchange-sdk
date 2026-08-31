@@ -7,6 +7,10 @@ namespace TLabs.ExchangeSdk.CryptoAdapters
     public static class CryptoAddressesHelper
     {
         private static readonly Regex SolanaAddressRegex = new("^[1-9A-HJ-NP-Za-km-z]{32,44}$", RegexOptions.Compiled);
+        private static readonly Regex NearImplicitRegex = new("^[0-9a-f]{64}$", RegexOptions.Compiled);
+        private static readonly Regex NearNamedRegex = new(
+            "^(([a-z0-9]+[\\-_])*[a-z0-9]+\\.)*([a-z0-9]+[\\-_])*[a-z0-9]+$",
+            RegexOptions.Compiled);
         private const string BitcoinBase58Alphabet = "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz";
 
         public static bool IsValidAddress(string adapterCode, string adapterAddress) => adapterCode switch
@@ -43,10 +47,9 @@ namespace TLabs.ExchangeSdk.CryptoAdapters
                 return false;
             if (adapterAddress.Length < 2 || adapterAddress.Length > 64)
                 return false;
-            if (new Regex("^[0-9a-f]{64}$").IsMatch(adapterAddress))
+            if (NearImplicitRegex.IsMatch(adapterAddress))
                 return true;
-            return new Regex("^(([a-z0-9]+[\\-_])*[a-z0-9]+\\.)*([a-z0-9]+[\\-_])*[a-z0-9]+$")
-                .IsMatch(adapterAddress);
+            return NearNamedRegex.IsMatch(adapterAddress);
         }
 
         /// <summary>
