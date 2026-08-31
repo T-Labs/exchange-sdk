@@ -150,7 +150,8 @@ namespace TLabs.ExchangeSdk.Tests;
     [TestCase("-alice.near")]
     [TestCase("alice.near.")]
     [TestCase("A.NEAR")]
-    public void IsValidNearAddress_rejects_whitespace_and_invalid_named_ids(string address)
+    [TestCase("0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF")]
+    public void IsValidNearAddress_rejects_invalid(string address)
         {
         Assert.That(CryptoAddressesHelper.IsValidNearAddress(address), Is.False);
         Assert.That(CryptoAddressesHelper.IsValidAddress("near", address), Is.False);
