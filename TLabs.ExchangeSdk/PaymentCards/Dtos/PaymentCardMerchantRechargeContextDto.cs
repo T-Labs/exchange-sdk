@@ -6,9 +6,7 @@ public class PaymentCardMerchantRechargeContextDto
 {
     public decimal MerchantBalance { get; set; }
 
-    public string SourceUserId { get; set; }
-
-    public decimal? SourceUserBalance { get; set; }
+    public decimal? FundsBalance { get; set; }
 
     public string TokenSymbol { get; set; }
 
