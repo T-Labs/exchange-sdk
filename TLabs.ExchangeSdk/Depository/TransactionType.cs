@@ -89,6 +89,18 @@ namespace TLabs.ExchangeSdk.Depository
         public static readonly TransactionType BotTransferFromUser = new TransactionType("311", "Перевод юзера к боту", nameof(BotTransferFromUser));
         public static readonly TransactionType BotTransferToUser = new TransactionType("312", "Перевод бота к юзеру", nameof(BotTransferToUser));
 
+        public static readonly TransactionType FundsToDevelopersSalary = new TransactionType("391",
+            "Отчисление с фондов на кошелек разработчиков", nameof(FundsToDevelopersSalary));
+        // Выплата разработчику по канону выводов: резерв (Begin/End) -> отправка -> подтверждение (392) / отмена
+        public static readonly TransactionType DevelopersSalaryPayoutBlockBegin = new TransactionType("393",
+            "Резерв выплаты разработчику начало", nameof(DevelopersSalaryPayoutBlockBegin));
+        public static readonly TransactionType DevelopersSalaryPayoutBlockEnd = new TransactionType("3931",
+            "Резерв выплаты разработчику конец", nameof(DevelopersSalaryPayoutBlockEnd));
+        public static readonly TransactionType DevelopersSalaryPayoutCancel = new TransactionType("394",
+            "Отмена резерва выплаты разработчику", nameof(DevelopersSalaryPayoutCancel));
+        public static readonly TransactionType DevelopersSalaryPayout = new TransactionType("392",
+            "Выплата с кошелька разработчиков", nameof(DevelopersSalaryPayout));
+
         public static readonly TransactionType InternalTransfer = new TransactionType("401", "Внутренний перевод", nameof(InternalTransfer));
         public static readonly TransactionType InternalTransferFromBonuses = new TransactionType("402", "Внутренний перевод с бонусного счета", nameof(InternalTransferFromBonuses));
 
@@ -215,6 +227,8 @@ namespace TLabs.ExchangeSdk.Depository
             WithdrawalBlockRollback, WithdrawalStockCommissionBlockRollback,
 
             TransferToColdWallet,
+            FundsToDevelopersSalary, DevelopersSalaryPayoutBlockBegin, DevelopersSalaryPayoutBlockEnd,
+            DevelopersSalaryPayoutCancel, DevelopersSalaryPayout,
 
             OrderingBegin, OrderingEnd,
             OrderCancellingBegin, OrderCancellingEnd,
