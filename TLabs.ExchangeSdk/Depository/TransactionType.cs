@@ -165,6 +165,7 @@ namespace TLabs.ExchangeSdk.Depository
         public static readonly TransactionType PaymentCardRefundFeeEnd = new TransactionType("938", "Комиссия за возврат по карте (наша) конец", nameof(PaymentCardRefundFeeEnd));
         public static readonly TransactionType PaymentCardMerchantPoolRechargeBegin = new TransactionType("939", "Пополнение merchant pool Bananatech начало", nameof(PaymentCardMerchantPoolRechargeBegin));
         public static readonly TransactionType PaymentCardMerchantPoolRechargeEnd = new TransactionType("940", "Пополнение merchant pool Bananatech конец", nameof(PaymentCardMerchantPoolRechargeEnd));
+        public static readonly TransactionType PaymentCardMerchantPoolRechargeCancel = new TransactionType("944", "Отмена пополнения merchant pool Bananatech", nameof(PaymentCardMerchantPoolRechargeCancel));
 
         // Block can happen on order creation or on deal creation, depending on buying or selling crypto
         public static readonly TransactionType P2pOrderBlockBegin = new TransactionType("751", "P2P блокировка для ордера начало", nameof(P2pOrderBlockBegin));
@@ -269,7 +270,7 @@ namespace TLabs.ExchangeSdk.Depository
             PaymentCardIssuanceFeeBegin, PaymentCardIssuanceFeeEnd,
             PaymentCardRechargeFeeBegin, PaymentCardRechargeFeeEnd,
             PaymentCardRefundFeeBegin, PaymentCardRefundFeeEnd,
-            PaymentCardMerchantPoolRechargeBegin, PaymentCardMerchantPoolRechargeEnd,
+            PaymentCardMerchantPoolRechargeBegin, PaymentCardMerchantPoolRechargeEnd, PaymentCardMerchantPoolRechargeCancel,
 
             P2pOrderBlockBegin, P2pOrderBlockEnd,
             P2pOrderBlockCancelBegin, P2pOrderBlockCancelEnd, P2pOrderRemainingBlockCancelBegin, P2pOrderRemainingBlockCancelEnd,
