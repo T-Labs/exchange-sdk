@@ -9,5 +9,5 @@ public class FuturesOrderCancelRequest
     public decimal? LimitPrice { get; set; }
     public bool IsLiquidation { get; set; }
 
-    public string UserId { get; set; } = null!;
+    public string? UserId { get; set; }
 }

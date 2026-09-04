@@ -3,6 +3,6 @@ namespace TLabs.ExchangeSdk.Futures;
 
 public class FuturesOrdersCancelAllRequest
 {
-    public string UserId { get; set; } = null!;
+    public string? UserId { get; set; }
     public long FuturesAccountId { get; set; }
 }
