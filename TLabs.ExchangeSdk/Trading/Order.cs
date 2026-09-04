@@ -26,6 +26,12 @@ namespace TLabs.ExchangeSdk.Trading
         /// <summary>Триггер stop-limit сработал, ордер дальше живёт как обычная лимитка</summary>
         public bool IsTriggered { get; set; }
 
+        /// <summary>
+        /// Сторона триггера: true — сработает на росте цены до стопа (buy-stop, sell take-profit),
+        /// false — на падении (sell stop-loss, buy take-profit). Заполняет брокер по last price
+        /// </summary>
+        public bool StopTriggerAbove { get; set; }
+
         public ClientType ClientType { get; set; }
 
         [Required]
