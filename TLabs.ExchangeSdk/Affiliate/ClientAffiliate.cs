@@ -190,6 +190,12 @@ namespace TLabs.ExchangeSdk.Affiliate
                 .GetQueryResult();
         }
 
+        public virtual async Task<ReferralUser> ImportReferralUser(ImportReferralUserRequest request)
+        {
+            return await "affiliate/users/import".InternalApi()
+                .PostJsonAsync<ReferralUser>(request);
+        }
+
         public virtual async Task<PagedList<ReferralUser>> GetReferralUsers(string search, int page = 1, int pageSize = 20)
         {
             var affiliateResponse = await "affiliate/users".InternalApi()

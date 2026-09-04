@@ -50,6 +50,7 @@ namespace TLabs.ExchangeSdk
             services.AddTransient<Trading.ClientTradingBrokerage>();
 
             services.AddTransient<Users.ClientUsers>();
+            services.AddTransient<Users.ClientPartnerImports>();
             services.AddTransient<Users.ClientFavoritePairs>();
             services.AddTransient<Users.ClientTelegram>();
             services.AddTransient<Users.IIPService, Users.IPService>();
