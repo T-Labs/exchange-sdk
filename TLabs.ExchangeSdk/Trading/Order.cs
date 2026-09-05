@@ -32,6 +32,12 @@ namespace TLabs.ExchangeSdk.Trading
         /// </summary>
         public bool StopTriggerAbove { get; set; }
 
+        /// <summary>
+        /// OCO: вторая цена триггера в противоположную сторону от StopPrice. Одна из двух сработает,
+        /// вторая умирает вместе с ордером. Только стоп-маркет на продажу: SL ниже рынка, TP выше
+        /// </summary>
+        public decimal? TakeProfitPrice { get; set; }
+
         public ClientType ClientType { get; set; }
 
         [Required]

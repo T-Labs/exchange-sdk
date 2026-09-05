@@ -21,6 +21,9 @@ namespace TLabs.ExchangeSdk.Trading
         /// null — старый брокер, сторона выводится из IsBid как у классического стопа
         /// </summary>
         public bool? StopTriggerAbove { get; set; }
+
+        /// <summary>OCO: цена тейк-профита к StopPrice (стоп-лоссу); только стоп-маркет на продажу</summary>
+        public decimal? TakeProfitPrice { get; set; }
         public DateTimeOffset DateCreated { get; set; }
         public ClientType ClientType { get; set; }
         public string UserId { get; set; }
@@ -41,6 +44,7 @@ namespace TLabs.ExchangeSdk.Trading
                 Price = Price,
                 StopPrice = StopPrice,
                 StopTriggerAbove = StopTriggerAbove ?? IsBid,
+                TakeProfitPrice = TakeProfitPrice,
                 Amount = Amount,
                 CurrencyPairCode = CurrencyPairCode,
                 DateCreated = DateCreated,
