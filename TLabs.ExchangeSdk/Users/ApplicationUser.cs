@@ -69,8 +69,8 @@ namespace TLabs.ExchangeSdk.Users
         /// <summary>When <see cref="AdminComment"/> was last edited</summary>
         public DateTimeOffset? AdminCommentUpdatedAt { get; set; }
 
-        /// <summary>User was created via partner structure CSV import</summary>
-        public bool IsPartnerStructureImport { get; set; }
+        /// <summary>Source label for users created via CSV user-import.</summary>
+        public string ImportSource { get; set; }
 
         public bool TwoFactorEmail {
             get => FlagsHelper.IsSet(TwoFactorMethods, TwoFactorMethods.Email);

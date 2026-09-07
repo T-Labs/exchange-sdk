@@ -10,20 +10,27 @@ public class ClientPartnerImports
 {
     public virtual async Task<PartnerImportJobDto> UploadCsvAsync(Stream csvStream, string fileName)
     {
-        return await "userprofiles/admin/partner-imports".InternalApi()
+        return await "userprofiles/admin/user-imports".InternalApi()
             .PostMultipartAsync(mp => mp.AddFile("file", csvStream, fileName))
             .ReceiveJson<PartnerImportJobDto>();
     }
 
     public virtual async Task<PartnerImportJobDto> GetJobAsync(Guid jobId)
     {
-        return await $"userprofiles/admin/partner-imports/{jobId}".InternalApi()
+        return await $"userprofiles/admin/user-imports/{jobId}".InternalApi()
             .GetJsonAsync<PartnerImportJobDto>();
     }
 
     public virtual async Task RetryFailedAsync(Guid jobId)
     {
-        await $"userprofiles/admin/partner-imports/{jobId}/retry-failed".InternalApi()
+        await $"userprofiles/admin/user-imports/{jobId}/retry-failed".InternalApi()
             .PostAsync();
+    }
+
+    public virtual async Task<PartnerImportJobDto> SendInvitationsAsync(Guid jobId)
+    {
+        return await $"userprofiles/admin/user-imports/{jobId}/send-invitations".InternalApi()
+            .PostAsync()
+            .ReceiveJson<PartnerImportJobDto>();
     }
 }

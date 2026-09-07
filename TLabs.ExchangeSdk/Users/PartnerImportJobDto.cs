@@ -25,4 +25,6 @@ public class PartnerImportJobDto
     public int FailedRows { get; set; }
 
     public int ProcessingRows { get; set; }
+
+    public int InvitationsSentRows { get; set; }
 }
