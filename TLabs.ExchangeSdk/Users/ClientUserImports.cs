@@ -6,19 +6,19 @@ using TLabs.DotnetHelpers;
 
 namespace TLabs.ExchangeSdk.Users;
 
-public class ClientPartnerImports
+public class ClientUserImports
 {
-    public virtual async Task<PartnerImportJobDto> UploadCsvAsync(Stream csvStream, string fileName)
+    public virtual async Task<UserImportJobDto> UploadCsvAsync(Stream csvStream, string fileName)
     {
         return await "userprofiles/admin/user-imports".InternalApi()
             .PostMultipartAsync(mp => mp.AddFile("file", csvStream, fileName))
-            .ReceiveJson<PartnerImportJobDto>();
+            .ReceiveJson<UserImportJobDto>();
     }
 
-    public virtual async Task<PartnerImportJobDto> GetJobAsync(Guid jobId)
+    public virtual async Task<UserImportJobDto> GetJobAsync(Guid jobId)
     {
         return await $"userprofiles/admin/user-imports/{jobId}".InternalApi()
-            .GetJsonAsync<PartnerImportJobDto>();
+            .GetJsonAsync<UserImportJobDto>();
     }
 
     public virtual async Task RetryFailedAsync(Guid jobId)
@@ -27,10 +27,10 @@ public class ClientPartnerImports
             .PostAsync();
     }
 
-    public virtual async Task<PartnerImportJobDto> SendInvitationsAsync(Guid jobId)
+    public virtual async Task<UserImportJobDto> SendInvitationsAsync(Guid jobId)
     {
         return await $"userprofiles/admin/user-imports/{jobId}/send-invitations".InternalApi()
             .PostAsync()
-            .ReceiveJson<PartnerImportJobDto>();
+            .ReceiveJson<UserImportJobDto>();
     }
 }

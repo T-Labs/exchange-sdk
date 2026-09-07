@@ -2,13 +2,13 @@ using System;
 
 namespace TLabs.ExchangeSdk.Users;
 
-public class PartnerImportJobDto
+public class UserImportJobDto
 {
     public Guid Id { get; set; }
 
     public string FileName { get; set; }
 
-    public PartnerImportJobStatus Status { get; set; }
+    public UserImportJobStatus Status { get; set; }
 
     public DateTimeOffset CreatedAt { get; set; }
 

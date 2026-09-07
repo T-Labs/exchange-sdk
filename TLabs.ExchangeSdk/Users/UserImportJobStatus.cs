@@ -1,6 +1,6 @@
 namespace TLabs.ExchangeSdk.Users;
 
-public enum PartnerImportJobStatus
+public enum UserImportJobStatus
 {
     Pending = 10,
     Running = 20,
