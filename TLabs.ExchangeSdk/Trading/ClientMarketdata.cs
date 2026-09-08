@@ -12,7 +12,7 @@ namespace TLabs.ExchangeSdk.Trading
         Task<List<MarketdataOrder>> GetOrders(string currencyPairCode = null, bool? isBid = null, int? count = null,
             string userId = null, OrderStatusRequest status = OrderStatusRequest.Active,
             DateTimeOffset? from = null, DateTimeOffset? to = null, bool includeDeals = false,
-            decimal? minVolume = null);
+            decimal? minVolume = null, bool includeUntriggeredStops = false);
 
         Task<MarketdataOrder> GetOrder(Guid id);
 
@@ -66,7 +66,7 @@ namespace TLabs.ExchangeSdk.Trading
         public async Task<List<MarketdataOrder>> GetOrders(string currencyPairCode = null, bool? isBid = null, int? count = null,
             string userId = null, OrderStatusRequest status = OrderStatusRequest.Active,
             DateTimeOffset? from = null, DateTimeOffset? to = null, bool includeDeals = false,
-            decimal? minVolume = null)
+            decimal? minVolume = null, bool includeUntriggeredStops = false)
         {
             var result = await $"marketdata/orders".InternalApi()
                 .WithTimeout(TimeSpan.FromMinutes(10))
@@ -79,6 +79,7 @@ namespace TLabs.ExchangeSdk.Trading
                 .SetQueryParam(nameof(to), to?.ToString("o"))
                 .SetQueryParam(nameof(includeDeals), includeDeals)
                 .SetQueryParam(nameof(minVolume), minVolume)
+                .SetQueryParam(nameof(includeUntriggeredStops), includeUntriggeredStops)
                 .GetJsonAsync<List<MarketdataOrder>>();
             return result;
         }
