@@ -21,6 +21,8 @@ public class OrderDto
     /// <summary>Триггер stop-limit сработал, ордер ждёт исполнения как обычная лимитка</summary>
     public bool IsTriggered { get; set; }
 
+    /// <summary>Чистый результат: ценовой PnL минус комиссии открытия и закрытия, плюс funding.
+    /// Ровно столько пришло на счёт — это поле показывать как итог позиции</summary>
     public decimal RealizedPnl { get; set; }
     public decimal Leverage { get; set; }
     public bool IsLong { get; set; }
@@ -40,6 +42,8 @@ public class OrderDto
     public decimal UnRealizedPnlPercentage { get; set; }
     public decimal TotalPnlPercentage { get; set; }
     public decimal Roe { get; set; }
+    /// <summary>Грязный ценовой PnL: до комиссий и без funding. Не итог позиции —
+    /// для колонки PnL брать <see cref="RealizedPnl"/>; поле будет помечено Obsolete после переезда фронта</summary>
     public decimal ClosedProfit { get; set; }
     public bool IsCopyTrading { get; set; }
     public CopyTradingOrderDetails? CopyTradingDetails { get; set; }

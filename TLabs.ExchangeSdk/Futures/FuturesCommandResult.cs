@@ -12,6 +12,13 @@ public class FuturesCommandResult
         Message = message;
     }
 
+    public FuturesCommandResult(bool success, string message, string code)
+    {
+        Success = success;
+        Message = message;
+        Code = code;
+    }
+
     public FuturesCommandResult(bool success)
     {
         Success = success;
@@ -19,6 +26,9 @@ public class FuturesCommandResult
 
     public bool Success { get; set; }
     public string Message { get; set; }
+
+    /// <summary>Ключ ошибки для локализации на фронте (snake_case, как у переводов); null при успехе</summary>
+    public string Code { get; set; }
 }
 
 public class FuturesCommandResult<T>
