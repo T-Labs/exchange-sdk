@@ -18,9 +18,11 @@ public class TradeDto
     [JsonIgnore]
     public bool IsFakeDealsBot { get; set; }
 
+    /// <summary>Чистый результат сделки: ценовой PnL минус её комиссия; у открывающей сделки = −комиссия</summary>
     public decimal RealizedPnl { get; set; }
     public decimal Fees { get; set; }
 
+    /// <summary>Грязный ценовой PnL сделки (до комиссии). Для итога брать <see cref="RealizedPnl"/></summary>
     public decimal ClosedProfit => RealizedPnl + Math.Abs(Fees);
 
     public TradeType TradeType { get; set; }
