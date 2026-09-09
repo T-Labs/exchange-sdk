@@ -24,7 +24,7 @@ namespace TLabs.ExchangeSdk.RabbitMq
             _logger = logger;
         }
 
-        public QueryResult Send(string queue, Message message)
+        public virtual QueryResult Send(string queue, Message message)
         {
             if (message.Id.NotHasValue())
                 message.Id = Guid.NewGuid().ToString();
