@@ -18,7 +18,7 @@ namespace TLabs.ExchangeSdk.FundPayouts.Dtos
 
         public decimal Amount { get; set; }
 
-        /// <summary>Optional globally unique key (max 128). Repeat with the same key returns the existing payout.</summary>
+        /// <summary>Required, globally unique (max 128). Repeat with the same key returns the existing payout instead of paying twice.</summary>
         public string ClientIdempotencyKey { get; set; }
 
         public override string ToString() =>
