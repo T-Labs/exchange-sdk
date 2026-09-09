@@ -27,7 +27,7 @@ public class FuturesCommandResult
     public bool Success { get; set; }
     public string Message { get; set; }
 
-    /// <summary>Ключ ошибки для локализации на фронте (snake_case, как у переводов); null при успехе</summary>
+    /// <summary>Ключ ошибки для локализации на фронте; null при успехе</summary>
     public string Code { get; set; }
 }
 
