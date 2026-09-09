@@ -67,6 +67,20 @@ namespace TLabs.ExchangeSdk.RabbitMq
             return result;
         }
 
+        public QueryResult SendTelegramTemplate(string templateName, Dictionary<string, string> arguments = null,
+            UserGroup userGroup = UserGroup.SingleUser, long? telegramId = null)
+        {
+            var message = new NotificationTelegram
+            {
+                UserGroup = userGroup,
+                TelegramId = telegramId,
+                TemplateName = templateName,
+                Arguments = arguments ?? new(),
+            };
+
+            return Send(RabbitMqQueues.Notifications, message);
+        }
+
         public QueryResult SendEmailToAdmins(string subject, string text)
         {
             return Send(RabbitMqQueues.Notifications, new NotificationEmail
