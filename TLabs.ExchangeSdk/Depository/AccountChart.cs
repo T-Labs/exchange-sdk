@@ -66,6 +66,7 @@ namespace TLabs.ExchangeSdk.Depository
 
         public static readonly AccountChart NetworkComission = new AccountChart("8", "Комиссия блокчейна", nameof(NetworkComission));
         public static readonly AccountChart ColdWallets = new AccountChart("11", "Холодные кошельки", nameof(ColdWallets));
+        public static readonly AccountChart DevelopersSalaryWallet = new AccountChart("12", "Кошелёк фонда разработчиков", nameof(DevelopersSalaryWallet));
 
         public static readonly AccountChart StakingLocked = new AccountChart("855", "Стейкинг замороженные средства", nameof(StakingLocked));
         public static readonly AccountChart StakingLockedTemp = new AccountChart("856", "Стейкинг замороженные средства", nameof(StakingLockedTemp));
@@ -148,7 +149,7 @@ namespace TLabs.ExchangeSdk.Depository
             PaymentCardPurchases,
 
             Withdrawn,
-            ColdWallets,
+            ColdWallets, DevelopersSalaryWallet,
             NetworkComission, WithdrawalNetworkCommissionFunds,
             NodeAgregationFunds,
         };
