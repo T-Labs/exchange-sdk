@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using Flurl.Http;
@@ -13,6 +14,13 @@ public class ClientUserImports
         return await "userprofiles/admin/user-imports".InternalApi()
             .PostMultipartAsync(mp => mp.AddFile("file", csvStream, fileName))
             .ReceiveJson<UserImportJobDto>();
+    }
+
+    public virtual async Task<IReadOnlyList<UserImportJobDto>> ListJobsAsync(int take = 20)
+    {
+        return await "userprofiles/admin/user-imports".InternalApi()
+            .SetQueryParam("take", take)
+            .GetJsonAsync<List<UserImportJobDto>>();
     }
 
     public virtual async Task<UserImportJobDto> GetJobAsync(Guid jobId)
