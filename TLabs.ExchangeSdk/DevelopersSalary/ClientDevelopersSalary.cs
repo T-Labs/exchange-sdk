@@ -46,6 +46,29 @@ namespace TLabs.ExchangeSdk.DevelopersSalary
                 .GetJsonAsync<PagedList<DevelopersSalaryAccrualDto>>();
         }
 
+        /// <summary>Fund addresses per network, taken from the adapters.</summary>
+        public async Task<List<DevelopersSalaryWalletAddressDto>> GetWalletAddresses()
+        {
+            return await $"{baseUrl}/wallet-addresses".InternalApi()
+                .GetJsonAsync<List<DevelopersSalaryWalletAddressDto>>();
+        }
+
+        public async Task<PagedList<DevelopersSalaryWalletTransferDto>> GetWalletTransfers(int page = 1, int pageSize = 25)
+        {
+            return await $"{baseUrl}/wallet-transfers".InternalApi()
+                .SetQueryParam(nameof(page), page)
+                .SetQueryParam(nameof(pageSize), pageSize)
+                .GetJsonAsync<PagedList<DevelopersSalaryWalletTransferDto>>();
+        }
+
+        /// <summary>Send the transfer of an accrual without waiting for the worker tick.</summary>
+        public async Task<QueryResult> TransferAccrualNow(Guid accrualId)
+        {
+            return await $"{baseUrl}/accruals/{accrualId}/transfer-now".InternalApi()
+                .PostJsonAsync(null)
+                .GetQueryResult();
+        }
+
         public async Task<List<DeveloperDto>> GetDevelopers(bool includeArchived = false)
         {
             return await $"{baseUrl}/developers".InternalApi()
