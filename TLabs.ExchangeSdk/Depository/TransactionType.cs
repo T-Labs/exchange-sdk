@@ -81,8 +81,6 @@ namespace TLabs.ExchangeSdk.Depository
 
         public static readonly TransactionType TransferToColdWallet = new TransactionType("11",
             "Перевод с кошелька ноды на холодный кошелек", nameof(TransferToColdWallet));
-        public static readonly TransactionType TransferToDevelopersSalaryWallet = new TransactionType("12",
-            "Перевод с кошелька ноды на кошелёк фонда разработчиков", nameof(TransferToDevelopersSalaryWallet));
 
         public static readonly TransactionType BotDeposit = new TransactionType("301", "Пополнение счета Exchanger", nameof(BotDeposit));
         public static readonly TransactionType BotWithdrawal = new TransactionType("302", "Вывод со счета Exchanger", nameof(BotWithdrawal));
@@ -229,7 +227,7 @@ namespace TLabs.ExchangeSdk.Depository
             WithdrawalNetworkCommission,
             WithdrawalBlockRollback, WithdrawalStockCommissionBlockRollback,
 
-            TransferToColdWallet, TransferToDevelopersSalaryWallet,
+            TransferToColdWallet,
             FundsToDevelopersSalary, DevelopersSalaryPayoutBlockBegin, DevelopersSalaryPayoutBlockEnd,
             DevelopersSalaryPayoutCancel, DevelopersSalaryPayout,
 

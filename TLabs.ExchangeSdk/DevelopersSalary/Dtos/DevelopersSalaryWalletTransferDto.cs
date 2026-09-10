@@ -24,9 +24,6 @@ namespace TLabs.ExchangeSdk.DevelopersSalary.Dtos
 
         public string ErrorText { get; set; }
 
-        /// <summary>Ledger entry of the transfer is saved.</summary>
-        public bool IsLedgerSaved { get; set; }
-
         public override string ToString() =>
             $"{nameof(DevelopersSalaryWalletTransferDto)}(Id:{Id}, {StatusId}, {Amount} {CurrencyCode} via {AdapterCode})";
     }
