@@ -15,7 +15,8 @@ namespace TLabs.ExchangeSdk.DevelopersSalary.Dtos
 
         public decimal Amount { get; set; }
 
-        public string StatusId { get; set; }
+        /// <summary>Withdrawal status code</summary>
+        public int StatusId { get; set; }
 
         public string Address { get; set; }
 

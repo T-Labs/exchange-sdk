@@ -39,7 +39,7 @@ namespace TLabs.ExchangeSdk.DevelopersSalary.Dtos
         public Guid? WalletTransferWithdrawalId { get; set; }
 
         /// <summary>Status code of that withdrawal, null when there is no transfer yet.</summary>
-        public string WalletTransferStatusId { get; set; }
+        public int? WalletTransferStatusId { get; set; }
 
         public override string ToString() =>
             $"{nameof(DevelopersSalaryAccrualDto)}(Id:{Id}, {Status}, {Amount} {CurrencyCode} from deposit {DepositAmount}, " +
