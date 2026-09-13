@@ -24,7 +24,7 @@ namespace TLabs.ExchangeSdk.RabbitMq
             _logger = logger;
         }
 
-        public QueryResult Send(string queue, Message message)
+        public virtual QueryResult Send(string queue, Message message)
         {
             if (message.Id.NotHasValue())
                 message.Id = Guid.NewGuid().ToString();
@@ -65,6 +65,20 @@ namespace TLabs.ExchangeSdk.RabbitMq
 
             var result = Send(RabbitMqQueues.Notifications, emailTemplateMessage);
             return result;
+        }
+
+        public QueryResult SendTelegramTemplate(string templateName, Dictionary<string, string> arguments = null,
+            UserGroup userGroup = UserGroup.SingleUser, long? telegramId = null)
+        {
+            var message = new NotificationTelegram
+            {
+                UserGroup = userGroup,
+                TelegramId = telegramId,
+                TemplateName = templateName,
+                Arguments = arguments ?? new(),
+            };
+
+            return Send(RabbitMqQueues.Notifications, message);
         }
 
         public QueryResult SendEmailToAdmins(string subject, string text)

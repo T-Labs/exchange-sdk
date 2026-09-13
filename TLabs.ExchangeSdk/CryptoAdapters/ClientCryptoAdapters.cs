@@ -120,6 +120,19 @@ namespace TLabs.ExchangeSdk.CryptoAdapters
                 : QueryResult<decimal>.CreateFailedLogic($"ParsingError {result.Data}");
         }
 
+        /// <summary>Get the address of the developers salary fund, created and kept by the adapter</summary>
+        public async Task<QueryResult<string>> GetDevelopersSalaryWalletAddress(string adapterCode)
+        {
+            using var cts = new CancellationTokenSource(TimeSpan.FromSeconds(5));
+            var result = await $"{adapterCode}/developers-salary-address".InternalApi()
+                .GetJsonAsync<AddressModel>(cts.Token).GetQueryResult();
+            if (!result.Succeeded)
+                return QueryResult<string>.CreateFailed(result);
+            return result.Data?.Address.HasValue() == true
+                ? QueryResult<string>.CreateSucceeded(result.Data.Address)
+                : QueryResult<string>.CreateFailedLogic("EmptyAddress");
+        }
+
         #region ETH
 
         public async Task<QueryResult<string>> ResendTransaction(string adapterCode, string txHash, decimal? newGasPrice = null)

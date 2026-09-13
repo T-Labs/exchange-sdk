@@ -51,6 +51,13 @@ namespace TLabs.ExchangeSdk.RabbitMq
         }
 
         public long? TelegramId { get; set; }
+
+        /// <summary>Pre-built text. Ignored when <see cref="TemplateName"/> is set.</summary>
         public string Message { get; set; }
+
+        /// <summary>Name of a template defined in Notificator's telegram-templates.json. See <see cref="TelegramTemplateNames"/>.</summary>
+        public string TemplateName { get; set; }
+
+        public Dictionary<string, string> Arguments { get; set; }
     }
 }

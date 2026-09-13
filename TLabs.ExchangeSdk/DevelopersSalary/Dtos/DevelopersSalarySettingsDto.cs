@@ -18,8 +18,11 @@ namespace TLabs.ExchangeSdk.DevelopersSalary.Dtos
         /// <summary>Percent of the full deposit amount sent to the wallet.</summary>
         public decimal PercentToSend { get; set; }
 
+        /// <summary>Move the accrued share to the fund address of the adapter.</summary>
+        public bool WalletTransferEnabled { get; set; }
+
         public override string ToString() =>
             $"{nameof(DevelopersSalarySettingsDto)}(Enabled:{Enabled}, {CurrencyCode} via [{AdapterCodes}], " +
-            $"Threshold:{UsdThreshold}$, Percent:{PercentToSend})";
+            $"Threshold:{UsdThreshold}$, Percent:{PercentToSend}, WalletTransfer:{WalletTransferEnabled})";
     }
 }
