@@ -1,0 +1,30 @@
+using System;
+
+namespace TLabs.ExchangeSdk.Users;
+
+public class UserImportJobDto
+{
+    public Guid Id { get; set; }
+
+    public string FileName { get; set; }
+
+    public UserImportJobStatus Status { get; set; }
+
+    public DateTimeOffset CreatedAt { get; set; }
+
+    public DateTimeOffset? CompletedAt { get; set; }
+
+    public int TotalRows { get; set; }
+
+    public int PendingRows { get; set; }
+
+    public int CompletedRows { get; set; }
+
+    public int SkippedExistingRows { get; set; }
+
+    public int FailedRows { get; set; }
+
+    public int ProcessingRows { get; set; }
+
+    public int InvitationsSentRows { get; set; }
+}
