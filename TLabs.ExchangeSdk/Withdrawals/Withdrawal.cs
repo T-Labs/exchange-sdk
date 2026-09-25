@@ -32,6 +32,9 @@ namespace TLabs.ExchangeSdk.Withdrawals
         /// <summary>True when this is a payout from the developers salary wallet (WithdrawalType stays Crypto).</summary>
         public bool IsDevelopersSalary { get; set; }
 
+        /// <summary>Set when this withdrawal is a payout from a fund (PayoutFund.Code); null for user withdrawals.</summary>
+        public string FundPayoutCode { get; set; }
+
         [Required]
         public decimal Amount { get; set; }
 
